@@ -1,0 +1,26 @@
+﻿https://hoplongtech.com/manage/login/
+user: admin
+pass: kelangthang0102
+
+Mail
+Mail: it.hoplongtech@gmail.com
+mk: 12345678@o
+
+serve: 150.95.108.203
+user : demo
+pass : itpro2018#
+
+betahoplong.tk
+
+DB: demo_hoplong
+uname: demo_admin
+pas: 123456
+
+tk vesta:
+
+cv
+    password: uGkXDxdKud,
+ mk: {Mp3.h_=C2=xf)_f
+
+Bật hiển thị lỗi trong file index.php	
+cấu hình file database.php 
