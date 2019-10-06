@@ -746,7 +746,7 @@ public function recruitment(){
 			if(request()->addCart){
 				return redirect()->back()->with('success','Thêm sản phẩm vào giỏ hàng thành công');
 			}
-			return redirect()->route('order');
+			return redirect()->route('view_cart');
 		}
 	}
 
