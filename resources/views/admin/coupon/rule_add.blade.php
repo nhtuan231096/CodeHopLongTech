@@ -111,7 +111,7 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label for="">Số tiền giảm</label>
-				<input type="text" name="price_reduced" class="form-control" id="" placeholder="Nhập số tiền giảm VD: 300000" value="{{isset($dataRule->price_reduced) ? $dataRule->price_reduced : ''}}">
+				<input type="text" name="price_reduced" class="form-control" id="" placeholder="Nhập số tiền giảm VD: 300000 hoặc 30%" value="{{isset($dataRule->price_reduced) ? $dataRule->price_reduced : ''}}">
 			</div>
 		</div>
 	</div>

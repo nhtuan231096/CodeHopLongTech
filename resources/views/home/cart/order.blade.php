@@ -432,11 +432,16 @@ $('#input_payment_method').change(function(){
       $('#show_ship_cod').css('display','block','!important');
       ship_code = 15000;
   }
-  if(value != 'Thanh toán tiền mặt khi nhận hàng'){
+  // if(value != 'Thanh toán tiền mặt khi nhận hàng' && value != 'Thanh toán bằng thẻ quốc tế Visa, Master, JCB'){
+  //   $('#ship_cod').text('0');
+  //   $('#show_ship_cod').css('display','none','!important');
+  //   ship_code = 0;
+  // }
+  else{
     $('#ship_cod').text('0');
-    $('#show_ship_cod').css('display','none','!important');
     ship_code = 0;
   }
+  
   // $('#ship_code').val(ship_code);
   var getShipCod = $('#ship_code').val(ship_code);
   var getShippingFee = $('#shipping_fee_1');
