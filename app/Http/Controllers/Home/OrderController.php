@@ -219,11 +219,20 @@ class OrderController extends Controller
 					// check confitions
 					$conditions = $rule->conditions;
 					$condition_for = $rule->condition_for;
+		
+
 					$price_reduced = $rule->price_reduced;
 					if($conditions == '<='){
 						// if($condition_for <= $cart->total_amount){
 						if($cart->total_amount <= $condition_for){
 							$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+
+							// check price reduced
+							if (stripos($price_reduced, "%") !== false) {
+								$price_reduced = str_replace('%','',$price_reduced);
+								$price_reduced = $price_reduced < 100 ? ($cart->total_amount/100) * $price_reduced : 0;
+								// dd($price_reduced);		    
+							}
 							$total_amount = $cart->total_amount - $price_reduced;
 
 							$data_uses_coupon = [
@@ -248,6 +257,13 @@ class OrderController extends Controller
 						// if($condition_for >= $cart->total_amount){
 						if($cart->total_amount >= $condition_for){
 							$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+							// check price reduced
+							if (stripos($price_reduced, "%") !== false) {
+								$price_reduced = str_replace('%','',$price_reduced);
+								$price_reduced = $price_reduced < 100 ? ($cart->total_amount/100) * $price_reduced : 0;
+								// dd($price_reduced);		    
+							}
+
 							$total_amount = $cart->total_amount - $price_reduced;
 
 							$data_uses_coupon = [
