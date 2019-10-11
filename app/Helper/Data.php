@@ -186,5 +186,9 @@ class Data
 			'0' => 'Khác',
 		];
 	}
+	public function stringToArray($string){
+		$arr = explode(",",$string);
+		return $arr;
+	}
 }
 
