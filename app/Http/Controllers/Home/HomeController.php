@@ -264,8 +264,10 @@ class HomeController extends Controller
 				$countRate3=Rate::where('status',1)->where('product_id',$product->id)->where('rate',3)->count();
 				$countRate4=Rate::where('status',1)->where('product_id',$product->id)->where('rate',4)->count();
 				$countRate5=Rate::where('status',1)->where('product_id',$product->id)->where('rate',5)->count();
-				$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/5;
-				// dd($rates->count());
+				$average = $countRate5 + $countRate4 + $countRate3 + $countRate2 + $countRate1;
+				// dd($average);
+				$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/$average;
+				// dd($percentRated/$average);
 				return view('home.pro-detail',[
 					'product'=>$product,
 					'others'=>$others,
@@ -284,6 +286,7 @@ class HomeController extends Controller
 					'countRate3'=>$countRate3,
 					'countRate4'=>$countRate4,
 					'countRate5'=>$countRate5,
+					'percentRated'=>$percentRated
 					]);
 			}
 			else

@@ -451,16 +451,17 @@
                                   <td class="verticalMid">
                                     <div>
                                       <div class="media">
-                                        <a class="pull-left" href="#">
+                                        <!-- <a class="pull-left" href="{{route('view',[$product->slug])}}"> -->
+                                        <a class="pull-left" href="{{url('')}}/@{{itemPartNumber['slug']}}">
                                           <img width="70px" class="media-object" src="{{url('uploads/product/')}}/@{{itemPartNumber['cover_image']}}" alt="Image">
                                         </a>
                                         <div class="media-body" style="padding-left: 15px">
-                                          <h4 class="media-heading">@{{itemPartNumber['title']}}</h4>
-                                          <p>
+                                          <!-- <h4 class="media-heading" style="font-size: 15px"><a href="{{route('view',[$product->slug])}}">@{{itemPartNumber['title']}}</a></h4> -->
+                                          <h4 class="media-heading" style="font-size: 15px"><a href="{{url('')}}/products/@{{itemPartNumber['slug']}}">@{{itemPartNumber['title']}}</a></h4>
                                             <div class="star-rating" title="Rated 5 out of 5">
                                               <span style="width:100%"></span>
                                             </div>
-                                          </p>
+                                            <div class="woocommerce-product-details__short-description">{!!$product->short_description!!}</div>
                                         </div>
                                       </div>
                                     </div>
@@ -616,7 +617,17 @@
                         </ul>
                       </div>
                       <div class="panel-body">
+                        @if($product->pdp)
+                          <?php $overViews = $cart->stringToArray($product->specifications);?>
+              
+                          @foreach($overViews as $overview)
+                            <div class="overViewImg">
+                              <img src="{{url('uploads/product_new/overview')}}/{{$overview}}">
+                            </div>
+                          @endforeach
+                        @else
                         <div style="width: 100%">{!!$product->specifications!!}</div>
+                        @endif
                       </div>
                       <div class="position_anchor" style="position: absolute;" id="size"></div>
                     </div>
@@ -630,7 +641,18 @@
                         </ul>
                       </div>
                       <div class="panel-body">
-                        <div style="overflow-x:auto; width: 100%">{!!$product->dimension!!}</div>
+                        @if($product->pdp)
+                          <?php $dimensions = $cart->stringToArray($product->dimension);?>
+              
+                          @foreach($dimensions as $dimension)
+                            <div class="overViewImg">
+                              <img src="{{url('uploads/product_new/dimension')}}/{{$dimension}}">
+                            </div>
+                          @endforeach
+                        @else
+                        <div style="width: 100%">{!!$product->dimension!!}</div>
+                        @endif
+                        <!-- <div style="overflow-x:auto; width: 100%">{!!$product->dimension!!}</div> -->
                       </div>
                       <div class="position_anchor" style="position: absolute;" id="docs"></div>
                     </div>
@@ -718,6 +740,18 @@
                       </div>
                       <div class="panel-body">
                         <div class="row">
+                          @if($product->pdp)
+                            <?php $actual_photos = $cart->stringToArray($product->actual_photo);?>
+                
+                            @foreach($actual_photos as $actual_photo)
+                              <div class="col-md-4">
+                                <img src="{{url('uploads/product_new/actual_photo')}}/{{$actual_photo}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">
+                              </div>
+                              <!-- <div class="overViewImg">
+                                <img src="{{url('uploads/product_new/dimension')}}/{{$dimension}}">
+                              </div> -->
+                            @endforeach
+                          @else
                           <div class="col-md-4">
                             <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">
                           </div>
@@ -727,6 +761,7 @@
                           <div class="col-md-4">
                             <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">
                           </div>
+                          @endif
                         </div>
                       </div>
                       <div class="position_anchor" style="position: absolute;" id="vote"></div>
@@ -747,9 +782,10 @@
                                 <div class="advanced-review-rating">
                                   <h2 class="based-title">Đánh giá {{$product->title}}</h2>
                                   <div class="avg-rating">
-                                    <span class="avg-rating-number">{{$countRates > 0 ? number_format((5/100) * ($countRate5 > 0 ? 100/($countRates/$countRate5) : 0),1) : number_format(5,1)}}</span>
+                                    <!-- <span class="avg-rating-number">{{$countRates > 0 ? number_format((5/100) * ($countRate5 > 0 ? 100/($countRates/$countRate5) : 0),1) : number_format(5,1)}}</span> -->
+                                    <span class="avg-rating-number">{{number_format($percentRated,1)}}</span>
                                     <div class="star-rating" title="Rated 0.0 out of 5">
-                                      <span style="width:{{$countRates > 0 ? ($countRate5 > 0 ? 100/($countRates/$countRate5) : 0) : 100 }}%"></span>
+                                      <span style="width:{{$countRates > 0 ? (100/5 * $percentRated) : 100 }}%"></span>
                                     </div>
                                   </div>
                                   <div class="rating-histogram" style="width: 100%">

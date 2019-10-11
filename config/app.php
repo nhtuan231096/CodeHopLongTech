@@ -170,17 +170,23 @@ return [
     'db_fields' => [
     'title',
     'slug',
-    'meta_title',
-    'meta_description',
     'cover_image',
-    'specifications',
-    'feature',
-    'content',
-    'warranty',
-    'price',
+    'cover_image_2',
+    'cover_image_3',
+    'cover_image_4',
+    'cover_image_5',
+    'video',
+    'image_360',
     'category_id',
+    'list_price',
+    'price',
+    'price_when_login',
+    'in_stock',
+    'specifications',
+    'dimension',
     'download_id',
-    'status'
+    'actual_photo',
+    'pdp'
 ],
     /*
     |--------------------------------------------------------------------------

@@ -19,6 +19,7 @@
             @foreach ($row as $key => $value)
                 <td>{{ $value }}</td>
             @endforeach
+                <td>1</td>
             </tr>
         @endforeach
         <tr>

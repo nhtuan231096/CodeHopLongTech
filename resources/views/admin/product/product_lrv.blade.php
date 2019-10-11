@@ -320,17 +320,34 @@
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label" for="sorder">Sorder</label>
                                             <input type="number" name="sorder" id="sorder" placeholder="Sorder" class="form-control" @if(isset($pro->id)) value="{{$pro->sorder}}" @endif {{old('sorder')}}>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label" for="sorder">Lượt xem</label>
                                             <input type="number" name="view" id="view" placeholder="Số lượt xem sản phẩm" class="form-control" @if(isset($pro->view)) value="{{$pro->view}}" @endif {{old('view')}}>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="sorder">PDP</label>
+                                            <!-- <input type="number" name="pdp" id="pdp" placeholder="pdp" class="form-control" @if(isset($pro->pdp)) value="{{$pro->pdp}}" @endif {{old('pdp')}}> -->
+
+                                            <select name="pdp" id="pdp" class="form-control">
+                                                @if($pro->pdp == 0)
+                                                <option value="0">disable</option>
+                                                <option value="1">enable</option>
+                                                @elseif($pro->pdp == 1)
+                                                <option value="1">enable</option>
+                                                <option value="0">disable</option>
+                                                @endif
+                                            </select>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
