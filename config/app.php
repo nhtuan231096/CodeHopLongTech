@@ -170,6 +170,8 @@ return [
     'db_fields' => [
     'title',
     'slug',
+    'meta_title',
+    'meta_description',
     'cover_image',
     'cover_image_2',
     'cover_image_3',
@@ -182,6 +184,7 @@ return [
     'price',
     'price_when_login',
     'in_stock',
+    'content',
     'specifications',
     'dimension',
     'download_id',

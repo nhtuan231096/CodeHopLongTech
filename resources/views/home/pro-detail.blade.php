@@ -44,7 +44,7 @@
         </span>{{$product->title}}
       </nav>
       <!-- .woocommerce-breadcrumb -->
-      <div id="primary" class="content-area">
+      <div id="primary" class="content-area" style="margin:0 auto">
         @if(Session::has('success'))
         <div class="alert alert-success">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -60,105 +60,55 @@
         <main id="main" class="site-main">
           <div class="product product-type-simple">
             <div class="single-product-wrapper">
-              <div class="product-images-wrapper thumb-count-4">
-                @if(($date = date('Y-m-d') <= $product->time_discount))
-                <span class="onsale" style="font-size: 18px">-<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">{{$product->discount}}</span>%</span></span>
-                @endif
-                <div id="techmarket-single-product-gallery" class="techmarket-single-product-gallery techmarket-single-product-gallery--with-images techmarket-single-product-gallery--columns-4 images" data-columns="4">
-                  <div class="techmarket-single-product-gallery-images">
-                    <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4">
-                      <figure class="woocommerce-product-gallery__wrapper ">
-                        <div data-thumb="assets/images/products/sm-card-3.jpg" class="woocommerce-product-gallery__image">
-                          <a href="" tabindex="-1">
-                            <!-- <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}"> -->
+              
+            <!-- //--- PRODUCT IMAGE -->
 
+<!-- todo -->
+<div class="product-images-wrapper thumb-count-3">
+   <span class="onsale">
+    @if($product->discount > 0)
+      <span class="woocommerce-Price-amount amount">
+         <span class="woocommerce-Price-currencySymbol">-{{$product->discount}}</span>%
+      </span>
+    @endif
+   </span>
+   <div class="techmarket-single-product-gallery techmarket-single-product-gallery--with-images techmarket-single-product-gallery--columns-4 images" data-columns="4">
+      <div class="techmarket-single-product-gallery-images">
+         <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images">
+            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider">
+               <div aria-live="polite" class="slick-list draggable">
+                  <div class="slick-track" style="opacity: 1; width: 1940px; transform: translate3d(0px, 0px, 0px);" role="listbox">
+                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
+                      <a href="" tabindex="0">
+                        <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
+                      </a>
+                    </div>
+                  </div>
+               </div>
+            </figure>
+         </div>
+      </div>
+      <div class="techmarket-single-product-gallery-thumbnails">
+         <figure class="techmarket-single-product-gallery-thumbnails__wrapper slick-initialized slick-slider slick-vertical">
+            <div aria-live="polite" class="slick-list draggable" style="height: 388px;">
+               <div class="slick-track" style="height: 388px;">
+                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-current slick-active" style="width: 90px;" tabindex="-1">
+                    <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+                  </figure>
+               </div>
+            </div>
+         </figure>
+      </div>
+   </div>
+</div>
 
-                            <div id="imageProductDetail" class="city">
-                              <p><img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}"></p>
-                            </div>
+<!-- todo -->
 
-                            <div id="VideoProductDetail" class="city" style="display:none">
-                              <h2></h2>
-                              <p>
-                               <div style="position:relative; padding-bottom:56.25%; padding-top:30px; height:0; overflow:hidden;">
-                                <iframe  width="425" height="344" src="{{$product->video}}" frameborder="0" allowfullscreen 
-                                  style="position:absolute; top:0; left:0; width:100%; height:100%;">
-                                </iframe>
-                              </div>
-                            </p>
-                          </div>
-                          <!-- <button class="w3-bar-item w3-button rm-background" onclick="openCity('imageProductDetail')"> -->
-                            @if(isset($product->image_360))
-                            <a class="text-center w3-bar-item w3-button rm-background" onclick="openCity('imageProductDetail')" style="width: 86px;display: inline-block;float: left;margin-top: 15px" data-toggle="modal" href='#image_360'>
-                              <img style="width: 50px;margin-left: 10px" src="https://cdn2.iconfinder.com/data/icons/lined-360/48/a-20-512.png" alt="">
-                              Hình 360 độ
-                            </a>  
-                            @endif
-                            <!-- </button> -->
-                            <div class="w3-bar w3-black">
-                              <button class="w3-bar-item w3-button rm-background" onclick="openCity('imageProductDetail')">
-                                <img style="width: 66px" src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">
-                              </button>
-                              
-                              <button class="w3-bar-item w3-button rm-background" onclick="openCity('VideoProductDetail')" style="padding-left: 0px;float: left;">
-                                @if(isset($product->video))
-                                <a class="text-center" target="_blank" style="width: 69px;display: inline-block; float: left;" href="">
-                                  <img style="width: 50px;margin-left: 10px;display: inline-block;" src="https://cdn4.vectorstock.com/i/thumb-large/82/28/play-video-icon-movie-icon-video-player-symbol-vector-20968228.jpg" alt="">
-                                  <span style="padding-left: 10px">Video</span>
-                                </a>
-                                @endif
-                              </button>
-                            </div>
-                            <script type="text/javascript">function openCity(cityName) {
-                              var i;
-                              var x = document.getElementsByClassName("city");
-                              for (i = 0; i < x.length; i++) {
-                                x[i].style.display = "none"; 
-                              }
-                              document.getElementById(cityName).style.display = "block"; 
-                            }</script>
+            <!-- //--- PRODUCT IMAGE -->
 
 
 
 
-
-                          </a>
-                        </div>
-                      </figure>
-
-
-
-                                            <!-- @if(isset($product->image_360))
-                                            <a class="text-center" style="width: 69px;display: inline-block;float: left;" data-toggle="modal" href='#image_360'>
-                                                <img style="width: 50px;margin-left: 10px" src="https://cdn2.iconfinder.com/data/icons/lined-360/48/a-20-512.png" alt="">
-                                                Hình 360 độ
-                                            </a>  
-                                            @endif  
-                                            @if(isset($product->video))
-                                            <a class="text-center" target="_blank" style="width: 69px;display: inline-block; float: left;" href="{{$product->video}}">
-                                                <img style="width: 50px;margin-left: 10px;display: inline-block;" src="https://cdn4.vectorstock.com/i/thumb-large/82/28/play-video-icon-movie-icon-video-player-symbol-vector-20968228.jpg" alt="">
-                                                <span style="padding-left: 10px">Video</span>
-                                            </a>
-                                            @endif -->
-                                            
-                                            <div class="modal fade" id="image_360">
-                                              <div class="modal-dialog" style="max-width: 678px">
-                                                <div class="modal-content text-center">
-                                                  <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4 class="modal-title">{{$product->title}}</h4>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                    <iframe style="margin-bottom: 66px" src="{{$product->image_360}}" scrolling="no" frameborder="0" width=560 height=315 allowfullscreen data-token="k6f7rb"></iframe>                            
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
                                     <div class="summary entry-summary">
                                       <div class="single-product-header">
                                         <h2 class="product_title entry-title">{{$product->title}}</h2>
@@ -375,13 +325,16 @@
                         </div>
                     </section>
                   </div> -->
+
+
+
                 </div>
               </main>
               <!-- #main -->
             </div>
             <!-- #primary -->
-            <div id="secondary" class="widget-area shop-sidebar" role="complementary">
-              <div id="techmarket_product_categories_widget-2" class="widget woocommerce widget_product_categories techmarket_widget_product_categories">
+            <!-- <div id="secondary" class="widget-area shop-sidebar" role="complementary"> -->
+              <!-- <div id="techmarket_product_categories_widget-2" class="widget woocommerce widget_product_categories techmarket_widget_product_categories">
                 <ul class="product-categories category-single">
                   <li class="product_cat">
                     <ul class="show-all-cat">
@@ -401,10 +354,9 @@
                       </ul>
                     </li>
                   </ul>
-                  <!-- .product-categories -->
-                </div>
+                </div> -->
 
-              </div>
+              <!-- </div> -->
             </div>
             <!-- .row -->
             <div class="woocommerce-tabs wc-tabs-wrapper">
@@ -599,7 +551,28 @@
                         </ul>
                       </div>
                       <div class="panel-body hideDimension togDimension" style="overflow: hidden;">
+                        @if($product->pdp == 1)
+                        <?php 
+                          $dataPro = json_decode(strip_tags($product->content));
+                        ?>
+                        <div>
+                          <div class="panel panel-default">
+                            <!-- Table -->
+                            <table class="table">
+                              <tbody>
+                                @foreach($dataPro as $title => $value)
+                                <tr>
+                                  <th>{{$title}}</th>
+                                  <td>{{$value}}</td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        @else
                         <div style="width: 100%">{!!$product->content!!}</div>
+                        @endif
                       </div>
                       <div class="text-center">
                         <a href="" class="fa fa-plus tog" ng-click="showDimension()"></a>
@@ -618,7 +591,7 @@
                       </div>
                       <div class="panel-body">
                         @if($product->pdp)
-                          <?php $overViews = $cart->stringToArray($product->specifications);?>
+                          <?php $overViews = $cart->stringToArray(strip_tags($product->specifications));?>
               
                           @foreach($overViews as $overview)
                             <div class="overViewImg">
@@ -642,7 +615,7 @@
                       </div>
                       <div class="panel-body">
                         @if($product->pdp)
-                          <?php $dimensions = $cart->stringToArray($product->dimension);?>
+                          <?php $dimensions = $cart->stringToArray(($product->dimension));?>
               
                           @foreach($dimensions as $dimension)
                             <div class="overViewImg">

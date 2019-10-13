@@ -265,6 +265,7 @@ class HomeController extends Controller
 				$countRate4=Rate::where('status',1)->where('product_id',$product->id)->where('rate',4)->count();
 				$countRate5=Rate::where('status',1)->where('product_id',$product->id)->where('rate',5)->count();
 				$average = $countRate5 + $countRate4 + $countRate3 + $countRate2 + $countRate1;
+				$average = $average == 0 ? 1 : $average;
 				// dd($average);
 				$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/$average;
 				// dd($percentRated/$average);

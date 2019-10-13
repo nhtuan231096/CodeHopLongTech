@@ -340,10 +340,10 @@
                                             <!-- <input type="number" name="pdp" id="pdp" placeholder="pdp" class="form-control" @if(isset($pro->pdp)) value="{{$pro->pdp}}" @endif {{old('pdp')}}> -->
 
                                             <select name="pdp" id="pdp" class="form-control">
-                                                @if($pro->pdp == 0)
+                                                @if(isset($pro->pdp) ? $pro->pdp == 0 : false)
                                                 <option value="0">disable</option>
                                                 <option value="1">enable</option>
-                                                @elseif($pro->pdp == 1)
+                                                @elseif(isset($pro->pdp) ? $pro->pdp == 1 : false)
                                                 <option value="1">enable</option>
                                                 <option value="0">disable</option>
                                                 @endif
