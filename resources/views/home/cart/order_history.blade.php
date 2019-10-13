@@ -40,7 +40,7 @@
 						<td>{{$order->order_id}}</td>
 						<td>{{$order->created_at}}</td>
 						<td>{{$stt}}</td>
-						<td>{{$order->total_price}}</td>
+						<td>{{number_format($order->total_order_price)}}</td>
 						<td>
 							<a ng-click="detaiOrder({{$order->order_id}})" data-toggle="modal" href='#modal-id'>Chi tiết</a>
 						</td>
@@ -71,9 +71,9 @@
 								<div class="col-md-3">
 									Giá
 								</div>
-								<div class="col-md-3">
+								<!-- <div class="col-md-3">
 									VAT
-								</div>
+								</div> -->
 							</div>
 							<hr>
 							<div class="row products" ng-repeat="item in detail_order" style="margin: 5px">
@@ -86,13 +86,13 @@
 								<div class="col-md-3" ng-if="item['price'] == 'Liên hệ'">
 									@{{item['price']}}
 								</div>
-								<div class="col-md-3">
+								<!-- <div class="col-md-3">
 									@if($order->vat == 1)
 										@{{((item['price']*item['quantity'])*10)/100 | number: 0}}
 									@else 
 										0
 									@endif
-								</div>
+								</div> -->
 							</div>
 							<hr>
 							<div class="row" style="margin-bottom: 10px">
@@ -101,6 +101,11 @@
 								</div>
 								<div class="col-md-4">
 									<span style="font-weight: bold;">Email:</span> @{{orders['email']}}
+								</div>
+							</div>
+							<div class="row" style="margin-bottom: 10px">
+								<div class="col-md-12">
+									<span style="font-weight: bold;">Địa chỉ nhận hàng:</span> @{{orders['address']}}
 								</div>
 							</div>
 							<div class="row" style="margin-bottom: 10px">
@@ -113,10 +118,18 @@
 							</div>
 							<div class="row" style="margin-bottom: 10px">
 								<div class="col-md-6">
+									<span style="font-weight: bold;">Phí vận chuyển:</span> @{{orders['ship_cod'] + orders['shipping_fee'] | number}}
+								</div>
+								<div class="col-md-6">
+									<span style="font-weight: bold;">VAT:</span> @{{orders['total_vat'] > 0 ? (orders['total_vat'] | number) : 0}}								
+								</div>
+							</div>
+							<div class="row" style="margin-bottom: 10px">
+								<div class="col-md-6">
 									<span style="font-weight: bold;">Mã giảm giá:</span> -@{{orders['use_coupon_code']>0 ? (orders['use_coupon_code'] | number) : 0}}
 								</div>
 								<div class="col-md-6">
-									<span style="font-weight: bold;">Tổng tiền:</span> @{{orders['total_price']}}								
+									<span style="font-weight: bold;">Tổng tiền:</span> @{{orders['total_order_price'] | number}}								
 								</div>
 							</div>
 						</div>

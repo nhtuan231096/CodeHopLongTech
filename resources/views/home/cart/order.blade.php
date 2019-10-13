@@ -167,11 +167,14 @@
           </div>
           <input type="hidden" name="status" value="1">
           <?php $totalAmount = !empty(request()->session()->get('price_reduced')) ? $cart->total_amount - (request()->session()->get('price_reduced')) : $cart->total_amount?>
-          <input type="hidden" name="total_price" value="{{number_format(isset($data_red_bill['red_bill_company']) ? ($totalAmount+(($cart->total_amount*10)/100)) : $totalAmount)}}">
+          <!-- <input type="hidden" name="total_price" value="{{number_format(isset($data_red_bill['red_bill_company']) ? ($totalAmount+(($cart->total_amount*10)/100)) : $totalAmount)}}"> -->
+          <input type="hidden" name="total_order_price" value="{{number_format(isset($data_red_bill['red_bill_company']) ? ($totalAmount+(($totalAmount*10)/100)) : $totalAmount)}}">
+          <input type="hidden" name="total_price" value="{{($totalAmount)}}">
           <input type="hidden" name="red_bill_company" value="{{isset($data_red_bill['red_bill_company']) ? $data_red_bill['red_bill_company'] : ''}}">
           <input type="hidden" name="red_bill_tax_code" value="{{isset($data_red_bill['red_bill_tax_code']) ? $data_red_bill['red_bill_tax_code'] : ''}}">
           <input type="hidden" name="red_bill_address" value="{{isset($data_red_bill['red_bill_address']) ? $data_red_bill['red_bill_address'] : ''}}">
           <input type="hidden" name="vat" value="{{isset($data_red_bill['red_bill_company']) ? 1 : 0}}">
+          <input type="hidden" name="total_vat" value="{{isset($data_red_bill['red_bill_company']) ? ($totalAmount*10)/100 : 0}}">
           <input type="hidden" id="reward_point" name="reward_point" value="">
           <input type="hidden" id="redeem_money_point" name="redeem_money" value="">
           <input type="hidden" id="reduced_price" name="reduced_price" value="">
@@ -249,7 +252,7 @@
         <div>
           <h6 class="my-0">VAT</h6>
         </div>
-        <?php $vat = ((($cart->total_amount * 10) / 100))?>
+        <?php $vat = ((($totalAmount * 10) / 100))?>
         <span class="text-muted">{{number_format($vat)}}</span>
       </li>
 
@@ -326,7 +329,7 @@
                 <h6 class="my-0"><b>Tổng tiền :</b></h6>
               </div>
               <?php 
-                    $cart_total = isset($data_red_bill['red_bill_company']) ? ($cart->total_amount + (($cart->total_amount * 10) / 100)) : $cart->total_amount;
+                    $cart_total = isset($data_red_bill['red_bill_company']) ? ($cart->total_amount + (($totalAmount * 10) / 100)) : $cart->total_amount;
                     $cart_total = (!empty(request()->session()->get('price_reduced'))) ? $cart_total - request()->session()->get('price_reduced') : $cart_total;
               ?>
               <i id="totalPrice" style="text-decoration: underline;">{{number_format($cart_total)}}</i>
@@ -344,7 +347,7 @@
                 <h6 class="my-0"><b>Tổng tiền :</b></h6>
               </div>
               <?php 
-                    $cart_total = isset($data_red_bill['red_bill_company']) ? ($cart->total_amount + (($cart->total_amount * 10) / 100)) : $cart->total_amount;
+                    $cart_total = isset($data_red_bill['red_bill_company']) ? ($cart->total_amount + (($totalAmount * 10) / 100)) : $cart->total_amount;
                     $cart_total = (!empty(request()->session()->get('price_reduced'))) ? $cart_total - request()->session()->get('price_reduced') : $cart_total;
               ?>
               <i id="totalPrice" style="text-decoration: underline;">{{number_format($cart_total)}}</i>

@@ -75,26 +75,95 @@
    <div class="techmarket-single-product-gallery techmarket-single-product-gallery--with-images techmarket-single-product-gallery--columns-4 images" data-columns="4">
       <div class="techmarket-single-product-gallery-images">
          <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images">
-            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider">
+
+
+
+            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image">
                <div aria-live="polite" class="slick-list draggable">
-                  <div class="slick-track" style="opacity: 1; width: 1940px; transform: translate3d(0px, 0px, 0px);" role="listbox">
+                  <div class="slick-track" role="listbox">
                      <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
                       <a href="" tabindex="0">
-                        <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
+                        <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                        <img src="{{url($urlImage)}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
                       </a>
                     </div>
                   </div>
                </div>
             </figure>
+            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image_2 hide">
+               <div aria-live="polite" class="slick-list draggable">
+                  <div class="slick-track" role="listbox">
+                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
+                      <a href="" tabindex="0">
+                        <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                        <img src="{{url($urlImage)}}/{{$product->cover_image_2}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
+                      </a>
+                    </div>
+                  </div>
+               </div>
+            </figure>
+            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image_3 hide">
+               <div aria-live="polite" class="slick-list draggable">
+                  <div class="slick-track" role="listbox">
+                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
+                      <a href="" tabindex="0">
+                        <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                        <img src="{{url($urlImage)}}/{{$product->cover_image_3}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
+                      </a>
+                    </div>
+                  </div>
+               </div>
+            </figure>
+            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider video hide">
+               <div aria-live="polite" class="slick-list draggable">
+                  <div class="slick-track" role="listbox">
+                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
+                      <a href="" tabindex="0">
+                        <iframe width="100%" height="413px" src="{{$product->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      </a>
+                    </div>
+                  </div>
+               </div>
+            </figure>
+            
+
+
          </div>
       </div>
       <div class="techmarket-single-product-gallery-thumbnails">
          <figure class="techmarket-single-product-gallery-thumbnails__wrapper slick-initialized slick-slider slick-vertical">
-            <div aria-live="polite" class="slick-list draggable" style="height: 388px;">
-               <div class="slick-track" style="height: 388px;">
-                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-current slick-active" style="width: 90px;" tabindex="-1">
-                    <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+            <div aria-live="polite" class="slick-list draggable" style="max-height: 463px;">
+               <div class="slick-track" style="max-height: 463px;">
+                  @if(isset($product->cover_image))
+                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-current slick-active slick-image" style="width: 90px;" tabindex="-1">
+                    <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                    <img src="{{url($urlImage)}}/{{$product->cover_image}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
                   </figure>
+                  @endif
+                  @if(isset($product->cover_image_2))
+                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-2" style="width: 90px;" tabindex="-1">
+                    <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                    <img src="{{url($urlImage)}}/{{$product->cover_image_2}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+                  </figure>
+                  @endif
+                  @if(isset($product->cover_image_3))
+                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-3" style="width: 90px;" tabindex="-1">
+                    <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                    <img src="{{url($urlImage)}}/{{$product->cover_image_3}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+                  </figure>
+                  @endif
+                  @if(isset($product->image_360))
+                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-360" style="width: 90px;" tabindex="-1" >
+                    <a data-toggle="modal" href='#image_360'>
+                      <img src="https://hoplongtech.com/public/home/assets/images/360.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+                    </a>
+                  </figure>
+                  @endif
+                  @if(isset($product->video))
+                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-video" style="width: 90px;" tabindex="-1">
+                    <img src="https://hoplongtech.com/public/home/assets/images/video.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+                  </figure>
+                  @endif
                </div>
             </div>
          </figure>
@@ -102,6 +171,111 @@
    </div>
 </div>
 
+
+
+<div class="modal fade" id="image_360">
+    <div class="modal-dialog" style="max-width: 678px">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{$product->title}}</h4>
+            </div>
+            <div class="modal-body">
+                <iframe style="margin-bottom: 66px" src="{{$product->image_360}}" scrolling="no" frameborder="0" width=560 height=315 allowfullscreen data-token="k6f7rb"></iframe>                            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+          // image
+          var image = $('.cover_image');
+          var image_2 = $('.cover_image_2');
+          var image_3 = $('.cover_image_3');
+          var video = $('.video');
+
+          // button slick image
+          var slick_image = $('.slick-image');
+          var slick_image_2 = $('.slick-image-2');
+          var slick_image_3 = $('.slick-image-3');
+          var slick_video = $('.slick-video');
+          
+          $('.slick-image').click(function(){
+            // image.removeClass('hide');   
+            image.show(600);
+
+            slick_image.addClass('slick-current slick-active');
+            slick_image_2.removeClass('slick-current slick-active');
+            slick_image_3.removeClass('slick-current slick-active');
+            slick_video.removeClass('slick-current slick-active');
+
+            // image_2.removeClass('show').addClass('hide');            
+            // image_3.removeClass('show').addClass('hide');            
+            // video.removeClass('show').addClass('hide');
+            image_2.hide();            
+            image_3.hide();            
+            video.hide();
+
+
+          });
+
+          $('.slick-image-2').click(function(){
+            // image_2.removeClass('hide');
+            image_2.show(600);
+
+            slick_image_2.addClass('slick-current slick-active');
+            slick_image.removeClass('slick-current slick-active');
+            slick_image_3.removeClass('slick-current slick-active');
+            slick_video.removeClass('slick-current slick-active');
+
+            // image.removeClass('show').addClass('hide');            
+            // image_3.removeClass('show').addClass('hide');            
+            // video.removeClass('show').addClass('hide');  
+            image.hide();            
+            image_3.hide();            
+            video.hide();            
+          });
+
+          $('.slick-image-3').click(function(){
+            // image_3.removeClass('hide');
+            image_3.show(600);
+
+            slick_image_3.addClass('slick-current slick-active');
+            slick_image_2.removeClass('slick-current slick-active');
+            slick_image.removeClass('slick-current slick-active');
+            slick_video.removeClass('slick-current slick-active');
+
+            // image.removeClass('show').addClass('hide');            
+            // image_2.removeClass('show').addClass('hide');            
+            // video.removeClass('show').addClass('hide');      
+            image.hide();            
+            image_2.hide();            
+            video.hide();            
+          });
+
+          $('.slick-video').click(function(){
+            // video.removeClass('hide');
+            video.show(600);
+
+            slick_video.addClass('slick-current slick-active');
+            slick_image.removeClass('slick-current slick-active');
+            slick_image_2.removeClass('slick-current slick-active');
+            slick_image_3.removeClass('slick-current slick-active');
+
+            // image.removeClass('show').addClass('hide');            
+            // image_2.removeClass('show').addClass('hide');            
+            // image_3.removeClass('show').addClass('hide'); 
+            image.hide();            
+            image_2.hide();            
+            image_3.hide();            
+          });
+
+         
+        });
+      </script>
 <!-- todo -->
 
             <!-- //--- PRODUCT IMAGE -->
