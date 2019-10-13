@@ -68,7 +68,7 @@
 						<span><a href="" class="btn btn-xs btn-info fa fa-search"></a></span>
 						@endif
 					</td>
-					<td>{{$order->total_price}}</td>
+					<td>{{number_format($order->total_order_price)}}</td>
 					<td>
 						@if($status == "Hủy đơn hàng")
 						<span class="label label-danger">{{$status}}</span>

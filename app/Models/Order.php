@@ -8,7 +8,7 @@ class Order extends Model
 {
 	protected $table='orders';
 	protected $fillable=[
-		'user_id','status','name','email','address','phone','total_price','payment_method','shipping_method','vat','reduced_price','use_coupon_code','total_vat','ship_cod','shipping_fee'
+		'user_id','status','name','email','address','phone','total_price','payment_method','shipping_method','vat','reduced_price','use_coupon_code','total_vat','ship_cod','shipping_fee','total_order_price'
 	];
 
 	public function order_detail(){

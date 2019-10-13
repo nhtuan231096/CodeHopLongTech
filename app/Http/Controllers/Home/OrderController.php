@@ -58,16 +58,18 @@ class OrderController extends Controller
 			$req->shipping_fee > 0 ? $req->merge(['shipping_fee'=>$req->shipping_fee]) : 0;
 			$req->ship_cod > 0 ? $req->merge(['ship_cod'=>$req->ship_cod]) : 0;
 			$req->use_coupon_code > 0 ? $req->merge(['use_coupon_code'=>$req->use_coupon_code]) : 0;
-			$toTalFormat = str_replace(',','',$req->total_price); 
-			$toTalFormat > 0 ? $req->merge(['total_price'=>$toTalFormat]) : 0;
-			$totalVat = $req->vat > 0 ? ($req->total_price - $req->reduced_price - $req->use_coupon_code)/10 : 0;
-			$TotalPrice = $req->total_price + $req->ship_cod + $req->shipping_fee - $req->reduced_price;
+			$toTalFormat = str_replace(',','',$req->total_order_price); 
+			// $toTalFormat > 0 ? $req->merge(['total_order_price'=>$toTalFormat]) : 0;
+			// $totalVat = $req->vat > 0 ? ($req->total_price - $req->reduced_price - $req->use_coupon_code)/10 : 0;
+			$totalVat = $req->total_vat > 0 ? $req->total_vat : 0;
+			// dd($toTalFormat);
+			$TotalPrice = $toTalFormat + $req->ship_cod + $req->shipping_fee - $req->reduced_price;
 
-			$req->merge(['total_vat'=>$totalVat]);
+			$req->merge(['total_order_price'=>$TotalPrice]);
 			// dd($req->all());
+
 		// }
 		if ($order = Order::create($req->all())) {
-			// dd($req->all());
 			$datas = [];
 			foreach ($cart->items as $key => $item) {
 				$datas[] = [
@@ -130,7 +132,7 @@ class OrderController extends Controller
 						// 	'total_points' => $addTotalPoints
 						// ]);
 					}
-					// dd($order);
+					
 					Mail::to($req->email)->send(new OrderSendMail($order));
 					$cart->clear();
 					AdminNotification::create([

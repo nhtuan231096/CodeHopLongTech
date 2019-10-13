@@ -74,7 +74,7 @@
                 </td>
                 <td>
                     <span style="margin-right: 31px">
-                        <b>VAT:</b> {{$order->vat == 1 ? number_format(($totalPrice * 10) /100) : 0}}
+                        <b>VAT:</b> {{$order->vat == 1 ? number_format($order->total_vat) : 0}}
                     </span>
                 </td>
 			</tr>
@@ -92,13 +92,16 @@
                 </td>
 			</tr>
             <tr>
-                <td></td>
+                <td>
+                    <?php $shipping_fee = $order->ship_cod + $order->shipping_fee;?>
+                    <b>Phí vận chuyển: </b> {{number_format($shipping_fee)}}
+                </td>
                 <td></td>
                 <td></td>
                 <td>
                    
                     <span style="margin-right: 31px">
-                        <b>Tổng tiền:</b> {{$order->total_price}}
+                        <b>Tổng tiền:</b> {{number_format($order->total_order_price)}}
                     </span>
                 </td>
             </tr>
@@ -315,7 +318,7 @@
                 </td>
                 
                 <td>
-                    {{number_format(($totalPrice * 10) /100)}}
+                    {{$order->vat == 1 ? number_format($order->total_vat) : 0}}
                 </td>
             </tr>
             @if(isset($order->reduced_price))
@@ -325,15 +328,24 @@
                 </td>
                 
                 <td>
-                	 -$order->reduced_price}}
+                	 -{{$order->reduced_price}}
                 </td>
             </tr>
             @endif
+            <tr class="item last">
+                <td>
+                    <span style="margin-left: 6px">Phí ship</span>
+                </td>
+                <?php $shipping_fee = $order->ship_cod + $order->shipping_fee;?>
+                <td>
+                     {{number_format($shipping_fee)}}
+                </td>
+            </tr>
             <tr class="total">
                 <td></td>
                 
                 <td>
-                   Tổng tiền: {{$order->total_price}}
+                   Tổng tiền: {{number_format($order->total_order_price)}}
                 </td>
             </tr>
         </table>

@@ -471,3 +471,9 @@
    background-color: #0077b5;
 }
 html { visibility:hidden; }
+
+#content #primary {
+    flex: 0 0 86.333%;
+    max-width: 86.333%;
+    order: 2;
+}

@@ -183,7 +183,7 @@ class Data
 			'3' => 'Đà Nẵng',
 			'4' => 'Thành Phố HCM',
 			'5' => 'Cần Thơ',
-			'0' => 'Khác',
+			'0' => 'Tỉnh thành khác',
 		];
 	}
 	public function stringToArray($string){

@@ -8,15 +8,9 @@
 	$shipping_fee = isset($order->shipping_fee) ? $order->shipping_fee : 0;
 	$ship_cod = isset($order->ship_cod) ? $order->ship_cod : 0;
 	$total_vat = isset($order->total_vat) ? $order->total_vat : 0;
-	$totalPrice = $order->total_price - $reduced_price - $use_coupon_code + $shipping_fee + $ship_cod + $total_vat;
+	// $totalPrice = $order->total_price - $reduced_price - $use_coupon_code + $shipping_fee + $ship_cod + $total_vat;
+	$totalPrice = $order->total_price + $shipping_fee + $ship_cod + $total_vat;
 	 ?>
-	<strong>Tổng tiền hàng: {{$order->total_price}} đ</strong><br>
-	<strong>Sử dụng điểm thưởng: {{$reduced_price}} đ</strong><br>
-	<strong>Mã giảm giá: {{$use_coupon_code}} đ</strong><br>
-	<strong>Phí ship: {{$shipping_fee}} đ</strong><br>
-	<strong>COD: {{$ship_cod}} đ</strong><br>
-	<strong>VAT: {{$total_vat}} đ</strong><br>
-
 </p>
 <p>
 	<strong>
@@ -36,10 +30,18 @@
 		<td>{{$k+=1}}</td>
 		<td>{{$item['title']}}</td>
 		<td>{{$item['quantity']}}</td>
-		<td>{{$item['price']}}</td>
+		<td>{{number_format($item['price'])}}</td>
 	</tr>
 	@endforeach
 </table>
 <p>
-	<strong>Tổng tiền: {{$totalPrice}} đ</strong><br>
+	<strong>Tổng tiền hàng: {{number_format($order->total_price + $use_coupon_code)}} đ</strong><br>
+	<strong>Sử dụng điểm thưởng: {{number_format($reduced_price)}} đ</strong><br>
+	<strong>Mã giảm giá: {{number_format($use_coupon_code)}} đ</strong><br>
+	<strong>Phí ship: {{number_format($shipping_fee)}} đ</strong><br>
+	<strong>COD: {{number_format($ship_cod)}} đ</strong><br>
+	<strong>VAT: {{number_format($total_vat)}} đ</strong><br>
+</p>
+<p>
+	<strong style="text-decoration: underline;">Tổng tiền: {{number_format($totalPrice)}} đ</strong><br>
 </p>
