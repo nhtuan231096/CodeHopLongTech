@@ -170,6 +170,7 @@ return [
     'db_fields' => [
     'title',
     'slug',
+    'short_description',
     'meta_title',
     'meta_description',
     'cover_image',

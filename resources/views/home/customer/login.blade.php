@@ -76,13 +76,69 @@
 
 											<h2>Đăng ký</h2>
 
-											<form method="post" class="register" action="{{route('register_customer')}}">
+											
+											
+
+											<!-- form customer -->
+											<form method="post" class="register" id="type_customer" action="{{route('register_customer')}}">
 
 												<p class="before-register-text">
 												Đăng nhập để theo dõi đơn hàng, lưu 
 												danh sách sản phẩm yêu thích, nhận
 												nhiều ưu đãi hấp dẫn.	</p>
+												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+													<label for="reg_email">Loại tài khoản <span class="required">*</span></label>
+													<select name="account_type" class="form-control account_type" required="required">
+														<option value="1">Công Ty</option>
+														<option selected value="0">Cá nhân</option>
+													</select>
+												</p>
+												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+													<label for="reg_email">Email <span class="required">*</span></label>
+													<input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" required>
+												</p>
+												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+													<label for="reg_email">Họ tên <span class="required">*</span></label>
+													<input type="" class="woocommerce-Input woocommerce-Input--text input-text" name="name" id="reg_email" required>
+												</p>
+												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+													<label for="reg_email">Số điện thoại <span class="required">*</span></label>
+													<input type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="phone" id="reg_email" required>
+												</p>
+												
+												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+													<label for="reg_email">Địa chỉ <span class="required">*</span></label>
+													<input class="woocommerce-Input woocommerce-Input--text input-text" name="address" id="address" required>
+												</p>
 
+												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+													<label for="reg_password">Mật khẩu <span class="required">*</span></label>
+													<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password">
+												</p>
+
+												@csrf
+
+												<p class="woocommerce-FormRow form-row">
+													<input type="hidden" id="woocommerce-register-nonce" name="woocommerce-register-nonce" value="4eb2b2e701"><input type="hidden" name="_wp_http_referer" value="/techmarket/my-account/">				<input type="submit" class="woocommerce-Button button" name="register" value="Đăng ký">
+												</p>
+
+												
+											</form>
+
+
+											<form method="post" class="register" id="type_company" action="{{route('register_customer')}}">
+
+												<p class="before-register-text">
+												Đăng nhập để theo dõi đơn hàng, lưu 
+												danh sách sản phẩm yêu thích, nhận
+												nhiều ưu đãi hấp dẫn.	</p>
+												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+													<label for="reg_email">Loại tài khoản <span class="required">*</span></label>
+													<select name="account_type" class="form-control account_type" required="required">
+														<option selected value="1">Công Ty</option>
+														<option value="0">Cá nhân</option>
+													</select>
+												</p>
 												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 													<label for="reg_email">Email <span class="required">*</span></label>
 													<input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" required>
@@ -95,20 +151,7 @@
 													<label for="reg_email">Số điện thoại <span class="required">*</span></label>
 													<input type="number" class="woocommerce-Input woocommerce-Input--text input-text" name="phone" id="reg_email" required>
 												</p>
-												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-													<label for="reg_email">Loại tài khoản <span class="required">*</span></label>
-													<select name="account_type" id="input" class="form-control" required="required">
-														<?php 
-															$cust='';$company='';
-															if (isset($customer->account_type)) {
-															 	$cust = $customer->account_type == 0 ? "selected" : ""; 
-																$company = $customer->account_type == 1 ? "selected" : "";
-															 } 
-														 ?>
-														<option {{$cust}} value="0">Cá nhân</option>
-														<option {{$company}} value="1">Công Ty</option>
-													</select>
-												</p>
+											
 												<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 													<label for="">Lĩnh vực kinh doanh <span class="required">*</span></label>
 													<input type="" class="woocommerce-Input woocommerce-Input--text input-text" name="business_areas" id="reg_email" required>
@@ -141,6 +184,25 @@
 												
 											</form>
 
+											<script type="text/javascript">
+												$(document).ready(function(){
+													$('#type_customer').hide();
+													
+													$('.account_type').change(function() {
+													    if ($(this).val() == '1') {
+													        $('#type_company').show();
+													        $('#type_customer').hide();
+													        $('.account_type').val(1);
+													    }
+													    if ($(this).val() == '0') {
+													        $('#type_company').hide();
+													        $('#type_customer').show();
+													        $('.account_type').val(0);
+													    }
+													});
+													
+												});
+											</script>
 										</div>
 
 									</div>
