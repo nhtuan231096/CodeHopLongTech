@@ -29,7 +29,34 @@
  });
 });
 </script>
-
+<style type="text/css">
+  /*.paginationPartNumber ul li a{
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+  }*/
+  .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+  }
+  .paginationPartNumber ul li a {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+  }
+  .pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+</style>
 <script src="https://360player.io/static/dist/scripts/embed.js" async></script>
 <div id="content" class="site-content" tabindex="-1">
   <div class="col-full" ng-app="myApp" ng-controller="myCtrl">
@@ -114,7 +141,7 @@
                   </div>
                </div>
             </figure>
-            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider video hide">
+            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider video hide" style="display: none">
                <div aria-live="polite" class="slick-list draggable">
                   <div class="slick-track" role="listbox">
                      <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
@@ -342,34 +369,34 @@
                                         <div class="modal-header">
                                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                           <h4 class="modal-title">
-                                            <span ng-show="language" style="color: red">Yêu cầu nhanh qua hotline: 1900.6536</span>
-                                            <span ng-hide="language" style="color: red">Quick Support: 1900.6536</span>
+                                            <span ng-hide="language" style="color: red">Yêu cầu nhanh qua hotline: 1900.6536</span>
+                                            <span  ng-show="language" style="color: red">Quick Support: 1900.6536</span>
                                           </h4> 
                                           <a style="float: right;" href="" class="btn btn-md btn-primary">
-                                            <span ng-click="language=false" ng-show="language">English</span>
-                                            <span ng-click="language=true" ng-hide="language">Vietnamese</span>
+                                            <span ng-click="language=false" ng-show="language">Vietnamese</span>
+                                            <span ng-click="language=true" ng-hide="language">English</span>
                                           </a>
                                         </div>
                                         <div class="modal-body">
                                           <form action="{{route('send_mail')}}" method="POST" role="form">
                                             <legend>
-                                              <span ng-show="language">Bạn đang yêu cầu báo giá sản phẩm {{$product->title}} </br>
+                                              <span ng-hide="language">Bạn đang yêu cầu báo giá sản phẩm {{$product->title}} </br>
                                               Nhập đầy đủ thông tin dưới đây để chúng tôi hỗ trợ bạn.</span> 
-                                              <span ng-hide="language">Enter information to receive a quote</span> 
+                                              <span ng-show="language">Enter information to receive a quote</span> 
                                             </legend>
                                             <input type="hidden" name="slug" value="{{$product->slug}}">
                                             <div class="form-group">
                                               <label class="control-label" for="">
-                                                <span ng-show="language">Họ tên:*</span>
-                                                <span ng-hide="language">Full name:*</span>
+                                                <span ng-hide="language">Họ tên:*</span>
+                                                <span ng-show="language">Full name:*</span>
                                               </label>
-                                              <input ng-show="language" ng-model="KHACH_HANG" type="text" name="name" class="form-control" id="" required placeholder="Nhập họ tên">
-                                              <input ng-hide="language" ng-model="KHACH_HANG" type="text" name="name" class="form-control" id="" required placeholder="Enter your name">
+                                              <input ng-hide="language" ng-model="KHACH_HANG" type="text" name="name" class="form-control" id="" required placeholder="Nhập họ tên">
+                                              <input ng-show="language" ng-model="KHACH_HANG" type="text" name="name" class="form-control" id="" required placeholder="Enter your name">
                                             </div>
                                             <div class="form-group">
                                               <label class="control-label" for="">Email:</label>
-                                              <input ng-show="language" ng-model="EMAIL" type="email" name="email" class="form-control" id="" required placeholder="Nhập email">
-                                              <input ng-hide="language" ng-model="EMAIL" type="email" name="email" class="form-control" id="" required placeholder="Enter email">
+                                              <input ng-hide="language" ng-model="EMAIL" type="email" name="email" class="form-control" id="" required placeholder="Nhập email">
+                                              <input ng-show="language" ng-model="EMAIL" type="email" name="email" class="form-control" id="" required placeholder="Enter email">
                                             </div>
                                             <div class="form-group">
                                               <input type="hidden" name="product_id" class="form-control" id="" value="{{$product->id}}"> 
@@ -380,18 +407,18 @@
                                             <input ng-model="MA_SAN_PHAM" type="hidden" name="code_product" class="form-control" id="MA_SAN_PHAM" value="{{$product->slug}}"> 
                                             <div class="form-group">
                                               <label class="control-label" for="">
-                                                <span ng-show="language">Số điện thoại:*</span>
-                                                <span ng-hide="language">Phone number:*</span>
+                                                <span ng-hide="language">Số điện thoại:*</span>
+                                                <span ng-show="language">Phone number:*</span>
                                               </label>    
-                                              <input ng-show="language" ng-model="SO_DIEN_THOAI" type="number" name="phone" class="form-control" id="" required placeholder="Nhập số điện thoại">
-                                              <input ng-hide="language" ng-model="SO_DIEN_THOAI" type="number" name="phone" class="form-control" id="" required placeholder="Enter your phone number">
+                                              <input ng-hide="language" ng-model="SO_DIEN_THOAI" type="number" name="phone" class="form-control" id="" required placeholder="Nhập số điện thoại">
+                                              <input ng-show="language" ng-model="SO_DIEN_THOAI" type="number" name="phone" class="form-control" id="" required placeholder="Enter your phone number">
                                             </div>
                                             <div class="form-group">
                                               <label class="control-label" for="">
-                                                <span ng-show="language">Địa chỉ báo giá:*</span>
-                                                <span ng-hide="language">Address quote:*</span>
+                                                <span ng-hide="language">Địa chỉ báo giá:*</span>
+                                                <span ng-show="language">Address quote:*</span>
                                               </label>
-                                              <select ng-model="DIA_CHI" ng-show="language" id="DIA_CHI" name="diaChi" id="input" class="form-control" required="required">
+                                              <select ng-model="DIA_CHI" ng-hide="language" id="DIA_CHI" name="diaChi" id="input" class="form-control" required="required">
                                                 <option value="#">
                                                   <span>Chọn địa chỉ báo giá</span>
                                                 </option>
@@ -411,7 +438,7 @@
                                                   <span>Thành Phố HCM</span>
                                                 </option>        
                                               </select>
-                                              <select ng-model="DIA_CHI" ng-hide="language" name="diaChi" id="input" class="form-control" required="required">
+                                              <select ng-model="DIA_CHI" ng-show="language" name="diaChi" id="input" class="form-control" required="required">
                                                 <option value=""><span>Choose a quote address</span></option>
                                                 <option value="HOPLONG"><span>Ha Noi</span></option>
                                                 <option value="TAHP"><span>Hai Phong</span></option>
@@ -422,19 +449,19 @@
                                             </div>
                                             <div class="form-group">
                                               <label class="control-label" for="">
-                                                <span ng-show="language">Nội dung:</span>
-                                                <span ng-hide="language">Content:</span>
+                                                <span ng-hide="language">Nội dung:</span>
+                                                <span ng-show="language">Content:</span>
                                               </label>
-                                              <textarea ng-show="language" ng-model="NOI_DUNG" name="content" rows=8 placeholder="Nội dung.."></textarea>
-                                              <textarea ng-hide="language" ng-model="NOI_DUNG" name="content" rows=8 placeholder="Enter content.."></textarea>
+                                              <textarea ng-hide="language" ng-model="NOI_DUNG" name="content" rows=8 placeholder="Nội dung.."></textarea>
+                                              <textarea ng-show="language" ng-model="NOI_DUNG" name="content" rows=8 placeholder="Enter content.."></textarea>
                                             </div>@csrf
                                             <div class="form-group text-right">
                                               <button ng-click="abc()" type="submit" class="btn btn-primary">
-                                                <span ng-show="language">Gửi</span>
-                                                <span ng-hide="language">Send</span>
+                                                <span ng-hide="language">Gửi</span>
+                                                <span ng-show="language">Send</span>
                                               </button>
-                                              <button ng-show="language" type="button" class="btn btn-info" data-dismiss="modal">Đóng</button>
-                                              <button ng-hide="language" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                              <button ng-hide="language" type="button" class="btn btn-info" data-dismiss="modal">Đóng</button>
+                                              <button ng-show="language" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                                             </div>
                                           </form>
                                         </div>
@@ -454,7 +481,7 @@
                                       <button class="btn btn-primary" name="addCart" value="true" style="font-weight: bold; padding: 13.6px 20px; font-size: 18px; width: 100%"> <i style="margin-right: 5px" class="fa fa-shopping-cart"></i>Thêm vào Giỏ hàng</button>
                                       <button class="btn btn-danger fa fa-tags" name="shopNow" style="font-weight: bold; padding: 16px 20px; font-size: 18px; width: 100%">Mua ngay</button>
                                       @else
-                                      <button class="btn btn-danger fa fa-money" data-toggle="modal" href='#modal-id' style="font-weight: bold; padding: 18px 20px; font-size: 18px; width: 100%;"><span> Yêu cầu báo giá</span></button>
+                                      <a class="btn btn-danger fa fa-money" data-toggle="modal" href='#modal-id' style="font-weight: bold; padding: 18px 20px; font-size: 18px; width: 100%;color:#fff"><span> Yêu cầu báo giá</span></a>
                                       @endif
                                     </form>
                                     <!-- @if($product->price > 0) -->
@@ -789,17 +816,14 @@
                       </div>
                       <div class="panel-body">
                         @if($product->pdp)
-                          <?php $dimensions = $cart->stringToArray(($product->dimension));?>
-              
-                          @foreach($dimensions as $dimension)
-                            <div class="overViewImg">
-                              <img src="{{url('uploads/product_new/dimension')}}/{{$dimension}}">
-                            </div>
-                          @endforeach
+                        <!-- todo -->
+                         
+                          <div class="overViewImg">
+                            <img src="{{url('uploads/product_new/dimension')}}/{{$product->dimension}}">
+                          </div>
                         @else
                         <div style="width: 100%">{!!$product->dimension!!}</div>
                         @endif
-                        <!-- <div style="overflow-x:auto; width: 100%">{!!$product->dimension!!}</div> -->
                       </div>
                       <div class="position_anchor" style="position: absolute;" id="docs"></div>
                     </div>
@@ -894,9 +918,7 @@
                               <div class="col-md-4">
                                 <img src="{{url('uploads/product_new/actual_photo')}}/{{$actual_photo}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">
                               </div>
-                              <!-- <div class="overViewImg">
-                                <img src="{{url('uploads/product_new/dimension')}}/{{$dimension}}">
-                              </div> -->
+         
                             @endforeach
                           @else
                           <div class="col-md-4">

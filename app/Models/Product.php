@@ -41,7 +41,7 @@ class Product extends Model
 			// 	return $query->where('title','like','%'.request()->title.'%')->orwhere('category_id',$cate_id);
 			// }
 			// dd($cate->first()->id);
-			return $query->where('title','like','%'.request()->title.'%')->orwhere('meta_title','like','%'.request()->title.'%');
+			return $query->select('id','title','created_at','slug','category_id','created_by','status')->where('title','like','%'.request()->title.'%')->orwhere('meta_title','like','%'.request()->title.'%');
 		}	
 		if(!empty(request()->created_by) && empty(request()->search) && empty(request()->status) && empty(request()->category_id))
 		{
