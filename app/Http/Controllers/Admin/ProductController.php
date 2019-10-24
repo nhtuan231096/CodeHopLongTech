@@ -542,25 +542,28 @@ public function post_import_price(Request $request){
         $type = $request->type;
         $val = $type == 'title' ? 'title' : 'id'; 
           // dd($val);
-        foreach ($data as $key => $value) {
-          $repPrice = str_replace([',','.'],'',$value['price']);
-          $pr = Product::select('title','price')->where('title',(string)$value['title'])->limit(1);
-            // dd(!empty($pr));
-          if(!empty($pr)){
-            $pr->update(['price'=>$repPrice]);
+        // import price
+        if(isset($request->import_price))
+        {
+          foreach ($data as $key => $value) {
+            $repPrice = str_replace([',','.'],'',$value['price']);
+            $pr = Product::select('title','price')->where('title',(string)$value['title'])->limit(1);
+              // dd(!empty($pr));
+            if(!empty($pr)){
+              $pr->update(['price'=>$repPrice]);
+            }
           }
         }
-
-          // $arrKey = [];
-          // $arrPrice = [];
-          // foreach ($data as $key => $value) {
-          //   $repPrice = str_replace([',','.'],'',$value['price']);
-          //   $arrPrice[] = $repPrice;
-          //   $arrKey[] = $value['title'];
-          //   // $a = Product::where($type,$value[$type])->update(['price'=>$repPrice]);
-          // }
-          // // $dataUpdate = array_combine($arrKey,$arrPrice);
-
+        // import image
+        if(isset($request->import_image)){
+          foreach ($data as $key => $value) {
+            $pr = Product::select('title','price')->where('title',(string)$value['title'])->limit(1);
+              // dd(!empty($pr));
+            if(!empty($pr)){
+              $pr->update(['actual_photo'=>$value['actual_photo']]);
+            }
+          }
+        }
         return redirect()->back()->with('success','Import thành công');
       }
     }

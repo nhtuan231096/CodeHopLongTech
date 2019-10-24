@@ -33,196 +33,200 @@
   /*.paginationPartNumber ul li a{
     padding: 5px 10px;
     border: 1px solid #ddd;
-  }*/
-  .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
-    z-index: 3;
-    color: #fff;
-    cursor: default;
-    background-color: #337ab7;
-    border-color: #337ab7;
-  }
-  .paginationPartNumber ul li a {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-  }
-  .pagination > li > a, .pagination > li > span {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    margin-left: -1px;
-    line-height: 1.42857143;
-    color: #337ab7;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #ddd;
-  }
-</style>
-<script src="https://360player.io/static/dist/scripts/embed.js" async></script>
-<div id="content" class="site-content" tabindex="-1">
-  <div class="col-full" ng-app="myApp" ng-controller="myCtrl">
-    <div class="row">
-      <nav class="woocommerce-breadcrumb" style="padding:0 15px">
-        <a href="{{route('home')}}">Home</a>
-        <span class="delimiter">
-          <i class="tm tm-breadcrumbs-arrow-right"></i>
-        </span><a href="{{route('view_category',['slug'=>$product->category->slug])}}">{{$product->category->title}}</a>
-        <span class="delimiter">
-          <i class="tm tm-breadcrumbs-arrow-right"></i>
-        </span>{{$product->title}}
-      </nav>
-      <!-- .woocommerce-breadcrumb -->
-      <div id="primary" class="content-area" style="margin:0 auto">
-        @if(Session::has('success'))
-        <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <strong><center>{{Session::get('success')}}</center></strong>
-        </div>
-        @endif 
-        @if(Session::has('error'))
-        <div class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <strong><center>{{Session::get('error')}}</center></strong>
-        </div>
-        @endif  
-        <main id="main" class="site-main">
-          <div class="product product-type-simple">
-            <div class="single-product-wrapper">
-              
-            <!-- //--- PRODUCT IMAGE -->
+    }*/
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+      z-index: 3;
+      color: #fff;
+      cursor: default;
+      background-color: #337ab7;
+      border-color: #337ab7;
+    }
+    .paginationPartNumber ul li a {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+    }
+    .pagination > li > a, .pagination > li > span {
+      position: relative;
+      float: left;
+      padding: 6px 12px;
+      margin-left: -1px;
+      line-height: 1.42857143;
+      color: #337ab7;
+      text-decoration: none;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+  </style>
+  <script src="https://360player.io/static/dist/scripts/embed.js" async></script>
+  <div id="content" class="site-content" tabindex="-1">
+    <div class="col-full" ng-app="myApp" ng-controller="myCtrl">
+      <div class="row">
+        <nav class="woocommerce-breadcrumb" style="padding:0 15px">
+          <a href="{{route('home')}}">Home</a>
+          <span class="delimiter">
+            <i class="tm tm-breadcrumbs-arrow-right"></i>
+          </span><a href="{{route('view_category',['slug'=>$product->category->slug])}}">{{$product->category->title}}</a>
+          <span class="delimiter">
+            <i class="tm tm-breadcrumbs-arrow-right"></i>
+          </span>{{$product->title}}
+        </nav>
+        <!-- .woocommerce-breadcrumb -->
+        <div id="primary" class="content-area" style="margin:0 auto">
+          @if(Session::has('success'))
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong><center>{{Session::get('success')}}</center></strong>
+          </div>
+          @endif 
+          @if(Session::has('error'))
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong><center>{{Session::get('error')}}</center></strong>
+          </div>
+          @endif  
+          <main id="main" class="site-main">
+            <div class="product product-type-simple">
+              <div class="single-product-wrapper">
+                
+                <!-- //--- PRODUCT IMAGE -->
 
-<!-- todo -->
-<div class="product-images-wrapper thumb-count-3">
-   <span class="onsale">
-    @if($product->discount > 0)
-      <span class="woocommerce-Price-amount amount">
-         <span class="woocommerce-Price-currencySymbol">-{{$product->discount}}</span>%
-      </span>
-    @endif
-   </span>
-   <div class="techmarket-single-product-gallery techmarket-single-product-gallery--with-images techmarket-single-product-gallery--columns-4 images" data-columns="4">
-      <div class="techmarket-single-product-gallery-images">
-         <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images">
+                <!-- todo -->
+                <div class="product-images-wrapper thumb-count-3">
+                 <span class="onsale">
+                  @if($product->discount > 0)
+                  <span class="woocommerce-Price-amount amount">
+                   <span class="woocommerce-Price-currencySymbol">-{{$product->discount}}</span>%
+                 </span>
+                 @endif
+               </span>
+               <div class="techmarket-single-product-gallery techmarket-single-product-gallery--with-images techmarket-single-product-gallery--columns-4 images" data-columns="4">
+                <div class="techmarket-single-product-gallery-images">
+                 <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images">
 
 
 
-            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image">
-               <div aria-live="polite" class="slick-list draggable">
-                  <div class="slick-track" role="listbox">
-                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
+                  <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image">
+                   <div aria-live="polite" class="slick-list draggable">
+                    <div class="slick-track" role="listbox">
+                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: auto; position: relative; overflow: hidden;" tabindex="-1" role="option">
                       <a href="" tabindex="0">
                         <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
                         <img src="{{url($urlImage)}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
                       </a>
                     </div>
                   </div>
-               </div>
-            </figure>
-            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image_2 hide">
+                </div>
+              </figure>
+              <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image_2 hide">
                <div aria-live="polite" class="slick-list draggable">
-                  <div class="slick-track" role="listbox">
-                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
-                      <a href="" tabindex="0">
-                        <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                        <img src="{{url($urlImage)}}/{{$product->cover_image_2}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
-                      </a>
-                    </div>
-                  </div>
-               </div>
-            </figure>
-            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image_3 hide">
-               <div aria-live="polite" class="slick-list draggable">
-                  <div class="slick-track" role="listbox">
-                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
-                      <a href="" tabindex="0">
-                        <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                        <img src="{{url($urlImage)}}/{{$product->cover_image_3}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
-                      </a>
-                    </div>
-                  </div>
-               </div>
-            </figure>
-            <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider video hide" style="display: none">
-               <div aria-live="polite" class="slick-list draggable">
-                  <div class="slick-track" role="listbox">
-                     <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: 485px; position: relative; overflow: hidden;" tabindex="-1" role="option">
-                      <a href="" tabindex="0">
-                        <iframe width="100%" height="413px" src="{{$product->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                      </a>
-                    </div>
-                  </div>
-               </div>
-            </figure>
-            
-
-
-         </div>
-      </div>
-      <div class="techmarket-single-product-gallery-thumbnails">
-         <figure class="techmarket-single-product-gallery-thumbnails__wrapper slick-initialized slick-slider slick-vertical">
-            <div aria-live="polite" class="slick-list draggable" style="max-height: 463px;">
-               <div class="slick-track" style="max-height: 463px;">
-                  @if(isset($product->cover_image))
-                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-current slick-active slick-image" style="width: 90px;" tabindex="-1">
+                <div class="slick-track" role="listbox">
+                 <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: auto; position: relative; overflow: hidden;" tabindex="-1" role="option">
+                  <a href="" tabindex="0">
                     <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                    <img src="{{url($urlImage)}}/{{$product->cover_image}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
-                  </figure>
-                  @endif
-                  @if(isset($product->cover_image_2))
-                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-2" style="width: 90px;" tabindex="-1">
-                    <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                    <img src="{{url($urlImage)}}/{{$product->cover_image_2}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
-                  </figure>
-                  @endif
-                  @if(isset($product->cover_image_3))
-                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-3" style="width: 90px;" tabindex="-1">
-                    <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                    <img src="{{url($urlImage)}}/{{$product->cover_image_3}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
-                  </figure>
-                  @endif
-                  @if(isset($product->image_360))
-                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-360" style="width: 90px;" tabindex="-1" >
-                    <a data-toggle="modal" href='#image_360'>
-                      <img src="https://hoplongtech.com/public/home/assets/images/360.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
-                    </a>
-                  </figure>
-                  @endif
-                  @if(isset($product->video))
-                  <figure class="techmarket-wc-product-gallery__image slick-slide slick-video" style="width: 90px;" tabindex="-1">
-                    <img src="https://hoplongtech.com/public/home/assets/images/video.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
-                  </figure>
-                  @endif
-               </div>
+                    <img src="{{url($urlImage)}}/{{$product->cover_image_2}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
+                  </a>
+                </div>
+              </div>
             </div>
-         </figure>
+          </figure>
+          <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider cover_image_3 hide">
+           <div aria-live="polite" class="slick-list draggable">
+            <div class="slick-track" role="listbox">
+             <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: auto; position: relative; overflow: hidden;" tabindex="-1" role="option">
+              <a href="" tabindex="0">
+                <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                <img src="{{url($urlImage)}}/{{$product->cover_image_3}}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="">
+              </a>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <figure class="woocommerce-product-gallery__wrapper slick-initialized slick-slider video hide" style="display: none">
+       <div aria-live="polite" class="slick-list draggable">
+        <div class="slick-track" role="listbox">
+         <div class="woocommerce-product-gallery__image slick-slide slick-current slick-active" style="width: auto; position: relative; overflow: hidden;" tabindex="-1" role="option">
+          <a href="" tabindex="0">
+            <iframe width="100%" height="413px" src="{{$product->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </a>
+        </div>
       </div>
-   </div>
+    </div>
+  </figure>
+  
+
+
+</div>
+</div>
+<div class="techmarket-single-product-gallery-thumbnails">
+ <figure class="techmarket-single-product-gallery-thumbnails__wrapper slick-initialized slick-slider slick-vertical">
+  <div aria-live="polite" class="slick-list draggable" style="max-height: 463px;">
+   <div class="slick-track" style="max-height: 463px;">
+    @if(isset($product->cover_image))
+    <figure class="techmarket-wc-product-gallery__image slick-slide slick-current slick-active slick-image" style="width: 90px;" tabindex="-1">
+      <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+      <img src="{{url($urlImage)}}/{{$product->cover_image}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+    </figure>
+    @endif
+    @if(isset($product->cover_image_2))
+    <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-2" style="width: 90px;" tabindex="-1">
+      <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+      <img src="{{url($urlImage)}}/{{$product->cover_image_2}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+    </figure>
+    @endif
+    @if(isset($product->cover_image_3))
+    <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-3" style="width: 90px;" tabindex="-1">
+      <?php $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+      <img src="{{url($urlImage)}}/{{$product->cover_image_3}}" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+    </figure>
+    @endif
+    @if(isset($product->image_360))
+    <figure class="techmarket-wc-product-gallery__image slick-slide slick-image-360" style="width: 90px;" tabindex="-1" >
+      <a data-toggle="modal" href='#image_360'>
+        <img src="https://hoplongtech.com/public/home/assets/images/360.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+      </a>
+    </figure>
+    @endif
+    @if(isset($product->video))
+    <figure class="techmarket-wc-product-gallery__image slick-slide slick-video" style="width: 90px;" tabindex="-1">
+      <img src="https://hoplongtech.com/public/home/assets/images/video.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+    </figure>
+    @endif
+  </div>
+</div>
+</figure>
+</div>
+</div>
 </div>
 
 
 
 <div class="modal fade" id="image_360">
-    <div class="modal-dialog" style="max-width: 678px">
-        <div class="modal-content text-center">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">{{$product->title}}</h4>
-            </div>
-            <div class="modal-body">
-                <iframe style="margin-bottom: 66px" src="{{$product->image_360}}" scrolling="no" frameborder="0" width=560 height=315 allowfullscreen data-token="k6f7rb"></iframe>                            
-            </div>
-        </div>
+  <div class="modal-dialog" style="max-width: 678px">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{$product->title}}</h4>
+      </div>
+      <div class="modal-body">
+        <iframe style="margin-bottom: 66px" src="{{$product->image_360}}" scrolling="no" frameborder="0" width=560 height=315 allowfullscreen data-token="k6f7rb"></iframe>                            
+      </div>
     </div>
+  </div>
 </div>
 
 
 
-      <script type="text/javascript">
-        $(document).ready(function(){
+<script type="text/javascript">
+  $(document).ready(function(){
           // image
           var image = $('.cover_image');
           var image_2 = $('.cover_image_2');
           var image_3 = $('.cover_image_3');
           var video = $('.video');
+
+          image_2.hide();
+          image_3.hide();
+          video.hide();
 
           // button slick image
           var slick_image = $('.slick-image');
@@ -232,7 +236,7 @@
           
           $('.slick-image').click(function(){
             // image.removeClass('hide');   
-            image.show(600);
+            image.show(0);
 
             slick_image.addClass('slick-current slick-active');
             slick_image_2.removeClass('slick-current slick-active');
@@ -251,7 +255,7 @@
 
           $('.slick-image-2').click(function(){
             // image_2.removeClass('hide');
-            image_2.show(600);
+            image_2.show(0);
 
             slick_image_2.addClass('slick-current slick-active');
             slick_image.removeClass('slick-current slick-active');
@@ -268,7 +272,7 @@
 
           $('.slick-image-3').click(function(){
             // image_3.removeClass('hide');
-            image_3.show(600);
+            image_3.show(0);
 
             slick_image_3.addClass('slick-current slick-active');
             slick_image_2.removeClass('slick-current slick-active');
@@ -285,7 +289,7 @@
 
           $('.slick-video').click(function(){
             // video.removeClass('hide');
-            video.show(600);
+            video.show(0);
 
             slick_video.addClass('slick-current slick-active');
             slick_image.removeClass('slick-current slick-active');
@@ -300,31 +304,31 @@
             image_3.hide();            
           });
 
-         
+          
         });
       </script>
-<!-- todo -->
+      <!-- todo -->
 
-            <!-- //--- PRODUCT IMAGE -->
-
-
+      <!-- //--- PRODUCT IMAGE -->
 
 
-                                    <div class="summary entry-summary">
-                                      <div class="single-product-header">
-                                        <h2 class="product_title entry-title">{{$product->title}}</h2>
-                                        <div class="rating-and-sharing-wrapper">
-                                          <div class="woocommerce-product-rating">
-                                            <div class="star-rating">
-                                              <span style="width:100%">Rated
-                                                <strong class="rating">5.00</strong> out of 5 based on
-                                                <span class="rating">10/10</span> đánh giá</span>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="single-product-meta">
-                                          <div class="brand"> 
+
+
+      <div class="summary entry-summary">
+        <div class="single-product-header">
+          <h2 class="product_title entry-title">{{$product->title}}</h2>
+          <div class="rating-and-sharing-wrapper">
+            <div class="woocommerce-product-rating">
+              <div class="star-rating">
+                <span style="width:100%">Rated
+                  <strong class="rating">5.00</strong> out of 5 based on
+                  <span class="rating">10/10</span> đánh giá</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="single-product-meta">
+            <div class="brand"> 
                                 <!-- @foreach($categorys1 as $cat)
                                  <a href="{{route('view_category',['slug'=>$cat->slug])}}"> <img width="145" height="50" class="img-responsive desaturate" alt="{{$cat->title}}" src="{{url('uploads/partner')}}/{{$cat->cover_image}}"></a>
                                 @endforeach
@@ -557,11 +561,11 @@
                   </ul>
                 </div> -->
 
-              <!-- </div> -->
-            </div>
-            <!-- .row -->
-            <div class="woocommerce-tabs wc-tabs-wrapper">
-              <div class="panel panel-info" style="position: relative;">
+                <!-- </div> -->
+              </div>
+              <!-- .row -->
+              <div class="woocommerce-tabs wc-tabs-wrapper">
+                <div class="panel panel-info" style="position: relative;">
                     <!-- <div class="panel-heading woocommerce-tabs">
                         <ul class="tabs wc-tabs" role="tablist" style="padding-left: 0px">
                             <li class="reviews_tab active" id="tab-title-reviews" role="tab" aria-controls="tab-reviews">
@@ -605,31 +609,31 @@
                                     <div>
                                       <div class="media">
                                         <!-- <a class="pull-left" href="{{route('view',[$product->slug])}}"> -->
-                                        <a class="pull-left" href="{{url('')}}/@{{itemPartNumber['slug']}}">
-                                          <img width="70px" class="media-object" src="{{url('uploads/product/')}}/@{{itemPartNumber['cover_image']}}" alt="Image">
-                                        </a>
-                                        <div class="media-body" style="padding-left: 15px">
-                                          <!-- <h4 class="media-heading" style="font-size: 15px"><a href="{{route('view',[$product->slug])}}">@{{itemPartNumber['title']}}</a></h4> -->
-                                          <h4 class="media-heading" style="font-size: 15px"><a href="{{url('')}}/products/@{{itemPartNumber['slug']}}">@{{itemPartNumber['title']}}</a></h4>
+                                          <a class="pull-left" href="{{url('')}}/@{{itemPartNumber['slug']}}">
+                                            <img width="70px" class="media-object" src="{{url('uploads/product/')}}/@{{itemPartNumber['cover_image']}}" alt="Image">
+                                          </a>
+                                          <div class="media-body" style="padding-left: 15px">
+                                            <!-- <h4 class="media-heading" style="font-size: 15px"><a href="{{route('view',[$product->slug])}}">@{{itemPartNumber['title']}}</a></h4> -->
+                                            <h4 class="media-heading" style="font-size: 15px"><a href="{{url('')}}/products/@{{itemPartNumber['slug']}}">@{{itemPartNumber['title']}}</a></h4>
                                             <div class="star-rating" title="Rated 5 out of 5">
                                               <span style="width:100%"></span>
                                             </div>
                                             <div class="woocommerce-product-details__short-description">{!!$product->short_description!!}</div>
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </td>
-                                  <td class="verticalMid">
-                                    <span style="text-decoration: line-through;" ng-if="itemPartNumber['list_price'] > 0">
-                                      @{{itemPartNumber['list_price']|number}}VNĐ
-                                    </span>
-                                    <span ng-if="itemPartNumber['list_price']==null">
-                                      Liên hệ: 1900.6536
-                                    </span>
-                                  </td>
-                                  <td class="verticalMid">
-                                    
-                                    <span class="woocommerce-Price-amount amount">
+                                    </td>
+                                    <td class="verticalMid">
+                                      <span style="text-decoration: line-through;" ng-if="itemPartNumber['list_price'] > 0">
+                                        @{{itemPartNumber['list_price']|number}}VNĐ
+                                      </span>
+                                      <span ng-if="itemPartNumber['list_price']==null">
+                                        Liên hệ: 1900.6536
+                                      </span>
+                                    </td>
+                                    <td class="verticalMid">
+                                      
+                                      <span class="woocommerce-Price-amount amount">
                                                         <!-- <span ng-if="itemPartNumber['price']>0">
                                                             @{{itemPartNumber['price']|number}}
                                                           </span> -->
@@ -752,9 +756,10 @@
                         </ul>
                       </div>
                       <div class="panel-body hideDimension togDimension" style="overflow: hidden;">
+                        {!!$product->feature!!}
                         @if($product->pdp == 1)
                         <?php 
-                          $dataPro = json_decode(strip_tags($product->content));
+                        $dataPro = json_decode(strip_tags($product->content));
                         ?>
                         <div>
                           <div class="panel panel-default">
@@ -792,13 +797,13 @@
                       </div>
                       <div class="panel-body">
                         @if($product->pdp)
-                          <?php $overViews = $cart->stringToArray(strip_tags($product->specifications));?>
-              
-                          @foreach($overViews as $overview)
-                            <div class="overViewImg">
-                              <img src="{{url('uploads/product_new/overview')}}/{{$overview}}">
-                            </div>
-                          @endforeach
+                        <?php $overViews = $cart->stringToArray(strip_tags($product->specifications));?>
+                        
+                        @foreach($overViews as $overview)
+                        <div class="overViewImg">
+                          <img src="{{url('uploads/product_new/overview')}}/{{$overview}}">
+                        </div>
+                        @endforeach
                         @else
                         <div style="width: 100%">{!!$product->specifications!!}</div>
                         @endif
@@ -817,10 +822,10 @@
                       <div class="panel-body">
                         @if($product->pdp)
                         <!-- todo -->
-                         
-                          <div class="overViewImg">
-                            <img src="{{url('uploads/product_new/dimension')}}/{{$product->dimension}}">
-                          </div>
+                        
+                        <div class="overViewImg">
+                          <img src="{{url('uploads/product_new/dimension')}}/{{$product->dimension}}">
+                        </div>
                         @else
                         <div style="width: 100%">{!!$product->dimension!!}</div>
                         @endif
@@ -912,14 +917,14 @@
                       <div class="panel-body">
                         <div class="row">
                           @if($product->pdp)
-                            <?php $actual_photos = $cart->stringToArray($product->actual_photo);?>
-                
-                            @foreach($actual_photos as $actual_photo)
-                              <div class="col-md-4">
-                                <img src="{{url('uploads/product_new/actual_photo')}}/{{$actual_photo}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">
-                              </div>
-         
-                            @endforeach
+                          <?php $actual_photos = $cart->stringToArray($product->actual_photo);?>
+                          
+                          @foreach($actual_photos as $actual_photo)
+                          <div class="col-md-4">
+                            <img src="{{url('uploads/product_new/actual_photo')}}/{{$actual_photo}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">
+                          </div>
+                          
+                          @endforeach
                           @else
                           <div class="col-md-4">
                             <img src="{{url('uploads/product')}}/{{$product->cover_image}}" class="attachment-shop_single size-shop_single" alt="{{$product->title}}">

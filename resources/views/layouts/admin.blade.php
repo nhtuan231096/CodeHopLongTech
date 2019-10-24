@@ -122,7 +122,7 @@
             <ul class="treeview-menu">
               <li><a href="{{route('product_lrv')}}"><i class="fa fa-align-center"></i>Sản phẩm</a></li>
               <li><a href="{{route('importProduct')}}"><i class="fa fa-cloud-upload"></i>Import sản phẩm</a></li>
-              <li><a href="{{route('import_price')}}"><i class="fa fa-cloud-upload"></i>Import giá sản phẩm</a></li>
+              <li><a href="{{route('import_price')}}"><i class="fa fa-cloud-upload"></i>Import cập nhật sản phẩm</a></li>
               <li><a href="{{route('rate_product')}}"><i class="fa fa-star"></i>Đánh giá sản phẩm</a></li>
               <li><a href="{{route('comment_product')}}"><i class="fa fa-comment"></i>Bình luận sản phẩm</a></li>
               <li><a href="{{route('insertProduct')}}"><i class="fa fa-cog"></i>Cập nhật thông tin</a></li>
