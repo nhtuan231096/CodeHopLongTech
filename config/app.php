@@ -186,6 +186,7 @@ return [
     'price_when_login',
     'in_stock',
     'content',
+    'feature',
     'specifications',
     'dimension',
     'download_id',
