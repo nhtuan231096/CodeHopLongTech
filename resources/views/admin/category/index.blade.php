@@ -2,6 +2,9 @@
 @section('title','Danh mục sản phẩm')
 @section('links','Danh mục')
 @section('main')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 <div class="panel panel-info">
 	<!-- Default panel contents -->
 	<div class="panel-heading">
@@ -44,17 +47,47 @@
 											</div>
 										</div>
 									</div>
-
-
 									<div class="form-group">
-										<label for="">Danh mục cha</label>
-										<select name="parent_id" id="inputParent_id" class="form-control">
-										<option value="0">Chọn danh mục cha</option>
-											
-											@foreach($parent as $cate)
-											<option value="{{$cate->id}}">{{$cate->title}}</option>
-											@endforeach
-										</select>
+										<style>
+											.chosen-container-single .chosen-single {
+												height: 34px;
+												width: 870px;
+											}
+											.chosen-container.chosen-with-drop .chosen-drop {
+												width: 870px;
+											}
+											.chosen-container-single .chosen-search input[type=text] {
+												width: 860px;
+											}
+											.chosen-container .chosen-results li.active-result {
+												width: 870px !important;
+											}
+											.chosen-container-single .chosen-single span {
+												padding: 5px;
+											}
+											.chosen-container .chosen-results {
+												overflow-y: hidden;
+											}
+											.chosen-container-single .chosen-single div b {
+												width: 86%;
+											}
+											.chosen-container-active.chosen-with-drop .chosen-single {
+												background: #fff;
+											}
+										</style>
+										<div class="form-group">
+											<div style="width:100%;margin:0px auto;">
+												<select name="category_id" id="inputCategory_id"  class="chosen form-control form-control" style="width:100px;">
+													<option value="">Danh mục cha</option>
+													@foreach($parent as $categ)
+													<option value="{{$categ->id}}">{{$categ->title}}</option>
+													@endforeach
+												</select>
+											</div>
+											<script type="text/javascript">
+												$(".chosen").chosen();
+											</script>
+										</div>
 									</div>
 									<div class="form-group">
 										<label for="">Mô tả</label>
@@ -81,40 +114,40 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-											<label for="">Meta description</label>
-											<input type="text" name="meta_description" class="form-control" id="meta_description" placeholder="meta description">
+												<label for="">Meta description</label>
+												<input type="text" name="meta_description" class="form-control" id="meta_description" placeholder="meta description">
+											</div>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-										<label for="">sorder</label>
-										<input type="number" name="sorder" class="form-control" id="" placeholder="Sorder">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">sorder</label>
+												<input type="number" name="sorder" class="form-control" id="" placeholder="Sorder">
+											</div>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Ảnh *</label>
-											<input type="file" name="upload_file" class="form-control" id="upload_file" placeholder="" required>
-											<input type="hidden" name="created_by" value="{{Auth::Guard('admin')->user()->username}}">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Ảnh *</label>
+												<input type="file" name="upload_file" class="form-control" id="upload_file" placeholder="" required>
+												<input type="hidden" name="created_by" value="{{Auth::Guard('admin')->user()->username}}">
+											</div>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Ảnh đại diện *</label>
-											<input type="file" name="upload_file2" class="form-control" id="upload_file2" placeholder="" required>
-											<input type="hidden" name="created_by" value="{{Auth::Guard('admin')->user()->username}}">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Ảnh đại diện *</label>
+												<input type="file" name="upload_file2" class="form-control" id="upload_file2" placeholder="" required>
+												<input type="hidden" name="created_by" value="{{Auth::Guard('admin')->user()->username}}">
+											</div>
+											
 										</div>
-										
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">Độ ưu tiên</label>
-											<select name="priority" class="form-control">
-												<option value="1">Nhóm 1</option>
-												<option value="2">Nhóm 2</option>
-											</select>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Độ ưu tiên</label>
+												<select name="priority" class="form-control">
+													<option value="1">Nhóm 1</option>
+													<option value="2">Nhóm 2</option>
+												</select>
+											</div>
 										</div>
-									</div>
 									</div>
 									<input type="hidden" name="status" value="enable">
 									@csrf
@@ -218,20 +251,20 @@
 					<td>{{$cate->priority}}</td>
 					<td>
 						<form action="{{route('update-cate',['id'=>$cate['id']])}}" method="POST" class="form-inline" role="form">
-						
+							
 							<div class="form-group">
 								<label class="sr-only" for="">label</label>
 								<input style="width: 60px;" type="number" class="form-control" name="sorder" value="{{$cate->sorder}}" id="" placeholder="">
 							</div>
-						@csrf()
+							@csrf()
 							
-						
+							
 							<button type="submit" class="fa fa-save btn btn-primary"></button>
 						</form>
 					</td>
-					 <td>
-			            <a href="{{route('list_cat_1',['id'=>$cate->id])}}"  onclick="return confirm('Bạn có chắn chắn muốn thêm mới danh muc???')" class="btn btn-xs btn-success fa fa-plus"></a>
-			        </td>
+					<td>
+						<a href="{{route('list_cat_1',['id'=>$cate->id])}}"  onclick="return confirm('Bạn có chắn chắn muốn thêm mới danh muc???')" class="btn btn-xs btn-success fa fa-plus"></a>
+					</td>
 					@if($cate->status=='enable')
 					<td><div class="label label-primary">{{$cate->status}}</div></td>
 					@else

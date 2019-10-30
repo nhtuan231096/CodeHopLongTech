@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="col-md-6">
     <div class="">
 
@@ -400,7 +401,7 @@
     </div>
 </div>   
 </div>
-<div class="col-md-6">
+<div class="col-md-6" >
     <div class="panel panel-info">
      <div class="panel-heading">
       <h3 class="panel-info">Danh sách sản phẩm</h3>
@@ -465,7 +466,7 @@
 
                      
             <div class="form-group">
-                <select name="created_by" id="" class="form-control" ng-model="screated_by">
+                <select name="created_by" id="" class="form-control">
                     <option value="">Người tạo</option>
                     @foreach($users as $user)
                     <option value="{{$user->username}}">{{$user->username}}</option>
@@ -501,6 +502,19 @@
  <table class="table table-hover">
   <thead>
    <tr>
+        <td>
+            <button class="btn btn-danger btn-xs delete-all" data-url="">Delete All</button>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+   </tr>
+   <tr>
+    <td>
+        <input type="checkbox" id="check_all">
+    </td>
     <th>Tên sản phẩm</th>
     <!-- <th>Danh mục</th> -->
     <th>Người tạo</th>
@@ -512,6 +526,7 @@
 <tbody>
     @foreach($products as $product)
     <tr>
+        <td><input type="checkbox" name="check" class="checkbox" value="{{$product->id}}" data-id="{{$product->id}}"></td>
         <td>{{$product->title}}</td>
         <!-- <td>{{$product->category}}</td> -->
         <td>{{$product->created_by}}</td>
@@ -530,198 +545,74 @@
 </table>
 {{$products->appends(request()->only('title','category_id','created_by','status'))->links()}}
 </div>
-<!-- edit sản phẩm  -->
-<!-- <div class="modal fade" id="modal-id">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Cập nhật sản phẩm</h4>
-            </div>
-            <div class="modal-body">
-                <form action="" method="POST" role="form" id="formEdit">
-                    <ul class="nav nav-tabs" style="font-style:20px">
-                      <li class="active "><a data-toggle="tab" href="#editpro">Thông tin cơ bản</a></li>
-                      <li class=""><a data-toggle="tab" href="#editpr">Chi tiết</a></li>
-                  </ul>
 
-                  <div class="tab-content">
-                      <div id="editpro" class="tab-pane fade in active">
-                          <br>
-                          <div class="form-group">
+<!-- mass delete -->
+    <script type="text/javascript">
+            
+    
 
-                            <label class="control-label" for="title">Tên sản phẩm:</label>
+        $(document).ready(function(){
+            $(".checkbox").prop('checked', false);
+            $("#check_all").prop('checked', false);
+            
+            $('#check_all').on('click', function(e) {
+             if($(this).is(':checked',true))  
+             {
+                $(".checkbox").prop('checked', true);  
+             } else {  
+                $(".checkbox").prop('checked',false);  
+             }  
 
-                            <input type="text" name="title" id="title" class="form-control" placeholder="Tên sản phẩm"
+            });
+            $('.checkbox').on('click',function(){
+                if($('.checkbox:checked').length == $('.checkbox').length){
+                    $('#check_all').prop('checked',true);
+                }else{
+                    $('#check_all').prop('checked',false);
+                }
+             });
+            $('.delete-all').on('click', function(e) {
 
-                            <p class="error error_title hidden"></p>
+            var idsArr = [];  
+            $(".checkbox:checked").each(function() {  
+                idsArr.push($(this).attr('data-id'));
+            });  
+            if(idsArr.length <=0)  
+            {  
+                alert("Vui lòng chọn sản phẩm cần xóa.");  
+            }  else { 
+                console.log(idsArr); 
+                if(confirm("Bạn có chắc chắn muốn xóa các sản phẩm đã chọn không?")){  
+                    var strIds = idsArr.join(","); 
+                    $.ajax({
+                        url: "{{ route('massDelete') }}",
+                        type: 'DELETE',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data: 'ids='+strIds,
+                        success: function (data) {
+                            if (data['status']==true) {
+                                $(".checkbox:checked").each(function() {  
+                                    $(this).parents("tr").remove();
+                                });
+                                alert(data['message']);
+                                location.reload();
+                            } else {
+                                alert('Có lỗi vui lòng thử lại!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }  
+            }  
+        });
 
-                        </div>
+        });
+    </script>
+    <!-- todo -->
+<!--end mass delete -->
 
-                        <div class="form-group">
-
-                            <label class="control-label" for="slug">Đường dẫn tĩnh:</label>
-
-                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Đường dẫn tĩnh">
-
-                            <p class="error error_slug hidden"></p>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="short_description">Mô tả ngắn:</label>
-                            <input type="text" name="short_description" id="short_description" placeholder="Mô tả ngắn" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="content">Tổng quan:</label>
-                            <textarea type="text" id="content" name="contents" class="editor_short form-control"></textarea>
-
-                            <div class="help-block with-errors"></div>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="upload_file">Ảnh</label>
-                            <input type="file" name="upload_file" class="form-control" id="upload_file" data-error="Please enter details.">
-                            <div class="help-block with-errors"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="product_code">Mã sản phẩm</label>
-                            <input type="text" name="product_code" id="product_code" placeholder="Mã sản phẩm" class="form-control" >
-                        </div>
-
-                        <input type="hidden" name="status" value="enable">
-                        <div class="form-group">
-
-                            <label class="control-label" for="price">Giá:</label>
-
-                            <input name="price" class="form-control" value="Liên hệ: 1900.6536">
-
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="dimension">Kích thước</label>
-                            <input type="" name="dimension" placeholder="Kích thước" class="form-control">
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="dimension">Lineup</label>
-                            <input type="" name="Lineup" placeholder="Lineup" class="form-control">
-                            <div class="help-block with-errors"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="meta_title">Meta Title</label>
-                            <input type="" name="meta_title" placeholder="Meta Title" class="form-control">
-                            <p class="error error_meta_title hidden"></p>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="meta_description">Meta Description</label>
-                            <input type="" name="meta_description" placeholder="Meta Description" class="form-control">
-                            <p class="error error_meta_description hidden"></p>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="meta_keywords">Meta Keywords</label>
-                            <input type="" name="meta_keywords" placeholder="Meta Keywords" class="form-control">
-                            <div class="help-block with-errors"></div>
-                        </div>
-
-
-                    </div>
-                    <div id="editpr" class="tab-pane fade">
-                        <br>
-                        <div class="form-group">
-                            <label class="control-label" for="specifications">Thông số kỹ thuật:</label>
-                            <textarea type="text" id="content" name="specifications" class="form-control"></textarea>
-
-                            <div class="help-block with-errors"></div>
-
-                        </div>
-                        <div class="form-group">
-
-                            <label class="control-label" for="feature">Đặc tính:</label>
-
-                            <textarea type="text" id="content" name="feature" class="editor_short form-control"></textarea>
-
-                            <div class="help-block with-errors"></div>
-
-                        </div>
-     
-                        <div class="form-group">
-                            <label class="control-label" for="download_id">ID tải xuống</label>
-                            <input type="text" name="download_id" id="promotion" placeholder="ID tải xuống" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="promotion">Khuyến mãi</label>
-                            <input type="text" name="promotion" id="promotion" placeholder="Khuyến mãi" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="sorder">Sorder</label>
-                            <input type="" name="sorder" id="sorder" placeholder="Sorder" class="form-control">
-                            <div class="help-block with-errors"></div>
-                        </div> 
-                        <div class="form-group">
-
-                            <label class="control-label" for="warranty">Bảo hành:</label>
-
-                            <input name="warranty" class="form-control" placeholder="Bảo hành" value="12 tháng">
-
-                            <div class="help-block with-errors"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="category_id">Danh mục:</label>
-                            <select name="category_id" id="" class="form-control" data-error="Bạn chưa chọn danh mục.">
-                                <option value="">Chọn danh mục</option>
-                                <option value="@{{cate.id}}" ng-repeat="cate in category" ng-model="editpr.category_id">@{{cate.title}}</option>
-
-                            </select>
-                            <div class="error error_category_id help-block with-errors hidden"></div>
-                        </div>  
-                        <div class="form-group">
-                            <label class="control-label" for="status">Trạng thái</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="enable">Enable</option>
-                                <option value="disable">Disable</option>
-
-                            </select>
-                            <div class="error error_category_id help-block with-errors hidden"></div>
-                        </div>  
-                        <div class="form-group">
-                            <label class="control-label" for="status">Loại sản phẩm</label>
-                            <div class="checkbox">
-                                <label>
-                                    <div class="clearfix">Sản phẩm bán chạy</div>
-                                    <input type="radio" name="is_best_seller" value="enable">Enable
-                                    <input type="radio" name="is_best_seller" value="disable">Disable
-                                </label>
-                                <label style="margin-left: 40px">
-                                    <div class="clearfix">Sản phẩm nổi bật</div>
-                                    <input type="radio" name="is_promotion" value="enable">Enable
-                                    <input type="radio" name="is_promotion" value="disable">Disable
-                                </label>
-                                <label style="margin-left: 40px">
-                                    <div class="clearfix">Sản phẩm mới</div>
-                                    <input type="radio" name="is_new_product" value="enable">Enable
-                                    <input type="radio" name="is_new_product" value="disable">Disable
-                                </label>
-                                <label style="margin-left: 40px">
-                                    <div class="clearfix">Sản phẩm đặc biệt</div>
-                                    <input type="radio" name="special_product" value="enable">Enable
-                                    <input type="radio" name="special_product" value="disable">Disable
-                                </label>
-                            </div>
-                            <div class="help-block with-errors"></div>
-                        </div>             
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary" ng-click="update_pro(product.id)">Cập nhật</button>
-                @csrf
-            </form>
-        </div>
-    </div>
-</div> -->
 </div>
 
 </div>

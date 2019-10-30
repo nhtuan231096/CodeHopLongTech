@@ -39,3 +39,7 @@ Route::get('getReplyCommentProduct/{comment_id}','\App\Http\Controllers\Home\Hom
 Route::get('getPartNumber/{product_id}','\App\Http\Controllers\Home\HomeController@getPartNumber');
 
 // route part number
+
+// route masdelete product
+Route::get('product-mass-delete','\App\Http\Controllers\Admin\ProductController@mass_delete');
+// route masdelete product

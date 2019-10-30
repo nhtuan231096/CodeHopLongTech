@@ -48,4 +48,8 @@ Route::post('order-list-pro/{id}','ProductController@orderListPro1')->name('orde
 // import product price
 Route::get('import_price','ProductController@import_price')->name('import_price');
 Route::post('import_price','ProductController@post_import_price')->name('import_price');
+
+// route mass delete product
+Route::delete('massDelete','ProductController@mass_delete')->name('massDelete');
+// route mass delete product
  ?>
