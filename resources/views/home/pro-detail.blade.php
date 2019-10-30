@@ -820,14 +820,16 @@
                         </ul>
                       </div>
                       <div class="panel-body">
-                        @if($product->pdp)
-                        <!-- todo -->
-                        
-                        <div class="overViewImg">
-                          <img src="{{url('uploads/product_new/dimension')}}/{{$product->dimension}}">
-                        </div>
-                        @else
-                        <div style="width: 100%">{!!$product->dimension!!}</div>
+                        @if($product->dimension)
+                          @if($product->pdp)
+                          <!-- todo -->
+                          
+                          <div class="overViewImg">
+                            <img src="{{url('uploads/product_new/dimension')}}/{{$product->dimension}}">
+                          </div>
+                          @else
+                          <div style="width: 100%">{!!$product->dimension!!}</div>
+                          @endif
                         @endif
                       </div>
                       <div class="position_anchor" style="position: absolute;" id="docs"></div>
@@ -916,7 +918,7 @@
                       </div>
                       <div class="panel-body">
                         <div class="row">
-                          @if($product->pdp)
+                          @if($product->pdp || $product->actual_photo)
                           <?php $actual_photos = $cart->stringToArray($product->actual_photo);?>
                           
                           @foreach($actual_photos as $actual_photo)

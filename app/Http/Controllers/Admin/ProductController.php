@@ -571,4 +571,12 @@ public function post_import_price(Request $request){
   }
   return redirect()->back()->with('error','Có lỗi vui lòng thử lại');
 }
+  // todo
+  public function mass_delete(Request $request){
+    $ids = $request->ids;
+    Product::whereIn('id',explode(",",$ids))->delete();
+    return response()->json(['status'=>true,'message'=>"Xóa sản phẩm thành công."]);   
+  }
+  // todo
+  
 }

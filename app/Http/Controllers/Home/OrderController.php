@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Mail;
 use App\Mail\OrderSendMail;
+use App\Mail\OrderSendMailNotification;
 use App\Models\Customer_type;
 use App\Models\CouponCode;
 use App\Models\CouponRule;
@@ -109,31 +110,18 @@ class OrderController extends Controller
 				}
 				if(OrderDetail::insert($datas)){
 					if(Auth::guard('customer')->check()){
-						// $reward_points = Reward_points::first();
-						// $formatTotalPrice = filter_var($req->total_price, FILTER_SANITIZE_NUMBER_INT);
-						// $points = round($formatTotalPrice/$reward_points->money, 0, PHP_ROUND_HALF_DOWN);
 
 						$id = Auth::guard('customer')->user()->id;
 						$customer = Customer::find($id);
-						// $currentPoints = $customer->reward_points;
-						// $currentTotalPoints = $customer->total_points;
-						// $addPoints = $currentPoints + $points;
-						// $addTotalPoints = $currentTotalPoints + $points;
-						// if($req->redeem_money){
-						// 	$addPoints = $addPoints - $req->redeem_money;
-						// }
-
 						$currentPoints = $customer->reward_points;						
 						$customer->update([
 							'reward_points' => $currentPoints - $req->redeem_money
 						]);
-						//$customer->update([
-						// 	'reward_points' => $addPoints,
-						// 	'total_points' => $addTotalPoints
-						// ]);
+
 					}
 					
 					Mail::to($req->email)->send(new OrderSendMail($order));
+					Mail::to('info.hoplongtech@gmail.com')->send(new OrderSendMailNotification($order));
 					$cart->clear();
 					AdminNotification::create([
 						'order_id' => $order->id,
