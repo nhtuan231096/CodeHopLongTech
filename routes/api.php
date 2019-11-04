@@ -43,3 +43,7 @@ Route::get('getPartNumber/{product_id}','\App\Http\Controllers\Home\HomeControll
 // route masdelete product
 Route::get('product-mass-delete','\App\Http\Controllers\Admin\ProductController@mass_delete');
 // route masdelete product
+
+// route search product
+Route::get('autoSearch/{product_search}','\App\Http\Controllers\Home\HomeController@autoSearch');
+// route search product

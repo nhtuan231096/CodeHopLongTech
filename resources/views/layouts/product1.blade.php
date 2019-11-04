@@ -72,6 +72,7 @@
       line-height: 50px !important; 
     }
   </style>
+  
 </head>
 <body class="woocommerce-active left-sidebar single-product normal">
   <div id="page" class="hfeed site">
@@ -436,6 +437,21 @@
                     </button>
                   </div>
                 </div>
+                <!-- <div class="search-tab" style="position: absolute;width: 97%">
+                    <div class="col-md-12" style="border: 1px solid #3498db;background: #fff;border: 2px solid #e7e7e7;
+border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
+                        <div class="media" ng-repeat="search_item in res_product_search ">
+                          <span ng-click="close_tab()" style="position: absolute;top: 10px;right: 15px;font-size: 16px;z-index: 50;font-weight: bold;cursor: pointer;">x</span>
+                            <a class="pull-left" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank">
+                                <img width="80" class="media-object" src="{{url('uploads/product')}}/@{{search_item['cover_image']}}" alt="Image">
+                            </a>
+                            <div class="media-body">
+                                <a class="" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank" style="font-size: 15px;font-weight: 700;margin-bottom: 0px;letter-spacing: -.04em;line-height: 1;padding: 10px 0 0;">@{{search_item['title']}}</a>
+                                <p>@{{search_item['price_product']}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
               </form>
               <!-- .navbar-search -->
               <ul id="site-header-cart" class="site-header-cart menu">

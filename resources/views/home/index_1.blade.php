@@ -16,6 +16,7 @@
     <link rel="canonical" href="http://localhost/hoplongtech" />
     <link rel="icon" href="{{url('uploads/logo/Logo-hl.png')}}" sizes="32x32" />
     <link rel="stylesheet" href="{{url('public')}}/css/newstyle.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43044974-10"></script>
     <script>
@@ -28,9 +29,11 @@
     <script type="text/javascript">
         var ajaxurl = '{{url("public/home/home")}}/wp-admin/admin-ajax.php';
     </script>
+    <script src="{{url('public/js')}}/angular.min.js"></script>
+    <script src="{{url('public/js')}}/SearchCtrl.js"></script>
     <link rel="stylesheet" href="{{url('public/css')}}/mystyle.css"> </head>
     <body class="page-template-default page page-id-614 site_layout_1 header_style_2 sticky_menu wpb-js-composer js-comp-ver-5.4.7 vc_responsive">
-        <div id="wrapper">
+        <div id="wrapper" ng-app="my_app" ng-controller="SearchCtrl">
             <div id="fullpage" class="content_wrapper">
                 <header id="header">
                     <div class="top_bar">
@@ -314,7 +317,7 @@
                             <form class="navbar-search ng-pristine ng-valid" action="{{route('search_product')}}" method="get">
                                 <label class="sr-only screen-reader-text" for="search">Tìm kiếm:</label>
                                 <div class="input-group">
-                                    <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="title" placeholder="Search for products">
+                                    <input type="text" id="search" class="form-control search-field product-search product-search-field" dir="ltr" value="" name="title" placeholder="Search for products" ng-change="productSearch(product_search)" ng-model="product_search" ng-model-options="{debounce: 1000}">
                                     <div class="input-group-addon search-categories">
                                         <select name="product_cat" id="product_cat" class="postform resizeselect" style="width: 154.609px;">
                                             <option value="" selected="selected">Tất cả các danh mục</option> @csrf </select>
@@ -323,8 +326,26 @@
                                             <input type="hidden" id="search-param" name="post_type" value="product" autocomplete="off">
                                             <button type="submit" class="btn btn-s"> <span class="search-btn fa fa-search"></span> </button>
                                         </div>
+                                </div>
+                            </form>
+                            <div style="position: relative;"> 
+                                <div class="search-tab" style="position: absolute;top:-34px;left: 0;width: 100%">
+                                    <div class="col-md-12" style="border: 1px solid #3498db;background: #fffc;">
+                                        <div class="media" ng-repeat="search_item in res_product_search ">
+                                            <span ng-click="close_tab()" style="position: absolute;top: 10px;right: 15px;font-size: 16px;z-index: 50;font-weight: bold;cursor: pointer;">x</span>
+                                            <a class="pull-left" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank">
+                                                <img width="80" class="media-object" src="{{url('uploads/product')}}/@{{search_item['cover_image']}}" alt="Image">
+                                            </a>
+                                            <div class="media-body">
+                                                <a class="" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank" style="font-size: 15px;font-weight: 700;margin-bottom: 0px;letter-spacing: -.04em;line-height: 1;padding: 10px 0 0;">@{{search_item['title']}}</a>
+                                                <p>@{{search_item['price_product']}}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </form>
+                                </div>
+                            </div>
+                                
+                                
                             </div>
                             <div class="col-md-3">
                                 <div class="hotline"><i class="fa fa-phone" style="font-size: 23px;padding-right: 10px;"></i><span>19006536</span></div>
@@ -505,7 +526,7 @@
                                 </br>
 
                             </br>
-                            <figure class="wpb_wrapper vc_figure"> <a data-rel="prettyPhoto[rel-1071-634409447]" href="https://hoplongtech.com/lich-su-phat-trien-cong-ty" target="_self" class="vc_single_image-wrapper" " style="border: 1px solid #3498db; "><img src="{{url('uploads/about')}}/{{isset($conf->img_time_line_8) ? $conf->img_time_line_8 : ''}}" class="vc_single_image-img attachment-full" alt="{{isset($conf->img_time_line_8) ? $conf->img_time_line_8 : 'no image'}}"></a></figure> 
+                            <figure class="wpb_wrapper vc_figure"> <a data-rel="prettyPhoto[rel-1071-634409447]" href="https://hoplongtech.com/lich-su-phat-trien-cong-ty" target="_self" class="vc_single_image-wrapper" style="border: 1px solid #3498db; "><img src="{{url('uploads/about')}}/{{isset($conf->img_time_line_8) ? $conf->img_time_line_8 : ''}}" class="vc_single_image-img attachment-full" alt="{{isset($conf->img_time_line_8) ? $conf->img_time_line_8 : 'no image'}}"></a></figure> 
                         </div>
                     </div>
                 </div>
@@ -834,4 +855,7 @@
                     });
                 };
             </script>
+
+          
+
             </html>
