@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage" ng-app="myApp">
+<!-- //--- -->
+<!-- <html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage" ng-app="myApp"> -->
+<!-- //--- -->
+<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage" ng-app="my_app" ng-controller="SearchCtrl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
@@ -84,6 +87,8 @@
     font-family: sans-serif;
   }
 </style>
+<script src="{{url('public/js')}}/angular.min.js"></script>
+<script src="{{url('public/js')}}/SearchCtrl.js"></script>  
 </head>
 <body class="woocommerce-active page-template-template-homepage-v1 can-uppercase">
   <!-- Google Tag Manager (noscript) -->
@@ -431,10 +436,10 @@
                   </ul>
                 </div>
                 <!-- .departments-menu -->
-                <form class="navbar-search" method="get" action="{{route('search_product')}}">
+                <form class="navbar-search" method="get" action="{{route('search_product')}}" style="position: relative;">
                   <label class="sr-only screen-reader-text" for="search">Search for:</label>
                   <div class="input-group">
-                    <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="title" placeholder="Tìm theo tên sản phẩm" />
+                    <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="title" placeholder="Tìm theo tên sản phẩm" ng-change="productSearch(product_search)" ng-model="product_search" ng-model-options="{debounce: 1000}" />
                     <div class="input-group-addon search-categories">
                       <select name='product_cat' id='product_cat' class='postform resizeselect'>
                         <option value='0' selected='selected'>All Categories</option>
@@ -451,7 +456,23 @@
                       </button>
                     </div>
                   </div>
+                  <div class="search-tab" style="position: absolute;width: 97%">
+                        <div class="col-md-12" style="border: 1px solid #3498db;background: #fff;border: 2px solid #e7e7e7;
+    border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
+                            <div class="media" ng-repeat="search_item in res_product_search ">
+                              <span ng-click="close_tab()" style="position: absolute;top: 10px;right: 15px;font-size: 16px;z-index: 50;font-weight: bold;cursor: pointer;">x</span>
+                                <a class="pull-left" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank">
+                                    <img width="80" class="media-object" src="{{url('uploads/product')}}/@{{search_item['cover_image']}}" alt="Image">
+                                </a>
+                                <div class="media-body">
+                                    <a class="" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank" style="font-size: 15px;font-weight: 700;margin-bottom: 0px;letter-spacing: -.04em;line-height: 1;padding: 10px 0 0;">@{{search_item['title']}}</a>
+                                    <p>@{{search_item['price_product']}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
+
                 <!-- .navbar-search -->
                 <!-- <ul class="header-compare nav navbar-nav">
                   <li class="nav-item">
@@ -515,8 +536,9 @@
                     </li>
                 </ul>
                 </div>
+               
               </div>
-
+              
               <div class="col-full handheld-only">
                 <div class="handheld-header">
                   <div class="row">

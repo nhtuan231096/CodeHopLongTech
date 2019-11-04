@@ -173,6 +173,7 @@ class Data
 		}
 		
 		else{
+			// return Auth::guard('customer')->check();
 			return $product['price'] > 0 ? number_format($product['price']).'  VNĐ' : $product['price'];
 		}
 	}

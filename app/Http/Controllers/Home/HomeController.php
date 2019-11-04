@@ -947,5 +947,16 @@ public function recruitment(){
 		return json_encode($partNumber);
     }
     // getPartNumber for api
+
+    public function autoSearch($product_search,Data $helperData){
+    	if($product_search != ''){
+    		$res = Product::select('id','price','price_when_login','title','slug','cover_image','time_discount','discount')->where('title','like','%'.$product_search.'%')->where('status','enable')->paginate(10);
+    		foreach ($res as $key => $value) {
+    			$price = $helperData->PriceProduct($value);
+    			$value->price_product = $price;
+    		}
+    		return json_encode($res);
+    	}
+    }
 }
  ?>
