@@ -1,6 +1,6 @@
 @extends('layouts.product1')
 @section('content')
-<script src="{{url('public/js')}}/angular.min.js"></script>
+<!-- <script src="{{url('public/js')}}/angular.min.js"></script> -->
 <!-- <script src="{{url('public/js')}}/OrderCtrl.js"></script> -->
 <script src="{{url('public/js')}}/dirPagination.js"></script>
 <!-- Latest compiled and minified CSS -->
@@ -59,7 +59,7 @@
   </style>
   <script src="https://360player.io/static/dist/scripts/embed.js" async></script>
   <div id="content" class="site-content" tabindex="-1">
-    <div class="col-full" ng-app="myApp" ng-controller="myCtrl">
+    <div class="col-full">
       <div class="row">
         <nav class="woocommerce-breadcrumb" style="padding:0 15px">
           <a href="{{route('home')}}">Home</a>
