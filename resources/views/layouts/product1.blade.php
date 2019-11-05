@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage" ng-app="myApp">
+<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage" ng-app="myApp" ng-controller="myCtrl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
@@ -33,6 +33,7 @@
     gtag('js', new Date());
     gtag('config', 'UA-43044974-10');
   </script>
+  <script src="{{url('public/js')}}/angular.min.js"></script>
   
   <style type="text/css">
     .sub-menu-parent
@@ -420,7 +421,7 @@
               <form class="navbar-search" method="get" action="{{route('search_product')}}">
                 <label class="sr-only screen-reader-text" for="search">Search for:</label>
                 <div class="input-group">
-                  <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="title" placeholder="Tìm theo tên sản phẩm" />
+                  <input type="text" id="search" class="form-control search-field product-search-field" dir="ltr" value="" name="title" placeholder="Tìm theo tên sản phẩm" ng-change="productSearch(product_search)" ng-model="product_search" ng-model-options="{debounce: 1000}"/>
                   <div class="input-group-addon search-categories">
                     <select name='product_cat' id='product_cat' class='postform resizeselect'>
                       <option value='0' selected='selected'>All Categories</option>
@@ -437,7 +438,7 @@
                     </button>
                   </div>
                 </div>
-                <!-- <div class="search-tab" style="position: absolute;width: 97%">
+                <div class="search-tab" style="position: absolute;width: 97%">
                     <div class="col-md-12" style="border: 1px solid #3498db;background: #fff;border: 2px solid #e7e7e7;
 border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
                         <div class="media" ng-repeat="search_item in res_product_search ">
@@ -451,7 +452,7 @@ border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
               </form>
               <!-- .navbar-search -->
               <ul id="site-header-cart" class="site-header-cart menu">
@@ -807,5 +808,31 @@ border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
                   page_id="673301269359074"
                   ref="">
                 </div>
+                <script type="text/javascript">
+                  var myApp = angular.module("myApp",[]);
+
+                  $url = window.location.protocol + "//" + window.location.hostname;
+                  myApp.controller("myCtrl",function($scope,$http){
+                    $(".search-tab").hide();
+                    $scope.close_tab = function(){
+                      $(".search-tab").hide();
+                    }
+
+                      $scope.productSearch = function(product_search){
+                        // console.log(product_search);
+                        $(".search-tab").show();
+                        if(product_search != ''){
+                          // $http.get($url + '/CodeHopLongTech/api/autoSearch/' + product_search).then(function(res){
+                          $http.get($url + '/api/autoSearch/' + product_search).then(function(res){
+                            $scope.res_product_search = res.data.data;
+                        }); 
+                        }
+                        if(product_search == ''){
+                          $scope.res_product_search = [];
+                        }
+                          
+                      };
+                  })
+                </script>
               </body>
               </html>

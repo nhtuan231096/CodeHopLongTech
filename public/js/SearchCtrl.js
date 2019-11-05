@@ -11,7 +11,8 @@ myapp.controller("SearchCtrl",function($scope,$http){
     	// console.log(product_search);
     	$(".search-tab").show();
     	if(product_search != ''){
-    		$http.get($url + '/CodeHopLongTech/api/autoSearch/' + product_search).then(function(res){
+    		// $http.get($url + '/CodeHopLongTech/api/autoSearch/' + product_search).then(function(res){
+    		$http.get($url + '/api/autoSearch/' + product_search).then(function(res){
 	    		$scope.res_product_search = res.data.data;
 			});	
     	}
