@@ -940,9 +940,10 @@ public function recruitment(){
     public function getPartNumber($product_id,Data $helperData){
     	$product = Product::find($product_id);
 		$partNumber = Product::where('category_id',$product->category_id)->where('id','<>',$product_id)->where('status','enable')->limit(20)->get();
-		// foreach ($partNumber as $item) {
-		// 	$item->price = $helperData->PriceProduct($item);
-		// }
+		foreach ($partNumber as $item) {
+			$item->short_description = strip_tags($item->short_description);
+			// $item->price = $helperData->PriceProduct($item);
+		}
 		
 		return json_encode($partNumber);
     }

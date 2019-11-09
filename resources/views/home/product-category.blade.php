@@ -17,7 +17,7 @@
                     </div>
                     <!-- .shop-archive-header -->
                     <div class="shop-control-bar">
-                        <h1 class="woocommerce-products-header__title page-title"><span>{{$category->title}}</span></h1>
+                        <h3 class="woocommerce-products-header__title page-title">Danh sách sản phẩm: <span>{{$category->title}}</span></h3>
                         @if(request()->is('/'))
                         <ul role="tablist" class="shop-view-switcher nav nav-tabs">
                             <li class="nav-item">
@@ -59,29 +59,6 @@
                                            @else
                                            <img alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="{{url('uploads/category')}}/{{$pro->cover_image}}">
                                            @endif
-
-                                            @if($pro->price=='' || is_numeric($pro->price) == false) 
-                                            <span class="woocommerce-Price-currencySymbol"><b>Liên hệ 1900.6536</b></span> 
-                                            @elseif(($date = date('Y-m-d') <= $product->time_discount))
-                                                <?php $productPrice = $pro->price - (($pro->price * $product->discount)/100)?>
-                                                <span class="woocommerce-Price-currencySymbol"><b>{{number_format($productPrice)}}</b></span>
-                                            @else 
-                                                @if(Auth::guard('customer')->check())
-                                                    <span class="woocommerce-Price-currencySymbol">
-                                                        <?php $priceProduct = isset($pro->price_when_login) ? ($pro->price_when_login) : ($pro->price > 0 ? ($pro->price) : $pro->price)?>
-                                                            <b>
-                                                                {{!empty($cart->DiscountAmount()) ? number_format(round($priceProduct - (($priceProduct/100) * $cart->DiscountAmount()))) : $priceProduct}} VNĐ
-                                                            </b>
-                                                    </span>
-                                                @else
-                                                    <span class="woocommerce-Price-currencySymbol">
-                                                        <b>
-                                                            {{$pro->price > 0 ? number_format($pro->price).'  VNĐ' : $pro->price}}
-                                                        </b>
-                                                    </span>
-                                                @endif
-                                            @endif 
-
                                             <br>
                                            <span class="price"><h2 class="woocommerce-loop-product__title">{{$pro->title}}</h2></span>
                                         </a>
@@ -105,7 +82,7 @@
                         <div id="grid-extended" class="tab-pane active" role="tabpanel">
                             <div class="woocommerce columns-5">
                                 <div class="products">
-                                    @foreach($products as $pro)
+                                    <!-- @foreach($products as $pro)
                                     <div class="product first">
                                         <div class="yith-wcwl-add-to-wishlist">
                                             <a href="" rel="dofollow" class="add_to_wishlist"></a>
@@ -135,7 +112,7 @@
                                                             </span>
                                                         @endif
                                                     @endif 
-                                                </span>
+                                                </span></br>
                                                 <span class="woocommerce-loop-product__title">{{$pro->title}}</span>
                                             </span>
                                         </a>
@@ -147,7 +124,106 @@
                                             <span class="review-count">(1)</span>
                                         </div>
                                     </div>
-                                    @endforeach
+                                    @endforeach -->
+
+<div class="panel-body">
+
+                            
+                            
+
+                            <!-- //--- -->
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th class="verticalMid">Mã hàng</th>
+                                  <!-- <th class="verticalMid">Giá thường</th> -->
+                                  <th class="verticalMid">Giá bán</th>
+                                  <th class="verticalMid">Tình trạng</th>
+                                  <th class="verticalMid">Số lượng</th>
+                                  <th class="verticalMid">Đặt hàng</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @foreach($products as $item)
+                                <tr>
+                                  <td class="verticalMid">
+                                    <div>
+                                      <div class="media">
+                                          <a class="pull-left" href="{{route('view',[$item->slug])}}">
+                                            <img width="70px" class="media-object" src="{{url('uploads/product/')}}/{{$item->cover_image}}" alt="Image">
+                                          </a>
+                                          <div class="media-body" style="padding-left: 15px">
+                                        
+                                            <h4 class="media-heading" style="font-size: 15px"><a href="{{url('')}}/products/{{$item->slug}}">{{$item->title}}</a></h4>
+                                            <div class="star-rating" title="Rated 5 out of 5">
+                                              <span style="width:100%"></span>
+                                            </div>
+                                            <div class="woocommerce-product-details__short-description">{!!$item->short_description!!}</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <!-- <td class="verticalMid"> -->
+                                    <!-- @if($item->list_price > 0)
+                                      <span style="text-decoration: line-through;">
+                                        {{number_format($item->list_price)}}VNĐ
+                                      </span>
+                                      @elseif($item->list_price == null)
+                                      <span>
+                                        Liên hệ: 1900.6536
+                                      </span>
+                                      @endif -->
+                                    <!-- </td> -->
+                                    <td class="verticalMid">
+                                      
+                                      <span class="woocommerce-Price-amount amount">
+                                                          <span>
+                                                            {{$cart->PriceProduct($item)}}
+                                                          </span>
+                                                        </span>
+                                                      </td>
+                                                      <td class="verticalMid">
+                                                        <p>Có sẵn: {{$item->in_stock > 0 ? $item->in_stock : 0}}</p>
+                                                        @if($item->in_stock == 0)
+                                                        <p>Đặt hàng: Từ 2-4 tuần</p>
+                                                        @endif
+                                                      </td>
+                                                      <td class="verticalMid">
+                                                        <form action="" method="POST" role="form" style="margin: 0">
+                                                          <div class="form-group" style="width: 56px;margin: 0">
+                                                            <input type="number" class="form-control" value="1">
+                                                          </div>
+                                                        </form>
+                                                      </td>
+                                                      @if($item->price != "Liên hệ 1900.6536")
+                                                      <td class="verticalMid">    
+                                                        <a href="{{route('add_cart',['id'=>$item->id])}}" class="btn btn-md btn-info" style="margin-bottom: 5px;    padding-right: 20px;">
+                                                          <i class="fa fa-shopping-cart"></i> Thêm giỏ 
+                                                        </a>
+                                                      </td>
+                                                      @else
+                                                      <td class="verticalMid">    
+                                                        <div class="clearfix"></div>
+                                                        <a href="" class="btn btn-md btn-danger">
+                                                          <i class="fa fa-phone"></i> Liên hệ
+                                                        </a>
+                                                      </td>
+                                                      @endif
+                                                    </tr>
+                                                    
+
+                                                    @endforeach
+
+
+                                                  </tbody>
+                                                  <div class="position_anchor" style="position: absolute; bottom: 60px"id="specifications"></div>
+                                                </table>
+                                              
+                                              <!-- //--- -->
+
+                                              <!-- <span id="specifications" style="padding:250px 0px"></span> -->
+                                            </div>                                    
+
                                 </div> 
                                 {{$products->appends(request()->only('title','category_id'))->links()}}
                                 <!-- .products -->
