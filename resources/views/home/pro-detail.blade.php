@@ -596,7 +596,7 @@
                               <thead>
                                 <tr>
                                   <th class="verticalMid">Mã hàng</th>
-                                  <th class="verticalMid">Giá thường</th>
+                                  <!-- <th class="verticalMid">Giá thường</th> -->
                                   <th class="verticalMid">Giá bán</th>
                                   <th class="verticalMid">Tình trạng</th>
                                   <th class="verticalMid">Số lượng</th>
@@ -618,7 +618,7 @@
                                             <div class="star-rating" title="Rated 5 out of 5">
                                               <span style="width:100%"></span>
                                             </div>
-                                            <div class="woocommerce-product-details__short-description">{!!$product->short_description!!}</div>
+                                            <div class="woocommerce-product-details__short-description">@{{itemPartNumber["short_description"]}}</div>
                                           </div>
                                         </div>
                                       </div>

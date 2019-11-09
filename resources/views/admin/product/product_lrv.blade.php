@@ -480,7 +480,13 @@
                     <option value="disable">Disable</option>
                 </select>
             </div>
-         
+           
+            <select name="tool_check_product" id="input" class="form-control tool_check_product">
+                <option value="">Tool Heath Product Check</option>
+                <option value="seo">Tiêu chí SEO</option>
+                <option value="pdp">Tiêu chí PDP</option>
+                <option value="price">Tiêu chí giá sản phẩm</option>
+            </select>
 
 
 
@@ -509,7 +515,9 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>
+            
+        </td>
    </tr>
    <tr>
     <td>
@@ -608,6 +616,33 @@
             }  
         });
 
+
+
+            // tool_check_product
+            // var checkPro = $(".tool_check_product");
+            // checkPro.val('');
+            // checkPro.change(function(){
+            //     if(checkPro.val() != '') {
+            //         $.ajax({
+            //             url: "",
+            //             type: 'GET',
+            //             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            //             data: 'data='+checkPro,
+            //             success: function (data) {
+            //                 if (data['status']==true) {
+            //                     console.log();
+            //                     location.reload();
+            //                 } else {
+            //                     alert('Có lỗi vui lòng thử lại!!');
+            //                 }
+            //             },
+            //             error: function (data) {
+            //                 alert(data.responseText);
+            //             }
+            //         });
+            //     }
+            // });
+            // tool_check_product
         });
     </script>
     <!-- todo -->

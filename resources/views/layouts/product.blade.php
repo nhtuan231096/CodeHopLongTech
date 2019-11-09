@@ -535,6 +535,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                           </form>
                         </div>
                       </div>
+                      <a class="handheld-header-cart-link has-icon" href="{{route('view_cart')}}" title="Giỏ hàng của bạn">
+                        <i class="header-cart-icon tm tm-shopping-bag"></i><span class="count">{{$cart->total_quantity}}</span>
+                      </a>
                     </div>
                   </div>
                 </div>
