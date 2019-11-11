@@ -4,18 +4,21 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Terms;
+use App\Helper\Data;
 
 /**
  * 
  */
 class TermsController extends Controller
 {
-	public function index(){
+	public function index(Data $data){
 		$id = isset(request()->id) ? request()->id : '';
 		$data_edit = Terms::find($id);
 		$datas = Terms::paginate(10);
+		$type_terms = $data->type_term();
 		return view('admin.terms.index',[
 			'datas' => $datas,
+			'type_terms' => $type_terms,
 			'data_edit' => $data_edit
 		]);
 	}

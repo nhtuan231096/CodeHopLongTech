@@ -121,6 +121,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{route('product_lrv')}}"><i class="fa fa-align-center"></i>Sản phẩm</a></li>
+              <li><a href="{{route('tool_product_check')}}"><i class="fa fa-toolbox"></i></i>Tool Heath Product Check</a></li>
               <li><a href="{{route('importProduct')}}"><i class="fa fa-cloud-upload"></i>Import sản phẩm</a></li>
               <li><a href="{{route('import_price')}}"><i class="fa fa-cloud-upload"></i>Import cập nhật sản phẩm</a></li>
               <li><a href="{{route('rate_product')}}"><i class="fa fa-star"></i>Đánh giá sản phẩm</a></li>

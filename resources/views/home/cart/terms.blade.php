@@ -5,8 +5,8 @@
 </div>
 <div class="jumbotron">
   <div class="container">
-    <h2 style="margin-top: 15px">{{$terms->name}}</h2>
-    <p>{!!$terms->content!!}</p>
+    <h2 style="margin-top: 15px">{{isset($terms->name) ? $terms->name : ''}}</h2>
+    <p>{!!isset($terms->content) ? $terms->content : ''!!}</p>
   </div>
 </div>
 @stop()

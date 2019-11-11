@@ -906,6 +906,14 @@ public function recruitment(){
 			'terms' => $terms,
     	]);
     }
+    public function view_terms($type){
+		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+		$terms = Terms::where('type_terms',$type)->first();
+    	return view('home.cart.terms',[
+			'categorys' => $categorys,
+			'terms' => $terms,
+    	]);
+    }
 
     public function rateProduct(Request $req){
   		$img='';

@@ -3,6 +3,7 @@ namespace App\Helper;
 use Auth;
 use App\Models\Reward_points;
 use App\Models\AdminNotification;
+use App\Models\Terms;
 
 class Data
 {
@@ -190,6 +191,18 @@ class Data
 	public function stringToArray($string){
 		$arr = explode(",",$string);
 		return $arr;
+	}
+	public function type_term(){
+		return [
+			'bao_hanh' => 'Chính sách bảo hành',
+			'thanh_toan' => 'Quy định và hình thức thanh toán',
+			'doi_tra' => 'Quy định đổi trả hàng',
+			'van_chuyen' => 'Chính sách vận chuyển, giao hàng'
+		];
+	}
+	public function getTerms(){
+		$datas = Terms::paginate(20);
+		return $datas;
 	}
 }
 
