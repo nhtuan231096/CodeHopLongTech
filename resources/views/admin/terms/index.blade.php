@@ -21,6 +21,15 @@
 				<input name="name" class="form-control" id="name" value="{{isset($data_edit->name) ? ($data_edit->name) : ''}}" placeholder="Nhập nội dung.." required>
 			</div>
 			<div class="form-group">
+				<label for="">Loại điều khoản</label>
+				<select name="type_terms" id="inputType_terms" class="form-control" required>
+					<option value="">Loại điều khoản</option>
+					@foreach($type_terms as $key=>$item)
+					<option value="{{$key}}">{{$item}}</option>
+					@endforeach
+				</select>
+			</div>
+			<div class="form-group">
 				<label for="">Nội dung</label>
 				<textarea name="content" style="height: 600px" cols="30" rows="10">{{isset($data_edit->content) ? ($data_edit->content) : ""}}</textarea>
 			</div>

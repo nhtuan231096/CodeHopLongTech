@@ -27,19 +27,19 @@ class Product extends Model
 
 	public function scopeSearch($query)
 	{
-		// tool_check_product
-		if(!empty(request()->tool_check_product)){
-			if(request()->tool_check_product == "seo") {
-				return $query->where('meta_description',null)->orwhere('meta_title',null);
-			}
-			if(request()->tool_check_product == "pdp") {
-				return $query->where('cover_image',null)->orwhere('content',null)->orwhere('download_id',null)->orwhere('actual_photo',null);
-			}
-			if(request()->tool_check_product == "price") {
-				return $query->where('price',null)->orwhere('list_price',null)->orwhere('price_when_login',null);
-			}
-		}
-		// tool_check_product
+		// // tool_check_product
+		// if(!empty(request()->tool_check_product)){
+		// 	if(request()->tool_check_product == "seo") {
+		// 		return $query->where('meta_description',null)->orwhere('meta_title',null);
+		// 	}
+		// 	if(request()->tool_check_product == "pdp") {
+		// 		return $query->where('cover_image',null)->orwhere('content',null)->orwhere('download_id',null)->orwhere('actual_photo',null);
+		// 	}
+		// 	if(request()->tool_check_product == "price") {
+		// 		return $query->where('price',null)->orwhere('list_price',null)->orwhere('price_when_login',null);
+		// 	}
+		// }
+		// // tool_check_product
 
 
 		if(empty(request()->title) && empty(request()->category_id) && empty(request()->created_by) && empty(request()->status) )
@@ -107,6 +107,26 @@ class Product extends Model
 	}
 	public function countComment(){
 		return $this->hasMany('\App\Models\Comment','product_id','id')->where('status',1);
+	}
+
+	public function scopeCheckProduct($query){
+		// tool_check_product
+		if(!empty(request()->tool_check_product)){
+			if(request()->tool_check_product == "seo") {
+				return $query->where('meta_description',null)->orwhere('meta_title',null);
+			}
+			if(request()->tool_check_product == "pdp") {
+				return $query->where('cover_image',null)->orwhere('content',null)->orwhere('download_id',null)->orwhere('actual_photo',null);
+			}
+			if(request()->tool_check_product == "price") {
+				return $query->where('price',null)->orwhere('list_price',null)->orwhere('price_when_login',null);
+			}
+		}
+		else
+		{
+			return $query->where('cover_image',null)->orwhere('content',null)->orwhere('download_id',null)->orwhere('actual_photo',null);
+		}
+		// tool_check_product
 	}
 }
  ?>

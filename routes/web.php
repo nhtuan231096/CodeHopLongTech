@@ -112,6 +112,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 
 	Route::get('cart/export-quote-pdf','HomeController@export_quote_pdf')->name('export_quote_pdf');
 	Route::get('cart/dieu-khoan-mua-hang','HomeController@terms_purc')->name('terms_purc');
+	Route::get('view-terms/{type}','HomeController@view_terms')->name('view_terms');
 	// end route cart
 
 	// route order checkout

@@ -761,10 +761,14 @@
                                                 <h4 class="widget_title no_stripe">Dịch vụ</h4>
                                                 <div class="menu-extra-links-container">
                                                     <ul id="menu-extra-links" class="menu">
-                                                        <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a href="#">Chính sách bảo hành</a></li>
-                                                        <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="#">Chính sách vận chuyển</a></li>
-                                                    </br>
-                                                    <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="#">Bảo hành sản phẩm</a></li>
+                                                    @foreach($cart->getTerms() as $item)
+                                                        @if($item->type_terms == "bao_hanh" || $item->type_terms == "thanh_toan" || $item->type_terms == "doi_tra" || $item->type_terms == "van_chuyen")         
+                                                        <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Quy định đổi trả hàng</a></li>
+                                                        <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
+                                                        </br>
+                                                        <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Bảo hành sản phẩm</a></li>
+                                                        @endif
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                             <div class="footer_n"> 

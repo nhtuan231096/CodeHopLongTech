@@ -52,4 +52,5 @@ Route::post('import_price','ProductController@post_import_price')->name('import_
 // route mass delete product
 Route::delete('massDelete','ProductController@mass_delete')->name('massDelete');
 // route mass delete product
+Route::get('tool-product-check','ProductController@tool_product_check')->name('tool_product_check');
  ?>

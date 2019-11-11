@@ -66,7 +66,8 @@ class ProductController extends Controller
   public function delPro($id){
     $deletePro=Product::destroy($id);
     if ($deletePro) {
-      return redirect()->route('product_lrv')->with('success','Xóa thành công');
+      // return redirect()->route('product_lrv')->with('success','Xóa thành công');
+      return redirect()->back()->with('success','Xóa thành công');
     }
     else{
       return redirect()->back()->with('error','Có lỗi vui lòng thử lại');
@@ -578,5 +579,10 @@ public function post_import_price(Request $request){
     return response()->json(['status'=>true,'message'=>"Xóa sản phẩm thành công."]);   
   }
   // todo
-  
+  public function tool_product_check(){
+    $products=Product::checkProduct()->orderBy('id','DESC')->paginate(15,['id','title','category_id','created_by','status','created_at']);
+    return view('admin.product.tool_product_check',[
+      'products'=>$products,
+    ]);
+  }
 }
