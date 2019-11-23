@@ -73,19 +73,19 @@ class PartnersController extends Controller
 
 		$partner=Partners::find($id);
 		$img=$partner->cover_image;
-		if($req->hasFile('cover_image')) {
-			$file=$req->cover_image;
+		if($req->hasFile('file_upload')) {
+			$file=$req->file_upload;
 			$file->move(base_path('uploads/partner'),$file->getClientOriginalName());
 			$img=$file->getClientOriginalName();
 			$req->merge(['cover_image'=>$img]);
 		}
 		if($editPartner=$partner->update($req->all()))
 		{
-			return redirect()->route('category')->with('success','Cập nhật hãng sản phẩm thành công');
+			return redirect()->route('partners')->with('success','Cập nhật hãng sản phẩm thành công');
 		}
 		else
 		{
-			return redirect()->route('category')->with('error','Có lỗi khi cập nhật');
+			return redirect()->route('partners')->with('error','Có lỗi khi cập nhật');
 		}
 	}	
 	public function deletePartner($id){
