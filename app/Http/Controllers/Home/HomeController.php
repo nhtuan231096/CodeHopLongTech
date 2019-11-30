@@ -129,9 +129,10 @@ class HomeController extends Controller
 		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
 		$partners=Partners::where('status','enable')->orderBy('sorder','DESC')->get();
 		$banner_top=News::limit(4)->where(['status'=>'enable','category_id'=>'41'])->get();
+		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
 
 		$date = Carbon::now()->toDateTimeString();
-		return view('home.index',[
+		return view('home.v2.index',[
 			'sliders'=>$slider,
 			'banners'=>$banners,
 			'categorys'=>$categorys,
@@ -148,9 +149,11 @@ class HomeController extends Controller
 			'pro_copy'=>$pro_copy,
 			'cat_copy'=>$cat_copy,
 			'date'=>$date,
+			'slider_homes'=>$slider_home,
 			]);
 	}
 	public function viewCate($slug,Request $req) {
+		$pro3 = (new Product())->datas3();
 		$pro2 = (new Product())->datas2();
 			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
 			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
@@ -162,12 +165,14 @@ class HomeController extends Controller
 			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
 			$others=Product::paginate(8)->where('category_id','<>','$id');
+			$promotion = $pro3->where('is_promotion','enable')->get();
+
 			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
 			if($category)
 			{	$cate=Category::where('parent_id',$category->id)->paginate(15);
 				$products=Product::where('category_id',$category->id)->paginate(15);
 				// dd($products);
-				return view('home.product-category',
+				return view('home.v2.category_product',
 					['category'=>$category,
 					'categorys'=>$categorys,
 					'partners'=>$partners,
@@ -175,7 +180,8 @@ class HomeController extends Controller
 					'sp'=>$sp,
 					'cate'=>$cate,
 					'products' => $products,
-					'categorys1'=>$categorys1
+					'categorys1'=>$categorys1,
+					'promotions'=>$promotion,
 					]);
 			}
 			// if($product)
@@ -232,6 +238,8 @@ class HomeController extends Controller
 			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
 			$others=Product::paginate(8)->where('category_id','<>','$id');
+			$pro3 = (new Product())->datas3();
+			$promotion = $pro3->where('is_promotion','enable')->get();
 			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
 			// if($category)
 			// {	$cate=Category::where('parent_id',$category->id)->paginate(15);
@@ -266,10 +274,9 @@ class HomeController extends Controller
 				$countRate5=Rate::where('status',1)->where('product_id',$product->id)->where('rate',5)->count();
 				$average = $countRate5 + $countRate4 + $countRate3 + $countRate2 + $countRate1;
 				$average = $average == 0 ? 1 : $average;
-				// dd($average);
 				$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/$average;
 				// dd($percentRated/$average);
-				return view('home.pro-detail',[
+				return view('home..v2.detail_product',[
 					'product'=>$product,
 					'others'=>$others,
 					'partners'=>$partners,
@@ -287,7 +294,8 @@ class HomeController extends Controller
 					'countRate3'=>$countRate3,
 					'countRate4'=>$countRate4,
 					'countRate5'=>$countRate5,
-					'percentRated'=>$percentRated
+					'percentRated'=>$percentRated,
+					'promotions'=>$promotion,
 					]);
 			}
 			else
@@ -627,6 +635,12 @@ public function recruitment(){
 		return view('home.history_company',['offices'=>$office,'actoffice'=>$actoffice,'categorys'=>$categorys,'supports'=>$supports,'sp'=>$sp,]);	
 	}
 
+	public function formRegister(){
+		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+		return view('home.v2.customer.register',[
+			'categorys'=>$categorys
+		]);
+	}
 	//update controller customer 
 	public function register(Request $req){
 		$this->validate($req,[
@@ -688,7 +702,7 @@ public function recruitment(){
 	}
 	public function loginCustomer(){
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
-		return view('home.customer.login',[
+		return view('home.v2.customer.login',[
 			'categorys' => $categorys
 		]);
 	}
@@ -757,7 +771,7 @@ public function recruitment(){
 	public function view_cart(Data $cart){
 		
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
-		return view('home.cart.view_cart',[
+		return view('home.v2.view_cart',[
 			'categorys' => $categorys,
 			'cart' => $cart 
 		]);

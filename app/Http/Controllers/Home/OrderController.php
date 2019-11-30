@@ -44,7 +44,7 @@ class OrderController extends Controller
 			$data_red_bill=request()->status;
 		}
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-		return view('home.cart.order',[
+		return view('home.v2.cart.order',[
 			'categorys' => $categorys,
 			'data_red_bill' => $data_red_bill
 		]);

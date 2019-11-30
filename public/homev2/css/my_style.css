@@ -1,0 +1,42 @@
+.common-home .product-simple .so-extraslider .extraslider-inner .item .item-inner .item-info .item-title, .common-home .product-simple .so-extraslider .extraslider-inner .item .item-inner .item-info .rating, .common-home .product-simple .so-extraslider .extraslider-inner .item .item-inner .item-info .ratings, .common-home .product-simple .so-extraslider .extraslider-inner .item .item-inner .item-info .price{
+	width: 133px;
+	/*width: 100%;*/
+}
+.logo{
+	text-align: center;
+}
+.content_price {
+	width: 100%;
+}
+.addCart{
+	padding: 10px!important;
+}
+.deal-hot {
+	font-weight: 500!important;
+}
+.deal-hot strong {
+	color: red;
+	font-weight: 600!important;
+}
+.res-img {
+	width: 213px!important;
+	height: 213px;
+}
+.register-benefits .tick-register li{
+	padding: 10px;
+	display: block;
+}
+.register-benefits .tick-register span{
+	margin-left: 15px
+}
+.errors{
+	color: red;
+	font-style: italic;
+	margin-bottom: -10px;
+}
+.paginate .pagination{
+	margin: 0 0 5px 0;
+}
+.sub-menu{
+	top: 0
+}
