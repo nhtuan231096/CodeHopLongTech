@@ -429,19 +429,20 @@ $(document).ready(function($) {
 	Page Category
 -------------------------------------------------- */
 
-$(document).ready(function(){
-	$('#cat_accordion').cutomAccordion ({
-		eventType: 'click',
-		autoClose: true,
-		saveState: true,
-		disableLink: true,
-		speed: 'slow',
-		showCount: false,
-		autoExpand: true,
-		cookie	: 'dcjq-accordion-1',
-		classExpand	 : 'button-view'
-	});  
-});
+// $(document).ready(function(){
+// 	$('#cat_accordion').cutomAccordion ({
+// 		eventType: 'click',
+// 		autoClose: true,
+// 		saveState: true,
+// 		disableLink: true,
+// 		speed: 'slow',
+// 		showCount: false,
+// 		autoExpand: true,
+// 		cookie	: 'dcjq-accordion-1',
+// 		classExpand	 : 'button-view'
+// 	});  
+// });
+
 
 $(function() {
 	var austDay = new Date(2019, 3 - 1, 28);
