@@ -40,7 +40,7 @@
 .sub-menu{
 	top: 0
 }
-.button-view-child{
+.btn-view-child{
 	display: block;
 	position: absolute;
 	right: 0;
@@ -53,6 +53,6 @@
 	line-height: 30px;
 	font-size: 14px;
 }
-.childMenu{
-	padding-left: 15px!important;
+.list-child-menu{
+	margin-bottom: 0px!important;
 }

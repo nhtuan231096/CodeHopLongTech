@@ -19,13 +19,16 @@
                             <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
                                 <ul class="itemMenu">
                                     @foreach($category->childs as $child)
-                                    <li>
-                                        <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>   <span class="button-view button-view-child fa fa-plus-square-o"></span>
-                                        @foreach($child->childs2 as $chil)
-                                        <li class="childMenu">
-                                            <a href="{{route('view_category',['slug'=>$chil->slug])}}">{{$chil->title}}</a>
-                                        </li>
-                                        @endforeach
+                                    <li class="menuCate">
+                                        <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>  
+                                        <span class="btn-view-child fa fa-plus-square-o"></span>
+                                        <ul class="list-child-menu">
+                                            @foreach($child->childs2 as $chil)
+                                            <li class="childMenu">
+                                                <a href="{{route('view_category',['slug'=>$chil->slug])}}">{{$chil->title}}</a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
                                     </li>
                                     @endforeach
                                 </ul>

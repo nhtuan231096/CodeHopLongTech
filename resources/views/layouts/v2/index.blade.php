@@ -308,7 +308,7 @@
                                             <span id="remove-verticalmenu" class="fa fa-times"></span>
                                             <div class="megamenu-pattern">
                                                 <div class="container-mega">
-                                                    <ul class="megamenu megamenu-left">
+                                                    <ul class="megamenu megamenu-left" style="position: relative;">
                                                         @foreach($categorys as $category)
                                                         <li class="item-vertical  with-sub-menu hover">
                                                             <p class="close-menu"></p>

@@ -41,7 +41,7 @@
                 <div id="categories-2" class="widget widget_categories"><span class="gamma widget-title">Danh mục tin tức</span>
                     <ul>
                         @foreach($news_category as $news_cate)
-                        <li class="cat-item"><a href="">{{$news_cate->title}}</a>
+                        <li class="cat-item"><a href="{{route('danh_muc_tin_tuc',['slug'=>$news_cate->slug])}}">{{$news_cate->title}}</a>
                         </li>
                         @endforeach
                     </ul>

@@ -871,13 +871,17 @@ public function recruitment(){
 	public function news_page(){
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$news_category = News_Category::where('status','enable')->get();
-		$news = News::search()->where('status','enable')->orderBy('id','desc')->paginate(8);
+		$news = News::search()->where('status','enable')->orderBy('id','desc')->paginate(15);
 		$special_news = News::where('status','enable')->where('type','project')->orderBy('id','desc')->paginate(6);
-		return view('home.news_page',[
+
+		$pro3 = (new Product())->datas3();
+		$promotion = $pro3->where('is_promotion','enable')->get();
+		return view('home.v2.news_page',[
 			'categorys' => $categorys,
 			'news_category' => $news_category,
 			'news' => $news,
-			'special_news' => $special_news
+			'special_news' => $special_news,
+			'promotions'=>$promotion,
 		]);
 	}
 	public function detail_news_page($slug){
@@ -885,7 +889,7 @@ public function recruitment(){
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$news_category = News_Category::where('status','enable')->get();
 		$special_news = News::where('status','enable')->where('type','project')->orderBy('id','desc')->paginate(6);
-		return view('home.new_page_detail',[
+		return view('home.v2.new_page_detail',[
 			'data' => $data,
 			'categorys' => $categorys,
 			'news_category' => $news_category,
