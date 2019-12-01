@@ -258,6 +258,7 @@
                             </div>
                             <form enctype="multipart/form-data" action="{{route('shopNow')}}" method="post" class="cart"> 
                                 @csrf
+                                @if($product->price > 0)
                                 <div class="form-group box-info-product">
                                     <div class="option quantity">
                                         <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
@@ -270,27 +271,12 @@
                                         </div>
                                     </div>
                                     <div class="cart">
-                                        <!-- <input type="submit" name="addCart" data-toggle="tooltip" title="" value="true" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" data-original-title="Add to Cart"> -->
                                         <button class="btn btn-danger btn-lg" name="addCart" value="true" style="font-weight: bold; font-size: 16px; width: 100%"> 
                                             <i style="margin-right: 5px" class="fa fa-shopping-cart"></i>Thêm giỏ hàng
                                         </button>
                                     </div>
-                                    <!-- <div class="add-to-links wish_comp">
-                                        <ul class="blank list-inline">
-                                            <li class="wishlist">
-                                                <a class="icon" data-toggle="tooltip" title=""
-                                                onclick="wishlist.add('50');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i>
-                                                </a>
-                                            </li>
-                                            <li class="compare">
-                                                <a class="icon" data-toggle="tooltip" title=""
-                                                onclick="compare.add('50');" data-original-title="Compare this Product"><i class="fa fa-exchange"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div> -->
-
                                 </div>
+                                @endif
                             </form>
 
                         </div>

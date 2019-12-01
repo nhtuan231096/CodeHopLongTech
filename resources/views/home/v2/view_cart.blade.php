@@ -76,7 +76,7 @@
 						<div class="panel-body">
 							<label class="col-sm-2 control-label" for="input-coupon">Nhập mã giảm giá của bạn</label>
 							<div class="input-group">
-								<input type="text" name="coupon" value="{{isset($data_uses_coupon['coupon_code']) ? $data_uses_coupon['coupon_code'] : ''}}" placeholder="Enter your coupon here" id="input-coupon" class="form-control">
+								<input type="text" name="coupon_code" value="{{isset($data_uses_coupon['coupon_code']) ? $data_uses_coupon['coupon_code'] : ''}}" placeholder="Enter your coupon here" id="input-coupon" class="form-control">
 								<span class="input-group-btn"><input type="submit" name="apply_coupon" value="Xác nhận" id="button-coupon" data-loading-text="Loading..." class="btn btn-primary"></span>
 							</div>
 						</div>
@@ -157,6 +157,14 @@
 		<div class="col-sm-4 col-sm-offset-8">
 			<table class="table table-bordered">
 				<tbody>
+					@if(isset($data_uses_coupon['price_reduced']))
+					<tr>
+						<td class="text-right">
+							<strong>Mã giảm giá:</strong>
+						</td>
+						<td class="text-right">-{{number_format($data_uses_coupon['price_reduced'])}} đ</td>
+					</tr>
+					@endif
 					<tr>
 						<td class="text-right">
 							<strong>Tổng tiền:</strong>
@@ -170,12 +178,6 @@
 						</td>
 					</tr>
 					<!-- <tr>
-						<td class="text-right">
-							<strong>Flat Shipping Rate:</strong>
-						</td>
-						<td class="text-right">$4.69</td>
-					</tr>
-					<tr>
 						<td class="text-right">
 							<strong>Eco Tax (-2.00):</strong>
 						</td>

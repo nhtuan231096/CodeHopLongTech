@@ -196,7 +196,6 @@ class OrderController extends Controller
 		}
 		// get coupon code
 		$coupon = CouponCode::where('coupon_code',$req->coupon_code)->first();
-
 		if($coupon){
 			// get rule
 			$rule = CouponRule::find($coupon->rule_id);
@@ -233,7 +232,7 @@ class OrderController extends Controller
 							// add total to session
 							$cart->add_coupon($data_uses_coupon);
 							// dd($data_uses_coupon);
-							return view('home.cart.view_cart',[
+							return view('home.v2.view_cart',[
 								'categorys' => $categorys,
 								'cart' => $cart,
 								'data_uses_coupon' => $data_uses_coupon
