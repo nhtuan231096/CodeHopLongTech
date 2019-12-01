@@ -19,19 +19,25 @@
                 <div class="modcontent">
                     <div class="box-category">
                         <ul id="cat_accordion" class="list-group">
-                        @foreach($categorys as $category)
-                            <li class="hadchild">
-                                <a href="" class="cutom-parent">Smartphone & Tablets</a>   
-                                <span class="button-view  fa fa-plus-square-o"></span>
-                                <ul class="chil-menu" style="display: none;">
-                                    <li>
-                                        <a href="category.html">Men's Watches</a>
+                            @foreach($categorys as $category)
+                            <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
+                                <ul class="itemMenu">
+                                    @foreach($category->childs as $child)
+                                    <li class="menuCate">
+                                        <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>  
+                                        <span class="btn-view-child fa fa-plus-square-o"></span>
+                                        <ul class="list-child-menu">
+                                            @foreach($child->childs2 as $chil)
+                                            <li class="childMenu">
+                                                <a href="{{route('view_category',['slug'=>$chil->slug])}}">{{$chil->title}}</a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
                                     </li>
+                                    @endforeach
                                 </ul>
                             </li>
-                           
-                            <!-- <li class=""><a href="category.html" class="cutom-parent">Health &amp; Beauty</a>  <span class="dcjq-icon"></span></li> -->
-                        @endforeach
+                            @endforeach
                         </ul>
                     </div>
                     
