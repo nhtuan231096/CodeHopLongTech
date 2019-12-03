@@ -17,6 +17,12 @@
 		<strong>{{Session::get('success')}}</strong>
 	</div>
 	@endif
+	@if(isset($usecoupon) == 1)
+	<div class="alert alert-success text-center">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Sử dụng mã giảm giá thành công</strong>
+	</div>
+	@endif
 	@if(count($cart->items) > 0)
 	<div class="row">
 		<!--Middle Part Start-->

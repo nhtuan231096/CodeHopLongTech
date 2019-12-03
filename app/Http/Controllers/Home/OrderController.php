@@ -235,7 +235,8 @@ class OrderController extends Controller
 							return view('home.v2.view_cart',[
 								'categorys' => $categorys,
 								'cart' => $cart,
-								'data_uses_coupon' => $data_uses_coupon
+								'data_uses_coupon' => $data_uses_coupon,
+								'usecoupon' => 1
 							]);
 						}
 						else {

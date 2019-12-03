@@ -580,10 +580,6 @@ $('#fa-fa-check').click(function(){
 
 var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
   var TotalCart = parseInt(ship_cod) + parseInt(shipping_fee) + parseInt(getTotalPrice) - parseInt(reduced_price);
-  // console.log(ship_cod);
-  // console.log(shipping_fee);
-  // console.log(getTotalPrice);
-  // console.log(reduced_price);
   var formatTotalPrice = String(TotalCart).replace(/(.)(?=(\d{3})+$)/g,'$1,');
   $('#totalPrice').text(formatTotalPrice);
 

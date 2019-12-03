@@ -1,6 +1,7 @@
 @extends('layouts.v2.index')
 @section('mainContainer')
 <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
+@if($cart->total_quantity)
 <div class="main-container container">
 	<ul class="breadcrumb">
 		<li><a href="{{route('home')}}"><i class="fa fa-home"></i></a></li>
@@ -258,20 +259,33 @@
 								<tfoot>
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Phí vận chuyển:</strong></td>
-									<td class="text-right">0</td>
+									<td class="text-right">
+										<span class="text-muted" id="shipping_fee">0</span>
+									</td>
 								  </tr>
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Phí ship COD:</strong></td>
-									<td class="text-right">0</td>
+									<td class="text-right">
+										<span class="text-muted" id="ship_cod">0</span>
+									</td>
 								  </tr>
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Mã giảm giá:</strong></td>
-									<td class="text-right">0</td>
+									<td class="text-right">
+										@if(!empty(request()->session()->get('price_reduced')))
+											<?php $price_reduced = request()->session()->get('price_reduced') ?>
+	        								<span class="text-muted">-{{number_format($price_reduced)}}</span>
+	        							@endif
+									</td>
 								  </tr>
 								  <tr>
 									<td class="text-right" colspan="4"><strong>VAT (10%):</strong></td>
-									<?php $vat = ((($totalAmount * 10) / 100))?>
-									<td class="text-right">{{number_format($vat)}}</td>
+									@if(isset($data_red_bill['red_bill_company']))
+										<?php $vat = ((($totalAmount * 10) / 100))?>
+										<td class="text-right">{{number_format($vat)}}</td>
+									@else
+										<td class="text-right">0</td>
+									@endif
 								  </tr>
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Tổng tiền:</strong></td>
@@ -301,6 +315,26 @@
 							<label class="control-label" for="confirm_agree">
 							  <input type="checkbox" checked="checked" value="1" required="" class="validate required" id="confirm_agree" name="confirm agree">
 							  <span>Tôi đã đọc và đồng ý với các <a class="agree" href="{{route('terms_purc')}}"><b>Điều khoản</b></a></span> </label>
+
+							<label class="control-label pull-right" for="confirm_agree">
+								@if(isset($data_red_bill['red_bill_company']))
+								<a href="{{route('order',['status'=>'unCheck'])}}" style="width: 100%">
+						          <div style="width: 31px; height:31px;position: absolute;z-index: 3;"></div>
+						          <div class="chkbx" style="float: left;">
+						            <input type="checkbox" value="None" id="chkbx" name="check" checked />
+						            <label for="chkbx"></label>
+						          </div>
+						          <span style="width: 86%;float: right;line-height: 2.3;padding-bottom: 15px" class="text-right" style="text-decoration: underline;">Lấy hóa đơn VAT</span>
+						        </a>
+								@else
+							    <a data-toggle="modal" href='#modal-id' style="width: 100%">
+						          <div class="chkbx" style="float: left;">
+						            <input type="checkbox" value="None" id="chkbx" name="check" />
+						            <label for="chkbx"></label>
+						          </div>
+						          <span style="width: 86%;float: right;line-height: 2.3" class="text-right" style="text-decoration: underline;">Lấy hóa đơn VAT</span>
+						        </a>
+						        @endif
 							<div class="buttons">
 							  <div class="pull-right">
 								<input type="submit" class="btn btn-primary" id="button-confirm" value="Xác nhận đặt hàng">
@@ -318,5 +352,231 @@
 		
 	</div>
 </div>
+<div class="modal fade" id="modal-id">
+	<div class="modal-dialog">
+	  <div class="modal-content" style="width: 100%">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	      <h4 class="modal-title">Thông tin viết hóa đơn</h4>
+	    </div>
+	    <div class="modal-body">
+	      <form action="{{route('red_bill')}}" method="POST" role="form">
 
+	        <div class="form-group">
+	          <label class="lab" for="">Tên công ty</label>
+	          <input type="text" class="form-control" name="red_bill_company" required placeholder="Nhập tên công ty">
+	        </div>
+	        <div class="form-group">
+	          <label class="lab" for="">Mã số thuế</label>
+	          <input type="number" class="form-control" name="red_bill_tax_code" required placeholder="Nhập mã số thuế">
+	        </div>
+	        <div class="form-group">
+	          <label class="lab" for="">Địa chỉ xuất hóa đơn</label>
+	          <input type="text" class="form-control" name="red_bill_address" required placeholder="Nhập địa chỉ công ty ( bao gồm Phường / Xã, Quận, Huyện, Tỉnh / Thành phố nếu có) ...">
+	        </div>
+	        @csrf
+	        <div style="font-size: 14px">*<b>Lưu ý:</b> Hoplong <span style="color: red">CHỈ XUẤT HÓA ĐƠN ĐỎ 1 LẦN DUY NHẤT</span> theo thông tin bạn đã nhập</div>
+	        <div class="modal-footer" style="padding-bottom: 0px">
+	          <button type="submit" class="btn btn-primary">Xác nhận</button>
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+	        </div>
+
+	      </form>
+	    </div>
+	  </div>
+	</div>
+</div>
+@else
+<div class="jumbotron text-center">
+	<div class="container">
+		<h1>Tiếp tục mua hàng!</h1>
+		<p>
+			<a href="{{route('home')}}" class="btn btn-primary btn-lg">Quay lại trang chủ</a>
+		</p>
+	</div>
+</div>
+@endif
+<!-- //--- -->
+<script type="text/javascript">
+// var ship_code = 0;
+// var shipping_fee = 0;
+var getShippingFee = $('#shipping_fee_1').val(0);
+var getShipCod = $('#ship_code').val(0)
+var reduced_price =$('#reduced_price').val(0)
+// ship cod
+$('#input_payment_method option[value=""]').attr('selected','selected');
+$('#input_payment_method').change(function(){
+  var getTotalPrice = $('#getTotalPrice').text();
+    getTotalPrice = getTotalPrice.replace(',','');
+    getTotalPrice = getTotalPrice.replace(',','');
+    getTotalPrice = getTotalPrice.replace(',','');
+
+
+  var TotalPrice = $('#totalPrice').text();
+    TotalPrice = TotalPrice.replace(',','');
+    TotalPrice = TotalPrice.replace(',','');
+    TotalPrice = TotalPrice.replace(',','');
+      
+  var value = $('#input_payment_method').val();
+  var cartTotal = TotalPrice;
+  if(value == 'Thanh toán tiền mặt khi nhận hàng'){
+      $('#ship_cod').text('15,000');
+      $('#show_ship_cod').css('display','block','!important');
+      ship_code = 15000;
+  }
+  // if(value != 'Thanh toán tiền mặt khi nhận hàng' && value != 'Thanh toán bằng thẻ quốc tế Visa, Master, JCB'){
+  //   $('#ship_cod').text('0');
+  //   $('#show_ship_cod').css('display','none','!important');
+  //   ship_code = 0;
+  // }
+  else{
+    $('#ship_cod').text('0');
+    ship_code = 0;
+  }
+  
+  // $('#ship_code').val(ship_code);
+  var getShipCod = $('#ship_code').val(ship_code);
+  var getShippingFee = $('#shipping_fee_1');
+  reduced_price = $('#reduced_price');
+  var format_reward_point = String(reduced_price.val()).replace(',','');
+  var format_reward_point = String(format_reward_point).replace(',','');
+  check(getShipCod.val(),getShippingFee.val(),getTotalPrice,format_reward_point);
+});  
+// end ship cod
+
+// shipping fee
+$('#city option[value=""]').attr('selected','selected');
+$('#city').change(function(){ 
+  var getTotalPrice = $('#getTotalPrice').text();
+    getTotalPrice = getTotalPrice.replace(',','');
+    getTotalPrice = getTotalPrice.replace(',','');
+    getTotalPrice = getTotalPrice.replace(',','');
+
+
+  var TotalPrice = $('#totalPrice').text();
+    TotalPrice = TotalPrice.replace(',','');
+    TotalPrice = TotalPrice.replace(',','');
+    TotalPrice = TotalPrice.replace(',','');
+
+    var value = $(this).val();
+    var cartTotal = TotalPrice;
+    // var show_shipping_fee = $('#shipping_fee');
+    // cartTotal = cartTotal.replace(',','');
+    // cartTotal = cartTotal.replace(',','');
+    // cartTotal = cartTotal.replace(',','');
+    // console.log(show_shipping_fee);
+    
+    if(cartTotal >= 5000000){
+      // return shipping_fee;
+      shipping_fee = 0;
+    }
+    else {
+      if(value == 0){
+      shipping_fee = 30000;
+      // return shipping_fee;
+      }
+      else {
+        shipping_fee = 20000;
+        // return shipping_fee;
+      }
+    }
+    format_shipping_fee = String(shipping_fee).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+    $('#shipping_fee').text(format_shipping_fee);
+    $('#show_shipping_fee').css('display','block','!important');
+    var  getShippingFee= $('#shipping_fee_1').val(shipping_fee);
+    var getShipCod = $('#ship_code');
+    var reduced_price = $('#reduced_price');
+    var format_reward_point = String(reduced_price.val()).replace(',','');
+    var format_reward_point = String(format_reward_point).replace(',','');
+    check(getShipCod.val(),getShippingFee.val(),getTotalPrice,format_reward_point);
+    // $('#shipping_fee_1').val(parseInt(shipping_fee));
+
+    // cartTotal = parseInt(cartTotal)+parseInt(shipping_fee);
+    // if(check_cod == 1){
+    //   cartTotal = cartTotal+15000;
+    // }
+
+    // // format cartTotal
+    // cartTotal = String(cartTotal).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+    // // format shipping_fee
+    // shipping_fee = String(shipping_fee).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+
+    // show_shipping_fee.text(shipping_fee);
+    // $('#show_shipping_fee').css('display','block','!important');
+    // check_ship = cartTotal;
+    // reload
+    // cartTotal = 0;
+    // show_shipping_fee = 0;
+    // shipping_fee = 0;
+});
+
+// reward point
+$('.reward_points').click(function(){
+  $('.reward_points').css("display","none");
+  $('.use_reward_points').css("display","block");
+});
+
+$('.fa-remove').click(function(){
+  $('.reward_points').css("display","block");
+  $('.use_reward_points').css("display","none");
+});
+$('#fa-fa-check').click(function(){
+  var getTotalPrice = $('#getTotalPrice').text();
+    getTotalPrice = getTotalPrice.replace(',','');
+    getTotalPrice = getTotalPrice.replace(',','');
+    getTotalPrice = getTotalPrice.replace(',','');
+
+
+  var TotalPrice = $('#totalPrice').text();
+    TotalPrice = TotalPrice.replace(',','');
+    TotalPrice = TotalPrice.replace(',','');
+    TotalPrice = TotalPrice.replace(',','');
+
+
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
+  // check customer login
+  <?php if(Auth::guard('customer')->check()): ?>
+
+  var points = <?php echo $cart->Reward_points()->redeem_money?>;
+  var auth_point = <?php echo Auth::guard('customer')->user()->reward_points ?>;
+  var money = $('#redeem_money').val();
+  if(money <= auth_point)
+  {
+    var total_price = <?php echo $cart_total?>;
+    var total = total_price - (money * points);
+    var reduced_price = (money * points);
+    
+    // $('#totalPrice').text(formatNumber(total));
+    check(getShipCod.val(),getShippingFee.val(),getTotalPrice,reduced_price); 
+
+
+    $('#reward_point').val(formatNumber(total));
+    $('#redeem_money_point').val(formatNumber(money));
+    $('#reduced_price').val(formatNumber(reduced_price));
+    
+    // $('.reward_points').css("display","block");
+    alert('Bạn đã sử dụng '+money+' điểm để đổi '+ formatNumber(reduced_price))+ 'đ';
+  }
+
+  else{
+    alert('Giá trị nhập vào không hợp lệ');
+  }
+<?php endif ?>
+}); 
+// reward point
+
+var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
+  var TotalCart = parseInt(ship_cod) + parseInt(shipping_fee) + parseInt(getTotalPrice) - parseInt(reduced_price);
+  // console.log(ship_cod);
+  // console.log(shipping_fee);
+  // console.log(getTotalPrice);
+  // console.log(reduced_price);
+  var formatTotalPrice = String(TotalCart).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+  $('#totalPrice').text(formatTotalPrice);
+
+}
+</script>
+<!-- //--- -->
 @stop()
