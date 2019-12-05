@@ -15,6 +15,8 @@ use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Category;
 use App\Models\Quotes_product;
+use App\Models\FlashSale;
+use App\Models\FlashSaleProduct;
 
 class ProductController extends Controller
 {
@@ -584,5 +586,57 @@ public function post_import_price(Request $request){
     return view('admin.product.tool_product_check',[
       'products'=>$products,
     ]);
+  }
+
+  public function flash_sale_index(){
+    return view('admin.product.flash_sale');
+  }
+  public function addFlashSale(){
+    $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
+    $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
+    $user=User::all(['id','username']);
+    return view('admin.product.flash_sale_add',[
+      'products'=>$products,
+      'categorys'=>$categorys,
+      'users'=>$user
+    ]);
+  }
+  public function saveFlashSale(Request $req){
+    $data_product_id = (explode(",",$req->data_product_id[0]));
+    $data_quantity   = (explode(",",$req->data_quantity[0]));
+    $data_title   = (explode(",",$req->data_title[0]));
+    $data_slug   = (explode(",",$req->data_slug[0]));
+    $data_price   = (explode(",",$req->data_price[0]));
+    $data_cover_image   = (explode(",",$req->data_cover_image[0]));
+    $data_category_id   = (explode(",",$req->data_category_id[0]));
+    $data_discount   = (explode(",",$req->data_discount[0]));
+    // $data='';
+
+
+    if($flashSale = FlashSale::create($req->all())){
+      for($i=0;$i<=count($data_product_id); $i++){
+        $data = [
+          'product_id'=>$data_product_id[$i],
+          'quantity'=>$data_quantity[$i],
+          'title'=>$data_title[$i],
+          'slug'=>$data_slug[$i],
+          'list_price'=>$data_price[$i],
+          'price'=>$data_price[$i] - (($data_price[$i]/100)*$data_discount[$i]),
+          'cover_image'=>$data_cover_image[$i],
+          'category_id'=>$data_category_id[$i],
+          'discount'=>$data_discount[$i],
+          'flash_sale_id'=>$flashSale->id,
+        ];
+
+        if(FlashSaleProduct::create($data)){
+          $data = '';
+        }
+        else{
+          $flashSale->delete();
+          return redirect()->back()->with('error','Có lỗi vui lòng thử lại');
+        }
+      }
+    }
+    return redirect()->route('addFlashSale')->with('success','Tạo Flash Sale thành công');
   }
 }

@@ -53,4 +53,9 @@ Route::post('import_price','ProductController@post_import_price')->name('import_
 Route::delete('massDelete','ProductController@mass_delete')->name('massDelete');
 // route mass delete product
 Route::get('tool-product-check','ProductController@tool_product_check')->name('tool_product_check');
+// flash_sale
+Route::get('flash-sale','ProductController@flash_sale_index')->name('flash_sale');
+Route::get('flash-sale-add','ProductController@addFlashSale')->name('addFlashSale');
+Route::post('flash-sale-add','ProductController@saveFlashSale')->name('addFlashSale');
+// flash_sale
  ?>
