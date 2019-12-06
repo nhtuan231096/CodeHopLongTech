@@ -727,6 +727,7 @@
         if(view) display(view);
     //--></script> 
 
+    <script type="text/javascript" src="{{url('public/homev2')}}/js/my_js.js"></script>
 
 
 </body>

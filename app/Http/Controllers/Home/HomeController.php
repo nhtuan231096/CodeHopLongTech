@@ -39,6 +39,7 @@ use App\Models\AgencyPostCategories;
 use App\Models\Customer_type;
 use App\Models\Terms;
 use App\Models\Rate;
+use App\Models\FlashSale;
 use App\Mail\ForgotPassword;
 use PDF;
 
@@ -130,7 +131,15 @@ class HomeController extends Controller
 		$partners=Partners::where('status','enable')->orderBy('sorder','DESC')->get();
 		$banner_top=News::limit(4)->where(['status'=>'enable','category_id'=>'41'])->get();
 		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
+		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->first();
 
+		$current_time = date_create(date("Y-m-d H:m:s"));
+		$end_date = date_create($flash_sale->end_time);
+		$date_diff = date_diff($current_time,$end_date);
+		$date_diff_day = $date_diff->format("%d");
+		$date_diff_hour = $date_diff->format("%h");
+		$date_diff_minute = $date_diff->format("%i");
+		// dd($date_diff);
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[
 			'sliders'=>$slider,
@@ -150,6 +159,10 @@ class HomeController extends Controller
 			'cat_copy'=>$cat_copy,
 			'date'=>$date,
 			'slider_homes'=>$slider_home,
+			'flash_sale'=>$flash_sale,
+			'date_diff_day'=>$date_diff_day,
+			'date_diff_hour'=>$date_diff_hour,
+			'date_diff_minute'=>$date_diff_minute,
 			]);
 	}
 	public function viewCate($slug,Request $req) {

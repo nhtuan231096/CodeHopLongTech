@@ -8,7 +8,11 @@ class FlashSale extends Model
 {
 	protected $table='flash_sale';
 	protected $fillable=[
-		'title',' status','end_time','created_at','updated_at'
+		'id','title',' status','end_time','created_at','updated_at'
 	];
+
+	public function products(){
+		return $this->hasMany('\App\Models\FlashSaleProduct','flash_sale_id','id');
+	}
 }
  ?>

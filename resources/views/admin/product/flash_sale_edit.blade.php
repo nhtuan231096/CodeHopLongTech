@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
-<form action="" method="GET" class="form-inline" role="form" style="position: absolute;right: 5%;top: 150px">
+<!-- <form action="" method="GET" class="form-inline" role="form" style="position: absolute;right: 5%;top: 150px">
 		      
 	<div class="form-group">
 	    <input type="title" class="form-control" name="title" id="" placeholder="Tên sản phẩm">
@@ -84,23 +84,23 @@
 
 
 	<button type="submit" class="btn btn-primary fa fa-search"></button>
-	</form>
+	</form> -->
 <form action="" method="POST" role="form">
-	<legend>Tạo sự kiện flash sale</legend>
+	<legend>Chi tiết flash sale</legend>
 
 	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
 				<label for="">Tiêu đề</label>
-				<input type="text" class="form-control" name="title" placeholder="Nhập tiêu đề">
+				<input type="text" class="form-control" name="title" placeholder="Nhập tiêu đề" value="{{$datas->title}}">
 			</div>
 
 			<div class="form-group">
 				<label for="">Ngày kết thúc</label>
-				<input type="date" class="form-control" name="end_time">
+				<input type="date" class="form-control" name="end_time" value="{{$datas->end_time}}">
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 		</div>
 		<div class="col-md-9" style="margin-top: 38px">
 		
@@ -116,30 +116,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($products as $product)
+					@foreach($datas->products as $data)
 					<tr>
-						<input type="hidden" class="title" value="{{$product->title}}">
-						<input type="hidden" class="slug" value="{{$product->slug}}">
-						<input type="hidden" class="price" value="{{$product->price}}">
-						<input type="hidden" class="cover_image" value="{{$product->cover_image}}">
-						<input type="hidden" class="category_id" value="{{$product->category_id}}">
-						<td class="cbx">
-							<input type="checkbox" class="checkbox" value="{{$product->id}}">
-						</td>
-						<td>{{$product->id}}</td>
-						<td>{{$product->title}}</td>
-						<td>{{$product->price}}</td>
-						<td class="qty">
-							<input type="number" name="quantity" class="quantity">
-						</td>
-						<td class="w_discount">
-							<input type="number" name="discount" class="discount">
-						</td>
+						<td></td>
+						<td>{{$data->id}}</td>
+						<td>{{$data->title}}</td>
+						<td>{{$data->price}}</td>
+						<td>{{$data->quantity}}</td>
+						<td>{{$data->discount}}</td>
 					</tr>
 					@endforeach
 				</tbody>
 			</table>
-			{{$products->links()}}
 		</div>
 		<input type="hidden" name="data_product_id[]" class="data_product_id" value="">
 		<input type="hidden" name="data_quantity[]" class="data_quantity" value="">

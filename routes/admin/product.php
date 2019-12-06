@@ -57,5 +57,7 @@ Route::get('tool-product-check','ProductController@tool_product_check')->name('t
 Route::get('flash-sale','ProductController@flash_sale_index')->name('flash_sale');
 Route::get('flash-sale-add','ProductController@addFlashSale')->name('addFlashSale');
 Route::post('flash-sale-add','ProductController@saveFlashSale')->name('addFlashSale');
+Route::get('flash-sale-del/{id}','ProductController@delFlashSale')->name('delFlashSale');
+Route::get('flash-sale-edit/{id}','ProductController@editFlashSale')->name('editFlashSale');
 // flash_sale
  ?>

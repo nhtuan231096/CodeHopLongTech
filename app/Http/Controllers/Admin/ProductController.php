@@ -589,7 +589,10 @@ public function post_import_price(Request $request){
   }
 
   public function flash_sale_index(){
-    return view('admin.product.flash_sale');
+    $datas = FlashSale::paginate(10);
+    return view('admin.product.flash_sale',[
+      'datas' => $datas
+    ]);
   }
   public function addFlashSale(){
     $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
@@ -610,11 +613,9 @@ public function post_import_price(Request $request){
     $data_cover_image   = (explode(",",$req->data_cover_image[0]));
     $data_category_id   = (explode(",",$req->data_category_id[0]));
     $data_discount   = (explode(",",$req->data_discount[0]));
-    // $data='';
-
-
     if($flashSale = FlashSale::create($req->all())){
-      for($i=0;$i<=count($data_product_id); $i++){
+      $i = 0;
+      foreach($data_product_id as $value){
         $data = [
           'product_id'=>$data_product_id[$i],
           'quantity'=>$data_quantity[$i],
@@ -627,7 +628,7 @@ public function post_import_price(Request $request){
           'discount'=>$data_discount[$i],
           'flash_sale_id'=>$flashSale->id,
         ];
-
+        $i++;
         if(FlashSaleProduct::create($data)){
           $data = '';
         }
@@ -637,6 +638,22 @@ public function post_import_price(Request $request){
         }
       }
     }
-    return redirect()->route('addFlashSale')->with('success','Tạo Flash Sale thành công');
+    return redirect()->route('flash_sale')->with('success','Tạo Flash Sale thành công');
+  }
+  public function delFlashSale($id){
+    FlashSale::destroy($id);
+    return redirect()->back()->with('success','Xóa thành công');
+  }
+  public function editFlashSale($id){
+    $datas = FlashSale::find($id);
+    $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
+    $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
+    $user=User::all(['id','username']);
+    return view('admin.product.flash_sale_edit',[
+      'products'=>$products,
+      'categorys'=>$categorys,
+      'users'=>$user,
+      'datas'=>$datas
+    ]);
   }
 }
