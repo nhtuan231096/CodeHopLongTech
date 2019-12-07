@@ -108,6 +108,9 @@
                                 <div>
                                     <a  href="#"><img src="{{url('uploads/category')}}/{{$category->cover_image}}" alt=""> <br></a>
                                 </div>
+                                <div class="">
+                                    {{$category->content}}
+                                </div>
                             </div>
                         
                         </div>

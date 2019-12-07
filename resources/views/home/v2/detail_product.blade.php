@@ -287,7 +287,7 @@
                 </div>
             </div>
             <!-- Product Tabs -->
-            <div class="producttab ">
+            <!-- <div class="producttab ">
                 <div class="tabsslider  vertical-tabs col-xs-12">
                     <ul class="nav nav-tabs col-lg-2 col-sm-3">
                         <li class="active"><a data-toggle="tab" href="#tab-1">THÔNG SỐ KỸ THUẬT</a></li>
@@ -304,7 +304,6 @@
                         ?>
                         <div>
                           <div class="panel panel-default">
-                            <!-- Table -->
                             <table class="table">
                               <tbody>
                                 @foreach($dataPro as $title => $value)
@@ -320,8 +319,6 @@
                         @else
                         <div style="width: 100%">{!!$product->content!!}</div>
                         @endif
-                            
-                            
                         </div>
                         <div id="tab-review" class="tab-pane fade">
                             <form action="{{route('rateProduct')}}" method="POST" role="form" enctype="multipart/form-data">
@@ -370,9 +367,7 @@
                                     </div>
                                     <div class="form-group"> <span class="icon icon-bubbles-2"></span>
                                         <textarea class="form-control" name="content" placeholder="Nội dung đánh giá của bạn về sản phẩm.."></textarea>
-                                    </div> 
-                                    <!-- <span style="font-size: 11px;"><span class="text-danger">Note:</span>                       HTML is not translated!</span> -->
-                                    
+                                    </div>                                     
                                     <div class="form-group">
                                      <b>Rating</b> <span>Bad</span>&nbsp;
                                     <input type="radio" name="rate" value="1"> &nbsp;
@@ -386,7 +381,6 @@
                                     value="5"> &nbsp;<span>Good</span>
                                     
                                     </div>
-                                    <!-- <div class="buttons clearfix"><a id="button-review" class="btn buttonGray">Gửi</a></div> -->
                                     <button type="submit" class="btn buttonGray pull-left">Gửi</button>
                                 </div>
                             </form>
@@ -419,7 +413,139 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+
+            <div class="producttab ">
+                    <div class="tabsslider horizontal-tabs  col-xs-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1">THÔNG SỐ KỸ THUẬT</a></li>
+                            <li class="item_nonactive"><a data-toggle="tab" href="#tab-review">Đánh giá ({{$product->countRate->count()}})</a></li>
+                            <li class="item_nonactive"><a data-toggle="tab" href="#tab-4">Tổng quan</a></li>
+                            <li class="item_nonactive "><a data-toggle="tab" href="#tab-5">Kích thước</a></li>
+                        </ul>
+                        <div class="tab-content col-xs-12">
+                            <div id="tab-1" class="tab-pane fade in active">
+                                @if($product->pdp == 1)
+                                <?php 
+                                  $dataPro = json_decode(strip_tags($product->content));
+                                ?>
+                                <div>
+                                  <div class="panel panel-default">
+                                    <table class="table">
+                                      <tbody>
+                                        @foreach($dataPro as $title => $value)
+                                        <tr>
+                                          <th>{{$title}}</th>
+                                          <td>{{$value}}</td>
+                                        </tr>
+                                        @endforeach
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                                @else
+                                <div style="width: 100%">{!!$product->content!!}</div>
+                                @endif
+                                
+                            </div>
+                            <div id="tab-review" class="tab-pane fade">
+                                <form action="{{route('rateProduct')}}" method="POST" role="form" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <input type="hidden" name="status" value="1">
+                                <div id="review">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            @foreach($rates as $rate)
+                                            <tr>
+                                                <td style="width: 50%;"><strong>{{$rate->name}}</strong></td>
+                                                <td class="text-right">{{date_format($rate->created_at,"d/m/Y")}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p>{{$rate->content}}</p>
+                                                    <div class="ratings">
+                                                        <div class="rating-box">
+                                                            <?php $o_start = 5 - $rate->rate;?>
+                                                            @for($i = 1; $i <= $rate->rate; $i++)
+                                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                                            @endfor
+                                                            @for($i = 1; $i <= $o_start; $i++)
+                                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                                            @endfor
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <div class="paginate pull-right">
+                                        {{$rates->links()}}
+                                    </div>
+                                    <div class="text-right"></div>
+                                </div>
+                                <h2 id="review-title">Gửi đánh giá của bạn</h2>
+                                <div class="contacts-form">
+                                    <div class="form-group"> <span class="icon icon-user"></span>
+                                        <input type="text" name="name" class="form-control" placeholder="Nhập họ tên" required> 
+                                    </div>
+                                    <div class="form-group"> <span class="icon icon-email"></span>
+                                        <input type="text" name="email" class="form-control" placeholder="Nhập email" required> 
+                                    </div>
+                                    <div class="form-group"> <span class="icon icon-bubbles-2"></span>
+                                        <textarea class="form-control" name="content" placeholder="Nội dung đánh giá của bạn về sản phẩm.."></textarea>
+                                    </div>                                     
+                                    <div class="form-group">
+                                     <b>Rating</b> <span>Bad</span>&nbsp;
+                                    <input type="radio" name="rate" value="1"> &nbsp;
+                                    <input type="radio" name="rate"
+                                    value="2"> &nbsp;
+                                    <input type="radio" name="rate"
+                                    value="3"> &nbsp;
+                                    <input type="radio" name="rate"
+                                    value="4"> &nbsp;
+                                    <input type="radio" name="rate" checked 
+                                    value="5"> &nbsp;<span>Good</span>
+                                    
+                                    </div>
+                                    <button type="submit" class="btn buttonGray pull-left">Gửi</button>
+                                </div>
+                            </form>
+                            </div>
+                            <div id="tab-4" class="tab-pane fade">
+                                @if($product->pdp)
+                                  <?php $overViews = $cart->stringToArray(strip_tags($product->specifications));?>
+                                  @foreach($overViews as $overview)
+                                    <div class="overViewImg">
+                                      <img src="{{url('uploads/product_new/overview')}}/{{$overview}}">
+                                    </div>
+                                  @endforeach
+                                @else
+                                <div style="width: 100%">{!!$product->specifications!!}</div>
+                                @endif              
+                            </div>
+                            <div id="tab-5" class="tab-pane fade">
+                                @if(isset($product->dimension))
+                                    @if($product->pdp)
+                                      <?php $dimensions = $cart->stringToArray(($product->dimension));?>
+                                      @foreach($dimensions as $dimension)
+                                        <div class="overViewImg">
+                                          <img src="{{url('uploads/product_new/dimension')}}/{{$dimension}}">
+                                        </div>
+                                      @endforeach
+                                    @else
+                                    <div style="width: 100%">{!!$product->dimension!!}</div>
+                                    @endif
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
             <!-- //Product Tabs -->
 
             <!-- Related Products -->

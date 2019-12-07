@@ -31,7 +31,7 @@
             			<!-- <li class="list-group-item"> <a href="{{route('tin_tuc_chi_tiet',['slug'=>$item->slug])}}"class="group-item active">{{$item->title}}</a></li> -->
             			<div class="post">
                             <div class="media">
-                                <a href="{{route('tin_tuc_chi_tiet',['slug'=>$news_cate])}}}}">
+                                <a href="{{route('tin_tuc_chi_tiet',['slug'=>$item->slug])}}">
                                     <img style="margin:20px 0 6px 0" width="100%" class="media-object" src="{{url('uploads/news')}}/{{$item->image_cover}}" alt="{{$item->image_cover}}">
                                 </a>
                             </div>

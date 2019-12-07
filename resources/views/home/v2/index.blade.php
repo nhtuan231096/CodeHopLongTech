@@ -291,26 +291,27 @@
 
                 <div class="module so-latest-blog blog-sidebar">
 
-                    <h3 class="modtitle"><span>Latest Posts</span></h3>
+                    <h3 class="modtitle"><span>Bài viết mới nhất</span></h3>
                     <div class="modcontent clearfix">
 
                         <div class="so-blog-external buttom-type1 button-type1">
                             <div class="blog-external-simple">
+                                @foreach($latest_post as $news)
                                 <div class="cat-wrap">
                                     <div class="media">
 
                                         <div class="item item-1">
                                             <div class="media-left">
-                                                <a href="#" target="_self">
-                                                <img src="{{url('public/homev2')}}/image/catalog/blog/1.jpg" alt="Biten demons lector in henderit in vulp" class="media-object">
+                                                <a href="{{route('tin_tuc_chi_tiet',['slug'=>$news->slug])}}" target="_self">
+                                                <img src="{{url('uploads/news')}}/{{$news->image_cover}}" alt="{{$news->title}}" class="media-object">
                                                 </a>
                                             </div>
                                             <div class="media-body">
                                                 <h4 class="media-heading">
-                                                <a href="#" title="Biten demons lector in henderit in vulp" target="_self">Biten demons lector in henderit in vulp nemusa tumps</a>
+                                                <a href="#" title="Biten demons lector in henderit in vulp" target="_self">{{$news->title}}</a>
                                                 </h4>
                                                 <div class="media-content">
-                                                    <div class="media-date-added"><i class="fa fa-calendar"></i> December 4th, 2017</div>         
+                                                    <div class="media-date-added"><i class="fa fa-calendar"></i> {{$news->created_at}}</div>         
                                                     <div class="media-subcontent">
                                                     <span class="media-comment"><i class="fa fa-comments"></i>0  Comment</span>
                                                     </div>
@@ -320,32 +321,7 @@
 
                                     </div>
                                 </div>
-                         
-                                <div class="cat-wrap">
-                                    <div class="media">
-
-                                        <div class="item item-2">
-                                            <div class="media-left">
-                                                <a href="#" target="_self">
-                                                    <img src="{{url('public/homev2')}}/image/catalog/blog/2.jpg" alt="Commodo laoreet semper tincidun sit" class="media-object">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">
-                                                <a href="#" title="Commodo laoreet semper tincidun sit" target="_self">Commodo laoreet semper tincidun sit dolor spums</a>
-                                                </h4>
-                                                <div class="media-content">
-                                                    <div class="media-date-added"><i class="fa fa-calendar"></i> November 15th, 2017</div>          
-                                                    <div class="media-subcontent">
-                                                        <span class="media-comment"><i class="fa fa-comments"></i>0  Comment</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                          
+                                @endforeach
                             </div>
                         </div>
 
@@ -527,7 +503,7 @@
                 <div id="so_category_slider_1" class="so-category-slider container-slider module cateslider1">
                     <div class="modcontent">                                                                
                         <div class="page-top">
-                            <div class="page-title-categoryslider">Đang khuyến mại</div>
+                            <div class="page-title-categoryslider">Sản phẩm mới</div>
                             <!-- <div class="item-sub-cat">
                                 <ul>
                                     <li><a href="#" title="Smartphone" target="_self">Smartphone</a></li>
@@ -546,12 +522,14 @@
                                 </a>
                             </div>
                             <div class="slider category-slider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="2" data-items_column2="1"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
-                                    @foreach($promotions as $promotion)
+                                    @foreach($new_products as $promotion)
                                     <div class="item">         
                                         <div class="item-inner product-layout transition product-grid">
                                             <div class="product-item-container">
                                                 <div class="left-block left-b">
-                                                    
+                                                    <div class="box-label">
+                                                        <span class="label-product label-new">New</span>
+                                                    </div>
                                                     <div class="product-image-container second_img">
                                                         <a href="{{route('view',['slug'=>$promotion->slug])}}" target="_self" title="{{$promotion->title}}">
                                                             <img src="{{url('uploads/product')}}/{{$promotion->cover_image}}" class="img-1 img-responsive" alt="{{$promotion->cover_image}}">
@@ -614,7 +592,7 @@
                 <div id="so_category_slider_1" class="so-category-slider container-slider module cateslider2">
                     <div class="modcontent">                                                                
                         <div class="page-top">
-                            <div class="page-title-categoryslider">Sản phẩm mới</div>
+                            <div class="page-title-categoryslider">Big Sale</div>
                             <!-- <div class="item-sub-cat">
                                 <ul>
                                     <li><a href="#" title="Smartphone" target="_self">Living room</a></li>
@@ -633,14 +611,14 @@
                                 </a>
                             </div>
                             <div class="slider category-slider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="2" data-items_column2="1"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
-                                    @foreach($new_products as $new_product)        
+                                    @foreach($promotions as $new_product)        
                                     <div class="item">         
                                         <div class="item-inner product-layout transition product-grid">
                                             <div class="product-item-container">
                                                 <div class="left-block left-b">
-                                                    <div class="box-label">
+                                                    <!-- <div class="box-label">
                                                         <span class="label-product label-new">New</span>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="product-image-container second_img">
                                                         <a href="{{route('view',['slug'=>$new_product->slug])}}" target="_self" title="Sunt inculpa qui">
                                                             <img src="{{url('uploads/product')}}/{{$new_product->cover_image}}" class="img-1 img-responsive" alt="$new_product->cover_image">
@@ -702,7 +680,7 @@
                 <div id="so_category_slider_1" class="so-category-slider container-slider module cateslider1">
                     <div class="modcontent">                                                                
                         <div class="page-top">
-                            <div class="page-title-categoryslider">Nhà phân phối chính thức</div>
+                            <div class="page-title-categoryslider">Gợi ý giành riêng cho bạn</div>
                             <div class="item-sub-cat">
                                 <ul>
                                     <li><a href="#" title="Schneider" target="_self">Schneider</a></li>

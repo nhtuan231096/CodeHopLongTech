@@ -132,6 +132,7 @@ class HomeController extends Controller
 		$banner_top=News::limit(4)->where(['status'=>'enable','category_id'=>'41'])->get();
 		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->first();
+		$news= News::orderBy('id','desc')->limit(1)->get();
 
 		$current_time = date_create(date("Y-m-d H:m:s"));
 		$end_date = date_create($flash_sale->end_time);
@@ -163,6 +164,7 @@ class HomeController extends Controller
 			'date_diff_day'=>$date_diff_day,
 			'date_diff_hour'=>$date_diff_hour,
 			'date_diff_minute'=>$date_diff_minute,
+			'latest_post'=>$news,
 			]);
 	}
 	public function viewCate($slug,Request $req) {
@@ -181,6 +183,7 @@ class HomeController extends Controller
 			$promotion = $pro3->where('is_promotion','enable')->get();
 
 			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
+
 			if($category)
 			{	$cate=Category::where('parent_id',$category->id)->paginate(15);
 				$products=Product::where('category_id',$category->id)->paginate(15);
