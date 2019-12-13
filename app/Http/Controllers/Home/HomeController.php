@@ -135,11 +135,11 @@ class HomeController extends Controller
 		$news= News::orderBy('id','desc')->limit(1)->get();
 
 		$current_time = date_create(date("Y-m-d H:m:s"));
-		$end_date = date_create($flash_sale->end_time);
-		$date_diff = date_diff($current_time,$end_date);
-		$date_diff_day = $date_diff->format("%d");
-		$date_diff_hour = $date_diff->format("%h");
-		$date_diff_minute = $date_diff->format("%i");
+		$end_date = isset($flash_sale->end_time) ? date_create($flash_sale->end_time) : '';
+		$date_diff = isset($flash_sale->end_time) ? date_diff($current_time,$end_date) : '';
+		$date_diff_day = isset($flash_sale->end_time) ? $date_diff->format("%d") : '';
+		$date_diff_hour = isset($flash_sale->end_time) ? $date_diff->format("%h") : '';
+		$date_diff_minute = isset($flash_sale->end_time) ? $date_diff->format("%i") : '';
 		// dd($date_diff);
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[
