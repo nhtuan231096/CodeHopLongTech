@@ -133,6 +133,7 @@ class HomeController extends Controller
 		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->first();
 		$news= News::orderBy('id','desc')->limit(1)->get();
+
 		// dd($date_diff);
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[
