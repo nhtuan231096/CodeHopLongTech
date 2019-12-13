@@ -384,6 +384,7 @@
                 </div>
 
                 <!-- Deals -->
+                @if(isset($flash_sale->products))
                 <div class="module deals-layout1">
                     <div class="head-title">
                         <div class="modtitle">
@@ -483,6 +484,7 @@
                         </div>
                       </div>
                 </div>
+                @endif
                 <!-- End Deals -->
 
                 <!-- Banners -->
