@@ -133,13 +133,6 @@ class HomeController extends Controller
 		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->first();
 		$news= News::orderBy('id','desc')->limit(1)->get();
-
-		$current_time = date_create(date("Y-m-d H:m:s"));
-		$end_date = date_create($flash_sale->end_time);
-		$date_diff = date_diff($current_time,$end_date);
-		$date_diff_day = $date_diff->format("%d");
-		$date_diff_hour = $date_diff->format("%h");
-		$date_diff_minute = $date_diff->format("%i");
 		// dd($date_diff);
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[
@@ -161,9 +154,6 @@ class HomeController extends Controller
 			'date'=>$date,
 			'slider_homes'=>$slider_home,
 			'flash_sale'=>$flash_sale,
-			'date_diff_day'=>$date_diff_day,
-			'date_diff_hour'=>$date_diff_hour,
-			'date_diff_minute'=>$date_diff_minute,
 			'latest_post'=>$news,
 			]);
 	}
@@ -1000,6 +990,20 @@ public function recruitment(){
     		}
     		return json_encode($res);
     	}
+    }
+
+    public function flashSale(){
+    	$pro3 = (new Product())->datas3();
+		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+		$promotion = $pro3->where('is_promotion','enable')->get();
+		$flash_sale = FlashSale::where('end_time','>',date("Y-m-d"))->orderBy('id','desc')->first();
+		// dd($a->end_time > date("Y-m-d"));
+    	return view('home.v2.flash_sale',[
+    		'categorys' => $categorys,
+    		'promotions' => $promotion,
+    		'flash_sale' => $flash_sale,
+    		'products' => $flash_sale->products()->paginate(15)
+    	]);
     }
 }
  ?>

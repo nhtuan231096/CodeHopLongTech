@@ -19,6 +19,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Tiêu đề</th>
+                    <th>Ảnh</th>
                     <th>Ngày tạo</th>
                     <th>Thời gian kết thúc</th>
                     <th>
@@ -31,6 +32,9 @@
                 <tr>
                     <td>{{$data->id}}</td>
                     <td>{{$data->title}}</td>
+                    <td>
+                        <img src="{{url('uploads/flash_sale')}}/{{$data->cover_image}}" width="100px" alt="">
+                    </td>
                     <td>{{$data->created_at}}</td>
                     <td>{{$data->end_time}}</td>
                     <td>

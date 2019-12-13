@@ -52,6 +52,9 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::post('/rate-product','HomeController@rateProduct')->name('rateProduct');
 
 	// rating
+	// flash-sale
+	Route::get('/flash-sale','HomeController@flashSale')->name('flash-sale');
+	// flash-sale
 
 	//update route customer  
 	Route::get('/dang-ky','HomeController@formRegister')->name('register_customer');

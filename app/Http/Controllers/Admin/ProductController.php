@@ -613,6 +613,15 @@ public function post_import_price(Request $request){
     $data_cover_image   = (explode(",",$req->data_cover_image[0]));
     $data_category_id   = (explode(",",$req->data_category_id[0]));
     $data_discount   = (explode(",",$req->data_discount[0]));
+
+    $img='';
+    if ($req->hasFile('file_upload')) {
+      $file=$req->file_upload;
+      $file->move(base_path('uploads/flash_sale'),$file->getClientOriginalName());
+      $img=$file->getClientOriginalName();
+      $req->merge(['cover_image'=>$img]);
+    } 
+
     if($flashSale = FlashSale::create($req->all())){
       $i = 0;
       foreach($data_product_id as $value){

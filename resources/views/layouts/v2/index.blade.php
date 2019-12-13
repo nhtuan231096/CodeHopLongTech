@@ -329,7 +329,7 @@
                                                                                             <li>
                                                                                                 <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
                                                                                                 <ul>
-                                                                                                    @foreach($child->childs2 as $chil)
+                                                                                                    @foreach($child->childs2->slice(0, 3) as $chil)
                                                                                                     <li><a href="{{route('view_category',['slug'=>$chil->slug])}}" >{{$chil->title}}</a></li>
                                                                                                     @endforeach
                                                                                                 </ul>
@@ -470,10 +470,10 @@
                         <div class="socials-w">
                           <h2>Follow socials</h2>
                           <ul class="socials">
-                            <li class="facebook"><a href="https://www.facebook.com/MagenTech" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
-                            <li class="twitter"><a href="https://twitter.com/smartaddons" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
-                            <li class="google_plus"><a href="https://plus.google.com/u/0/+Smartaddons/posts" target="_blank"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
-                            <li class="pinterest"><a href="https://www.pinterest.com/smartaddons/" target="_blank"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
+                            <li class="facebook"><a href="https://www.facebook.com/hoplongtech/" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
+                            <li class="twitter"><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+                            <li class="google_plus"><a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
+                            <li class="pinterest"><a href="https://www.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
                             <li class="youtube"><a href="#" target="_blank"><i class="fa fa-youtube-play"></i><span>Youtube</span></a></li>
                             <li class="linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin"></i><span>linkedin</span></a></li>
                             <li class="skype"><a href="#" target="_blank"><i class="fa fa-skype"></i><span>skype</span></a></li>
@@ -540,7 +540,7 @@
                                     1900.6536
                                 </li>
                                 <li class="mail">
-                                    <a href="mailto:contact@opencartworks.com">info@hoplongtech.com.vn</a>
+                                    <a href="mailto:info@hoplongtech.com.vn">info@hoplongtech.com.vn</a>
                                 </li>
                                 <li class="time">
                                     Open time: 8:00AM - 6:00PM
@@ -556,7 +556,7 @@
                                 <h3 class="modtitle">Thông tin - Hỗ trợ</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
-                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="{{route('home')}}">About Us</a></li>
                                         <li><a href="#">FAQ</a></li>
                                         <li><a href="#">Warranty And Services</a></li>
                                         <li><a href="#">Support 24/7 page</a></li>
@@ -605,11 +605,11 @@
                                 <h3 class="modtitle">Khách hàng</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
-                                        <li><a href="#">Tin tức</a></li>
-                                        <li><a href="#">Mã giảm giá</a></li>
-                                        <li><a href="#">Chương trình khuyến mại</a></li>
-                                        <li><a href="#">Đăng nhập</a></li>
-                                        <li><a href="#">Đăng ký</a></li>
+                                        <li><a href="{{route('tin_tuc')}}">Tin tức</a></li>
+                                        <li><a href="">Mã giảm giá</a></li>
+                                        <li><a href="{{route('tin_tuc')}}">Chương trình khuyến mại</a></li>
+                                        <li><a href="{{route('loginCustomer')}}">Đăng nhập</a></li>
+                                        <li><a href="{{route('register_customer')}}">Đăng ký</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -621,10 +621,10 @@
                                 <h3 class="modtitle">Dịch vụ</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
-                                        <li><a href="#">Dành cho đại lý</a></li>
-                                        <li><a href="#">Chính sách bảo hành</a></li>
-                                        <li><a href="#">Chính sách đổi trả</a></li>
-                                        <li><a href="#">Chính sách vận chuyển</a></li>
+                                        <li><a href="{{route('home_agency_posts')}}">Dành cho đại lý</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Chính sách bảo hành</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Chính sách đổi trả</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
                                     </ul>
                                 </div>
                             </div>

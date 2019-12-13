@@ -99,6 +99,13 @@
 				<label for="">Ngày kết thúc</label>
 				<input type="date" class="form-control" name="end_time" value="{{$datas->end_time}}">
 			</div>
+
+			<div class="form-group">
+				<label for="">Ảnh đại diện</label>
+				<div class="clearfix"></div>
+				<!-- <input type="file" class="form-control" name="file_upload" style="padding: 0"> -->
+				<img src="{{url('uploads/flash_sale')}}/{{$datas->cover_image}}" width="100" alt="">
+			</div>
 			
 			<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 		</div>

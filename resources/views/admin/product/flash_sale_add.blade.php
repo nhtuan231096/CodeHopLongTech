@@ -85,7 +85,7 @@
 
 	<button type="submit" class="btn btn-primary fa fa-search"></button>
 	</form>
-<form action="" method="POST" role="form">
+<form action="" method="POST" role="form" enctype="multipart/form-data">
 	<legend>Tạo sự kiện flash sale</legend>
 
 	<div class="row">
@@ -93,6 +93,11 @@
 			<div class="form-group">
 				<label for="">Tiêu đề</label>
 				<input type="text" class="form-control" name="title" placeholder="Nhập tiêu đề">
+			</div>
+
+			<div class="form-group">
+				<label for="">Ảnh đại diện</label>
+				<input type="file" class="form-control" name="file_upload" style="padding: 0">
 			</div>
 
 			<div class="form-group">

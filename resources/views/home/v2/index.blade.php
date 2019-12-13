@@ -126,13 +126,12 @@
                     </div>
                 </div>
 
-                <div class="module product-simple extra-layout1">
+                <!-- <div class="module product-simple extra-layout1">
                     <h3 class="modtitle">
                         <span>Robot công nghiệp</span>
                     </h3>
                     <div class="modcontent">
                         <div id="so_extra_slider_1" class="so-extraslider" >
-                            <!-- Begin extraslider-inner -->
                             <div class="yt-content-slider extraslider-inner" data-rtl="yes" data-pagination="yes" data-autoplay="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="1" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="no" data-lazyload="yes" data-loop="no" data-buttonpage="top">
                                 <div class="item ">
                                     @foreach($cat_copy as $shn)
@@ -148,11 +147,11 @@
                                                 <a href="{{route('view_category',['slug'=>$shn->slug])}}" target="_self" title="Mandouille short">{{$shn->title}}</a>
                                             </div>
                                             <div class="rating">
-                                                <!-- <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> -->
+                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
                                             </div>
                                             <div class="content_price price">
                                                 <span class="price-new product-price"> </span>
@@ -161,19 +160,52 @@
 
                                             </div>
                                         </div>
-                                        <!-- End item-info -->
-                                        <!-- End item-wrap-inner -->
                                     </div>
                                     @endif
                                     @endforeach 
-                                    <!-- End item-wrap -->
                                 </div>
                             </div>
-                            <!--End extraslider-inner -->
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <div class="module so-latest-blog blog-sidebar">
 
+                    <h3 class="modtitle"><span>Bài viết mới nhất</span></h3>
+                    <div class="modcontent clearfix">
+
+                        <div class="so-blog-external buttom-type1 button-type1">
+                            <div class="blog-external-simple">
+                                @foreach($latest_post as $news)
+                                <div class="cat-wrap">
+                                    <div class="media">
+
+                                        <div class="item item-1">
+                                            <div class="media-left">
+                                                <a href="{{route('tin_tuc_chi_tiet',['slug'=>$news->slug])}}" target="_self">
+                                                <img src="{{url('uploads/news')}}/{{$news->image_cover}}" alt="{{$news->title}}" class="media-object">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">
+                                                <a href="#" title="Biten demons lector in henderit in vulp" target="_self">{{$news->title}}</a>
+                                                </h4>
+                                                <div class="media-content">
+                                                    <div class="media-date-added"><i class="fa fa-calendar"></i> {{$news->created_at}}</div>         
+                                                    <div class="media-subcontent">
+                                                    <span class="media-comment"><i class="fa fa-comments"></i>0  Comment</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="module">
                     <div class="policy-w">
                         <a href="#"><img src="{{url('public/homev2')}}/image/catalog/banners/call-us.jpg" alt="image"></a>
@@ -289,44 +321,7 @@
                     </div>
                 </div>
 
-                <div class="module so-latest-blog blog-sidebar">
-
-                    <h3 class="modtitle"><span>Bài viết mới nhất</span></h3>
-                    <div class="modcontent clearfix">
-
-                        <div class="so-blog-external buttom-type1 button-type1">
-                            <div class="blog-external-simple">
-                                @foreach($latest_post as $news)
-                                <div class="cat-wrap">
-                                    <div class="media">
-
-                                        <div class="item item-1">
-                                            <div class="media-left">
-                                                <a href="{{route('tin_tuc_chi_tiet',['slug'=>$news->slug])}}" target="_self">
-                                                <img src="{{url('uploads/news')}}/{{$news->image_cover}}" alt="{{$news->title}}" class="media-object">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">
-                                                <a href="#" title="Biten demons lector in henderit in vulp" target="_self">{{$news->title}}</a>
-                                                </h4>
-                                                <div class="media-content">
-                                                    <div class="media-date-added"><i class="fa fa-calendar"></i> {{$news->created_at}}</div>         
-                                                    <div class="media-subcontent">
-                                                    <span class="media-comment"><i class="fa fa-comments"></i>0  Comment</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                
                 
                 <!-- <div class="module testimonials">
                     <h3 class="modtitle"><span>Testimonials</span></h3>
@@ -384,31 +379,40 @@
                 </div>
 
                 <!-- Deals -->
+                @if(isset($flash_sale->products))
                 <div class="module deals-layout1">
                     <div class="head-title">
                         <div class="modtitle">
                             <span>Flash Sale</span>
-                            <div class="cslider-item-timer" id="countdown">
-                                <div id='tiles'></div>
-                                <!-- <div class="product_time_maxprice">
+                            <div class="cslider-item-timer">
+                              <div class="product_time_maxprice">
                                 
-                                    <div class="item-time">
-                                      <div class="item-timer">
-                                        <div class="defaultCountdown-30"></div>
-                                      </div>
+                                <div class="item-time">
+                                  <div class="item-timer">
+                                    <div class="second-counter" data-date="{{$flash_sale->end_time}}">
+                                        <div class="time-item time-day">
+                                            <div class="num-time counter-days">00</div>
+                                            <div class="name-time">Day </div>
+                                        </div>
+                                        <div class="time-item time-hour">
+                                            <div class="num-time counter-hours">00</div>
+                                            <div class="name-time">Hour </div>
+                                        </div>
+                                        <div class="time-item time-min">
+                                            <div class="num-time counter-minutes">00</div>
+                                            <div class="name-time">Min </div>
+                                        </div>
+                                        <div class="time-item time-sec">
+                                            <div class="num-time counter-seconds">00</div>
+                                            <div class="name-time">Sec </div>
+                                        </div>
                                     </div>
-                                </div> -->
-                                <div class="labels">
-                                    <!-- <li>Days</li>
-                                    <li>Hours</li>
-                                    <li>Mins</li>
-                                    <li>Secs</li> -->
+                                  </div>
                                 </div>
-                                <input type="hidden" id="date_diff_day" value="{{$date_diff_day}}">
-                                <input type="hidden" id="date_diff_hour" value="{{$date_diff_hour}}">
+                              </div>
                             </div>
-                           
-                              <!-- <a class="viewall" href="?route=product/special">View All</a> -->
+                              
+                              <a class="viewall" href="{{route('flash-sale')}}">Xem thêm</a>
                             
                         </div>    
                     </div>
@@ -483,6 +487,7 @@
                         </div>
                       </div>
                 </div>
+                @endif
                 <!-- End Deals -->
 
                 <!-- Banners -->
@@ -877,4 +882,69 @@
         
     </div>
 </div>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+    window.loopcounter = function( idWarp ) {
+        if(typeof idWarp!= 'undefined'){
+            var date = $('.'+idWarp).data('date');
+            if(typeof date != 'undefined'){
+                var start = new Date( date.replace(/-/g, "/") ),
+                end   = new Date(),
+                diff  = new Date( start - end ),
+                time  = diff/1000/60/60/24;
+
+                var day = parseInt(time);
+                var hour = parseInt( 24 - (diff/1000/60/60)%24 );
+                var min = parseInt( 60 - (diff/1000/60)%60 );
+                var sec = parseInt( 60 - (diff/1000)%60 );
+                
+                counterDate(idWarp,day,hour,min,sec);
+
+                var interval = setInterval(function () {
+                    if( sec==0 && min!=0 ){
+                        min--;
+                        sec = 60;
+                    }
+                    if(min == 0 && sec == 0 && hour!=0 ){
+                        hour--;
+                        min = 59;
+                        sec = 60;
+                    }
+                    if(min == 0 && sec == 0 && hour == 0 && day!=0 ){
+                        day--;
+                        hour = 23;
+                        min = 59;
+                        sec = 60;
+                    }
+                    if(min == 0 && sec == 0 && hour == 0 && day==0 ){
+                        clearInterval(interval);
+                    }else{
+                        sec--;
+                    }
+                    counterDate(idWarp,day,hour,min,sec);
+                }, 1000 );
+
+                function counterDate(id,day,hour,min,sec){
+                    if (time < 0) { day = hour = min = sec = 0; }
+                    $( '.'+id+' .counter-days').html( counterDoubleDigit(day) );
+                    $( '.'+id+' .counter-hours').html( counterDoubleDigit(hour) );
+                    $( '.'+id+' .counter-minutes').html( counterDoubleDigit(min) );
+                    $( '.'+id+' .counter-seconds').html( counterDoubleDigit(sec) );
+                }
+                function counterDoubleDigit( arg ){
+                    if( arg.toString().length <= 1 ){
+                        arg = ('0' + arg).slice(-2);
+                    }
+                    return arg;
+                }
+            }
+        }
+    }
+//loopcounter( 'counter-id' );
+});
+    $(document).ready(function(){
+        loopcounter('second-counter');
+    });
+</script>
+
 @stop()

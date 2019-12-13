@@ -8,7 +8,7 @@ class FlashSale extends Model
 {
 	protected $table='flash_sale';
 	protected $fillable=[
-		'id','title',' status','end_time','created_at','updated_at'
+		'id','title',' status','end_time','created_at','updated_at','cover_image'
 	];
 
 	public function products(){
