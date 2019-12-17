@@ -1,14 +1,14 @@
 @extends('layouts.v2.index')
 @section('mainContainer')
-<script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
+<!-- <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script> -->
 
 <div class="main-container container">
     <div id="content">
         <div class="content-top-w">
             
-            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 main-left">
-                <!-- <div class="module col1 hidden-sm hidden-xs"> -->
-                <div class="module col1 col-sm-12 col-xs-12">
+            <!-- <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 main-left"> -->
+                <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 main-left module col1 hidden-sm hidden-xs"></div>    
+                <!-- <div class="module col1 col-sm-12 col-xs-12">
                     <div class="module category-style">
                         <h3 class="modtitle">Danh mục sản phẩm</h3>
                         <div class="modcontent">
@@ -39,8 +39,8 @@
                             
                         </div>
                     </div>
-                </div>
-            </div>    
+                </div> -->
+            <!-- </div>     -->
             <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 main-right">
                 <div class="slider-container row"> 
                                 

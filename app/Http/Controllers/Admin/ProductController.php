@@ -613,7 +613,6 @@ public function post_import_price(Request $request){
     $data_cover_image   = (explode(",",$req->data_cover_image[0]));
     $data_category_id   = (explode(",",$req->data_category_id[0]));
     $data_discount   = (explode(",",$req->data_discount[0]));
-
     $img='';
     if ($req->hasFile('file_upload')) {
       $file=$req->file_upload;
@@ -621,21 +620,21 @@ public function post_import_price(Request $request){
       $img=$file->getClientOriginalName();
       $req->merge(['cover_image'=>$img]);
     } 
-
+    dd($req->all());
     if($flashSale = FlashSale::create($req->all())){
       $i = 0;
       foreach($data_product_id as $value){
         $data = [
-          'product_id'=>$data_product_id[$i],
-          'quantity'=>$data_quantity[$i],
+          'product_id'=>(int)$data_product_id[$i],
+          'quantity'=>(int)$data_quantity[$i],
           'title'=>$data_title[$i],
           'slug'=>$data_slug[$i],
-          'list_price'=>$data_price[$i],
-          'price'=>$data_price[$i] - (($data_price[$i]/100)*$data_discount[$i]),
-          'cover_image'=>$data_cover_image[$i],
-          'category_id'=>$data_category_id[$i],
-          'discount'=>$data_discount[$i],
-          'flash_sale_id'=>$flashSale->id,
+          'list_price'=>(int)$data_price[$i],
+          'price'=>(int)$data_price[$i] - (((int)$data_price[$i]/100)*(int)$data_discount[$i]),
+          'cover_image'=>isset($data_cover_image[$i]) ? $data_cover_image[$i] : '',
+          'category_id'=>(int)$data_category_id[$i],
+          'discount'=>(int)$data_discount[$i],
+          'flash_sale_id'=>(int)$flashSale->id,
         ];
         $i++;
         if(FlashSaleProduct::create($data)){
@@ -664,5 +663,20 @@ public function post_import_price(Request $request){
       'users'=>$user,
       'datas'=>$datas
     ]);
+  }
+
+  public function getAllProduct(){
+    if(request()->search){
+
+        $products = Product::where("title", "LIKE", "%{$request->get('search')}%")
+
+            ->paginate(15);      
+
+    }else{
+
+      $products = Product::paginate(15);
+
+    }
+    return response()->json($products);
   }
 }
