@@ -131,7 +131,9 @@ class HomeController extends Controller
 		$partners=Partners::where('status','enable')->orderBy('sorder','DESC')->get();
 		$banner_top=News::limit(4)->where(['status'=>'enable','category_id'=>'41'])->get();
 		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
-		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->first();
+		$current_date = date('Y-m-d');
+		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
+		// dd($flash_sale);
 		$news= News::orderBy('id','desc')->limit(1)->get();
 
 		// dd($date_diff);
@@ -154,7 +156,7 @@ class HomeController extends Controller
 			'cat_copy'=>$cat_copy,
 			'date'=>$date,
 			'slider_homes'=>$slider_home,
-			'flash_sale'=>$flash_sale,
+			'flash_sale'=> $flash_sale,
 			'latest_post'=>$news,
 			]);
 	}

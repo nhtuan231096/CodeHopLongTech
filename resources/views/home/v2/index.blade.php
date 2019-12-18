@@ -1,7 +1,6 @@
 @extends('layouts.v2.index')
 @section('mainContainer')
 <!-- <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script> -->
-
 <div class="main-container container">
     <div id="content">
         <div class="content-top-w">
@@ -70,7 +69,7 @@
                                     <!-- Begin extraslider-inner -->
                                     <div class="yt-content-slider extraslider-inner" data-rtl="yes" data-pagination="yes" data-autoplay="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="1" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="no" data-lazyload="yes" data-loop="no" data-buttonpage="top">
                                         <div class="item ">
-                                            @foreach($best_seller as $product)
+                                            @foreach($best_seller->slice(0, 5) as $product)
                                             <div class="product-layout item-inner style1 ">
                                                 <div class="item-image">
                                                     <div class="item-img-info">
@@ -505,19 +504,10 @@
                 <!-- end Banners -->
 
                 <!-- Category Slider 1 -->
-                <div id="so_category_slider_1" class="so-category-slider container-slider module cateslider1">
+                <!-- <div id="so_category_slider_1" class="so-category-slider container-slider module cateslider1">
                     <div class="modcontent">                                                                
                         <div class="page-top">
                             <div class="page-title-categoryslider">Sản phẩm mới</div>
-                            <!-- <div class="item-sub-cat">
-                                <ul>
-                                    <li><a href="#" title="Smartphone" target="_self">Smartphone</a></li>
-                                    <li><a href="#" title="Tablets" target="_self">Tablets</a></li>
-                                    <li><a href="#" title="Computer" target="_self">Computer</a></li>
-                                    <li><a href="#" title="Accessories" target="_self">Accessories</a></li>
-                                    <li><a href="#" title="Hitech" target="_self">Hitech</a></li>
-                                </ul>
-                            </div>  -->
                         </div>
 
                         <div class="categoryslider-content">
@@ -542,13 +532,9 @@
                                                             <img src="{{url('uploads/product')}}/{{$cover_image_2}}" class="img-2 img-responsive" alt="{{$cover_image_2}}">
                                                         </a>
                                                     </div>
-                                                    <!--quickview--> 
                                                     <div class="so-quickview">
                                                       <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
-                                                    </div>                                                     
-                                                    <!--end quickview-->
-
-                                                    
+                                                    </div>                                                    
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
@@ -557,11 +543,7 @@
                                                                     Thêm giỏ hàng 
                                                                 </a>
                                                             </span>   
-                                                        <!-- <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                                        </button>
-                                                        <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span> -->
-                                                        </button>
-                                                        
+                                                        </button>        
                                                     </div>
                                                     <div class="caption hide-cont">
                                                         <div class="ratings">
@@ -573,12 +555,10 @@
                                                             </div>
                                                             <span class="rating-num">( 2 )</span>
                                                         </div>
-                                                        <h4><a href="{{route('view',['slug'=>$promotion->slug])}}" title="{{$promotion->title}}" target="_self">{{$promotion->title}}</a></h4>
-                                                        
+                                                        <h4><a href="{{route('view',['slug'=>$promotion->slug])}}" title="{{$promotion->title}}" target="_self">{{$promotion->title}}</a></h4>  
                                                     </div>
                                                     <p class="price">
                                                       <span class="price-new">{{$cart->PriceProduct($promotion)}}</span>
-                                                      
                                                     </p>
                                                 </div>
 
@@ -589,9 +569,230 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </div> -->
                 <!-- end Category Slider 1 -->
+                
+                <!-- Listing tabs -->
+                <div class="module listingtab-layout1">
+                    
+                    <div id="so_listing_tabs_1" class="so-listing-tabs first-load">
+                        <div class="loadeding"></div>
+                        <div class="ltabs-wrap">
+                            <div class="ltabs-tabs-container" data-delay="300" data-duration="600" data-effect="starwars" data-ajaxurl="" data-type_source="0" data-lg="5" data-md="3" data-sm="2" data-xs="1" data-margin="30">
+                                <!--Begin Tabs-->
+                                <div class="ltabs-tabs-wrap"> 
+                                <span class="ltabs-tab-selected">Bathroom</span> <span class="ltabs-tab-arrow">▼</span>
+                                    <div class="item-sub-cat">
+                                        <ul class="ltabs-tabs cf">
+                                            <li class="ltabs-tab tab-sel" data-category-id="20" data-active-content=".items-category-20"> <span class="ltabs-tab-label">Bán chạy</span> </li>
+                                            <li class="ltabs-tab " data-category-id="18" data-active-content=".items-category-18"> <span class="ltabs-tab-label">Giá Đặc biệt</span> </li>
+                                            <li class="ltabs-tab " data-category-id="25" data-active-content=".items-category-25"> <span class="ltabs-tab-label">Sản phẩm mới</span> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Tabs-->
+                            </div>
+                        
+                            <div class="ltabs-items-container products-list grid">
+                                <!--Begin Items-->
+                                <div class="ltabs-items items-category-20 grid ltabs-items-selected ltabs-items-loaded" data-total="16">
+                                    <div class="ltabs-items-inner ltabs-slider">
+                                        @foreach($best_seller as $product)
+                                        <div class="item">         
+                                            <div class="item-inner product-layout transition product-grid">
+                                                <div class="product-item-container">
+                                                    <div class="left-block left-b">
+                                                        
+                                                        <div class="product-image-container second_img">
+                                                            <a href="{{route('view',['slug'=>$product->slug])}}" target="_self" title="">
+                                                                <img src="{{url('uploads/product')}}/{{$product->cover_image}}" alt="{{$product->cover_image}}" class="img-1 img-responsive">
+                                                                <img src="{{url('uploads/product')}}/{{$product->cover_image}}" alt="{{$product->cover_image}}" class="img-2 img-responsive">
+                                                            </a>
+                                                        </div>
+                                                        <!--quickview--> 
+                                                        <div class="so-quickview">
+                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                        </div>                                                     
+                                                        <!--end quickview-->
+
+                                                        
+                                                    </div>
+                                                    <div class="right-block">
+                                                        <div class="button-group so-quickview cartinfo--left">
+                                                            <span>
+                                                                    @if($product->price > 0)
+                                                                    <a class="addToCart addCart" href="{{route('add_cart',['id'=>$product->id])}}">
+                                                                        Thêm giỏ hàng 
+                                                                    </a>
+                                                                    @else
+                                                                    <a class="addToCart addCart" href="{{route('view',['slug'=>$product->slug])}}">
+                                                                        Chi tiết
+                                                                    </a>
+                                                                    @endif
+                                                              </span>  
+                                                        </div>
+                                                        <div class="caption hide-cont">
+                                                            <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                            </div>
+                                                            <h4><a href="{{route('view',['slug'=>$product->slug])}}" title="Pastrami bacon" target="_self">{{$product->title}}</a></h4>
+                                                            
+                                                        </div>
+                                                        <p class="price">
+                                                          <span class="price-new">{{$cart->PriceProduct($product)}}</span>
+                                                          
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>      
+                                        </div>
+                                        @endforeach
+                                    </div>                              
+                                </div>
+                                <div class="ltabs-items items-category-18 grid ltabs-items-loaded" data-total="16">
+                                   <div class="ltabs-items-inner ltabs-slider owl2-carousel owl2-theme owl2-loaded">
+                                      <div class="owl2-stage-outer">
+                                         <div class="owl2-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1701px;">
+                                            @foreach($promotions->slice(0, 5) as $promotion)
+                                            <div class="owl2-item active" style="width: 213px; margin-right: 30px;">
+                                               <div class="item">
+                                                  <div class="item-inner product-layout transition product-grid">
+                                                     <div class="product-item-container">
+                                                        <div class="left-block left-b">
+                                                           <div class="product-image-container second_img">
+                                                              <a href="{{route('view',['slug'=>$promotion->slug])}}" target="_self" title="">
+                                                              <img src="{{url('uploads/product')}}/{{$promotion->cover_image}}" class="img-1 img-responsive" alt="$promotion->cover_image">
+                                                              <?php $cover_image_new_2 = isset($promotion->cover_image_2) ? $promotion->cover_image_2 : $promotion->cover_image;?>
+                                                              <img src="{{url('uploads/product')}}/{{$cover_image_new_2}}" class="img-2 img-responsive" alt="{{$promotion->cover_image}}">
+                                                              </a>
+                                                           </div>
+                                                           <!--quickview--> 
+                                                           <div class="so-quickview">
+                                                              <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view',['slug'=>$promotion->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                           </div>
+                                                           <!--end quickview-->
+                                                        </div>
+                                                        <div class="right-block">
+                                                           <div class="button-group so-quickview cartinfo--left">
+                                                              <span>
+                                                                @if($promotion->price > 0)
+                                                                <a class="addToCart addCart" href="{{route('add_cart',['id'=>$promotion->id])}}">
+                                                                    Thêm giỏ hàng 
+                                                                </a>
+                                                                @else
+                                                                <a class="addToCart addCart" href="{{route('view',['slug'=>$promotion->slug])}}">
+                                                                    Chi tiết
+                                                                </a>
+                                                                @endif
+                                                              </span>   
+                                                           </div>
+                                                           <div class="caption hide-cont">
+                                                              <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                              </div>
+                                                              <h4><a href="{{route('view',['slug'=>$promotion->slug])}}" title="Pastrami bacon" target="_self">{{$promotion->title}}</a></h4>
+                                                           </div>
+                                                           <p class="price">
+                                                              <span class="price-new">{{$cart->PriceProduct($promotion)}}</span>
+                                                           </p>
+                                                        </div>
+                                                     </div>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            @endforeach
+                                         </div>
+                                      </div>
+                                      <!-- <div class="owl2-controls">
+                                         <div class="owl2-nav">
+                                            <div class="owl2-prev" style=""></div>
+                                            <div class="owl2-next" style=""></div>
+                                         </div>
+                                         <div style="display: none;" class="owl2-dots"></div>
+                                      </div> -->
+                                   </div>
+                                </div>
+                                <div class="ltabs-items  items-category-25 grid ltabs-items-loaded" data-total="16">
+                                   <div class="ltabs-items-inner ltabs-slider owl2-carousel owl2-theme owl2-loaded">
+                                      <div class="owl2-stage-outer">
+                                         <div class="owl2-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1701px;">
+                                            @foreach($new_products->slice(0, 5) as $new_product)
+                                            <div class="owl2-item active" style="width: 213px; margin-right: 30px;">
+                                               <div class="item">
+                                                  <div class="item-inner product-layout transition product-grid">
+                                                     <div class="product-item-container">
+                                                        <div class="left-block left-b">
+                                                           <div class="product-image-container second_img">
+                                                              <a href="{{route('view',['slug'=>$new_product->slug])}}" target="_self" title="">
+                                                              <img src="{{url('uploads/product')}}/{{$new_product->cover_image}}" class="img-1 img-responsive" alt="">
+                                                              <img src="{{url('uploads/product')}}/{{$new_product->cover_image}}" class="img-2 img-responsive" alt="">
+                                                              </a>
+                                                           </div>
+                                                           <!--quickview--> 
+                                                           <div class="so-quickview">
+                                                              <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view',['slug'=>$new_product->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                           </div>
+                                                           <!--end quickview-->
+                                                        </div>
+                                                        <div class="right-block">
+                                                           <div class="button-group so-quickview cartinfo--left">
+                                                                <span>
+                                                                    @if($new_product->price > 0)
+                                                                    <a class="addToCart addCart" href="{{route('add_cart',['id'=>$new_product->id])}}">
+                                                                        Thêm giỏ hàng 
+                                                                    </a>
+                                                                    @else
+                                                                    <a class="addToCart addCart" href="{{route('view',['slug'=>$new_product->slug])}}">
+                                                                        Chi tiết
+                                                                    </a>
+                                                                    @endif
+                                                              </span>  
+                                                           </div>
+                                                           <div class="caption hide-cont">
+                                                              <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                              </div>
+                                                              <h4><a href="{{route('view',['slug'=>$new_product->slug])}}" title="Pastrami bacon" target="_self">{{$new_product->title}}</a></h4>
+                                                           </div>
+                                                           <p class="price">
+                                                              <span class="price-new">{{$cart->PriceProduct($new_product)}}</span>
+                                                           </p>
+                                                        </div>
+                                                     </div>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                            @endforeach
+                                         </div>
+                                      </div>
+                                      <!-- <div class="owl2-controls">
+                                         <div class="owl2-nav">
+                                            <div class="owl2-prev" style=""></div>
+                                            <div class="owl2-next" style=""></div>
+                                         </div>
+                                         <div style="display: none;" class="owl2-dots"></div>
+                                      </div> -->
+                                   </div>
+                                </div>
+
+
+                                <!--End Items-->
+                            </div>
+                            
+                        </div>   
+                    </div>
+                </div>
+                <!-- end Listing tabs -->        
 
                 <!-- Category Slider 2 -->
                 <div id="so_category_slider_1" class="so-category-slider container-slider module cateslider2">
@@ -642,10 +843,16 @@
                                                 <div class="right-block">
                                                     <div class="button-group so-quickview cartinfo--left">
                                                         <span>
+                                                            @if($new_product->price > 0)
                                                             <a class="addToCart addCart" href="{{route('add_cart',['id'=>$new_product->id])}}">
                                                                 Thêm giỏ hàng 
                                                             </a>
-                                                        </span>   
+                                                            @else
+                                                            <a class="addToCart addCart" href="{{route('view',['slug'=>$new_product->slug])}}">
+                                                                Chi tiết
+                                                            </a>
+                                                            @endif
+                                                        </span>    
                                                        <!--  <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
                                                         </button>
                                                         <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
@@ -688,19 +895,19 @@
                             <div class="page-title-categoryslider">Gợi ý giành riêng cho bạn</div>
                             <div class="item-sub-cat">
                                 <ul>
-                                    <li><a href="#" title="Schneider" target="_self">Schneider</a></li>
-                                    <li><a href="#" title="Omron" target="_self">Omron</a></li>
-                                    <li><a href="#" title="Autonics" target="_self">Autonics</a></li>
-                                    <li><a href="#" title="Idec" target="_self">Idec</a></li>
-                                    <li><a href="#" title="Mitsubishi" target="_self">Mitsubishi</a></li>
-                                    <li><a href="#" title="LS" target="_self">LS</a></li>
-                                    <li><a href="#" title="Hanyoung" target="_self">Hanyoung</a></li>
-                                    <li><a href="#" title="Delta" target="_self">Delta</a></li>
+                                    <li><a title="Schneider" id="menu_schneider" target="_self">Schneider</a></li>
+                                    <li><a title="Omron" id="menu_omron" target="_self">Omron</a></li>
+                                    <li><a title="Autonics" id="menu_autonics" target="_self">Autonics</a></li>
+                                    <li><a title="Idec" id="menu_idec" target="_self">Idec</a></li>
+                                    <li><a title="Mitsubishi" id="menu_mitsubishi" target="_self">Misubishi</a></li>
+                                    <li><a title="LS" id="menu_ls" target="_self">LS</a></li>
+                                    <li><a title="Hanyoung" target="_self">Hanyoung</a></li>
+                                    <li><a title="Delta" target="_self">Delta</a></li>
                                 </ul>
                             </div> 
                         </div>
 
-                        <div class="categoryslider-content">
+                        <div class="categoryslider-content" id="schneider">
                             <div class="item-cat-image" style="min-height: 351px;">
                                 <a href="#" title="Fashion & Accessories" target="_self">
                                   <img class="categories-loadimage" alt="Fashion & Accessories" src="{{url('public/homev2')}}/image/catalog/demo/category/tab3.jpg">
@@ -742,6 +949,296 @@
                                                             <span class="rating-num"></span>
                                                         </div>
                                                         <h4><a href="{{route('view_category',['slug'=>$shn->slug])}}" title="Pastrami bacon" target="_self">{{$shn->title}}</a></h4>
+                                                        
+                                                    </div>
+                                                    <p class="price">
+                                                      <!-- <span class="price-new">$80.00</span> -->
+                                                      
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>      
+                                    </div>
+                                    @endif
+                                    @endforeach                           
+                            </div>
+                        </div>
+
+                        <div class="categoryslider-content" id="omron">
+                            <div class="item-cat-image" style="min-height: 351px;">
+                                <a href="#" title="Fashion & Accessories" target="_self">
+                                  <img class="categories-loadimage" alt="Fashion & Accessories" src="{{url('public/homev2')}}/image/catalog/demo/category/tab3.jpg">
+                                </a>
+                            </div>
+                            <div class="slider category-slider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="2" data-items_column2="1"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
+                                    @foreach($cat_copy as $om)
+                                    @if($om->sorder==2)
+                                    <div class="item">         
+                                        <div class="item-inner product-layout transition product-grid">
+                                            <div class="product-item-container">
+                                                <div class="left-block left-b">
+                                                    
+                                                    <div class="product-image-container second_img">
+                                                        <a href="{{route('view_category',['slug'=>$om->slug])}}" target="_self" title="">
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$om->cover_image}}" class="img-1 img-responsive" alt="{{$om->cover_image}}">
+                                                            <?php $cover_image_cate_2 = isset($om->cover_image_2) ? $om->cover_image_2 : $om->cover_image;?>
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$cover_image_cate_2}}" class="img-2 img-responsive" alt="{{$om->cover_image}}">
+                                                        </a>
+                                                    </div>
+                                                    <!--quickview--> 
+                                                    <div class="so-quickview">
+                                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view_category',['slug'=>$om->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                    </div>                                                     
+                                                    <!--end quickview-->
+
+                                                    
+                                                </div>
+                                                <div class="right-block">
+                                                    <div class="button-group so-quickview cartinfo--left">
+                                                        <button type="button" class="addToCart" title="">
+                                                            <span>Chi tiết </span>   
+                                                        </button>
+                                                    </div>
+                                                    <div class="caption hide-cont">
+                                                        <div class="ratings">
+                                                            <div class="rating-box">    
+                                                            </div>
+                                                            <span class="rating-num"></span>
+                                                        </div>
+                                                        <h4><a href="{{route('view_category',['slug'=>$om->slug])}}" title="Pastrami bacon" target="_self">{{$om->title}}</a></h4>
+                                                        
+                                                    </div>
+                                                    <p class="price">
+                                                      <!-- <span class="price-new">$80.00</span> -->
+                                                      
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>      
+                                    </div>
+                                    @endif
+                                    @endforeach                           
+                            </div>
+                        </div>
+
+                        <div class="categoryslider-content" id="autonics">
+                            <div class="item-cat-image" style="min-height: 351px;">
+                                <a href="#" title="Fashion & Accessories" target="_self">
+                                  <img class="categories-loadimage" alt="Fashion & Accessories" src="{{url('public/homev2')}}/image/catalog/demo/category/tab3.jpg">
+                                </a>
+                            </div>
+                            <div class="slider category-slider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="2" data-items_column2="1"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
+                                    @foreach($cat_copy as $auto)
+                                    @if($auto->sorder==3)
+                                    <div class="item">         
+                                        <div class="item-inner product-layout transition product-grid">
+                                            <div class="product-item-container">
+                                                <div class="left-block left-b">
+                                                    
+                                                    <div class="product-image-container second_img">
+                                                        <a href="{{route('view_category',['slug'=>$auto->slug])}}" target="_self" title="">
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$auto->cover_image}}" class="img-1 img-responsive" alt="{{$auto->cover_image}}">
+                                                            <?php $cover_image_cate_2 = isset($auto->cover_image_2) ? $auto->cover_image_2 : $auto->cover_image;?>
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$cover_image_cate_2}}" class="img-2 img-responsive" alt="{{$auto->cover_image}}">
+                                                        </a>
+                                                    </div>
+                                                    <!--quickview--> 
+                                                    <div class="so-quickview">
+                                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view_category',['slug'=>$auto->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                    </div>                                                     
+                                                    <!--end quickview-->
+
+                                                    
+                                                </div>
+                                                <div class="right-block">
+                                                    <div class="button-group so-quickview cartinfo--left">
+                                                        <button type="button" class="addToCart" title="">
+                                                            <span>Chi tiết </span>   
+                                                        </button>
+                                                    </div>
+                                                    <div class="caption hide-cont">
+                                                        <div class="ratings">
+                                                            <div class="rating-box">    
+                                                            </div>
+                                                            <span class="rating-num"></span>
+                                                        </div>
+                                                        <h4><a href="{{route('view_category',['slug'=>$auto->slug])}}" title="Pastrami bacon" target="_self">{{$auto->title}}</a></h4>
+                                                        
+                                                    </div>
+                                                    <p class="price">
+                                                      <!-- <span class="price-new">$80.00</span> -->
+                                                      
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>      
+                                    </div>
+                                    @endif
+                                    @endforeach                           
+                            </div>
+                        </div>
+
+                        <div class="categoryslider-content" id="idec">
+                            <div class="item-cat-image" style="min-height: 351px;">
+                                <a href="#" title="Fashion & Accessories" target="_self">
+                                  <img class="categories-loadimage" alt="Fashion & Accessories" src="{{url('public/homev2')}}/image/catalog/demo/category/tab3.jpg">
+                                </a>
+                            </div>
+                            <div class="slider category-slider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="2" data-items_column2="1"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
+                                    @foreach($cat_copy as $id)
+                                    @if($id->sorder==4)
+                                    <div class="item">         
+                                        <div class="item-inner product-layout transition product-grid">
+                                            <div class="product-item-container">
+                                                <div class="left-block left-b">
+                                                    
+                                                    <div class="product-image-container second_img">
+                                                        <a href="{{route('view_category',['slug'=>$id->slug])}}" target="_self" title="">
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$id->cover_image}}" class="img-1 img-responsive" alt="{{$id->cover_image}}">
+                                                            <?php $cover_image_cate_2 = isset($id->cover_image_2) ? $id->cover_image_2 : $id->cover_image;?>
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$cover_image_cate_2}}" class="img-2 img-responsive" alt="{{$id->cover_image}}">
+                                                        </a>
+                                                    </div>
+                                                    <!--quickview--> 
+                                                    <div class="so-quickview">
+                                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view_category',['slug'=>$id->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                    </div>                                                     
+                                                    <!--end quickview-->
+
+                                                    
+                                                </div>
+                                                <div class="right-block">
+                                                    <div class="button-group so-quickview cartinfo--left">
+                                                        <button type="button" class="addToCart" title="">
+                                                            <span>Chi tiết </span>   
+                                                        </button>
+                                                    </div>
+                                                    <div class="caption hide-cont">
+                                                        <div class="ratings">
+                                                            <div class="rating-box">    
+                                                            </div>
+                                                            <span class="rating-num"></span>
+                                                        </div>
+                                                        <h4><a href="{{route('view_category',['slug'=>$id->slug])}}" title="Pastrami bacon" target="_self">{{$id->title}}</a></h4>
+                                                        
+                                                    </div>
+                                                    <p class="price">
+                                                      <!-- <span class="price-new">$80.00</span> -->
+                                                      
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>      
+                                    </div>
+                                    @endif
+                                    @endforeach                           
+                            </div>
+                        </div>
+
+                        <div class="categoryslider-content" id="mitsubishi">
+                            <div class="item-cat-image" style="min-height: 351px;">
+                                <a href="#" title="Fashion & Accessories" target="_self">
+                                  <img class="categories-loadimage" alt="Fashion & Accessories" src="{{url('public/homev2')}}/image/catalog/demo/category/tab3.jpg">
+                                </a>
+                            </div>
+                            <div class="slider category-slider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="2" data-items_column2="1"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
+                                    @foreach($cat_copy as $mit)
+                                    @if($mit->sorder==6)
+                                    <div class="item">         
+                                        <div class="item-inner product-layout transition product-grid">
+                                            <div class="product-item-container">
+                                                <div class="left-block left-b">
+                                                    
+                                                    <div class="product-image-container second_img">
+                                                        <a href="{{route('view_category',['slug'=>$mit->slug])}}" target="_self" title="">
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$mit->cover_image}}" class="img-1 img-responsive" alt="{{$mit->cover_image}}">
+                                                            <?php $cover_image_cate_2 = isset($mit->cover_image_2) ? $mit->cover_image_2 : $mit->cover_image;?>
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$cover_image_cate_2}}" class="img-2 img-responsive" alt="{{$mit->cover_image}}">
+                                                        </a>
+                                                    </div>
+                                                    <!--quickview--> 
+                                                    <div class="so-quickview">
+                                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view_category',['slug'=>$mit->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                    </div>                                                     
+                                                    <!--end quickview-->
+
+                                                    
+                                                </div>
+                                                <div class="right-block">
+                                                    <div class="button-group so-quickview cartinfo--left">
+                                                        <button type="button" class="addToCart" title="">
+                                                            <span>Chi tiết </span>   
+                                                        </button>
+                                                    </div>
+                                                    <div class="caption hide-cont">
+                                                        <div class="ratings">
+                                                            <div class="rating-box">    
+                                                            </div>
+                                                            <span class="rating-num"></span>
+                                                        </div>
+                                                        <h4><a href="{{route('view_category',['slug'=>$mit->slug])}}" title="Pastrami bacon" target="_self">{{$mit->title}}</a></h4>
+                                                        
+                                                    </div>
+                                                    <p class="price">
+                                                      <!-- <span class="price-new">$80.00</span> -->
+                                                      
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>      
+                                    </div>
+                                    @endif
+                                    @endforeach                           
+                            </div>
+                        </div>
+
+                        <div class="categoryslider-content" id="ls">
+                            <div class="item-cat-image" style="min-height: 351px;">
+                                <a href="#" title="Fashion & Accessories" target="_self">
+                                  <img class="categories-loadimage" alt="Fashion & Accessories" src="{{url('public/homev2')}}/image/catalog/demo/category/tab3.jpg">
+                                </a>
+                            </div>
+                            <div class="slider category-slider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="2" data-items_column2="1"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
+                                    @foreach($cat_copy as $ls)
+                                    @if($ls->sorder==5)
+                                    <div class="item">         
+                                        <div class="item-inner product-layout transition product-grid">
+                                            <div class="product-item-container">
+                                                <div class="left-block left-b">
+                                                    
+                                                    <div class="product-image-container second_img">
+                                                        <a href="{{route('view_category',['slug'=>$ls->slug])}}" target="_self" title="">
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$ls->cover_image}}" class="img-1 img-responsive" alt="{{$ls->cover_image}}">
+                                                            <?php $cover_image_cate_2 = isset($ls->cover_image_2) ? $ls->cover_image_2 : $ls->cover_image;?>
+                                                            <img height="100" src="{{url('uploads/category')}}/{{$cover_image_cate_2}}" class="img-2 img-responsive" alt="{{$ls->cover_image}}">
+                                                        </a>
+                                                    </div>
+                                                    <!--quickview--> 
+                                                    <div class="so-quickview">
+                                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view_category',['slug'=>$ls->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                    </div>                                                     
+                                                    <!--end quickview-->
+
+                                                    
+                                                </div>
+                                                <div class="right-block">
+                                                    <div class="button-group so-quickview cartinfo--left">
+                                                        <button type="button" class="addToCart" title="">
+                                                            <span>Chi tiết </span>   
+                                                        </button>
+                                                    </div>
+                                                    <div class="caption hide-cont">
+                                                        <div class="ratings">
+                                                            <div class="rating-box">    
+                                                            </div>
+                                                            <span class="rating-num"></span>
+                                                        </div>
+                                                        <h4><a href="{{route('view_category',['slug'=>$ls->slug])}}" title="Pastrami bacon" target="_self">{{$ls->title}}</a></h4>
                                                         
                                                     </div>
                                                     <p class="price">
@@ -947,6 +1444,64 @@
         loopcounter('second-counter');
     });
 </script>
+<script type="text/javascript">
+    $('#schneider').show();
+    $('#omron').hide();
+    $('#autonics').hide();
+    $('#idec').hide();
+    $('#mitsubishi').hide();
+    $('#ls').hide();
 
+    $(document).ready(function(){
+        $('#menu_schneider').click(function(){
+            $('#schneider').show();
+            $('#omron').hide();
+            $('#autonics').hide();
+            $('#idec').hide();
+            $('#mitsubishi').hide();
+            $('#ls').hide();
+        });
+        $('#menu_omron').click(function(){
+            $('#omron').show();
+            $('#schneider').hide();
+            $('#autonics').hide();
+            $('#idec').hide();
+            $('#mitsubishi').hide();
+            $('#ls').hide();
+        });
+        $('#menu_autonics').click(function(){
+            $('#omron').hide();
+            $('#schneider').hide();
+            $('#autonics').show();
+            $('#idec').hide();
+            $('#mitsubishi').hide();
+            $('#ls').hide();
+        });
+        $('#idec').click(function(){
+            $('#schneider').hide();
+            $('#omron').hide();
+            $('#autonics').hide();
+            $('#idec').show();
+            $('#mitsubishi').hide();
+            $('#ls').hide();
+        });
+        $('#mitsubishi').click(function(){
+            $('#schneider').hide();
+            $('#omron').hide();
+            $('#autonics').hide();
+            $('#idec').hide();
+            $('#mitsubishi').show();
+            $('#ls').hide();
+        });
+        $('#ls').click(function(){
+            $('#schneider').hide();
+            $('#omron').hide();
+            $('#autonics').hide();
+            $('#idec').hide();
+            $('#mitsubishi').hide();
+            $('#ls').show();
+        });
+    });
+</script>
 @stop()
 
