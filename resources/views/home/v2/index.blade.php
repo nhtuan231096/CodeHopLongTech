@@ -46,7 +46,7 @@
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 col2">
                         <div class="module sohomepage-slider ">
                             <div class="yt-content-slider"  data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="1" data-items_column0="1" data-items_column1="1" data-items_column2="1"  data-items_column3="1" data-items_column4="1" data-arrows="no" data-pagination="yes" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
-                                @foreach($slider_homes as $slider)
+                                @foreach($sliders as $slider)
                                 <div class="yt-content-slide">
                                     <a href="#"><img src="{{url('uploads/slider')}}/{{$slider->cover_image}}" alt="{{$slider->title}}" class="img-responsive"></a>
                                 </div>
@@ -62,7 +62,7 @@
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 col3">
                         <div class="module product-simple extra-layout1">
                             <h3 class="modtitle">
-                                <span>Sản phẩm bán chạy</span>
+                                <span>Bán chạy</span>
                             </h3>
                             <div class="modcontent">
                                 <div id="so_extra_slider_1" class="so-extraslider" >
@@ -211,7 +211,7 @@
                         <ul class="block-infos">
                             <li class="info1">
                               <div class="inner">
-                              <i class="fa fa-file-text-o"></i>
+                              <i class="fa fa-plane"></i>
                               <div class="info-cont">
                               <a href="#">Miễn phí</a>
                               <p>giao hàng nội thành</p>
@@ -220,7 +220,7 @@
                             </li>
                             <li class="info2">
                               <div class="inner">
-                              <i class="fa fa-shield"></i>
+                              <i class="fa fa-money"></i>
                               <div class="info-cont">
                               <a href="#">An toàn</a>
                               <p>Giao dịch tài chính</p>
@@ -238,7 +238,7 @@
                             </li>
                             <li class="info4">
                               <div class="inner">
-                              <i class="fa fa-money"></i>
+                              <i class="fa fa-shield"></i>
                               <div class="info-cont">
                               <a href="#">365+ ngày</a>
                               <p>Bảo hành sản phẩm</p>
@@ -602,7 +602,6 @@
                                             <div class="item-inner product-layout transition product-grid">
                                                 <div class="product-item-container">
                                                     <div class="left-block left-b">
-                                                        
                                                         <div class="product-image-container second_img">
                                                             <a href="{{route('view',['slug'=>$product->slug])}}" target="_self" title="">
                                                                 <img src="{{url('uploads/product')}}/{{$product->cover_image}}" alt="{{$product->cover_image}}" class="img-1 img-responsive">
@@ -611,24 +610,28 @@
                                                         </div>
                                                         <!--quickview--> 
                                                         <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view',['slug'=>$product->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Chi tiết</span></a>
                                                         </div>                                                     
                                                         <!--end quickview-->
-
                                                         
                                                     </div>
                                                     <div class="right-block">
                                                         <div class="button-group so-quickview cartinfo--left">
                                                             <span>
                                                                     @if($product->price > 0)
-                                                                    <a class="addToCart addCart" href="{{route('add_cart',['id'=>$product->id])}}">
+                                                                   <!--  <a class="addToCart addCart" href="{{route('add_cart',['id'=>$product->id])}}">
                                                                         Thêm giỏ hàng 
-                                                                    </a>
+                                                                    </a> -->
+                                                                    <button type="button" class="addToCart addCart" title="Add to cart"><a href="{{route('add_cart',['id'=>$product->id])}}"><span style="color: #fff">Thêm vào giỏ</span></a></button>
                                                                     @else
                                                                     <a class="addToCart addCart" href="{{route('view',['slug'=>$product->slug])}}">
                                                                         Chi tiết
                                                                     </a>
                                                                     @endif
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                                                    </button>
                                                               </span>  
                                                         </div>
                                                         <div class="caption hide-cont">

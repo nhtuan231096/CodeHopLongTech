@@ -199,7 +199,7 @@ html {
                     </div>
 
                     <a class="reviews_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{$product->countRate->count()}} đánh giá</a>  | 
-                    <a class="write_review_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Đánh giá sản phẩm</a>
+                    <a class="write_review_button" href="" onclick="$('a[href=\'#danh-gia\']').trigger('click'); return false;">Đánh giá sản phẩm này</a>
                 </div>
 
                 <div class="product-label form-group">
@@ -207,7 +207,7 @@ html {
                         <span class="price-new" itemprop="price">{{$cart->PriceProduct($product)}}</span>
                         <span class="price-old">{{$product->list_price > 0 ? number_format($product->list_price) : ''}}</span>
                     </div>
-                    <div class="stock"><span>Availability:</span> <span class="status-stock">In Stock</span></div>
+                    <div class="stock"><span>Tình trạng:</span> <span class="status-stock">Có sẵn</span></div>
                 </div>
 
                 <div class="product-box-desc">
@@ -297,7 +297,7 @@ html {
                             <div class="form-group box-info-product">
                                 <div class="option quantity">
                                     <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
-                                        <label>Qty</label>
+                                        <label>Số lượng</label>
                                         <input class="form-control" type="text" name="quantity" id="quantity-input"
                                         value="1">
                                         <input type="hidden" name="id" value="{{$product->id}}">
@@ -306,8 +306,13 @@ html {
                                     </div>
                                 </div>
                                 <div class="cart">
-                                    <button class="btn btn-danger btn-lg" name="addCart" value="true" style="font-weight: bold; font-size: 16px; width: 100%"> 
+                                    <button class="btn btn-primary btn-lg" name="addCart" value="true" style="font-weight: bold; font-size: 16px;"> 
                                         <i style="margin-right: 5px" class="fa fa-shopping-cart"></i>Thêm giỏ hàng
+                                    </button>
+                                </div>
+                                <div class="add-to-links wish_comp wishlist">
+                                    <button class="btn btn-danger btn-lg" name="shopNow" value="true" style="font-weight: bold; font-size: 16px;"> 
+                                        <i style="margin-right: 5px" class="fa fa-money"></i>Mua ngay
                                     </button>
                                 </div>
                             </div>

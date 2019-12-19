@@ -71,7 +71,7 @@
                 <div class="row">
                     <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
                         <div class="hidden-md hidden-sm hidden-xs welcome-msg">Công ty cổ phần công nghệ Hợp Long /
-                            <span>Trang thương mại điện tử</span> 
+                            <span>Merry Christmas</span> 
                         </div>
                         <ul class="top-link list-inline hidden-lg ">
                             <li class="account" id="my_account">
@@ -132,7 +132,7 @@
                 <div class="row">
                     <!-- Logo -->
                     <div class="navbar-logo col-lg-2 col-md-3 col-sm-4 col-xs-12">
-                        <div class="logo"><a href="{{route('home')}}"><img src="{{url('public/homev2')}}/image/catalog/Logo-hl.png" height="46px" title="Your Store" alt="hoplongtech" /></a></div>
+                        <div class="logo"><a href="{{route('home')}}"><img src="{{url('public/homev2')}}/image/catalog/logo.png" height="46px" title="Your Store" alt="hoplongtech" /></a></div>
                     </div>
                     <!-- //end Logo -->
 
@@ -379,9 +379,6 @@
                                         <div class="megamenu-pattern">
                                             <div class="container-mega">
                                                 <ul class="megamenu" data-transition="slide" data-animationtime="250">
-                                                    <li class="home hover">
-                                                        <a href="{{route('home')}}">TRANG CHỦ</a>
-                                                    </li>
                                                     <li class="with-sub-menu hover">
                                                         <p class="close-menu"></p>
                                                         <a href="{{route('home_product')}}" class="clearfix">
@@ -391,14 +388,15 @@
                                                     </li>
                                                     <li class="with-sub-menu hover">
                                                         <p class="close-menu"></p>
-                                                        <a href="{{route('tuyen-dung')}}" class="clearfix">
-                                                            <strong>Tuyển dụng</strong>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>Flash Sale</strong>
+                                                            <img class="label-hot" src="{{url('public/homev2')}}/image/catalog/menu/hot-icon.png" alt="icon items">
                                                         </a>
                                                     </li>
                                                     <li class="with-sub-menu hover">
                                                         <p class="close-menu"></p>
-                                                        <a href="{{route('home_agency_posts')}}" class="clearfix">
-                                                            <strong>Dành cho đại lý</strong>
+                                                        <a href="#" class="clearfix">
+                                                            <strong>Voucher</strong>
                                                             <img class="label-hot" src="{{url('public/homev2')}}/image/catalog/menu/new-icon.png" alt="icon items">
                                                         </a>
                                                     </li>
@@ -406,16 +404,19 @@
                                                     <li class="">
                                                         <p class="close-menu"></p>
                                                         <a href="{{route('downloads')}}" class="clearfix">
-                                                            <strong>DOWNLOAD</strong>
+                                                            <strong>Khuyến mại</strong>
                                                         </a>
                                             
                                                     </li>
-                                                    <li class="">
+                                                    <!-- <li class="">
                                                         <p class="close-menu"></p>
                                                         <a href="{{route('tin_tuc')}}" class="clearfix">
                                                             <strong>Tin tức</strong>
                                                             <span class="label"></span>
                                                         </a>
+                                                    </li> -->
+                                                    <li class="with-sub-menu hover">
+                                                        <a href="{{route('home')}}">Về Hoplong</a>
                                                     </li>
                                                 </ul>
                                                 
@@ -470,13 +471,12 @@
                         <div class="socials-w">
                           <h2>Follow socials</h2>
                           <ul class="socials">
-                            <li class="facebook"><a href="https://www.facebook.com/hoplongtech/" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
-                            <li class="twitter"><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
-                            <li class="google_plus"><a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
-                            <li class="pinterest"><a href="https://www.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
-                            <li class="youtube"><a href="#" target="_blank"><i class="fa fa-youtube-play"></i><span>Youtube</span></a></li>
-                            <li class="linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin"></i><span>linkedin</span></a></li>
-                            <li class="skype"><a href="#" target="_blank"><i class="fa fa-skype"></i><span>skype</span></a></li>
+                            <li class="facebook"><a href="https://www.facebook.com/hoplongtech/" target="_blank" rel="nofollow"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
+                            <li class="twitter"><a href="https://twitter.com/" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+                            <li class="google_plus"><a href="https://plus.google.com/" target="_blank" rel="nofollow"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
+                            <li class="pinterest"><a href="https://www.pinterest.com/" target="_blank" rel="nofollow"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
+                            <li class="youtube"><a href="#" target="_blank"><i class="fa fa-youtube-play" rel="nofollow"></i><span>Youtube</span></a></li>
+                            <li class="linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin" rel="nofollow"></i><span>linkedin</span></a></li>
                           </ul>
                         </div>
                         
@@ -529,12 +529,11 @@
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-infos">
                         <div class="infos-footer">
                             <div class="logo">
-                                <a href="{{route('home')}}"><img src="{{url('public/homev2')}}/image/catalog/Logo-hl.png" height="46px" alt="image"></a>
+                                <a href="{{route('home')}}"><img src="{{url('public/homev2')}}/image/catalog/logo-footer.png" height="46px" alt="image"></a>
                             </div>
                             <ul class="menu">
-                                <li class="adres">
-                                    87 Lĩnh Nam - Hoàng Mai - Hà Nội <br>
-                                    22/64 Sài Đồng - Long Biên
+                                <li class="adress">
+                                    87 Lĩnh Nam - Hoàng Mai - Hà Nội
                                 </li>
                                 <li class="phone">
                                     1900.6536
@@ -553,16 +552,15 @@
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
                         <div class="box-information box-footer">
                             <div class="module clearfix">
-                                <h3 class="modtitle">Thông tin - Hỗ trợ</h3>
+                                <h3 class="modtitle">Hệ thống chi nhánh:</h3>
                                 <div class="modcontent">
-                                    <ul class="menu">
-                                        <li><a href="{{route('home')}}">About Us</a></li>
-                                        <li><a href="#">FAQ</a></li>
-                                        <li><a href="#">Warranty And Services</a></li>
-                                        <li><a href="#">Support 24/7 page</a></li>
-                                        <li><a href="#">Product Registration</a></li>
-                                        <li><a href="#">Product Support</a></li>
-                                    </ul>
+                                  <ul class="menu">
+                                    <li><a href="#">Hà Nội</a></li>
+                                    <li><a href="#">Hải phòng</a></li>
+                                    <li><a href="#">Đà Nẵng</a></li>
+                                    <li><a href="#">Hồ Chí Minh</a></li>
+                                    <li><a href="#">Cần Thơ</a></li>
+                                  </ul>
                                 </div>
                             </div>
                         </div>
@@ -571,45 +569,46 @@
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-clear">
                         <div class="box-service box-footer">
                           <div class="module clearfix">
-                            <h3 class="modtitle">Chúng tôi hiện diện tại:</h3>
-                            <div class="modcontent">
-                              <ul class="menu">
-                                <li><a href="#">Hà Nội</a></li>
-                                <li><a href="#">Hải phòng</a></li>
-                                <li><a href="#">Đà Nẵng</a></li>
-                                <li><a href="#">Hồ Chí Minh</a></li>
-                                <li><a href="#">Cần Thơ</a></li>
-                              </ul>
-                            </div>
+                            <h3 class="modtitle">Về Hoplong</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="{{route('home')}}">Giới thiệu</a></li>
+                                        <li><a href="#">Điều khoản sử dụng</a></li>
+                                        <li><a href="#">Chính sách bảo mật</a></li>
+                                        <li><a href="#">Hình thức thanh toán</a></li>
+                                        <li><a href="#">Liên hệ</a></li>
+                                    </ul>
+                                </div>
                           </div>
                         </div>
-                    </div>
+                    </div><!-- 
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
                         <div class="box-service box-footer">
                           <div class="module clearfix">
                             <h3 class="modtitle">Danh mục sản phẩm</h3>
                             <div class="modcontent">
                               <ul class="menu">
-                                @foreach($categorys->slice(0,6) as $category)
+                                @foreach($categorys->slice(0,5) as $category)
                                 <li><a href="{{route('view_category',[$category->slug])}}">{{$category->title}}</a></li>
                                 @endforeach
                               </ul>
                             </div>
                           </div>
                         </div>
-                    </div>
+                    </div> -->
                 
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
                         <div class="box-account box-footer">
                             <div class="module clearfix">
-                                <h3 class="modtitle">Khách hàng</h3>
+                                <h3 class="modtitle">Chăm sóc khách hàng</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
-                                        <li><a href="{{route('tin_tuc')}}">Tin tức</a></li>
-                                        <li><a href="">Mã giảm giá</a></li>
-                                        <li><a href="{{route('tin_tuc')}}">Chương trình khuyến mại</a></li>
-                                        <li><a href="{{route('loginCustomer')}}">Đăng nhập</a></li>
-                                        <li><a href="{{route('register_customer')}}">Đăng ký</a></li>
+                                        <li><a href="">Hotline: 1900.6536</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Hướng dẫn mua hàng</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Điểm thưởng và đổi điểm thưởng</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
+                                        <li><a href="{{route('loginCustomer')}}">Dành cho đại lý</a></li>
+                                        <!-- <li><a href="{{route('register_customer')}}">Đăng ký</a></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -631,10 +630,27 @@
                         </div>
 
                     </div>
-                    
-
-
-                    
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-service box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">Tải ứng dụng ngay</h3>
+                                <div class="modcontent col-md-6">
+                                    <!-- <ul class="menu">
+                                        <li><a href="{{route('home_agency_posts')}}">Dành cho đại lý</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Chính sách bảo hành</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Chính sách đổi trả</a></li>
+                                        <li><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
+                                    </ul> -->
+                                    <img src="{{url('public/homev2')}}/image/catalog/qr-code.png" alt="iOS/Android">
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="{{url('public/homev2')}}/image/catalog/appstore.png" alt="Aps Store"></br></br>
+                                    <img src="{{url('public/homev2')}}/image/catalog/googleplay.png" alt="CH Play">
+                                </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -661,13 +677,16 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="col-lg-12 col-xs-12 payment-w">
-                <img src="{{url('public/homev2')}}/image/catalog/demo/payment/payment.png" alt="imgpayment">
+                    <img src="{{url('public/homev2')}}/image/catalog/demo/payment/payment.png" alt="imgpayment">
+                </div>
+                <div class="col-lg-12 col-xs-12 payment-w">
+                    <a href="http://online.gov.vn/Home/WebDetails/29393" rel="nofollow" target="_blank"><img src="{{url('public/homev2')}}/image/catalog/dathongbao.png" alt="Đã thông báo Bộ Công Thương" style="margin-top: 20px;"></a>
                 </div>
             </div>
             <div class="copyright-w">
                 <div class="container">
                     <div class="copyright">
-                    Copyright © 2019 <a href="http://www.opencartworks.com/" target="_blank">hoplongtech.com</a> All rights reserved. 
+                    Copyright © 2019 <a href="https://hoplongtech.com/" target="_blank">hoplongtech.com</a> All rights reserved. 
                     </div>
                 </div>
             </div>            
