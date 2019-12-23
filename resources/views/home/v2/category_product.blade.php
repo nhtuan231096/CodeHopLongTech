@@ -1,5 +1,25 @@
 @extends('layouts.v2.index')
 @section('mainContainer')
+<style type="text/css">
+    .title-general::after {
+        position: absolute;
+        content: "";
+        width: 110px;
+        height: 2px;
+        background-color: #3191CF;
+        bottom: -2px;
+        left: 0;
+    }
+    .title-detail::after {
+        position: absolute;
+        content: "";
+        width: 110px;
+        height: 2px;
+        background-color: #3191CF;
+        bottom: -2px;
+        left: 190px;
+    }
+</style>
 <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
 <div class="main-container container">
     <ul class="breadcrumb">
@@ -15,7 +35,28 @@
                 <div class="modcontent">
                     <div class="box-category">
                         <ul id="cat_accordion" class="list-group">
-                            @foreach($categorys as $category)
+                            <!-- @foreach($categorys as $category)
+                            <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
+                                <ul class="itemMenu">
+                                    @foreach($category->childs as $child)
+                                    <li class="menuCate">
+                                        <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>  
+                                        <span class="btn-view-child fa fa-plus-square-o"></span>
+                                        <ul class="list-child-menu">
+                                            @foreach($child->childs2 as $chil)
+                                            <li class="childMenu">
+                                                <a href="{{route('view_category',['slug'=>$chil->slug])}}">{{$chil->title}}</a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @endforeach -->
+
+                            <!-- //--- -->
+                            @foreach($cate as $category)
                             <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
                                 <ul class="itemMenu">
                                     @foreach($category->childs as $child)
@@ -34,6 +75,7 @@
                                 </ul>
                             </li>
                             @endforeach
+                            <!-- //--- -->
                         </ul>
                     </div>
                     
@@ -100,8 +142,12 @@
         <!--Middle Part Start-->
         <div id="content" class="col-md-9 col-sm-8">
             <div class="products-category">
-                <h3 class="title-category ">{{$category->title}}</h3>
-                <div class="category-desc">
+                <h3 class="title-category">
+                    <span id="general">{{$category->title}}</span>
+                    <span id="detail" style="padding-left: 25px">Thông tin chi tiết</span>
+                </h3>
+                
+                <div class="category-desc" style="display: none;">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="banners">
@@ -109,135 +155,138 @@
                                     <a  href="#"><img src="{{url('uploads/category')}}/{{$category->cover_image}}" alt=""> <br></a>
                                 </div>
                                 <div class="">
-                                    {{$category->content}}
+                                    {!!$category->content!!}
                                 </div>
                             </div>
                         
                         </div>
                     </div>
                 </div>
-                <!-- Filters -->
-                <div class="product-filter product-filter-top filters-panel">
-                    <div class="row">
-                        <div class="col-md-5 col-sm-3 col-xs-12 view-mode">
-                            
-                                <div class="list-view">
-                                    <button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip"  data-original-title="Grid"><i class="fa fa-th"></i></button>
-                                    <button class="btn btn-default list" data-view="list" data-toggle="tooltip" data-original-title="List"><i class="fa fa-th-list"></i></button>
-                                </div>
-                    
-                        </div>
-                        <div class="short-by-show form-inline text-right col-md-7 col-sm-9 col-xs-12">
-                            <!-- <div class="form-group short-by">
-                                <label class="control-label" for="input-sort">Sort By:</label>
-                                <select id="input-sort" class="form-control"
-                                onchange="location = this.value;">
-                                    <option value="" selected="selected">Default</option>
-                                    <option value="">Name (A - Z)</option>
-                                    <option value="">Name (Z - A)</option>
-                                    <option value="">Price (Low &gt; High)</option>
-                                    <option value="">Price (High &gt; Low)</option>
-                                    <option value="">Rating (Highest)</option>
-                                    <option value="">Rating (Lowest)</option>
-                                    <option value="">Model (A - Z)</option>
-                                    <option value="">Model (Z - A)</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="input-limit">Show:</label>
-                                <select id="input-limit" class="form-control" onchange="location = this.value;">
-                                    <option value="" selected="selected">15</option>
-                                    <option value="">25</option>
-                                    <option value="">50</option>
-                                    <option value="">75</option>
-                                    <option value="">100</option>
-                                </select>
-                            </div> -->
-                        </div>
-                        <!-- <div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">
-                            <ul class="pagination">
-                                <li class="active"><span>1</span></li>
-                                <li><a href="">2</a></li><li><a href="">&gt;</a></li>
-                                <li><a href="">&gt;|</a></li>
-                            </ul>
-                        </div> -->
-                    </div>
-                </div>
-                <!-- //end Filters -->
+               
 
                 <!--changed listings-->
-                <div class="products-list row nopadding-xs so-filter-gird">
-                    @foreach($products as $pro)
-                    <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                        <div class="product-item-container">
-                            <div class="left-block left-b">
+                <div class="products">
+                 <!-- Filters -->
+                    <div class="product-filter product-filter-top filters-panel">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-3 col-xs-12 view-mode">
                                 
-                                <div class="product-image-container second_img">
-                                    <a href="{{route('view',[$pro->slug])}}" target="_self" title="Lastrami bacon">
-                                        <?php $urlImage = ($pro->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                                        <img src="{{url($urlImage)}}/{{$pro->cover_image}}" class="img-1 img-responsive" alt="">
-                                        @if(isset($pro->cover_image_2))
-                                        <img src="{{url($urlImage)}}/{{$pro->cover_image_2}}" class="img-2 img-responsive" alt="">
-                                        @endif
-                                    </a>
-                                </div>
-                                <!--quickview--> 
-                                <div class="so-quickview">
-                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view',[$pro->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
-                                </div>                                                     
-                                <!--end quickview-->
-
-                                
-                            </div>
-                            <div class="right-block">
-                                <div class="button-group so-quickview cartinfo--left">
-                                    <a href="{{route('add_cart',['id'=>$pro->id])}}" class="addToCart addCart">Thêm giỏ hàng</a>
-                                   <!--  <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                    </button>
-                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                    </button> -->
-                                    
-                                </div>
-                                <div class="caption hide-cont">
-                                    <div class="ratings">
-                                        <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                        </div>
-                                        <span class="rating-num">( 2 )</span>
+                                    <div class="list-view">
+                                        <button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip"  data-original-title="Grid"><i class="fa fa-th"></i></button>
+                                        <button class="btn btn-default list" data-view="list" data-toggle="tooltip" data-original-title="List"><i class="fa fa-th-list"></i></button>
                                     </div>
-                                    <h4><a href="product.html" title="Pastrami bacon" target="_self">{{$pro->title}}</a></h4>
-                                    
-                                </div>
-                                <p class="price">
-                                  <span class="price-new">{{$cart->PriceProduct($pro)}}</span>
-                                  
-                                </p>
-                                <div class="description item-desc">
-                                    <p>{!!$pro->short_description!!}</p>
-                                </div>
-                                <div class="list-block">
-                                    <a href="{{route('add_cart',['id'=>$pro->id])}}" class="addToCart addCart">Thêm giỏ hàng</a>
-                                    <!-- <button class="wishlist btn-button" type="button" title="Add to Wish List" onclick="wishlist.add('101');"><i class="fa fa-heart"></i>
-                                    </button>
-                                    <button class="compare btn-button" type="button" title="Compare this Product" onclick="compare.add('101');"><i class="fa fa-refresh"></i>
-                                    </button> -->
-                                </div>
+                        
                             </div>
-
+                            <div class="short-by-show form-inline text-right col-md-7 col-sm-9 col-xs-12">
+                                <!-- <div class="form-group short-by">
+                                    <label class="control-label" for="input-sort">Sort By:</label>
+                                    <select id="input-sort" class="form-control"
+                                    onchange="location = this.value;">
+                                        <option value="" selected="selected">Default</option>
+                                        <option value="">Name (A - Z)</option>
+                                        <option value="">Name (Z - A)</option>
+                                        <option value="">Price (Low &gt; High)</option>
+                                        <option value="">Price (High &gt; Low)</option>
+                                        <option value="">Rating (Highest)</option>
+                                        <option value="">Rating (Lowest)</option>
+                                        <option value="">Model (A - Z)</option>
+                                        <option value="">Model (Z - A)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="input-limit">Show:</label>
+                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
+                                        <option value="" selected="selected">15</option>
+                                        <option value="">25</option>
+                                        <option value="">50</option>
+                                        <option value="">75</option>
+                                        <option value="">100</option>
+                                    </select>
+                                </div> -->
+                            </div>
+                            <!-- <div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">
+                                <ul class="pagination">
+                                    <li class="active"><span>1</span></li>
+                                    <li><a href="">2</a></li><li><a href="">&gt;</a></li>
+                                    <li><a href="">&gt;|</a></li>
+                                </ul>
+                            </div> -->
                         </div>
                     </div>
-                    @endforeach
-                </div>
-                {{$products->links()}}
-                <!--// End Changed listings-->
-                <!-- Filters -->
-                <div class="product-filter product-filter-bottom filters-panel">
-                    <div class="row">
-                        <div class="col-sm-6 text-left"></div>
-                        <div class="col-sm-6 text-right">Showing 1 to 15 of 15 (1 Pages)</div>
+                    <!-- //end Filters -->
+                    <div class="products-list row nopadding-xs so-filter-gird">
+                        @foreach($products as $pro)
+                        <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                            <div class="product-item-container">
+                                <div class="left-block left-b">
+                                    
+                                    <div class="product-image-container second_img">
+                                        <a href="{{route('view',[$pro->slug])}}" target="_self" title="Lastrami bacon">
+                                            <?php $urlImage = ($pro->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                                            <img src="{{url($urlImage)}}/{{$pro->cover_image}}" class="img-1 img-responsive" alt="">
+                                            @if(isset($pro->cover_image_2))
+                                            <img src="{{url($urlImage)}}/{{$pro->cover_image_2}}" class="img-2 img-responsive" alt="">
+                                            @endif
+                                        </a>
+                                    </div>
+                                    <!--quickview--> 
+                                    <div class="so-quickview">
+                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view',[$pro->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                    </div>                                                     
+                                    <!--end quickview-->
+
+                                    
+                                </div>
+                                <div class="right-block">
+                                    <div class="button-group so-quickview cartinfo--left">
+                                        <a href="{{route('add_cart',['id'=>$pro->id])}}" class="addToCart addCart">Thêm giỏ hàng</a>
+                                       <!--  <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                        </button>
+                                        <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                        </button> -->
+                                        
+                                    </div>
+                                    <div class="caption hide-cont">
+                                        <div class="ratings">
+                                            <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            </div>
+                                            <span class="rating-num">( 2 )</span>
+                                        </div>
+                                        <h4><a href="product.html" title="Pastrami bacon" target="_self">{{$pro->title}}</a></h4>
+                                        
+                                    </div>
+                                    <p class="price">
+                                      <span class="price-new">{{$cart->PriceProduct($pro)}}</span>
+                                      
+                                    </p>
+                                    <div class="description item-desc">
+                                        <p>{!!$pro->short_description!!}</p>
+                                    </div>
+                                    <div class="list-block">
+                                        <a href="{{route('add_cart',['id'=>$pro->id])}}" class="addToCart addCart">Thêm giỏ hàng</a>
+                                        <!-- <button class="wishlist btn-button" type="button" title="Add to Wish List" onclick="wishlist.add('101');"><i class="fa fa-heart"></i>
+                                        </button>
+                                        <button class="compare btn-button" type="button" title="Compare this Product" onclick="compare.add('101');"><i class="fa fa-refresh"></i>
+                                        </button> -->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    {{$products->links()}}
+                    <!--// End Changed listings-->
+                    <!-- Filters -->
+                    <div class="product-filter product-filter-bottom filters-panel">
+                        <div class="row">
+                            <div class="col-sm-6 text-left"></div>
+                            <div class="col-sm-6 text-right">Showing 1 to 15 of 15 (1 Pages)</div>
+                        </div>
                     </div>
                 </div>
                 <!-- //end Filters -->
@@ -250,4 +299,16 @@
         <!--Middle Part End-->
     </div>
 </div>
+<script type="text/javascript">
+    $("#detail").click(function(){
+        $(this).parent().addClass('title-detail').removeClass('title-general');
+        $(".category-desc").show();
+        $(".products").hide();
+    });
+    $("#general").click(function(){
+        $(this).parent().addClass('title-general').removeClass('title-detail');
+        $(".category-desc").hide();
+        $(".products").show();
+    });
+</script>
 @stop()

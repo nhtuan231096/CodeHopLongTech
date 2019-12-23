@@ -38,7 +38,7 @@
                     <td>{{$data->created_at}}</td>
                     <td>{{$data->end_time}}</td>
                     <td>
-                        <a href="{{route('editFlashSale',['id'=>$data->id])}}" class="btn btn-xs btn-info fa fa-search"></a>
+                        <a href="{{route('editFlashSale',['id'=>$data->id])}}" class="btn btn-xs btn-info fa fa-edit"></a>
                         <a href="{{route('delFlashSale',['id'=>$data->id])}}" class="btn btn-xs btn-danger fa fa-trash"></a>
                     </td>
                 </tr>

@@ -96,6 +96,7 @@ class HomeController extends Controller
 		$banners=Banner::limit(5)->get();
 
 		$categorys=Category::limit(16)->where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->get();
+		// dd($categorys);
 		
 		$parent_categorys=Category::limit(16)->where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->get();
 
@@ -103,7 +104,6 @@ class HomeController extends Controller
 		// 	return $pro->where('is_best_seller','enable')->get();
 		// });
 		$best_seller = $pro->where('is_best_seller','enable')->get();
-
 		// $new_product = Cache::remember('new_product',1*60,function() use($pro2){
 		// 	return $pro2->where('is_new_product','enable')->get();
 		// });
@@ -173,12 +173,14 @@ class HomeController extends Controller
 			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
 			$others=Product::paginate(8)->where('category_id','<>','$id');
-			$promotion = $pro3->where('is_promotion','enable')->get();
+			$promotion = $pro3->where('is_promotion','enable')->where('category_id',$category->id)->get();
 
 			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
 
 			if($category)
-			{	$cate=Category::where('parent_id',$category->id)->paginate(15);
+			{	
+				$cate=Category::where('parent_id',$category->id)->paginate(15);
+				$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
 				$products=Product::where('category_id',$category->id)->paginate(15);
 				// dd($products);
 				return view('home.v2.category_product',
@@ -187,48 +189,13 @@ class HomeController extends Controller
 					'partners'=>$partners,
 					'supports'=>$supports,
 					'sp'=>$sp,
-					'cate'=>$cate,
+					'cate'=>$cate->count() > 0 ? $cate : $curentCate,
 					'products' => $products,
 					'categorys1'=>$categorys1,
 					'promotions'=>$promotion,
 					]);
 			}
-			// if($product)
-			// {
-			// 	$new_product = Cache::remember('new_product',1*60,function() use($pro2){
-			// 		return $pro2->where('is_new_product','enable')->get();
-			// 	});
-			// 	$comment=Comment::orderBy('id','DESC')->where('status',1)->where('product_id',$product->id)->where('id_comment_reply',null)->paginate(5);
-			// 	$sames=Product::where('category_id',$product->category_id)->where('id','<>','$product->id')->where('status','enable')->paginate(8);
-			// 	$rates=Rate::where('status',1)->where('product_id',$product->id)->paginate(4);
-			// 	$countRates=Rate::where('status',1)->where('product_id',$product->id)->count();
-			// 	$countRate1=Rate::where('status',1)->where('product_id',$product->id)->where('rate',1)->count();
-			// 	$countRate2=Rate::where('status',1)->where('product_id',$product->id)->where('rate',2)->count();
-			// 	$countRate3=Rate::where('status',1)->where('product_id',$product->id)->where('rate',3)->count();
-			// 	$countRate4=Rate::where('status',1)->where('product_id',$product->id)->where('rate',4)->count();
-			// 	$countRate5=Rate::where('status',1)->where('product_id',$product->id)->where('rate',5)->count();
-			// 	$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/5;
-			// 	// dd($rates->count());
-			// 	return view('home.pro-detail',[
-			// 		'product'=>$product,
-			// 		'others'=>$others,
-			// 		'partners'=>$partners,
-			// 		'categorys'=>$categorys,
-			// 		'new_products'=>$new_product,
-			// 		'supports'=>$supports,
-			// 		'comments'=>$comment,
-			// 		'sp'=>$sp,
-			// 		'sames'=>$sames,
-			// 		'categorys1'=>$categorys1,
-			// 		'rates'=>$rates,
-			// 		'countRates'=>$countRates,
-			// 		'countRate1'=>$countRate1,
-			// 		'countRate2'=>$countRate2,
-			// 		'countRate3'=>$countRate3,
-			// 		'countRate4'=>$countRate4,
-			// 		'countRate5'=>$countRate5,
-			// 		]);
-			// }
+		
 			else
 			{
 				return view('errors.404');
@@ -284,7 +251,10 @@ class HomeController extends Controller
 				$average = $countRate5 + $countRate4 + $countRate3 + $countRate2 + $countRate1;
 				$average = $average == 0 ? 1 : $average;
 				$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/$average;
-				// dd($percentRated/$average);
+
+				$cate=Category::where('id',$product->category_id)->first();
+				$cate_related = Category::where('parent_id',$cate->parent_id)->where('status','enable')->limit(15)->get();
+				// dd($cate->parent_id);
 				return view('home..v2.detail_product',[
 					'product'=>$product,
 					'others'=>$others,
@@ -305,6 +275,7 @@ class HomeController extends Controller
 					'countRate5'=>$countRate5,
 					'percentRated'=>$percentRated,
 					'promotions'=>$promotion,
+					'cate'=>$cate_related,
 					]);
 			}
 			else

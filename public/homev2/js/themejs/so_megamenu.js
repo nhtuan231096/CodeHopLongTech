@@ -3,26 +3,26 @@ var hover = false;
 var itemver =  11 ;
 var show_itemver = itemver-1 ;
 $(document).ready(function() {
-	$(".vertical .megamenu .loadmore").click(function(){
-		if($(this).hasClass('open')){
-			$('ul.megamenu li.item-vertical').each(function(i){
-					if(i>show_itemver){
-							$(this).slideUp(200);
-							$(this).css('display', 'none');
-					}
-			});
-			$(this).removeClass('open');
-			$('.vertical .megamenu .loadmore').html('<i class="fa fa-plus-square"></i><span class="more-view">Open Categories</span>');
-		}else{
-			$('.vertical ul.megamenu li.item-vertical').each(function(i){
-				if(i>show_itemver){
-						$(this).slideDown(200);
-				}
-			});
-			$(this).addClass('open');
-			$('.vertical .megamenu .loadmore').html('<i class="fa fa-minus-square"></i><span class="more-view">Close Categories</span>');
-		}
-	});
+	// $(".vertical .megamenu .loadmore").click(function(){
+	// 	if($(this).hasClass('open')){
+	// 		$('ul.megamenu li.item-vertical').each(function(i){
+	// 				if(i>show_itemver){
+	// 						$(this).slideUp(200);
+	// 						$(this).css('display', 'none');
+	// 				}
+	// 		});
+	// 		$(this).removeClass('open');
+	// 		$('.vertical .megamenu .loadmore').html('<i class="fa fa-plus-square"></i><span class="more-view">Open Categories</span>');
+	// 	}else{
+	// 		$('.vertical ul.megamenu li.item-vertical').each(function(i){
+	// 			if(i>show_itemver){
+	// 					$(this).slideDown(200);
+	// 			}
+	// 		});
+	// 		$(this).addClass('open');
+	// 		$('.vertical .megamenu .loadmore').html('<i class="fa fa-minus-square"></i><span class="more-view">Close Categories</span>');
+	// 	}
+	// });
 
 	$("ul.megamenu li .sub-menu .content .hover-menu ul li").hover(function () {
 		$(this).children("ul").show();
@@ -267,3 +267,24 @@ function hoverMegaMenu(){
 			}
 		});	
 }
+
+//---
+$(document).ready(function () {
+    size_li = $("#myList .item-vertical").size();
+    x=12;
+    $('#myList .item-vertical:lt('+x+')').show(200);
+    $('#loadMore').click(function () {
+        // x= (x+5 <= size_li) ? x+5 : size_li;
+        x= size_li;
+        $('#myList .item-vertical:lt('+x+')').show(200);
+        $('#loadMore').hide();
+        $('#lessMore').show();
+    });
+    $('#lessMore').click(function () {
+        x=12; 
+        $('#myList .item-vertical').not(':lt('+x+')').hide(200);
+        $('#lessMore').hide();
+        $('#loadMore').show();
+    });
+});
+//---

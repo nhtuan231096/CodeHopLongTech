@@ -49,3 +49,4 @@ Route::get('autoSearch/{product_search}','\App\Http\Controllers\Home\HomeControl
 // route search product
 
 Route::get('getProductFlashSale/','\App\Http\Controllers\Admin\ProductController@getAllProduct');
+Route::get('getEditProductFlashSale/','\App\Http\Controllers\Admin\ProductController@getEditProduct');

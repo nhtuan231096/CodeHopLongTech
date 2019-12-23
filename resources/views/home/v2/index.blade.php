@@ -103,7 +103,79 @@
                                             @endforeach
                                             <!-- End item-wrap -->
                                         </div>
-                                        
+                                        @if($best_seller->count()>6)
+                                        <div class="item ">
+                                            @foreach($best_seller->slice(6, 11) as $product)
+                                            <div class="product-layout item-inner style1 ">
+                                                <div class="item-image">
+                                                    <div class="item-img-info">
+                                                        <a href="{{route('view',['slug'=>$product->slug])}}" target="_self" title="{{$product->title}}">
+                                                            <img src="{{url('uploads/product')}}/{{$product->cover_image}}" alt="{{$product->cover_image}}">
+                                                            </a>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title">
+                                                        <a href="{{route('view',['slug'=>$product->slug])}}" target="_self" title="{{$product->title}}">{{$product->title}}</a>
+                                                    </div>
+                                                    <div class="rating">
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="content_price price">
+                                                        <span class="price-new product-price">{{$cart->PriceProduct($product)}}</span>&nbsp;&nbsp;
+
+                                                        <!-- <span class="price-old">$76.00 </span>&nbsp; -->
+
+                                                    </div>
+                                                </div>
+                                                <!-- End item-info -->
+                                                <!-- End item-wrap-inner -->
+                                            </div>
+                                            @endforeach
+                                            <!-- End item-wrap -->
+                                        </div>
+                                        @elseif($best_seller->count()>12)
+                                        <div class="item ">
+                                            @foreach($best_seller->slice(12, 17) as $product)
+                                            <div class="product-layout item-inner style1 ">
+                                                <div class="item-image">
+                                                    <div class="item-img-info">
+                                                        <a href="{{route('view',['slug'=>$product->slug])}}" target="_self" title="{{$product->title}}">
+                                                            <img src="{{url('uploads/product')}}/{{$product->cover_image}}" alt="{{$product->cover_image}}">
+                                                            </a>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title">
+                                                        <a href="{{route('view',['slug'=>$product->slug])}}" target="_self" title="{{$product->title}}">{{$product->title}}</a>
+                                                    </div>
+                                                    <div class="rating">
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="content_price price">
+                                                        <span class="price-new product-price">{{$cart->PriceProduct($product)}}</span>&nbsp;&nbsp;
+
+                                                        <!-- <span class="price-old">$76.00 </span>&nbsp; -->
+
+                                                    </div>
+                                                </div>
+                                                <!-- End item-info -->
+                                                <!-- End item-wrap-inner -->
+                                            </div>
+                                            @endforeach
+                                            <!-- End item-wrap -->
+                                        </div>
+                                        @endif
                                     </div>
                                     <!--End extraslider-inner -->
                                 </div>

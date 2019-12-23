@@ -589,7 +589,7 @@ public function post_import_price(Request $request){
   }
 
   public function flash_sale_index(){
-    $datas = FlashSale::paginate(10);
+    $datas = FlashSale::orderBy('id','desc')->paginate(10);
     return view('admin.product.flash_sale',[
       'datas' => $datas
     ]);
@@ -620,7 +620,7 @@ public function post_import_price(Request $request){
       $img=$file->getClientOriginalName();
       $req->merge(['cover_image'=>$img]);
     } 
-    dd($req->all());
+    // dd($req->all());
     if($flashSale = FlashSale::create($req->all())){
       $i = 0;
       foreach($data_product_id as $value){
@@ -636,6 +636,7 @@ public function post_import_price(Request $request){
           'discount'=>(int)$data_discount[$i],
           'flash_sale_id'=>(int)$flashSale->id,
         ];
+        // dd($data_discount);
         $i++;
         if(FlashSaleProduct::create($data)){
           $data = '';
@@ -657,6 +658,7 @@ public function post_import_price(Request $request){
     $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
     $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
     $user=User::all(['id','username']);
+    // dd($datas);
     return view('admin.product.flash_sale_edit',[
       'products'=>$products,
       'categorys'=>$categorys,
@@ -666,17 +668,21 @@ public function post_import_price(Request $request){
   }
 
   public function getAllProduct(){
-    if(request()->search){
+    if(request()->title){
 
-        $products = Product::where("title", "LIKE", "%{$request->get('search')}%")
+        $products = Product::where("title", "LIKE", "%".request()->title."%")
 
             ->paginate(15);      
 
     }else{
 
-      $products = Product::paginate(15);
+      $products = Product::where('status','enable')->where('price','>',0)->paginate(15);
 
     }
     return response()->json($products);
+  }
+  public function getEditProduct(){
+    $datas = FlashSale::find(request()->flash_sale_id);
+    return response()->json($datas->products);
   }
 }

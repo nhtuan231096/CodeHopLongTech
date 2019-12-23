@@ -54,7 +54,28 @@ html {
                 <div class="modcontent">
                     <div class="box-category">
                         <ul id="cat_accordion" class="list-group">
-                            @foreach($categorys as $category)
+                            <!-- @foreach($categorys as $category)
+                            <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
+                                <ul class="itemMenu">
+                                    @foreach($category->childs as $child)
+                                    <li class="menuCate">
+                                        <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>  
+                                        <span class="btn-view-child fa fa-plus-square-o"></span>
+                                        <ul class="list-child-menu">
+                                            @foreach($child->childs2 as $chil)
+                                            <li class="childMenu">
+                                                <a href="{{route('view_category',['slug'=>$chil->slug])}}">{{$chil->title}}</a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @endforeach -->
+
+                            <!-- //--- -->
+                            @foreach($cate as $category)
                             <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
                                 <ul class="itemMenu">
                                     @foreach($category->childs as $child)
@@ -73,6 +94,7 @@ html {
                                 </ul>
                             </li>
                             @endforeach
+                            <!-- //--- -->
                         </ul>
                     </div>
                     
@@ -305,6 +327,7 @@ html {
                                         <span class="input-group-addon product_quantity_up">+</span>
                                     </div>
                                 </div>
+                             
                                 <div class="cart">
                                     <button class="btn btn-primary btn-lg" name="addCart" value="true" style="font-weight: bold; font-size: 16px;"> 
                                         <i style="margin-right: 5px" class="fa fa-shopping-cart"></i>Thêm giỏ hàng
@@ -812,4 +835,14 @@ html {
 </div>
 <!--Middle Part End-->
 </div>
+<!-- //--- -->
+<script type="text/javascript">
+    $('.product_quantity_up').click(function(){
+        $("#quantity-input").val(parseInt($("#quantity-input").val()) - 1);
+    });
+    $('.product_quantity_down').click(function(){
+        $("#quantity-input").val(parseInt($("#quantity-input").val()) + 1);
+    });
+</script>
+<!-- //--- -->
 @stop()

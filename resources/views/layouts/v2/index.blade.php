@@ -54,8 +54,9 @@
 
     <style type="text/css">
          body{font-family:'Poppins', sans-serif;}
+         #myList .item-vertical{ display:none;}
     </style>
-
+    
 </head>
 
 <body class="common-home res layout-1">
@@ -308,7 +309,7 @@
                                             <span id="remove-verticalmenu" class="fa fa-times"></span>
                                             <div class="megamenu-pattern">
                                                 <div class="container-mega">
-                                                    <ul class="megamenu megamenu-left" style="position: relative;">
+                                                    <ul class="megamenu megamenu-left" id="myList" style="position: relative;">
                                                         @foreach($categorys as $category)
                                                         <li class="item-vertical  with-sub-menu hover">
                                                             <p class="close-menu"></p>
@@ -343,11 +344,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </li>
+                                                        </li>   
                                                         @endforeach
-                                                        <li class="loadmore">
+                                                        <li class="loadmore" id="loadMore">
                                                             <i class="fa fa-plus-square-o"></i>
-                                                            <span class="more-view">More Categories</span>
+                                                            <span class="more-view">Xem thêm</span>
+                                                        </li>
+
+                                                        <li class="loadmore" id="lessMore" style="display: none;">
+                                                            <i class="fa fa-plus-square-o"></i>
+                                                            <span class="more-view">Rút gọn</span>
                                                         </li>
                                                             
                                                         </ul>

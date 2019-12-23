@@ -11,12 +11,12 @@
 <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
 <script src="{{url('public/homev2/js/flashSaleCtrl.js')}}"></script>
 <div class="wrapp"  ng-controller="flashSaleCtrl">
-	<form action="{{route('addFlashSale')}}" method="GET" class="form-inline" role="form" style="position: absolute;right: 5%;top: 150px">
+	<form method="GET" class="form-inline" role="form" style="position: absolute;right: 5%;top: 150px">
 			      
 		<div class="form-group">
-		    <input type="title" class="form-control" name="title" id="" placeholder="Tên sản phẩm">
+		    <input type="title" class="form-control" name="title" id="title" placeholder="Tên sản phẩm">
 		</div>
-		 <div class="form-group">
+		 <!-- <div class="form-group">
 		        <style>
 		            .chosen-container-single .chosen-single {
 		                height: 34px;
@@ -57,36 +57,9 @@
 		              $(".chosen").chosen();
 		            </script>
 		        </div>
-		</div>
+		</div> -->
 
-
-		         
-		<div class="form-group">
-		    <select name="created_by" id="" class="form-control">
-		        <option value="">Người tạo</option>
-		        @foreach($users as $user)
-		        <option value="{{$user->username}}">{{$user->username}}</option>
-		        @endforeach
-		    </select>
-		</div>
-		<div class="form-group">
-		    <select name="status" id="inputCategory_id" class="form-control">
-		        <option value="">Trạng thái</option>
-		        <option value="enable">Enable</option>
-		        <option value="disable">Disable</option>
-		    </select>
-		</div>
-
-		<select name="tool_check_product" id="input" class="form-control tool_check_product">
-		    <option value="">Tool Heath Product Check</option>
-		    <option value="seo">Tiêu chí SEO</option>
-		    <option value="pdp">Tiêu chí PDP</option>
-		    <option value="price">Tiêu chí giá sản phẩm</option>
-		</select>
-
-
-
-		<button type="submit" class="btn btn-primary fa fa-search"></button>
+		<button type="button" class="btn btn-primary fa fa-search" ng-click="search()"></button>
 		</form>
 	<form action="" method="POST" role="form" enctype="multipart/form-data">
 		<legend>Tạo sự kiện flash sale</legend>
@@ -160,7 +133,7 @@
 								<input type="number" name="quantity" class="quantity" id="quantity@{{product['id']}}" ng-keyup="quantityNumber(product['id'])">
 							</td>
 							<td class="w_discount">
-								<input type="number" name="discount" id="category_id@{{product['id']}}" class="discount">
+								<input type="number" name="discount" id="discount@{{product['id']}}" class="discount">
 							</td>
 						</tr>
 					</tbody>

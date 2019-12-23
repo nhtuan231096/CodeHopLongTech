@@ -12,7 +12,7 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 	var data_discount = [];
 
 	$('.quantity').val('');
-	$('.discount').val('');
+	// $('.discount').val('');
 	$('.checkbox').prop('checked', false);
 	$('.checkbox').attr('disabled', true);
 
@@ -20,13 +20,13 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 	$scope.totalPages = 0;
 	$scope.currentPage = 1;
 	$scope.range = [];
-	
-	$scope.getProducts = function(pageNumber){
+		
+	$scope.getProducts = function(pageNumber,title=''){
 
     if(pageNumber===undefined){
       pageNumber = '1';
     }
-    $http.get(url + '/CodeHopLongTech/api/getProductFlashSale/?page='+pageNumber).then(function(response) {
+    $http.get(url + '/CodeHopLongTech/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
 	      $scope.products        = response.data.data;
 	      $scope.totalPages   = response.data.last_page;
 	      $scope.currentPage  = response.data.current_page;
@@ -43,6 +43,8 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 	    });
 
 	};
+
+
 
 	$scope.quantityNumber = function(productId){
 
@@ -74,7 +76,7 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 		        data_cover_image.push(cover_image.val());
 		        data_category_id.push(category_id.val());
 		        data_discount.push(discount.val());
-
+		        console.log(discount.val());
 		        $('.data_product_id').val(data_product_id);
 		        $('.data_quantity').val(data_quantity);
 		        $('.data_title').val(data_title);
@@ -108,10 +110,67 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 		
 	}
 
-
+	$scope.search = function(){
+		var title = $("#title").val();
+		$http.get(url + '/CodeHopLongTech/api/getProductFlashSale?title='+title).then(function(res){
+			$scope.products = res.data.data;
+		});
+		// var pageNumber = 1;
+		// $scope.getProducts(pageNumber,title);
+	}
 
 	// $http.get(url + '/CodeHopLongTech/api/getProductFlashSale/').then(function(res){
 	// 	$scope.products = res.data.data;
 	// 	console.log($scope.getProductFlashSale);
 	// });
+
+	// edit flash sale
+	$scope.getEditProducts = function(pageNumber,title=''){
+
+    if(pageNumber===undefined){
+      pageNumber = '1';
+    }
+    $http.get(url + '/CodeHopLongTech/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
+	      $scope.products        = response.data.data;
+	      $scope.totalPages   = response.data.last_page;
+	      $scope.currentPage  = response.data.current_page;
+
+	      // get current product flash sale
+	      var flash_sale_id = $('#flash_sale_id').val();
+	      $http.get(url + '/CodeHopLongTech/api/getEditProductFlashSale/?flash_sale_id='+flash_sale_id).then(function(res){
+				$scope.currentProducts = res.data;
+				for(var i = 0; i < $scope.products.length; i++) { 
+					if ($scope.products[i]) {
+				      	for(var j = 0; j < $scope.currentProducts.length; j++) {
+				      		if($scope.currentProducts[j]){
+				      			// console.log($scope.currentProducts[j].id);
+				      			if($scope.products[i].id == $scope.currentProducts[j].product_id) {
+				      				$scope.products[i].quantity = $scope.currentProducts[j].quantity > 0 ? $scope.currentProducts[j].quantity : 0;
+				      				$scope.products[i].discount = $scope.currentProducts[j].discount > 0 ? $scope.currentProducts[j].discount : '';
+				      				$scope.products[i].checked = $scope.currentProducts[j].quantity > 0 ? 1 : 0;
+					      			// todo
+					      		}
+				      		}
+				      	}
+					}
+			      }
+
+		   });
+	      // console.log($scope.products);
+
+	      // Pagination Range
+	      var pages = [];
+
+	      for(var i=1;i<=response.data.last_page;i++) {
+	      	if(i <= $scope.currentPage + 3 && i>= $scope.currentPage -3){
+	        	pages.push(i);
+	      	}
+	      }
+
+	      $scope.range = pages; 
+	    });
+		// console.log($(".cbx1").children('.checked').prop('checked', true));
+		// ($(".cbx1").children('.checked').prop('checked', true));
+	};
+	// edit flash sale
 })
