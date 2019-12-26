@@ -136,6 +136,8 @@ class HomeController extends Controller
 		// dd($flash_sale);
 		$news= News::orderBy('id','desc')->limit(1)->get();
 
+		// $promotionOfPartner = $pro->where('category_id',)
+
 		// dd($date_diff);
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[

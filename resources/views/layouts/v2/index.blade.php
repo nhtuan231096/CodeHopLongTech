@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
     
     <!-- Basic page needs
@@ -45,6 +45,8 @@
     <link id="color_scheme" href="{{url('public/homev2')}}/css/theme.css" rel="stylesheet"> 
     <link href="{{url('public/homev2')}}/css/responsive.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/my_style.css" rel="stylesheet">
+
+    <script src="{{url('public/js')}}/angular.min.js"></script>
     
      <!-- Google web fonts
     ============================================ -->
