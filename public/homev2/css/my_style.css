@@ -177,3 +177,177 @@
 	display: inline-block;
 }
 /*// flashsale---*/
+
+/*review*/
+#reviews .advanced-review .advanced-review-rating {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+#reviews .advanced-review .advanced-review-rating {
+
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+#reviews .advanced-review .advanced-review-rating h2.based-title {
+
+    font-weight: 500;
+    margin-bottom: 1.375em;
+    font-size: 1.5em;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 0.542em;
+
+}
+#reviews .avg-rating {
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.813em;
+
+}
+#reviews .avg-rating .avg-rating-number {
+
+    font-size: 2.75em;
+    display: inline-block;
+    line-height: 1;
+    font-weight: 300;
+    margin-right: 0.659em;
+
+}
+#reviews .avg-rating .star-rating {
+
+    display: inline-block;
+    font-size: 1.438em;
+    width: 6em;
+    letter-spacing: 2px;
+
+}
+.star-rating {
+
+    overflow: hidden;
+    position: relative;
+    height: 1em;
+    line-height: 1;
+    font-size: 1.8em;
+    width: 6em;
+    font-family: 'star';
+    font-weight: 400;
+    word-break: keep-all;
+
+}
+#reviews .advanced-review .advanced-review-rating .star-rating::before {
+
+    content: "\f006\f006\f006\f006\f006";
+    font-family: FontAwesome;
+
+}
+.star-rating::before {
+
+    content: "\f006\f006\f006\f006\f006";
+    font-family: FontAwesome;
+    letter-spacing: 0.313em;
+    opacity: .25;
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute;
+    color: #2c2d33;
+
+}
+#reviews .avg-rating .star-rating {
+
+    font-size: 1.438em;
+    letter-spacing: 2px;
+
+}
+.star-rating {
+
+    line-height: 1;
+    font-size: 1em;
+    font-family: 'star';
+    font-weight: 400;
+    word-break: keep-all;
+
+}
+.star-rating span {
+
+    overflow: hidden;
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding-top: 1.5em;
+
+}
+#reviews .advanced-review .advanced-review-rating .star-rating span::before {
+
+    content: "\f005\f005\f005\f005\f005";
+    font-family: FontAwesome;
+
+}
+.star-rating span::before {
+
+    content: "\f005\f005\f005\f005\f005";
+    font-family: FontAwesome;
+    letter-spacing: 0.313em;
+    top: 0;
+    position: absolute;
+    left: 0;
+    color: #fed700;
+
+}
+#reviews .rating-histogram .rating-bar {
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    justify-content: space-between;
+
+}
+#reviews .rating-histogram .rating-bar .star-rating {
+
+    letter-spacing: 2px;
+
+}
+.star-rating {
+
+    overflow: hidden;
+    position: relative;
+    height: 1em;
+    line-height: 1;
+    font-size: 1em;
+    width: 6em;
+    font-family: 'star';
+    font-weight: 400;
+    word-break: keep-all;
+    float: left;
+
+}
+#reviews .rating-histogram .rating-bar .rating-percentage-bar {
+    width: 12.25em;
+    height: 0.625em;
+    border-radius: 0.313em;
+    background-color: #f3f3f3;
+
+}
+#reviews .rating-histogram .rating-bar .rating-percentage-bar .rating-percentage {
+    height: 100%;
+    background-color: #59abe1;
+    display: block;
+
+}
+#reviews .rating-histogram .rating-bar .rating-percentage-bar .rating-percentage {
+    height: 100%;
+    background-color: #d8d8d8;
+    display: block;
+    border-radius: .313em;
+
+}
+.rating-count{
+	font-size: 17px;
+	margin: 15px 0;
+}
+/*review*/

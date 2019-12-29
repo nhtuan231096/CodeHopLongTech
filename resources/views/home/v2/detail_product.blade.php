@@ -16,6 +16,7 @@ html {
 }
 </style>
 <link rel="stylesheet" href="{{url('public/css')}}/styleProduct.css">
+<link rel="stylesheet" href="{{url('public/homev2')}}/css/mystyle.css">
 <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
 <script type="text/javascript">
    jQuery(document).ready(function($) {
@@ -777,37 +778,103 @@ html {
                             @csrf
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <input type="hidden" name="status" value="1">
-                            <div id="review">
-                                <table class="table table-striped table-bordered">
-                                    <tbody>
-                                        @foreach($rates as $rate)
-                                        <tr>
-                                            <td style="width: 50%;"><strong>{{$rate->name}}</strong></td>
-                                            <td class="text-right">{{date_format($rate->created_at,"d/m/Y")}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <p>{{$rate->content}}</p>
-                                                <div class="ratings">
-                                                    <div class="rating-box">
-                                                        <?php $o_start = 5 - $rate->rate;?>
-                                                        @for($i = 1; $i <= $rate->rate; $i++)
-                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                        @endfor
-                                                        @for($i = 1; $i <= $o_start; $i++)
-                                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                        @endfor
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="paginate pull-right">
-                                    {{$rates->links()}}
+                            <div class="">
+                                <div class="col-md-3">
+                                    <div class="advanced-review row">
+                                        <div class="advanced-review-rating">
+                                          <h2 class="based-title" style="margin-bottom: 20px">Đánh giá {{$product->title}}</h2>
+                                          <div class="avg-rating">
+                                            <!-- <span class="avg-rating-number">{{$countRates > 0 ? number_format((5/100) * ($countRate5 > 0 ? 100/($countRates/$countRate5) : 0),1) : number_format(5,1)}}</span> -->
+                                            <span class="avg-rating-number" style="font-size: 23px; margin-top: 15px; float: left;">{{number_format($percentRated,1)}}</span>
+                                            <div class="star-rating" style="font-size: 1.8em;margin:15px 25px;" title="Rated 0.0 out of 5">
+                                              <span style="width:{{$countRates > 0 ? (100/5 * $percentRated) : 100 }}%"></span>
+                                            </div>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div class="rating-histogram" style="width: 100%">
+                                            <div class="rating-bar" style="position: relative;">
+                                              <div class="star-rating" style="margin-right:10px;font-size: 1.6em" title="Rated 5 out of 5">
+                                                <span style="width:100%"></span>
+                                              </div>
+                                              <div class="rating-count zero">{{$countRate5}}</div>
+                                              <div class="rating-percentage-bar" style="position:absolute;top:7px;right:0;width: 12.25em;height: 0.625em;border-radius: 0.313em;background-color: #f3f3f3;">
+                                                <span style="width:{{$countRate5 > 0 ? 100/($countRates/$countRate5) : 0}}%" class="rating-percentage" style="height: 100%;background-color: #59abe1; display: block;"></span>
+                                              </div>
+                                            </div>
+                                            <div class="rating-bar" style="position: relative;">
+                                              <div class="star-rating" style="margin-right:10px;font-size: 1.6em" title="Rated 4 out of 5">
+                                                <span style="width:80%"></span>
+                                              </div>
+                                              <div class="rating-count zero">{{$countRate4}}</div>
+                                              <div class="rating-percentage-bar" style="position:absolute;top:7px;right:0;width: 12.25em;height: 0.625em;border-radius: 0.313em;background-color: #f3f3f3;">
+                                                <span style="width:{{$countRate4 > 0 ? 100/($countRates/$countRate4) : 0}}%" class="rating-percentage" style="height: 100%;background-color: #59abe1; display: block;"></span>
+                                              </div>
+                                            </div>
+                                            <div class="rating-bar" style="position: relative;">
+                                              <div class="star-rating" style="margin-right:10px;font-size: 1.6em" title="Rated 3 out of 5">
+                                                <span style="width:60%"></span>
+                                              </div>
+                                              <div class="rating-count zero">{{$countRate3}}</div>
+                                              <div class="rating-percentage-bar" style="position:absolute;top:7px;right:0;width: 12.25em;height: 0.625em;border-radius: 0.313em;background-color: #f3f3f3;">
+                                                <span style="width:{{$countRate3 > 0 ? 100/($countRates/$countRate3) : 0}}%" class="rating-percentage" style="height: 100%;background-color: #59abe1; display: block;"></span>
+                                              </div>
+                                            </div>
+                                            <div class="rating-bar" style="position: relative;">
+                                              <div class="star-rating" style="margin-right:10px;font-size: 1.6em" title="Rated 2 out of 5">
+                                                <span style="width:40%"></span>
+                                              </div>
+                                              <div class="rating-count zero">{{$countRate2}}</div>
+                                              <div class="rating-percentage-bar" style="position:absolute;top:7px;right:0;width: 12.25em;height: 0.625em;border-radius: 0.313em;background-color: #f3f3f3;">
+                                                <span style="width:{{$countRate2 > 0 ? 100/($countRates/$countRate2) : 0}}%" class="rating-percentage" style="height: 100%;background-color: #59abe1; display: block;"></span>
+                                              </div>
+                                            </div>
+                                            <div class="rating-bar" style="position: relative;">
+                                              <div class="star-rating" style="margin-right:10px;font-size: 1.6em" title="Rated 1 out of 5">
+                                                <span style="width:20%"></span>
+                                              </div>
+                                              <div class="rating-count zero">{{$countRate1}}</div>
+                                              <div class="rating-percentage-bar" style="position:absolute;top:7px;right:0;width: 12.25em;height: 0.625em;border-radius: 0.313em;background-color: #f3f3f3;">
+                                                <span style="width:{{$countRate1 > 0 ? 100/($countRates/$countRate1) : 0}}%" class="rating-percentage" style="height: 100%;background-color: #59abe1; display: block;"></span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="text-right"></div>
+                                <div class="col-md-9">
+                                    <div id="review">
+                                        <table class="table table-striped table-bordered">
+                                            <tbody>
+                                                @foreach($rates as $rate)
+                                                <tr>
+                                                    <td style="width: 50%;"><strong>{{$rate->name}}</strong></td>
+                                                    <td class="text-right">{{date_format($rate->created_at,"d/m/Y")}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <p>{{$rate->content}}</p>
+                                                        <div class="ratings">
+                                                            <div class="rating-box">
+                                                                <?php $o_start = 5 - $rate->rate;?>
+                                                                @for($i = 1; $i <= $rate->rate; $i++)
+                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                                                @endfor
+                                                                @for($i = 1; $i <= $o_start; $i++)
+                                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                                                @endfor
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        <div class="paginate pull-right">
+                                            {{$rates->links()}}
+                                        </div>
+                                        <div class="text-right"></div>
+                                    </div>
+                                </div>    
                             </div>
                             <h2 id="review-title">Gửi đánh giá của bạn</h2>
                             <div class="contacts-form">
