@@ -546,7 +546,8 @@
 
                                           <div class="item-available">
                                             <div class="available">
-                                              <span class="color_width" data-title="50%" data-toggle='tooltip' style="width: 50%"></span>
+                                                <?php $sold = (100 / $flash_sale->products->count()) * $itemProduct->sold ?>
+                                                <span class="color_width" data-title="50%" data-toggle='tooltip' style="width: {{$sold}}%"></span>
                                           </div>                          
                                           <p class="a2">Sold: <b>{{$itemProduct->sold}}</b>  </p>
                                       </div>

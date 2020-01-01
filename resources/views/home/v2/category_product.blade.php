@@ -4,7 +4,7 @@
     .title-general::after {
         position: absolute;
         content: "";
-        width: 110px;
+        width: 60px;
         height: 2px;
         background-color: #3191CF;
         bottom: -2px;
@@ -13,11 +13,21 @@
     .title-detail::after {
         position: absolute;
         content: "";
-        width: 110px;
+        width: 60px;
         height: 2px;
         background-color: #3191CF;
         bottom: -2px;
-        left: 190px;
+        left: 95px !important;
+    }
+    .title-category::after {
+
+    position: absolute;
+    content: "";
+    width: 60px;
+    height: 2px;
+    background-color: #3191CF;
+    bottom: -2px;
+    left: 0;
     }
 </style>
 <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
@@ -35,31 +45,11 @@
                 <div class="modcontent">
                     <div class="box-category">
                         <ul id="cat_accordion" class="list-group">
-                            <!-- @foreach($categorys as $category)
-                            <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
-                                <ul class="itemMenu">
-                                    @foreach($category->childs as $child)
-                                    <li class="menuCate">
-                                        <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>  
-                                        <span class="btn-view-child fa fa-plus-square-o"></span>
-                                        <ul class="list-child-menu">
-                                            @foreach($child->childs2 as $chil)
-                                            <li class="childMenu">
-                                                <a href="{{route('view_category',['slug'=>$chil->slug])}}">{{$chil->title}}</a>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            @endforeach -->
-
                             <!-- //--- -->
-                            @foreach($cate as $category)
-                            <li class="hadchild"><a href="{{route('view_category',[$category->slug])}}" class="cutom-parent">{{$category->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
+                            @foreach($cate as $cat)
+                            <li class="hadchild"><a href="{{route('view_category',[$cat->slug])}}" class="cutom-parent">{{$cat->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
                                 <ul class="itemMenu">
-                                    @foreach($category->childs as $child)
+                                    @foreach($cat->childs as $child)
                                     <li class="menuCate">
                                         <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>  
                                         <span class="btn-view-child fa fa-plus-square-o"></span>
@@ -221,18 +211,18 @@
                                 <div class="left-block left-b">
                                     
                                     <div class="product-image-container second_img">
-                                        <a href="{{route('view',[$pro->slug])}}" target="_self" title="Lastrami bacon">
+                                        <a href="{{route('view',[$pro->slug])}}" target="_self" title="">
                                             <?php $urlImage = ($pro->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
                                             <img src="{{url($urlImage)}}/{{$pro->cover_image}}" class="img-1 img-responsive" alt="">
                                             @if(isset($pro->cover_image_2))
-                                            <img src="{{url($urlImage)}}/{{$pro->cover_image_2}}" class="img-2 img-responsive" alt="">
+                                            <img src="{{url($urlImage)}}/{{$pro->cover_image}}" class="img-2 img-responsive" alt="">
                                             @endif
                                         </a>
                                     </div>
                                     <!--quickview--> 
-                                    <div class="so-quickview">
+                                    <!-- <div class="so-quickview">
                                       <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view',[$pro->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
-                                    </div>                                                     
+                                    </div> -->                                                     
                                     <!--end quickview-->
 
                                     
