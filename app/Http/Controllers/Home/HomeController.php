@@ -52,7 +52,7 @@ class HomeController extends Controller
 				'custome_type' => $custome_type,
 				'cart' => new Data()
 			]);
-        	return $next($request); 
+			return $next($request); 
 		});
 	}
 	public function index(){
@@ -83,8 +83,6 @@ class HomeController extends Controller
 	}
 
 	public function index_product(){
-		// $a = new Data;
-		// dd($a->DiscountAmount());
 		//toi uu
 		// Cache::flush();
 		
@@ -133,7 +131,6 @@ class HomeController extends Controller
 		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
 		$current_date = date('Y-m-d');
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
-		// dd($flash_sale);
 		$news= News::orderBy('id','desc')->limit(1)->get();
 
 		// $promotionOfPartner = $pro->where('category_id',)
@@ -160,64 +157,64 @@ class HomeController extends Controller
 			'slider_homes'=>$slider_home,
 			'flash_sale'=> $flash_sale,
 			'latest_post'=>$news,
-			]);
+		]);
 	}
 	public function viewCate($slug,Request $req) {
 		$pro3 = (new Product())->datas3();
 		$pro2 = (new Product())->datas2();
-			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
-			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-			$new_product=Product::paginate(10)->Where('is_new_product','create')->where('status','enable');
-			$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();;
-			$category= Category::where('slug',$slug)->first();
-			$product= Product::where('slug',$slug)->first();
-			$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
-			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
+		$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		$new_product=Product::paginate(10)->Where('is_new_product','create')->where('status','enable');
+		$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();;
+		$category= Category::where('slug',$slug)->first();
+		$product= Product::where('slug',$slug)->first();
+		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
+		$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
-			$others=Product::paginate(8)->where('category_id','<>','$id');
-			$promotion = $pro3->where('is_promotion','enable')->where('category_id',$category->id)->get();
+		$others=Product::paginate(8)->where('category_id','<>','$id');
+		$promotion = $pro3->where('is_promotion','enable')->where('category_id',$category->id)->get();
 
 			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
 
-			if($category)
-			{	
-				$cate=Category::where('parent_id',$category->id)->paginate(15);
-				$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
-				$products=Product::where('category_id',$category->id)->paginate(15);
+		if($category)
+		{	
+			$cate=Category::where('parent_id',$category->id)->paginate(15);
+			$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
+			$products=Product::where('category_id',$category->id)->paginate(15);
 				// dd($products);
-				return view('home.v2.category_product',
-					['category'=>$category,
-					'categorys'=>$categorys,
-					'partners'=>$partners,
-					'supports'=>$supports,
-					'sp'=>$sp,
-					'cate'=>$cate->count() > 0 ? $cate : $curentCate,
-					'products' => $products,
-					'categorys1'=>$categorys1,
-					'promotions'=>$promotion,
-					]);
-			}
+			return view('home.v2.category_product',
+				['category'=>$category,
+				'categorys'=>$categorys,
+				'partners'=>$partners,
+				'supports'=>$supports,
+				'sp'=>$sp,
+				'cate'=>$cate->count() > 0 ? $cate : $curentCate,
+				'products' => $products,
+				'categorys1'=>$categorys1,
+				'promotions'=>$promotion,
+			]);
+		}
 		
-			else
-			{
-				return view('errors.404');
-			}
+		else
+		{
+			return view('errors.404');
+		}
 	}
 	public function view($slug, Request $req)
-		{
-			$pro2 = (new Product())->datas2();
-			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
-			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-			$new_product=Product::paginate(10)->Where('is_new_product','create')->where('status','enable');
-			$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();;
-			$category= Category::where('slug',$slug)->first();
-			$product= Product::where('slug',$slug)->first();
-			$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
-			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
+	{
+		$pro2 = (new Product())->datas2();
+		$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		$new_product=Product::paginate(10)->Where('is_new_product','create')->where('status','enable');
+		$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();;
+		$category= Category::where('slug',$slug)->first();
+		$product= Product::where('slug',$slug)->first();
+		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
+		$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
-			$others=Product::paginate(8)->where('category_id','<>','$id');
-			$pro3 = (new Product())->datas3();
-			$promotion = $pro3->where('is_promotion','enable')->get();
+		$others=Product::paginate(8)->where('category_id','<>','$id');
+		$pro3 = (new Product())->datas3();
+		$promotion = $pro3->where('is_promotion','enable')->get();
 			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
 			// if($category)
 			// {	$cate=Category::where('parent_id',$category->id)->paginate(15);
@@ -234,57 +231,57 @@ class HomeController extends Controller
 			// 		'categorys1'=>$categorys1
 			// 		]);
 			// }
-			if($product)
-			{
-				$view = $product->view + 1;
-				$product->update(['view'=>$view]);
-				$new_product = Cache::remember('new_product',1*60,function() use($pro2){
-					return $pro2->where('is_new_product','enable')->get();
-				});
-				$comment=Comment::orderBy('id','DESC')->where('status',1)->where('product_id',$product->id)->where('id_comment_reply',null)->paginate(5);
-				$sames=Product::where('category_id',$product->category_id)->where('id','<>','$product->id')->where('status','enable')->paginate(8);
-				$rates=Rate::where('status',1)->where('product_id',$product->id)->paginate(4);
-				$countRates=Rate::where('status',1)->where('product_id',$product->id)->count();
-				$countRate1=Rate::where('status',1)->where('product_id',$product->id)->where('rate',1)->count();
-				$countRate2=Rate::where('status',1)->where('product_id',$product->id)->where('rate',2)->count();
-				$countRate3=Rate::where('status',1)->where('product_id',$product->id)->where('rate',3)->count();
-				$countRate4=Rate::where('status',1)->where('product_id',$product->id)->where('rate',4)->count();
-				$countRate5=Rate::where('status',1)->where('product_id',$product->id)->where('rate',5)->count();
-				$average = $countRate5 + $countRate4 + $countRate3 + $countRate2 + $countRate1;
-				$average = $average == 0 ? 1 : $average;
-				$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/$average;
+		if($product)
+		{
+			$view = $product->view + 1;
+			$product->update(['view'=>$view]);
+			$new_product = Cache::remember('new_product',1*60,function() use($pro2){
+				return $pro2->where('is_new_product','enable')->get();
+			});
+			$comment=Comment::orderBy('id','DESC')->where('status',1)->where('product_id',$product->id)->where('id_comment_reply',null)->paginate(5);
+			$sames=Product::where('category_id',$product->category_id)->where('id','<>','$product->id')->where('status','enable')->paginate(8);
+			$rates=Rate::where('status',1)->where('product_id',$product->id)->paginate(4);
+			$countRates=Rate::where('status',1)->where('product_id',$product->id)->count();
+			$countRate1=Rate::where('status',1)->where('product_id',$product->id)->where('rate',1)->count();
+			$countRate2=Rate::where('status',1)->where('product_id',$product->id)->where('rate',2)->count();
+			$countRate3=Rate::where('status',1)->where('product_id',$product->id)->where('rate',3)->count();
+			$countRate4=Rate::where('status',1)->where('product_id',$product->id)->where('rate',4)->count();
+			$countRate5=Rate::where('status',1)->where('product_id',$product->id)->where('rate',5)->count();
+			$average = $countRate5 + $countRate4 + $countRate3 + $countRate2 + $countRate1;
+			$average = $average == 0 ? 1 : $average;
+			$percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/$average;
 
-				$cate=Category::where('id',$product->category_id)->first();
-				$cate_related = Category::where('parent_id',$cate->parent_id)->where('status','enable')->limit(15)->get();
+			$cate=Category::where('id',$product->category_id)->first();
+			$cate_related = Category::where('parent_id',$cate->parent_id)->where('status','enable')->limit(15)->get();
 				// dd($cate->parent_id);
-				return view('home..v2.detail_product',[
-					'product'=>$product,
-					'others'=>$others,
-					'partners'=>$partners,
-					'categorys'=>$categorys,
-					'new_products'=>$new_product,
-					'supports'=>$supports,
-					'comments'=>$comment,
-					'sp'=>$sp,
-					'sames'=>$sames,
-					'categorys1'=>$categorys1,
-					'rates'=>$rates,
-					'countRates'=>$countRates,
-					'countRate1'=>$countRate1,
-					'countRate2'=>$countRate2,
-					'countRate3'=>$countRate3,
-					'countRate4'=>$countRate4,
-					'countRate5'=>$countRate5,
-					'percentRated'=>$percentRated,
-					'promotions'=>$promotion,
-					'cate'=>$cate_related,
-					]);
-			}
-			else
-			{
-				return view('errors.404');
-			}
+			return view('home..v2.detail_product',[
+				'product'=>$product,
+				'others'=>$others,
+				'partners'=>$partners,
+				'categorys'=>$categorys,
+				'new_products'=>$new_product,
+				'supports'=>$supports,
+				'comments'=>$comment,
+				'sp'=>$sp,
+				'sames'=>$sames,
+				'categorys1'=>$categorys1,
+				'rates'=>$rates,
+				'countRates'=>$countRates,
+				'countRate1'=>$countRate1,
+				'countRate2'=>$countRate2,
+				'countRate3'=>$countRate3,
+				'countRate4'=>$countRate4,
+				'countRate5'=>$countRate5,
+				'percentRated'=>$percentRated,
+				'promotions'=>$promotion,
+				'cate'=>$cate_related,
+			]);
 		}
+		else
+		{
+			return view('errors.404');
+		}
+	}
 	public function comment(Request $req){
 		$img='';
 		$file=$req->upload_file;
@@ -303,20 +300,20 @@ class HomeController extends Controller
 	public function send_mail(Request $req){
 		$input = $req->all();
 		$quotes=Quotes_product::create($input);
-        Mail::send('mail', array(
-        	'id'=>$quotes->id,
-        	'name'=>$input["name"],
-        	'email'=>$input["email"], 
-        	'content'=>$input['content'],  
-        	'product'=>$input['product'],
+		Mail::send('mail', array(
+			'id'=>$quotes->id,
+			'name'=>$input["name"],
+			'email'=>$input["email"], 
+			'content'=>$input['content'],  
+			'product'=>$input['product'],
 			'product_id'=>$input['product_id'], 
-        	'phone'=>$input['phone']), 
-        function($message){
+			'phone'=>$input['phone']), 
+		function($message){
 	        // $message->from(email, 'Hoplongtech');
-	        $message->to('info@hoplongtech.com.vn', 'Hoplongtech')->subject('Yêu cầu báo giá sản phẩm');
-	    });
-	    $slug = $input['slug'];
-        Session::flash('flash_message', 'Send message successfully!');
+			$message->to('info@hoplongtech.com.vn', 'Hoplongtech')->subject('Yêu cầu báo giá sản phẩm');
+		});
+		$slug = $input['slug'];
+		Session::flash('flash_message', 'Send message successfully!');
 		return redirect()->route('view',['slug'=>$slug])->with('success','Yêu cầu báo giá thành công');	
 		// $req->session()->flash('success', 'Tạo bài viết thành công!')	
 	}
@@ -330,13 +327,13 @@ class HomeController extends Controller
 		return view('home.confirm_pro',[
 			'supports'=>$supports,
 			'sp'=>$sp
-			]);
+		]);
 	}
 	public function project(){
 		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
 		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
 		// $categorys=Category::orderBy('sorder','ASC')->Where('parent_id','parent')->get();
-		 $categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$project = News::where('category_id','33')->orderBy('id','DESC')->paginate(18);
 		$nproject = News::where('category_id','33')->orderBy('id','DESC')->paginate(10);
 		return view('home.project',[
@@ -345,7 +342,7 @@ class HomeController extends Controller
 			'categorys' => $categorys,
 			'supports' => $supports,
 			'sp' => $sp,
-			]);
+		]);
 	}
 	public function detail_project($slug){
 		$news=News::where('slug',$slug)->first();
@@ -354,9 +351,9 @@ class HomeController extends Controller
 		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
 		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
 		// $categorys=Category::orderBy('sorder','ASC')->Where('parent_id','parent')->get();
-		 $categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
-		 $related=News::where('category_id',$news->category_id)->where('slug','<>','$news->slug')->latest()->get();
-	 	$tintuc= News::where('slug',$slug)->first();
+		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+		$related=News::where('category_id',$news->category_id)->where('slug','<>','$news->slug')->latest()->get();
+		$tintuc= News::where('slug',$slug)->first();
 		$office=Office::where('status','enable')->get();
 		$actoffice=Office::where('sorder','1')->first();
 		$relate=News::where('category_id',$tintuc->category_id)->where('slug','<>','$tintuc->slug')->latest()->get();
@@ -371,11 +368,11 @@ class HomeController extends Controller
 			'office' => $office,
 			'actoffice' => $actoffice,
 			'relate' => $relate,
-			]);
+		]);
 	}
 	public function productJson(){
-	    return Product::paginate(10);
-	  	}  
+		return Product::paginate(10);
+	}  
 	public function filter($filter){
 		return Product::where('capacity',$filter)->get();
 	}
@@ -444,7 +441,7 @@ class HomeController extends Controller
 		header('Content-Transfer-Encoding:binary');
 		header('Accept-Ranges:bytes');
 		@readfile($file_name);
-		}
+	}
 	public function document($slug){
 		$document= Product::where('slug',$slug)->first();	
 		$file_name=base_path('uploads/download/').$document->taiLieu->file_download;
@@ -453,7 +450,7 @@ class HomeController extends Controller
 		header('Content-Transfer-Encoding:binary');
 		header('Accept-Ranges:bytes');
 		@readfile($file_name);
-		}
+	}
 	public function documents($slug,$lang){
 		$document= Product::where('slug',$slug)->first();
 		if($lang == 'vn'){
@@ -473,22 +470,22 @@ class HomeController extends Controller
 		header('Content-Transfer-Encoding:binary');
 		header('Accept-Ranges:bytes');
 		@readfile($file_name);
-		}
+	}
 
 
 	public function detail_news($slug){
 		$news=News::where('slug',$slug)->first();
 		return view('home.news_detail',[
 			'news_dt'=>$news
-			]);
+		]);
 	}
 	public function detail_catnews($slug){
 		$news=News_category::where('slug',$slug)->first();
 		return view('home.news_category',[
 			'news_cat'=>$news
-			]);
+		]);
 	}
-public function recruitment(){
+	public function recruitment(){
 		$office=Office::where('status','enable')->get();
 		$cat_work= CatWork::where('status','enable')->get();	
 		$add_work= AddressWork::where('status','enable')->get();
@@ -508,17 +505,17 @@ public function recruitment(){
 		]);	
 	}
 	public function recruitment2($id){
-	$news= NewsWork::where('id',$id)->first();
-	$office=Office::where('status','enable')->get();
-	$actoffice=Office::where('sorder','1')->first();
-	$cat_work= CatWork::where('status','enable')->get();	
-	$add_work= AddressWork::where('status','enable')->get();	
+		$news= NewsWork::where('id',$id)->first();
+		$office=Office::where('status','enable')->get();
+		$actoffice=Office::where('sorder','1')->first();
+		$cat_work= CatWork::where('status','enable')->get();	
+		$add_work= AddressWork::where('status','enable')->get();	
 		if($news){
 			if($news){
 				return view('home.recruitment-detail',['news'=>$news,'actoffice'=>$actoffice,
-			'offices'=>$office,'cat_work'=>$cat_work,
-			'add_work'=>$add_work,
-			]);
+					'offices'=>$office,'cat_work'=>$cat_work,
+					'add_work'=>$add_work,
+				]);
 			}else{
 				return view('errors.404');
 			}
@@ -533,14 +530,14 @@ public function recruitment(){
 		$req->merge(['upload_file'=>$img]);
 		// dd($req->all());
 		$cv=CV::create($req->all());
-        Mail::send('cv-mail', array(
-        	'id'=>$cv->id,
-        	'title'=>$cv->title,
-        	'upload_file'=>$cv->upload_file),
-        function($message){
-	        $message->to('hr01@hoplongtech.com.vn', 'Hoplongtech')->subject('Tuyển dụng Công ty Hợp long');
-	    });
-        Session::flash('flash_message', 'Send message successfully!');
+		Mail::send('cv-mail', array(
+			'id'=>$cv->id,
+			'title'=>$cv->title,
+			'upload_file'=>$cv->upload_file),
+		function($message){
+			$message->to('hr01@hoplongtech.com.vn', 'Hoplongtech')->subject('Tuyển dụng Công ty Hợp long');
+		});
+		Session::flash('flash_message', 'Send message successfully!');
 		return redirect()->back()->with('success','Bạn đã nộp cv thành công!');
 	}
 	public function cv_send_mail($id){
@@ -566,7 +563,7 @@ public function recruitment(){
 			'supports' => $supports,
 			'sp' => $sp,
 			'categorys1' => $categorys1,
-			]);
+		]);
 	}
 	public function categorys(){
 		$categorys1=Category::where(['status'=>'enable','parent_id'=>0])->paginate(18);
@@ -584,16 +581,16 @@ public function recruitment(){
 		]);
 	}
 	public function get_news($slug){
-	$tintuc= News::where('slug',$slug)->first();
-	$office=Office::where('status','enable')->get();
-	$actoffice=Office::where('sorder','1')->first();
-	$related=News::where('category_id',$tintuc->category_id)->where('slug','<>','$tintuc->slug')->paginate(8);
+		$tintuc= News::where('slug',$slug)->first();
+		$office=Office::where('status','enable')->get();
+		$actoffice=Office::where('sorder','1')->first();
+		$related=News::where('category_id',$tintuc->category_id)->where('slug','<>','$tintuc->slug')->paginate(8);
 		if($tintuc){
 			if($tintuc){
 				return view('home.tintuc',['tintuc'=>$tintuc,'actoffice'=>$actoffice,
-			'offices'=>$office,'related'=>$related,
-			
-			]);
+					'offices'=>$office,'related'=>$related,
+					
+				]);
 			}else{
 				return view('errors.404');
 			}
@@ -652,11 +649,11 @@ public function recruitment(){
 		if($check->count() > 0){
 			$data = 
 			[
-	        	'email'=>$req->email,
-	        	'password'=>($check->first()->password)
+				'email'=>$req->email,
+				'password'=>($check->first()->password)
 			];
 
-		    Mail::to($req->email)->send(new ForgotPassword($data));
+			Mail::to($req->email)->send(new ForgotPassword($data));
 			return redirect()->back()->with('success','Hệ thống đã gửi email xác nhận cho bạn, vui lòng truy cập email để kích hoạt lại mật khẩu.');
 		}
 		else{
@@ -893,60 +890,60 @@ public function recruitment(){
 	}
 
 	public function export_quote_pdf(){
-        $data = ['title' => 'Welcome to HDTuto.com'];
-        $pdf = PDF::loadView('home.cart.quote_pdf', $data);
+		$data = ['title' => 'Welcome to HDTuto.com'];
+		$pdf = PDF::loadView('home.cart.quote_pdf', $data);
   		// return view('home.cart.quote_pdf');
-        return $pdf->download('bao_gia_hoplongtech.pdf');
-    }
-    public function terms_purc(){
+		return $pdf->download('bao_gia_hoplongtech.pdf');
+	}
+	public function terms_purc(){
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$terms = Terms::first();
-    	return view('home.cart.terms',[
+		return view('home.cart.terms',[
 			'categorys' => $categorys,
 			'terms' => $terms,
-    	]);
-    }
-    public function view_terms($type){
+		]);
+	}
+	public function view_terms($type){
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$terms = Terms::where('type_terms',$type)->first();
-    	return view('home.cart.terms',[
+		return view('home.cart.terms',[
 			'categorys' => $categorys,
 			'terms' => $terms,
-    	]);
-    }
+		]);
+	}
 
-    public function rateProduct(Request $req){
-  		$img='';
+	public function rateProduct(Request $req){
+		$img='';
 		$file=$req->upload_file;
 		if($file){
 			$file->move(base_path('uploads/comment/rate'),$file->getClientOriginalName());
 			$img=$file->getClientOriginalName();
 			$req->merge(['cover_image'=>$img]);
 		}
-    	$rate = Rate::create($req->all());
-    	if($rate) {
-    		return redirect()->back()->with('success','Bạn đã đánh giá sản phẩm');
-    	}
-    }
+		$rate = Rate::create($req->all());
+		if($rate) {
+			return redirect()->back()->with('success','Bạn đã đánh giá sản phẩm');
+		}
+	}
 
     // getRateProduct for api
-    public function getRateProduct($product_id){
-    	$rates=Rate::where('status',1)->where('product_id',$product_id)->get();
-    	return json_encode($rates);
-    }
-    public function getCommentProduct($product_id){
-    	$comment=Comment::orderBy('id','DESC')->where('status',1)->where('product_id',$product_id)->where('id_comment_reply',null)->get();
-    	return json_encode($comment);
-    }
-    public function getReplyCommentProduct($comment_id){
-    	$comment=Comment::orderBy('id','DESC')->where('status',1)->where('id_comment_reply',$comment_id)->get();
-    	return json_encode($comment);
-    }
+	public function getRateProduct($product_id){
+		$rates=Rate::where('status',1)->where('product_id',$product_id)->get();
+		return json_encode($rates);
+	}
+	public function getCommentProduct($product_id){
+		$comment=Comment::orderBy('id','DESC')->where('status',1)->where('product_id',$product_id)->where('id_comment_reply',null)->get();
+		return json_encode($comment);
+	}
+	public function getReplyCommentProduct($comment_id){
+		$comment=Comment::orderBy('id','DESC')->where('status',1)->where('id_comment_reply',$comment_id)->get();
+		return json_encode($comment);
+	}
     // getRateProduct for api
 
     // getPartNumber for api
-    public function getPartNumber($product_id,Data $helperData){
-    	$product = Product::find($product_id);
+	public function getPartNumber($product_id,Data $helperData){
+		$product = Product::find($product_id);
 		$partNumber = Product::where('category_id',$product->category_id)->where('id','<>',$product_id)->where('status','enable')->limit(20)->get();
 		foreach ($partNumber as $item) {
 			$item->short_description = strip_tags($item->short_description);
@@ -954,32 +951,31 @@ public function recruitment(){
 		}
 		
 		return json_encode($partNumber);
-    }
+	}
     // getPartNumber for api
 
-    public function autoSearch($product_search,Data $helperData){
-    	if($product_search != ''){
-    		$res = Product::select('id','price','price_when_login','title','slug','cover_image','time_discount','discount')->where('title','like','%'.$product_search.'%')->where('status','enable')->paginate(10);
-    		foreach ($res as $key => $value) {
-    			$price = $helperData->PriceProduct($value);
-    			$value->price_product = $price;
-    		}
-    		return json_encode($res);
-    	}
-    }
+	public function autoSearch($product_search,Data $helperData){
+		if($product_search != ''){
+			$res = Product::select('id','price','price_when_login','title','slug','cover_image','time_discount','discount')->where('title','like','%'.$product_search.'%')->where('status','enable')->paginate(10);
+			foreach ($res as $key => $value) {
+				$price = $helperData->PriceProduct($value);
+				$value->price_product = $price;
+			}
+			return json_encode($res);
+		}
+	}
 
-    public function flashSale(){
-    	$pro3 = (new Product())->datas3();
+	public function flashSale(){
+		$pro3 = (new Product())->datas3();
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$promotion = $pro3->where('is_promotion','enable')->get();
 		$flash_sale = FlashSale::where('end_time','>',date("Y-m-d"))->orderBy('id','desc')->first();
-		// dd($a->end_time > date("Y-m-d"));
-    	return view('home.v2.flash_sale',[
-    		'categorys' => $categorys,
-    		'promotions' => $promotion,
-    		'flash_sale' => $flash_sale,
-    		'products' => $flash_sale->products()->paginate(15)
-    	]);
-    }
+		return view('home.v2.flash_sale',[
+			'categorys' => $categorys,
+			'promotions' => $promotion,
+			'flash_sale' => $flash_sale,
+			'products' => $flash_sale->products()->paginate(15)
+		]);
+	}
 }
- ?>
+?>

@@ -89,20 +89,6 @@
                     </div>
                     <div class="header-top-right collapsed-block col-lg-5 col-md-4 col-sm-6 col-xs-8">
                         <ul class="top-link list-inline lang-curr">
-                            <!-- <li class="currency">
-                                <div class="btn-group currencies-block">
-                                    <form action="index.html" method="post" enctype="multipart/form-data" id="currency">
-                                        <a class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                            <span class="icon icon-credit "></span> $ US Dollar  <span class="fa fa-angle-down"></span>
-                                        </a>
-                                        <ul class="dropdown-menu btn-xs">
-                                            <li> <a href="#">(€)&nbsp;Euro</a></li>
-                                            <li> <a href="#">(£)&nbsp;Pounds    </a></li>
-                                            <li> <a href="#">($)&nbsp;US Dollar </a></li>
-                                        </ul>
-                                    </form>
-                                </div>
-                            </li>    -->
                             <li class="language">
                                 <div class="btn-group languages-block ">
                                     <form action="#" method="post" enctype="multipart/form-data" id="bt-language">
@@ -120,9 +106,6 @@
                                 
                             </li>
                         </ul>
-                        
-
-                        
                     </div>
                 </div>
             </div>
@@ -164,7 +147,6 @@
                                         <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
                                     
                                     </div>
-                                    <!-- <input type="hidden" name="route" value="product/search" /> -->
                                 </form>
                             </div>
                         </div>  
@@ -230,21 +212,6 @@
                                                         </td>
                                                         <td class="text-right">{{number_format($cart->total_amount)}}</td>
                                                     </tr>
-                                                    <!-- <tr>
-                                                        <td class="text-left"><strong>Eco Tax (-2.00)</strong>
-                                                        </td>
-                                                        <td class="text-right">$2.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><strong>VAT (20%)</strong>
-                                                        </td>
-                                                        <td class="text-right">$20.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><strong>Total</strong>
-                                                        </td>
-                                                        <td class="text-right">$162.00</td>
-                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                             <p class="text-right"> <a class="btn view-cart" href="{{route('view_cart')}}"><i class="fa fa-shopping-cart"></i>Xem giỏ hàng</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="{{route('order')}}"><i class="fa fa-share"></i>Đặt hàng</a> 
@@ -257,20 +224,8 @@
 
                         </div>
                         <!--//cart-->
-
-                        <!-- <ul class="wishlist-comp hidden-md hidden-sm hidden-xs">
-                            <li class="compare hidden-xs"><a href="#" class="top-link-compare" title="Compare "><i class="fa fa-refresh"></i></a>
-                            </li>
-                            <li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Wish List (0) "><i class="fa fa-heart"></i></a>
-                            </li>
-                        </ul> -->
-
-                                            
-                        
                     </div>
-                    
                 </div>
-
             </div>
         </div>
         <!-- //Header center -->
