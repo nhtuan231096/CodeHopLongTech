@@ -1,86 +1,167 @@
-@extends('layouts.product') @section('content')
-<div id="content" class="site-content" tabindex="-1">
-    <div class="col-full">
-        <nav class="woocommerce-breadcrumb"><a href="{{route('home')}}">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span><a style="background: none" href="{{route('tin_tuc')}}">Tin tức</a></nav>
-        <div class="row">
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main" role="main">
-                    
-                    <!-- #post-## -->
-                    <div class="post-wrapper">
-                      <img src="{{url('uploads/news')}}/{{$data->image_cover}}" style="width: 100%;height: 350px" alt="{{$data->image_cover}}">
-                      <h2>{{$data->title}}</h2>
-                      <span>{{$data->created_at}}</span> by <span>{{$data->created_by}}</span>
-                      <p><i>{{strip_tags($data->description)}}</i></p>
-                      <p>
-                        {!!$data->content!!}
-                      </p>
-                    </div>
-                    <!-- #post-## -->
-                    
-                </main>
-                <!-- #main -->
-            </div>
-            <!-- #primary -->
-
-            <div id="secondary" class="sidebar-blog widget-area" role="complementary">
-                <div id="search-2" class="widget widget_search">
-                    <form role="search" method="get" class="search-form" action="">
-                        <label>
-                            <span class="screen-reader-text">Tìm kiếm:</span>
-                            <input type="search" class="search-field" placeholder="Tìm kiếm…" value="" name="search">
-                        </label>
-                        <input type="submit" class="search-submit" value="Search">
-                    </form>
-                </div>
-               <!--  <div id="text-2" class="widget widget_text"><span class="gamma widget-title">About</span>
-                    <div class="textwidget">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero.</p>
-                    </div>
-                </div> -->
-                <div id="categories-2" class="widget widget_categories"><span class="gamma widget-title">Danh mục tin tức</span>
-                    <ul>
-                        @foreach($news_category as $news_cate)
-                        <li class="cat-item"><a href="{{route('danh_muc_tin_tuc',['slug'=>$news_cate->slug])}}">{{$news_cate->title}}</a>
-                        </li>
+@extends('layouts.v2.index')
+@section('mainContainer')
+<script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
+<div class="main-container container">
+	<ul class="breadcrumb">
+		<li><a href="{{route('home')}}"><i class="fa fa-home"></i></a></li>
+		<li><a href="{{route('tin_tuc')}}">Tin tức / Dự án</a></li>
+		<li><a href="">{{$data->title}}</a></li>
+	</ul>
+	
+	<div class="row">
+		<!--Left Part Start -->
+        <aside class="col-md-3 col-sm-4 col-xs-12 content-aside left_column " id="column-left">
+            <div class="module blog-category titleLine">
+                <h3 class="modtitle">Danh mục tin tức</h3>
+                <div class="modcontent">
+                    <ul class="list-group ">
+                    	@foreach($news_category as $news_cate)
+                        <li class="list-group-item"> <a href="blog-page.html"class="group-item active">{{$news_cate->title}}</a></li>
                         @endforeach
                     </ul>
+                    
                 </div>
-                <div id="techmarket_posts_carousel_widget-3" class="widget techmarket_posts_carousel_widget">
-                        <header class="section-header">
-                            <h2 class="section-title">Dự án</h2>
-                            <div class="custom-slick-nav"><a href="#" class="slick-arrow" style="display: inline;"></a></div>
-                        </header>
-                        @foreach($special_news as $item)
-                        <div class="post">
+            </div>
+			<div class="module blog-category titleLine">
+            	<h3 class="modtitle">Dự án</h3>
+            	<div class="modcontent">
+            		<ul class="list-group ">
+            			@foreach($special_news as $item)
+            			<!-- <li class="list-group-item"> <a href="{{route('tin_tuc_chi_tiet',['slug'=>$item->slug])}}"class="group-item active">{{$item->title}}</a></li> -->
+            			<div class="post">
                             <div class="media">
-                                <a href="#">
+                                <a href="{{route('tin_tuc_chi_tiet',['slug'=>$news_cate])}}}}">
                                     <img style="margin:20px 0 6px 0" width="100%" class="media-object" src="{{url('uploads/news')}}/{{$item->image_cover}}" alt="{{$item->image_cover}}">
                                 </a>
                             </div>
                             <a href="#" style="font-size: 16px;padding:5px">{{$item->title}}.</a>
                         </div>
-                        @endforeach
-                        
-                </div>
-                <!-- <div id="tag_cloud-2" class="widget widget_tag_cloud"><span class="gamma widget-title">Tags</span>
-                    <div class="tagcloud"><a href="https://demo2.chethemes.com/techmarket/tag/amazon-like/" class="tag-cloud-link tag-link-82 tag-link-position-1" style="font-size: 22pt;" aria-label="amazon like (9 items)">amazon like</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/awesome/" class="tag-cloud-link tag-link-83 tag-link-position-2" style="font-size: 22pt;" aria-label="Awesome (9 items)">Awesome</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/bootstrap/" class="tag-cloud-link tag-link-84 tag-link-position-3" style="font-size: 22pt;" aria-label="bootstrap (9 items)">bootstrap</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/buy-it/" class="tag-cloud-link tag-link-85 tag-link-position-4" style="font-size: 22pt;" aria-label="buy it (9 items)">buy it</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/clean-design/" class="tag-cloud-link tag-link-86 tag-link-position-5" style="font-size: 22pt;" aria-label="clean design (9 items)">clean design</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/electronics/" class="tag-cloud-link tag-link-95 tag-link-position-6" style="font-size: 8pt;" aria-label="electronics (1 item)">electronics</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/theme/" class="tag-cloud-link tag-link-90 tag-link-position-7" style="font-size: 22pt;" aria-label="theme (9 items)">theme</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/video-post-format/" class="tag-cloud-link tag-link-98 tag-link-position-8" style="font-size: 8pt;" aria-label="video post format (1 item)">video post format</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/woocommerce/" class="tag-cloud-link tag-link-91 tag-link-position-9" style="font-size: 22pt;" aria-label="woocommerce (9 items)">woocommerce</a>
-                        <a href="https://demo2.chethemes.com/techmarket/tag/wordpress/" class="tag-cloud-link tag-link-92 tag-link-position-10" style="font-size: 22pt;" aria-label="wordpress (9 items)">wordpress</a></div>
-                </div> -->
+            			@endforeach
+            		</ul>
+            		
+            	</div>
             </div>
-            <!-- #secondary -->
+            <!-- <div class="module product-simple">
+                <h3 class="modtitle">
+                    <span>Latest products</span>
+                </h3>
+                <div class="modcontent">
+                    <div class="so-extraslider" >
+                        <div class="yt-content-slider extraslider-inner">
+                            <div class="item ">
+                                <div class="product-layout item-inner style1 ">
+                                    <div class="item-image">
+                                        <div class="item-img-info">
+                                            <a href="#" target="_self" title="Mandouille short ">
+                                                <img src="{{url('public/homev2')}}/image/catalog/demo/product/80/8.jpg" alt="Mandouille short">
+                                                </a>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="item-info">
+                                        <div class="item-title">
+                                            <a href="#" target="_self" title="Mandouille short">Mandouille short </a>
+                                        </div>
+                                        <div class="rating">
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        </div>
+                                        <div class="content_price price">
+                                            <span class="price-new product-price">$55.00 </span>&nbsp;&nbsp;
 
-        </div>
-        <!-- .col-full -->
-    </div>
-    <!-- .row -->
+                                            <span class="price-old">$76.00 </span>&nbsp;
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+            <div class="module banner-left hidden-xs ">
+                <div class="banner-sidebar banners">
+                  <div>
+                    <a title="Banner Image" href="#"> 
+                      <img src="{{url('public/homev2')}}/image/catalog/banners/banner-sidebar.jpg" alt="Banner Image"> 
+                    </a>
+                  </div>
+                </div>
+            </div>  
+        </aside>
+        <!--Left Part End -->
+		
+		<!--Middle Part Start-->
+		<div id="content" class="col-md-9 col-sm-8">
+			<div class="article-info">
+				<div class="blog-header">
+					<h3>{{$data->title}}</h3>
+				</div>
+				<div class="article-sub-title">
+					<span class="article-author">Post by: <a href="#"> {{$data->created_by}}</a></span>
+					<span class="article-date">Ngày đăng: {{date_format($data->created_at,'d-m-Y H:i:s')}}</span>
+					<span class="article-comment">0  Bình luận</span>
+				</div>
+				<div class="form-group">
+					<a href="" class="image-popup"><img src="{{url('uploads/news')}}/{{$data->image_cover}}" alt=""></a>
+				</div>
+				
+				<div class="article-description">
+					{!!$data->content!!}
+				</div>
+				
+				<div class="panel panel-default related-comment">
+					<div class="panel-body">
+						<div class="form-group">
+							<div id="comments" class="blog-comment-info">
+								
+								<h3 id="review-title">Để lại bình luận của bạn  </h3>
+								<input type="hidden" name="blog_article_reply_id" value="0" id="blog-reply-id">
+								<div class="comment-left contacts-form row">
+									<div class="col-md-6">
+										<b>Họ tên:</b>
+										<br>
+										<input type="text" name="name" value="" class="form-control">
+										<br>
+									</div>
+									<div class="col-md-12">
+										<b>Nội dung bình luận:</b>
+										<br>
+										<textarea rows="6" cols="50" name="text" class="form-control"></textarea>
+										<!-- <span style="font-size: 11px;">Note: HTML is not translated!</span> -->
+										<!-- <br> -->
+										<!-- <br> -->
+									</div>
+									<!-- <div class="col-md-4"> -->
+										<!-- <b>Enter the code in the box below:</b> -->
+										<!-- <br> -->
+										<!-- <input type="text" name="captcha" style="" -->
+										<!-- value="" class="form-control"> -->
+										<!-- <br> -->
+										<!-- <div class="form-group"> -->
+											<!-- <img src="{{url('public/homev2')}}/image/demo/content/captcha.jpg" alt="" -->
+											<!-- id="captcha"> -->
+										<!-- </div> -->
+									</div>
+								</div>
+								<br>
+								<div class="text-left"><a id="button-comment"
+									class="btn buttonGray"><span>Gửi</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+		
+	</div>
+	<!--Middle Part End-->
 </div>
 @stop()

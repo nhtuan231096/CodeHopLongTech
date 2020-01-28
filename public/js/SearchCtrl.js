@@ -1,5 +1,4 @@
 var myapp = angular.module("my_app",[]);
-
 $url = window.location.protocol + "//" + window.location.hostname;
 myapp.controller("SearchCtrl",function($scope,$http){
 	$(".search-tab").hide();

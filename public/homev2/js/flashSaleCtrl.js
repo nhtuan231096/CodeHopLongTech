@@ -1,5 +1,7 @@
 var admin = angular.module("admin",[]);
 admin.controller("flashSaleCtrl",function($scope,$http){
+	console.log('x');
+	// var url = window.location.protocol + "//" + window.location.hostname + '/CodeHopLongTech';
 	var url = window.location.protocol + "//" + window.location.hostname;
 
 	var data_product_id = [];
@@ -26,7 +28,7 @@ admin.controller("flashSaleCtrl",function($scope,$http){
     if(pageNumber===undefined){
       pageNumber = '1';
     }
-    $http.get(url + '/CodeHopLongTech/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
+    $http.get(url + '/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
 	      $scope.products        = response.data.data;
 	      $scope.totalPages   = response.data.last_page;
 	      $scope.currentPage  = response.data.current_page;
@@ -112,14 +114,14 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 
 	$scope.search = function(){
 		var title = $("#title").val();
-		$http.get(url + '/CodeHopLongTech/api/getProductFlashSale?title='+title).then(function(res){
+		$http.get(url + '/api/getProductFlashSale?title='+title).then(function(res){
 			$scope.products = res.data.data;
 		});
 		// var pageNumber = 1;
 		// $scope.getProducts(pageNumber,title);
 	}
 
-	// $http.get(url + '/CodeHopLongTech/api/getProductFlashSale/').then(function(res){
+	// $http.get(url + '/api/getProductFlashSale/').then(function(res){
 	// 	$scope.products = res.data.data;
 	// 	console.log($scope.getProductFlashSale);
 	// });
@@ -130,14 +132,14 @@ admin.controller("flashSaleCtrl",function($scope,$http){
     if(pageNumber===undefined){
       pageNumber = '1';
     }
-    $http.get(url + '/CodeHopLongTech/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
+    $http.get(url + '/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
 	      $scope.products        = response.data.data;
 	      $scope.totalPages   = response.data.last_page;
 	      $scope.currentPage  = response.data.current_page;
 
 	      // get current product flash sale
 	      var flash_sale_id = $('#flash_sale_id').val();
-	      $http.get(url + '/CodeHopLongTech/api/getEditProductFlashSale/?flash_sale_id='+flash_sale_id).then(function(res){
+	      $http.get(url + '/api/getEditProductFlashSale/?flash_sale_id='+flash_sale_id).then(function(res){
 				$scope.currentProducts = res.data;
 				for(var i = 0; i < $scope.products.length; i++) { 
 					if ($scope.products[i]) {

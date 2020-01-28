@@ -143,7 +143,7 @@
                             <div class="itemBlogContent clearfix ">
                                 <div class="blog-content">
                                     <div class="article-title font-title">
-                                        <h4><a href="blog-detail.html">{{$item->title}}</a></h4>
+                                        <h4><a href="{{route('tin_tuc_chi_tiet',['tin_tuc_chi_tiet'=>$item->slug])}}">{{$item->title}}</a></h4>
                                     </div>
                                     <div class="blog-meta"> <span class="author"><i class="fa fa-user"></i><span>Post by </span>{{$item->created_by}}</span>
                                     </div>

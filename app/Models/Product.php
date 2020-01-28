@@ -13,16 +13,16 @@ class Product extends Model
 	protected $fillable=['id','title','slug','short_description','content','sorder','feature','specifications','dimension','line_up','catalog','created_by','cover_image','meta_title','meta_description','modified_by','meta_keywords','status','price','price_when_login','warranty','promotion','category_id','product_code','download_id','is_best_seller','is_promotion','is_new_product','special_product','comment','created_at','updated_at','capacity','in_stock','discount','time_discount','image_360','video','list_price','cover_image_2','cover_image_3','cover_image_4','cover_image_5','view','actual_photo','pdp'
 	];
 	public function scopeDatas($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC')->limit(16);
+		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
 	}
 	public function scopeDatas2($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC')->limit(10);
+		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
 	}
 	public function scopeDatas3($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC')->limit(10);
+		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
 	}
 	public function scopeDatas4($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC')->limit(10);
+		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
 	}
 
 	public function scopeSearch($query)

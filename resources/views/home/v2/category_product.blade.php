@@ -3,8 +3,8 @@
 <style type="text/css">
     .title-general::after {
         position: absolute;
-        content: "";
-        width: 60px;
+        content: none;
+        width: 110px;
         height: 2px;
         background-color: #3191CF;
         bottom: -2px;
@@ -12,22 +12,29 @@
     }
     .title-detail::after {
         position: absolute;
-        content: "";
-        width: 60px;
+        content: none;
+        width: 110px;
         height: 2px;
         background-color: #3191CF;
         bottom: -2px;
-        left: 95px !important;
+        left: 190px;
     }
     .title-category::after {
-
-    position: absolute;
-    content: "";
-    width: 60px;
-    height: 2px;
-    background-color: #3191CF;
-    bottom: -2px;
-    left: 0;
+        position: absolute;
+        content: none;
+        width: 110px;
+        height: 2px;
+        background-color: #3191CF;
+        bottom: -2px;
+        left: 0;
+    }
+    .title-general{
+        border-bottom: 2px solid blue;
+        padding-bottom: 8px;
+    }
+    .title-detail{
+        border-bottom: 2px solid blue;
+        padding-bottom: 8px;
     }
 </style>
 <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
@@ -36,7 +43,6 @@
         <li><a href="{{route('home')}}"><i class="fa fa-home"></i></a></li>
         <li><a href="#">{{$category->title}}</a></li>
     </ul>
-    
     <div class="row">
         <!--Left Part Start -->
         <aside class="col-sm-4 col-md-3 content-aside" id="column-left">
@@ -45,31 +51,13 @@
                 <div class="modcontent">
                     <div class="box-category">
                         <ul id="cat_accordion" class="list-group">
-                            <!-- //--- -->
-                            @foreach($cate as $cat)
-                            <li class="hadchild"><a href="{{route('view_category',[$cat->slug])}}" class="cutom-parent">{{$cat->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
-                                <ul class="itemMenu">
-                                    @foreach($cat->childs as $child)
-                                    <li class="menuCate">
-                                        <a href="{{route('view_category',['slug'=>$child->slug])}}">{{$child->title}}</a>  
-                                        <span class="btn-view-child fa fa-plus-square-o"></span>
-                                        <ul class="list-child-menu">
-                                            @foreach($child->childs2 as $chil)
-                                            <li class="childMenu">
-                                                <a href="{{route('view_category',['slug'=>$chil->slug])}}">{{$chil->title}}</a>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    @endforeach
-                                </ul>
+                            @foreach($cate as $category1)
+                            <li class="hadchild"><a href="{{route('view_category',[$category1->slug])}}" class="cutom-parent">{{$category1->title}}</a>   <span class="button-view  fa fa-plus-square-o"></span>
                             </li>
                             @endforeach
                             <!-- //--- -->
                         </ul>
                     </div>
-                    
-                    
                 </div>
             </div>
             <div class="module product-simple">
@@ -86,7 +74,8 @@
                                     <div class="item-image">
                                         <div class="item-img-info">
                                             <a href="{{route('view',['slug'=>$promotion->slug])}}" target="_self" title="{{$promotion->title}}">
-                                                <img src="{{url('uploads/product')}}/{{$promotion->cover_image}}" alt="{{$promotion->cover_image}}">
+                                                <?php $urlImage = ($promotion->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                                                <img src="{{url($urlImage)}}/{{$promotion->cover_image}}" alt="{{$promotion->cover_image}}">
                                             </a>
                                         </div>
                                         
@@ -134,7 +123,7 @@
             <div class="products-category">
                 <h3 class="title-category">
                     <span id="general">{{$category->title}}</span>
-                    <span id="detail" style="padding-left: 25px">Thông tin chi tiết</span>
+                    <span id="detail" style="margin-left: 25px">Thông tin chi tiết</span>
                 </h3>
                 
                 <div class="category-desc" style="display: none;">
@@ -152,124 +141,107 @@
                         </div>
                     </div>
                 </div>
-               
-
                 <!--changed listings-->
                 <div class="products">
                  <!-- Filters -->
                     <div class="product-filter product-filter-top filters-panel">
                         <div class="row">
                             <div class="col-md-5 col-sm-3 col-xs-12 view-mode">
-                                
                                     <div class="list-view">
                                         <button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip"  data-original-title="Grid"><i class="fa fa-th"></i></button>
                                         <button class="btn btn-default list" data-view="list" data-toggle="tooltip" data-original-title="List"><i class="fa fa-th-list"></i></button>
                                     </div>
-                        
                             </div>
-                            <div class="short-by-show form-inline text-right col-md-7 col-sm-9 col-xs-12">
-                                <!-- <div class="form-group short-by">
-                                    <label class="control-label" for="input-sort">Sort By:</label>
-                                    <select id="input-sort" class="form-control"
-                                    onchange="location = this.value;">
-                                        <option value="" selected="selected">Default</option>
-                                        <option value="">Name (A - Z)</option>
-                                        <option value="">Name (Z - A)</option>
-                                        <option value="">Price (Low &gt; High)</option>
-                                        <option value="">Price (High &gt; Low)</option>
-                                        <option value="">Rating (Highest)</option>
-                                        <option value="">Rating (Lowest)</option>
-                                        <option value="">Model (A - Z)</option>
-                                        <option value="">Model (Z - A)</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="input-limit">Show:</label>
-                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
-                                        <option value="" selected="selected">15</option>
-                                        <option value="">25</option>
-                                        <option value="">50</option>
-                                        <option value="">75</option>
-                                        <option value="">100</option>
-                                    </select>
-                                </div> -->
-                            </div>
-                            <!-- <div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">
-                                <ul class="pagination">
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="">2</a></li><li><a href="">&gt;</a></li>
-                                    <li><a href="">&gt;|</a></li>
-                                </ul>
-                            </div> -->
                         </div>
                     </div>
                     <!-- //end Filters -->
                     <div class="products-list row nopadding-xs so-filter-gird">
-                        @foreach($products as $pro)
-                        <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
-                            <div class="product-item-container">
-                                <div class="left-block left-b">
-                                    
-                                    <div class="product-image-container second_img">
-                                        <a href="{{route('view',[$pro->slug])}}" target="_self" title="">
-                                            <?php $urlImage = ($pro->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                                            <img src="{{url($urlImage)}}/{{$pro->cover_image}}" class="img-1 img-responsive" alt="">
-                                            @if(isset($pro->cover_image_2))
-                                            <img src="{{url($urlImage)}}/{{$pro->cover_image}}" class="img-2 img-responsive" alt="">
-                                            @endif
-                                        </a>
-                                    </div>
-                                    <!--quickview--> 
-                                    <!-- <div class="so-quickview">
-                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="{{route('view',[$pro->slug])}}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
-                                    </div> -->                                                     
-                                    <!--end quickview-->
-
-                                    
-                                </div>
-                                <div class="right-block">
-                                    <div class="button-group so-quickview cartinfo--left">
-                                        <a href="{{route('add_cart',['id'=>$pro->id])}}" class="addToCart addCart">Thêm giỏ hàng</a>
-                                       <!--  <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
-                                        </button>
-                                        <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
-                                        </button> -->
+                        @if($childCategory->count() > 0)
+                            @foreach($childCategory as $itemCate)
+                            <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
                                         
-                                    </div>
-                                    <div class="caption hide-cont">
-                                        <div class="ratings">
-                                            <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
-                                            </div>
-                                            <span class="rating-num">( 2 )</span>
+                                        <div class="product-image-container">
+                                            <a href="{{route('view_category',[$itemCate->slug])}}" target="_self" title="{{$itemCate->title}}">
+                                                <img src="{{url('uploads/category')}}/{{$itemCate->cover_image}}" class="img-1 img-responsive" alt="{{$itemCate->title}}">
+                                            </a>
                                         </div>
-                                        <h4><a href="product.html" title="Pastrami bacon" target="_self">{{$pro->title}}</a></h4>
-                                        
                                     </div>
-                                    <p class="price">
-                                      <span class="price-new">{{$cart->PriceProduct($pro)}}</span>
-                                      
-                                    </p>
-                                    <div class="description item-desc">
-                                        <p>{!!$pro->short_description!!}</p>
-                                    </div>
-                                    <div class="list-block">
-                                        <a href="{{route('add_cart',['id'=>$pro->id])}}" class="addToCart addCart">Thêm giỏ hàng</a>
-                                        <!-- <button class="wishlist btn-button" type="button" title="Add to Wish List" onclick="wishlist.add('101');"><i class="fa fa-heart"></i>
-                                        </button>
-                                        <button class="compare btn-button" type="button" title="Compare this Product" onclick="compare.add('101');"><i class="fa fa-refresh"></i>
-                                        </button> -->
+                                    <div class="right-block">
+                                        <div class="caption hide-cont text-center">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                </div>
+                                                <span class="rating-num">( 2 )</span>
+                                            </div>
+                                            <!-- <h4><a href="{{route('view',[$itemCate->slug])}}" target="_self">{{$itemCate->title}}</a></h4> -->
+                                            
+                                        </div>
+                                        <p class="price text-center">
+                                          <span class="price-new"><a href="{{route('view_category',[$itemCate->slug])}}">{{$itemCate->title}}</a></span>
+                                        </p>
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
-                        @endforeach
+                            @endforeach
+                            <div class="clearfix"></div>
+                            {{$childCategory->links()}}
+                        @else
+                            @foreach($products as $pro)
+                            <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
+                                        <div class="product-image-container">
+                                            <a href="{{route('view',[$pro->slug])}}" target="_self" title="{{$pro->title}}">
+                                                <?php $urlImage = ($pro->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                                                <img src="{{url($urlImage)}}/{{$pro->cover_image}}" class="img-1 img-responsive" alt="{{$pro->title}}">
+                                                @if(isset($pro->cover_image_2))
+                                                <img src="{{url($urlImage)}}/{{$pro->cover_image_2}}" class="img-2 img-responsive" alt="{{$pro->title}}">
+                                                @endif
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="right-block">
+                                        <div class="button-group so-quickview cartinfo--left text-center">
+                                            <!-- <span> -->
+                                                    <a class="addToCart addCart" style="padding:5px 10px!important; background:#d7d7d7" href="{{route('add_cart',['id'=>$pro->id])}}">
+                                                        <span style="color: #fff">Thêm vào giỏ</span>
+                                                    </a>
+                                            <!-- </span>    -->
+                                                <!-- <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                                </button>
+                                                <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                                </button> -->
+                                        </div>
+                                        <div class="caption hide-cont text-center">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                </div>
+                                                <span class="rating-num">( 2 )</span>
+                                            </div>
+                                            <h4><a href="{{route('view',[$pro->slug])}}" title="Pastrami bacon" target="_self">{{$pro->title}}</a></h4>
+                                            
+                                        </div>
+                                        <p class="price text-center">
+                                          <span class="price-new">{{$cart->PriceProduct($pro)}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            <div class="clearfix"></div>
+                            {{$products->links()}}
+                        @endif
                     </div>
-                    {{$products->links()}}
                     <!--// End Changed listings-->
                     <!-- Filters -->
                     <div class="product-filter product-filter-bottom filters-panel">
@@ -290,13 +262,16 @@
     </div>
 </div>
 <script type="text/javascript">
+    $("#general").addClass('title-general');
     $("#detail").click(function(){
-        $(this).parent().addClass('title-detail').removeClass('title-general');
+        $(this).addClass('title-detail').removeClass('title-general');
+        $("#general").removeClass('title-general');
         $(".category-desc").show();
         $(".products").hide();
     });
     $("#general").click(function(){
-        $(this).parent().addClass('title-general').removeClass('title-detail');
+        $(this).addClass('title-general').removeClass('title-detail');
+        $("#detail").removeClass('title-detail');
         $(".category-desc").hide();
         $(".products").show();
     });

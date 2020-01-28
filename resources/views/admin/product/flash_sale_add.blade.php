@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
-<script src="{{url('public/homev2/js/flashSaleCtrl.js')}}"></script>
+<!-- <script src="{{url('public/homev2/js/flashSaleCtrl.js')}}"></script> -->
 <div class="wrapp"  ng-controller="flashSaleCtrl">
 	<form method="GET" class="form-inline" role="form" style="position: absolute;right: 5%;top: 150px">
 			      
@@ -166,6 +166,10 @@
 	</form>
 </div>
 <script type="text/javascript">
+var admin = angular.module("admin",[]);
+admin.controller("flashSaleCtrl",function($scope,$http){
+	// var url = window.location.protocol + "//" + window.location.hostname + '/CodeHopLongTech';
+	var url = window.location.protocol + "//" + window.location.hostname;
 
 	var data_product_id = [];
 	var data_quantity = [];
@@ -177,70 +181,168 @@
 	var data_discount = [];
 
 	$('.quantity').val('');
-	$('.discount').val('');
+	// $('.discount').val('');
 	$('.checkbox').prop('checked', false);
 	$('.checkbox').attr('disabled', true);
 
-	// $('.checkbox').change(function(){
-	//     var product_id = $(this).val();
-	// 	var quantity = $(this).parent().parent().children('.qty').children('.quantity');
-	// 	var title = $(this).parent().parent().children('.title');
-	// 	var slug = $(this).parent().parent().children('.slug');
-	// 	var price = $(this).parent().parent().children('.price');
-	// 	var cover_image = $(this).parent().parent().children('.cover_image');
-	// 	var category_id = $(this).parent().parent().children('.category_id');
-	// 	var discount = $(this).parent().parent().children('.w_discount').children('.discount');
+	$scope.posts = [];
+	$scope.totalPages = 0;
+	$scope.currentPage = 1;
+	$scope.range = [];
+		
+	$scope.getProducts = function(pageNumber,title=''){
 
-	// 	if (this.checked) {
+    if(pageNumber===undefined){
+      pageNumber = '1';
+    }
+    $http.get(url + '/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
+	      $scope.products        = response.data.data;
+	      $scope.totalPages   = response.data.last_page;
+	      $scope.currentPage  = response.data.current_page;
+	      // Pagination Range
+	      var pages = [];
 
-	//         data_product_id.push(product_id);
-	//         data_quantity.push(quantity.val());
-	//         data_title.push(title.val());
-	//         data_slug.push(slug.val());
-	//         data_price.push(price.val());
-	//         data_cover_image.push(cover_image.val());
-	//         data_category_id.push(category_id.val());
-	//         data_discount.push(discount.val());
+	      for(var i=1;i<=response.data.last_page;i++) {
+	      	if(i <= $scope.currentPage + 3 && i>= $scope.currentPage -3){
+	        	pages.push(i);
+	      	}
+	      }
 
-	//         $('.data_product_id').val(data_product_id);
-	//         $('.data_quantity').val(data_quantity);
-	//         $('.data_title').val(data_title);
-	//         $('.data_slug').val(data_slug);
-	//         $('.data_price').val(data_price);
-	//         $('.data_cover_image').val(data_cover_image);
-	//         $('.data_category_id').val(data_category_id);
-	//         $('.data_discount').val(data_discount);
-	    
-	//     } else {
-	    	
-	//     	data_product_id.splice($.inArray(product_id, data_product_id),1);
-	//     	data_quantity.splice($.inArray(quantity.val(), data_quantity),1);
-	//     	data_title.splice($.inArray(title.val(), data_title),1);
-	//     	data_slug.splice($.inArray(slug.val(), data_slug),1);
-	//     	data_price.splice($.inArray(price.val(), data_price),1);
-	//     	data_cover_image.splice($.inArray(cover_image.val(), data_cover_image),1);
-	//     	data_category_id.splice($.inArray(category_id.val(), data_category_id),1);
-	//     	data_discount.splice($.inArray(discount.val(), data_discount),1);
+	      $scope.range = pages; 
+	    });
 
-	//     	$('.data_product_id').val(data_product_id);
-	//     	$('.data_quantity').val(data_quantity);
-	//     	$('.data_title').val(data_title);
-	//     	$('.data_slug').val(data_slug);
-	//     	$('.data_price').val(data_price);
-	//     	$('.data_cover_image').val(data_cover_image);
-	//     	$('.data_category_id').val(data_category_id);
-	//     	$('.data_discount').val(data_discount);
+	};
 
-	//     }
+
+
+	$scope.quantityNumber = function(productId){
+
+		var product_id = $('#checkbox'+productId).val();
+		var quantity = $('#quantity'+productId);
+		var title = $('#title'+productId);
+		var slug = $('#slug'+productId);
+		var price = $('#price'+productId);
+		var cover_image = $('#cover_image'+productId);
+		var category_id = $('#category_id'+productId);
+		var discount = $('#discount'+productId);
+
+		if ($('#quantity'+productId).val() != '') {
+			($('#checkbox'+productId).removeAttr('disabled'));
+			// checkbox.attr('disabled', false);
+		}
+		else {
+			($('#checkbox'+productId).attr('disabled','disabled'));
+			// checkbox.attr('disabled', true);
+		}
+		// todo
+		$('#checkbox'+productId).click(function(){
+			if($('#checkbox'+productId).is(':checked')){
+				data_product_id.push(product_id);
+		        data_quantity.push(quantity.val());
+		        data_title.push(title.val());
+		        data_slug.push(slug.val());
+		        data_price.push(price.val());
+		        data_cover_image.push(cover_image.val());
+		        data_category_id.push(category_id.val());
+		        data_discount.push(discount.val());
+		        console.log(discount.val());
+		        $('.data_product_id').val(data_product_id);
+		        $('.data_quantity').val(data_quantity);
+		        $('.data_title').val(data_title);
+		        $('.data_slug').val(data_slug);
+		        $('.data_price').val(data_price);
+		        $('.data_cover_image').val(data_cover_image);
+		        $('.data_category_id').val(data_category_id);
+		        $('.data_discount').val(data_discount);
+			}
+			else{
+				data_product_id.splice($.inArray(product_id, data_product_id),1);
+		    	data_quantity.splice($.inArray(quantity.val(), data_quantity),1);
+		    	data_title.splice($.inArray(title.val(), data_title),1);
+		    	data_slug.splice($.inArray(slug.val(), data_slug),1);
+		    	data_price.splice($.inArray(price.val(), data_price),1);
+		    	data_cover_image.splice($.inArray(cover_image.val(), data_cover_image),1);
+		    	data_category_id.splice($.inArray(category_id.val(), data_category_id),1);
+		    	data_discount.splice($.inArray(discount.val(), data_discount),1);
+
+		    	$('.data_product_id').val(data_product_id);
+		    	$('.data_quantity').val(data_quantity);
+		    	$('.data_title').val(data_title);
+		    	$('.data_slug').val(data_slug);
+		    	$('.data_price').val(data_price);
+		    	$('.data_cover_image').val(data_cover_image);
+		    	$('.data_category_id').val(data_category_id);
+		    	$('.data_discount').val(data_discount);
+			}
+		});
+			
+		
+	}
+
+	$scope.search = function(){
+		var title = $("#title").val();
+		$http.get(url + '/api/getProductFlashSale?title='+title).then(function(res){
+			$scope.products = res.data.data;
+		});
+		// var pageNumber = 1;
+		// $scope.getProducts(pageNumber,title);
+	}
+
+	// $http.get(url + '/api/getProductFlashSale/').then(function(res){
+	// 	$scope.products = res.data.data;
+	// 	console.log($scope.getProductFlashSale);
 	// });
-	// $('.quantity').keyup($.debounce(700, function(e){
-	// 	var checkbox = $(this).parent().parent().children('.cbx').children('.checkbox');
-	// 	if ($('.quantity').val() != '') {
-	// 		checkbox.attr('disabled', false);
-	// 	}
-	// 	else {
-	// 		checkbox.attr('disabled', true);
-	// 	}
-	// }));
+
+	// edit flash sale
+	$scope.getEditProducts = function(pageNumber,title=''){
+
+    if(pageNumber===undefined){
+      pageNumber = '1';
+    }
+    $http.get(url + '/api/getProductFlashSale/?page='+pageNumber+'?title='+title).then(function(response) {
+	      $scope.products        = response.data.data;
+	      $scope.totalPages   = response.data.last_page;
+	      $scope.currentPage  = response.data.current_page;
+
+	      // get current product flash sale
+	      var flash_sale_id = $('#flash_sale_id').val();
+	      $http.get(url + '/api/getEditProductFlashSale/?flash_sale_id='+flash_sale_id).then(function(res){
+				$scope.currentProducts = res.data;
+				for(var i = 0; i < $scope.products.length; i++) { 
+					if ($scope.products[i]) {
+				      	for(var j = 0; j < $scope.currentProducts.length; j++) {
+				      		if($scope.currentProducts[j]){
+				      			// console.log($scope.currentProducts[j].id);
+				      			if($scope.products[i].id == $scope.currentProducts[j].product_id) {
+				      				$scope.products[i].quantity = $scope.currentProducts[j].quantity > 0 ? $scope.currentProducts[j].quantity : 0;
+				      				$scope.products[i].discount = $scope.currentProducts[j].discount > 0 ? $scope.currentProducts[j].discount : '';
+				      				$scope.products[i].checked = $scope.currentProducts[j].quantity > 0 ? 1 : 0;
+					      			// todo
+					      		}
+				      		}
+				      	}
+					}
+			      }
+
+		   });
+	      // console.log($scope.products);
+
+	      // Pagination Range
+	      var pages = [];
+
+	      for(var i=1;i<=response.data.last_page;i++) {
+	      	if(i <= $scope.currentPage + 3 && i>= $scope.currentPage -3){
+	        	pages.push(i);
+	      	}
+	      }
+
+	      $scope.range = pages; 
+	    });
+		// console.log($(".cbx1").children('.checked').prop('checked', true));
+		// ($(".cbx1").children('.checked').prop('checked', true));
+	};
+	// edit flash sale
+})
+
 </script>
 @stop()

@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    
     <!-- Basic page needs
     ============================================ -->
-    <title>@if(isset($category)){{$category->meta_title}} @elseif(isset($download)) {{$download->title}} @elseif(isset($news_project)) {{$news_project->title}} @elseif(isset($img_company)) {{$img_company->title}} @else Công ty cổ phẩn công nghệ Hợp Long @endif</title>
+    <h1 style="margin:0;"><title>@if(isset($product)){{$product->meta_title}} @elseif(isset($category)){{$category->meta_title}} @elseif(isset($download)) {{$download->title}} @elseif(isset($news_project)) {{$news_project->title}} @elseif(isset($img_company)) {{$img_company->title}} @elseif(isset($data)) {{$data->title}} @else Công ty cổ phẩn công nghệ Hợp Long @endif</title></h1>
     <meta charset="utf-8">
     <!-- <meta name="keywords" content="html5 template, best html5 template, best html template, html5 basic template, multipurpose html5 template, multipurpose html template, creative html templates, creative html5 templates" /> -->
-    <meta name="description" content="@if(isset($category)){{$category->meta_description}}@elseif(isset($download))
-    {{$download->content}}@else Công ty cổ phẩn công nghệ Hợp Long - Nhà phân phối chính thức Schneider Electric, Autonics, Omron, LS, Delta, Hanyoung, Patlite tại Việt Nam @endif">
-    <meta name="author" content="Magentech">
+    <meta name="description" content="@if(isset($product)){{$product->meta_description}}@elseif(isset($category)){{$category->meta_description}}@elseif(isset($download))
+    {{$download->content}}@elseif(isset($data)) {{$data->title}}@else Công ty cổ phẩn công nghệ Hợp Long - Nhà phân phối chính thức Schneider Electric, Autonics, Omron, LS, Delta, Hanyoung, Patlite tại Việt Nam @endif">
+    <meta name="author" content="Hoplongtech.com">
     <meta name="robots" content="index, follow" />
-   
     <!-- Mobile specific metas
     ============================================ -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    
     <!-- Favicon
     ============================================ -->
-    <link rel="icon" href="{{url('uploads/logo/Logo-hl.png')}}" sizes="32x32" />
-  
-   
+    <link rel="icon" href="{{url('uploads/logo/Logo-hl.png')}}" sizes="25x32" />
     <!-- Libs CSS
     ============================================ -->
     <link rel="stylesheet" href="{{url('public/homev2')}}/css/bootstrap/css/bootstrap.min.css">
@@ -30,7 +25,6 @@
     <link href="{{url('public/homev2')}}/css/themecss/lib.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/js/minicolors/miniColors.css" rel="stylesheet">
-    
     <!-- Theme CSS
     ============================================ -->
     <link href="{{url('public/homev2')}}/css/themecss/so_searchpro.css" rel="stylesheet">
@@ -39,26 +33,56 @@
     <link href="{{url('public/homev2')}}/css/themecss/so-listing-tabs.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/themecss/so-category-slider.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/themecss/so-newletter-popup.css" rel="stylesheet">
-
     <link href="{{url('public/homev2')}}/css/footer/footer1.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/header/header1.css" rel="stylesheet">
     <link id="color_scheme" href="{{url('public/homev2')}}/css/theme.css" rel="stylesheet"> 
     <link href="{{url('public/homev2')}}/css/responsive.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/my_style.css" rel="stylesheet">
-
     <script src="{{url('public/js')}}/angular.min.js"></script>
-    
+    <script src="{{url('public/js')}}/dirPagination.js"></script>
      <!-- Google web fonts
     ============================================ -->
-    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">   
     <script type="text/javascript" src="{{url('public/homev2')}}/js/jquery-2.2.4.min.js"></script>
-
     <style type="text/css">
-         body{font-family:'Poppins', sans-serif;}
+         body{font-family:'Open Sans', sans-serif;}
          #myList .item-vertical{ display:none;}
     </style>
-    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43044974-10"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-43044974-10');
+    </script>
+    <script id='autoAdsMaxLead-widget-script' src='https://cdn.autoads.asia/scripts/autoads-maxlead-widget.js?business_id=807e8c7d5f9e40898e3ff4e83c794894' type='text/javascript' charset='UTF-8' async></script>
+    <style type="text/css">
+        .search-loader {
+          border: 6px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 6px solid #3498db;
+          width: 70px;
+          height: 70px;
+          position: absolute;
+          top:15%;
+          right: 50%;
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
 <body class="common-home res layout-1">
@@ -74,7 +98,7 @@
                 <div class="row">
                     <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
                         <div class="hidden-md hidden-sm hidden-xs welcome-msg">Công ty cổ phần công nghệ Hợp Long /
-                            <span>Merry Christmas</span> 
+                            <span>Chúc mừng năm mới</span> 
                         </div>
                         <ul class="top-link list-inline hidden-lg ">
                             <li class="account" id="my_account">
@@ -89,46 +113,28 @@
                     </div>
                     <div class="header-top-right collapsed-block col-lg-5 col-md-4 col-sm-6 col-xs-8">
                         <ul class="top-link list-inline lang-curr">
-                            <!-- <li class="currency">
-                                <div class="btn-group currencies-block">
-                                    <form action="index.html" method="post" enctype="multipart/form-data" id="currency">
-                                        <a class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                            <span class="icon icon-credit "></span> $ US Dollar  <span class="fa fa-angle-down"></span>
-                                        </a>
-                                        <ul class="dropdown-menu btn-xs">
-                                            <li> <a href="#">(€)&nbsp;Euro</a></li>
-                                            <li> <a href="#">(£)&nbsp;Pounds    </a></li>
-                                            <li> <a href="#">($)&nbsp;US Dollar </a></li>
-                                        </ul>
-                                    </form>
-                                </div>
-                            </li>    -->
                             <li class="language">
                                 <div class="btn-group languages-block ">
                                     <form action="#" method="post" enctype="multipart/form-data" id="bt-language">
                                         <a class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                            <img src="{{url('public/homev2')}}/image/catalog/flags/vn.jpg" width="16px";height="10px" alt="English" title="English">
+                                            <img src="{{url('public/homev2')}}/image/catalog/flags/vn.png" width="16px";height="10px" alt="Tiếng Việt" title="Tiếng Việt">
                                             <span class="">Tiếng Việt</span>
                                             <span class="fa fa-angle-down"></span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li> <a href="#"> <img class="image_flag" src="{{url('public/homev2')}}/image/catalog/flags/vn.jpg" width="16px";height="10px" alt="Arabic" title="Arabic" /> Tiếng Việt </a> </li>
-                                            <li><a href="index.html"><img class="image_flag" src="{{url('public/homev2')}}/image/catalog/flags/gb.png" alt="English" title="English" /> English </a></li>
+                                            <li> <a href="#"> <img class="image_flag" src="{{url('public/homev2')}}/image/catalog/flags/vn.png" width="16px";height="10px" alt="Tiếng Việt" title="Tiếng Việt" /> Tiếng Việt </a> </li>
+                                            <!-- <li><a href="#"><img class="image_flag" src="{{url('public/homev2')}}/image/catalog/flags/gb.png" alt="English" title="English" /> English </a></li> -->
                                         </ul>
                                     </form>
                                 </div>
                                 
                             </li>
                         </ul>
-                        
-
-                        
                     </div>
                 </div>
             </div>
         </div>
         <!-- //Header Top -->
-
         <!-- Header center -->
         <div class="header-middle">
             <div class="container">
@@ -138,33 +144,34 @@
                         <div class="logo"><a href="{{route('home')}}"><img src="{{url('public/homev2')}}/image/catalog/logo.png" height="46px" title="Your Store" alt="hoplongtech" /></a></div>
                     </div>
                     <!-- //end Logo -->
-
-                    
                     <!-- Search -->
                     <div class="col-lg-7 col-md-6 col-sm-5">
                         <div class="search-header-w">
-                            <div class="icon-search hidden-lg hidden-md hidden-sm"><i class="fa fa-search"></i></div>                                
-                              
+                            <div class="icon-search hidden-lg hidden-md hidden-sm"><i class="fa fa-search"></i></div>
                             <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
                                 <form method="GET" action="{{route('search_product')}}">
                                     <div id="search0" class="search input-group form-group">
-                                        <div class="select_category filter_type  icon-select hidden-sm hidden-xs">
-                                            <select class="no-border" name='product_cat'>
-                                                <option selected value="0">Tất cả danh mục</option>
-                                                @foreach($categorys as $cat)
-                                                <option class="level-0" value="{{$cat->title}}">{{$cat->title}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" name="title" placeholder="Tìm theo tên sản phẩm" >
-
+                                        <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" name="title" placeholder="Tìm theo tên sản phẩm" ng-change="productSearch(product_search)" ng-model="product_search" ng-model-options="{debounce: 1000}" >
                                         <input type="hidden" id="search-param" name="post_type" value="product" />
-                                
                                         <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
-                                    
                                     </div>
                                     <!-- <input type="hidden" name="route" value="product/search" /> -->
+                                    <div class="search-tab" style="position: absolute;width: 97%;z-index: 999;">
+                                        <div class="col-md-12 search-tab-items" style="border: 1px solid #3498db;background: #fff;border: 2px solid #e7e7e7;
+                    border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
+                                            <div class="media" ng-repeat="search_item in res_product_search ">
+                                              <span ng-click="close_tab()" style="position: absolute;top: 10px;right: 15px;font-size: 16px;z-index: 50;font-weight: bold;cursor: pointer;">x</span>
+                                                <a class="pull-left" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank">
+                                                    <img width="80" class="media-object" src="{{url('uploads/product')}}/@{{search_item['cover_image']}}" alt="Image">
+                                                </a>
+                                                <div class="media-body">
+                                                    <a class="" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank" style="font-size: 15px;font-weight: 700;margin-bottom: 0px;letter-spacing: -.04em;line-height: 1;padding: 10px 0 0;">@{{search_item['title']}}</a>
+                                                    <p>@{{search_item['price_product']}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="search-loader"></div>
+                                    </div>
                                 </form>
                             </div>
                         </div>  
@@ -172,21 +179,13 @@
                     <!-- //end Search -->
                     <div class="middle-right col-lg-3 col-md-3 col-sm-3">                  
                         <!--cart-->
-                        
                         <div class="shopping_cart">
                             <div id="cart" class="btn-shopping-cart">
-
                                 <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <div class="shopcart">
-                                        <span class="icon-c">
-                                <i class="fa fa-shopping-bag"></i>
-                              </span>
+                                        <span class="icon-c"><i class="fa fa-shopping-bag"></i></span>
                                         <div class="shopcart-inner">
-                                            <p class="text-shopping-cart">
-
-                                                Giỏ hàng
-                                            </p>
-
+                                            <p class="text-shopping-cart">Giỏ hàng</p>
                                             <span class="total-shopping-cart cart-total-full">
                                    <span class="items_cart">{{$cart->total_quantity}}</span><span class="items_cart2"> sản phẩm</span><span class="items_carts">( {{number_format($cart->total_amount)}} )</span>
                                             </span>
@@ -230,21 +229,6 @@
                                                         </td>
                                                         <td class="text-right">{{number_format($cart->total_amount)}}</td>
                                                     </tr>
-                                                    <!-- <tr>
-                                                        <td class="text-left"><strong>Eco Tax (-2.00)</strong>
-                                                        </td>
-                                                        <td class="text-right">$2.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><strong>VAT (20%)</strong>
-                                                        </td>
-                                                        <td class="text-right">$20.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left"><strong>Total</strong>
-                                                        </td>
-                                                        <td class="text-right">$162.00</td>
-                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                             <p class="text-right"> <a class="btn view-cart" href="{{route('view_cart')}}"><i class="fa fa-shopping-cart"></i>Xem giỏ hàng</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="{{route('order')}}"><i class="fa fa-share"></i>Đặt hàng</a> 
@@ -254,27 +238,12 @@
                                 </ul>
                                 @endif
                             </div>
-
                         </div>
-                        <!--//cart-->
-
-                        <!-- <ul class="wishlist-comp hidden-md hidden-sm hidden-xs">
-                            <li class="compare hidden-xs"><a href="#" class="top-link-compare" title="Compare "><i class="fa fa-refresh"></i></a>
-                            </li>
-                            <li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Wish List (0) "><i class="fa fa-heart"></i></a>
-                            </li>
-                        </ul> -->
-
-                                            
-                        
                     </div>
-                    
                 </div>
-
             </div>
         </div>
         <!-- //Header center -->
-
         <!-- Header Bottom -->
         <div class="header-bottom hidden-compact">
             <div class="container">
@@ -312,12 +281,12 @@
                                             <div class="megamenu-pattern">
                                                 <div class="container-mega">
                                                     <ul class="megamenu megamenu-left" id="myList" style="position: relative;">
-                                                        @foreach($categorys as $category)
+                                                        @foreach($categorys as $itemCategory)
                                                         <li class="item-vertical  with-sub-menu hover">
                                                             <p class="close-menu"></p>
-                                                            <a href="{{route('view_category',[$category->slug])}}" class="clearfix">
+                                                            <a href="{{route('view_category',[$itemCategory->slug])}}" class="clearfix">
                                                                 <img src="{{url('public/homev2')}}/image/catalog/menu/icons/ico10.png" alt="icon">
-                                                                <span>{{$category->title}}</span>
+                                                                <span>{{$itemCategory->title}}</span>
                                                                 <b class="fa-angle-right"></b>
                                                             </a>
                                                             <div class="sub-menu" data-subwidth="60"  >
@@ -325,17 +294,17 @@
                                                                     <div class="row">
                                                                         <div class="col-sm-12">
                                                                             <div class="row">
-                                                                                @foreach($category->childs as $child)
+                                                                                @foreach($itemCategory->childs as $child)
                                                                                 <div class="col-md-4 static-menu">
                                                                                     <div class="menu">
                                                                                         <ul>
                                                                                             <li>
                                                                                                 <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
-                                                                                                <ul>
-                                                                                                    @foreach($child->childs2->slice(0, 3) as $chil)
+                                                                                                <!-- <ul>
+                                                                                                    @foreach($child->childs2 as $chil)
                                                                                                     <li><a href="{{route('view_category',['slug'=>$chil->slug])}}" >{{$chil->title}}</a></li>
                                                                                                     @endforeach
-                                                                                                </ul>
+                                                                                                </ul> -->
                                                                                             </li>
                                                                                         </ul>
                                                                                     </div>
@@ -393,7 +362,7 @@
                                                             <strong>SẢN PHẨM</strong>
                                                             <img class="label-hot" src="{{url('public/homev2')}}/image/catalog/menu/hot-icon.png" alt="icon items">
                                                         </a>
-                                                    </li>
+                                                    </li><!-- 
                                                     <li class="with-sub-menu hover">
                                                         <p class="close-menu"></p>
                                                         <a href="#" class="clearfix">
@@ -408,19 +377,10 @@
                                                             <img class="label-hot" src="{{url('public/homev2')}}/image/catalog/menu/new-icon.png" alt="icon items">
                                                         </a>
                                                     </li>
-                                                    
                                                     <li class="">
                                                         <p class="close-menu"></p>
                                                         <a href="{{route('downloads')}}" class="clearfix">
                                                             <strong>Khuyến mại</strong>
-                                                        </a>
-                                            
-                                                    </li>
-                                                    <!-- <li class="">
-                                                        <p class="close-menu"></p>
-                                                        <a href="{{route('tin_tuc')}}" class="clearfix">
-                                                            <strong>Tin tức</strong>
-                                                            <span class="label"></span>
                                                         </a>
                                                     </li> -->
                                                     <li class="with-sub-menu hover">
@@ -461,14 +421,9 @@
         </div>
     </header>
     <!-- //Header Container  -->
-    
-   
 <!-- Main Container  -->
 @yield('mainContainer')
 <!-- //Main Container -->
-   
-   
-
     <!-- Footer Container -->
     <footer class="footer-container typefooter-1">
         <!-- Footer Top Container -->
@@ -480,18 +435,13 @@
                           <h2>Follow socials</h2>
                           <ul class="socials">
                             <li class="facebook"><a href="https://www.facebook.com/hoplongtech/" target="_blank" rel="nofollow"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
-                            <li class="twitter"><a href="https://twitter.com/" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
-                            <li class="google_plus"><a href="https://plus.google.com/" target="_blank" rel="nofollow"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
-                            <li class="pinterest"><a href="https://www.pinterest.com/" target="_blank" rel="nofollow"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
-                            <li class="youtube"><a href="#" target="_blank"><i class="fa fa-youtube-play" rel="nofollow"></i><span>Youtube</span></a></li>
+                            <li class="youtube"><a href="https://www.youtube.com/channel/UCVAAwrppS45yC10KcpjKsqg/videos" target="_blank"><i class="fa fa-youtube-play" rel="nofollow"></i><span>Youtube</span></a></li>
+                            <li class="twitter"><a href="#" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+                            <li class="google_plus"><a href="#" target="_blank" rel="nofollow"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
+                            <li class="pinterest"><a href="#" target="_blank" rel="nofollow"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
                             <li class="linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin" rel="nofollow"></i><span>linkedin</span></a></li>
                           </ul>
                         </div>
-                        
-
-
-
-
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="module newsletter-footer1">
@@ -540,7 +490,7 @@
                                 <a href="{{route('home')}}"><img src="{{url('public/homev2')}}/image/catalog/logo-footer.png" height="46px" alt="image"></a>
                             </div>
                             <ul class="menu">
-                                <li class="adress">
+                                <li class="adres">
                                     87 Lĩnh Nam - Hoàng Mai - Hà Nội
                                 </li>
                                 <li class="phone">
@@ -554,8 +504,6 @@
                                 </li>
                             </ul>
                         </div>
-
-
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
                         <div class="box-information box-footer">
@@ -567,7 +515,6 @@
                                     <li><a href="#">Hải phòng</a></li>
                                     <li><a href="#">Đà Nẵng</a></li>
                                     <li><a href="#">Hồ Chí Minh</a></li>
-                                    <li><a href="#">Cần Thơ</a></li>
                                   </ul>
                                 </div>
                             </div>
@@ -580,43 +527,26 @@
                             <h3 class="modtitle">Về Hoplong</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
+                                        <li><a style="color: red;">Hotline: 1900.6536</a></li>
                                         <li><a href="{{route('home')}}">Giới thiệu</a></li>
-                                        <li><a href="#">Điều khoản sử dụng</a></li>
-                                        <li><a href="#">Chính sách bảo mật</a></li>
-                                        <li><a href="#">Hình thức thanh toán</a></li>
+                                        <li><a href="#">Lịch sử phát triển</a></li>
+                                        <li><a href="#">Tuyển dụng</a></li>
                                         <li><a href="#">Liên hệ</a></li>
                                     </ul>
                                 </div>
                           </div>
                         </div>
-                    </div><!-- 
-                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
-                        <div class="box-service box-footer">
-                          <div class="module clearfix">
-                            <h3 class="modtitle">Danh mục sản phẩm</h3>
-                            <div class="modcontent">
-                              <ul class="menu">
-                                @foreach($categorys->slice(0,5) as $category)
-                                <li><a href="{{route('view_category',[$category->slug])}}">{{$category->title}}</a></li>
-                                @endforeach
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                    </div> -->
-                
+                    </div>
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
                         <div class="box-account box-footer">
                             <div class="module clearfix">
                                 <h3 class="modtitle">Chăm sóc khách hàng</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
-                                        <li><a href="">Hotline: 1900.6536</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Hướng dẫn mua hàng</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Điểm thưởng và đổi điểm thưởng</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
-                                        <li><a href="{{route('loginCustomer')}}">Dành cho đại lý</a></li>
-                                        <!-- <li><a href="{{route('register_customer')}}">Đăng ký</a></li> -->
+                                        <li><a href="{{route('home_agency_posts')}}">Dành cho đại lý</a></li>
+                                        <li><a href="">Hướng dẫn mua hàng</a></li>
+                                        <li><a href="https://hoplongtech.com/tin-tuc/hinh-thuc-thanh-toan">Hình thức thanh toán</a></li>
+                                        <li><a href="">Đổi điểm thưởng</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -625,13 +555,13 @@
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
                         <div class="box-service box-footer">
                             <div class="module clearfix">
-                                <h3 class="modtitle">Dịch vụ</h3>
+                                <h3 class="modtitle">Chính sách/ Điều khoản</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
-                                        <li><a href="{{route('home_agency_posts')}}">Dành cho đại lý</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Chính sách bảo hành</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Chính sách đổi trả</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
+                                        <li><a href="https://hoplongtech.com/tin-tuc/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+                                        <li><a href="https://hoplongtech.com/tin-tuc/chinh-sach-bao-hanh">Chính sách bảo hành</a></li>
+                                        <li><a href="https://hoplongtech.com/tin-tuc/chinh-sach-van-chuyen-giao-nhan-lap-dat">Chính sách Vận chuyển / Lắp đặt</a></li>
+                                        <li><a href="https://hoplongtech.com/tin-tuc/chinh-sach-doi-tra-hang-va-hoan-tien">Chính sách đổi trả / Hoàn tiền</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -643,12 +573,6 @@
                             <div class="module clearfix">
                                 <h3 class="modtitle">Tải ứng dụng ngay</h3>
                                 <div class="modcontent col-md-6">
-                                    <!-- <ul class="menu">
-                                        <li><a href="{{route('home_agency_posts')}}">Dành cho đại lý</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Chính sách bảo hành</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Chính sách đổi trả</a></li>
-                                        <li><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
-                                    </ul> -->
                                     <img src="{{url('public/homev2')}}/image/catalog/qr-code.png" alt="iOS/Android">
                                 </div>
                                 <div class="col-md-6">
@@ -662,59 +586,47 @@
                 </div>
             </div>
         </div>
-       <!--  <div class="container">
+        <div class="container">
             <div class="row">
                         <div class="footer-b">
                             <div class="bottom-cont">
-                                <a href="#"><img src="{{url('public/homev2')}}/image/catalog/demo/payment/pay1.jpg" alt="image"></a>
+                                <a href="http://online.gov.vn/Home/WebDetails/29393"><img src="{{url('public/homev2')}}/image/catalog/dathongbao.png" alt="Đã thông báo Bộ Công Thương"></a>
                                 <ul class="footer-links">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Customer Service</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Site Map</a></li>
-                                    <li><a href="#">Orders and Returns</a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Giới thiệu</a></li>
+                                    <li><a href="#">Voucher</a></li>
+                                    <li><a href="#">Chăm sóc khách hàng</a></li>
+                                    <li><a href="#">Tin tức</a></li>
+                                    <li><a href="#">Liên hệ</a></li>
                                 </ul>  
-                                <p>**$50 off orders $350+ with the code BOO50. $75 off orders $500+ with the code BOO75. $150 off orders $1000+ with the code BOO150. Valid from October 28, 2016 to October 31, 2016. Offer may not be combined with any other offers or promotions, is non-exchangeable and non-refundable. Offer valid within the US only.</p>
+                                <p>Quà tặng trị giá 200.000đ (Áp dụng sản phẩm tự động hóa công nghiệp SCHNEIDER ELECTRIC)</br> Nhập mã HOPLONG giảm thêm 1% dành cho toàn bộ đơn hàng từ 01/01 đến 28/02/2020. Tặng voucher 20.000đ khi đánh giá 5* </br>(Áp dụng cho đơn hàng từ 200.000đ)</p>
                             </div>
                         </div>
             </div>
-        </div> -->
-
+        </div>
         <!-- Footer Bottom Container -->
         <div class="footer-bottom">
             <div class="container">
                 <div class="col-lg-12 col-xs-12 payment-w">
                     <img src="{{url('public/homev2')}}/image/catalog/demo/payment/payment.png" alt="imgpayment">
                 </div>
-                <div class="col-lg-12 col-xs-12 payment-w">
-                    <a href="http://online.gov.vn/Home/WebDetails/29393" rel="nofollow" target="_blank"><img src="{{url('public/homev2')}}/image/catalog/dathongbao.png" alt="Đã thông báo Bộ Công Thương" style="margin-top: 20px;"></a>
-                </div>
             </div>
             <div class="copyright-w">
                 <div class="container">
                     <div class="copyright">
-                    Copyright © 2019 <a href="https://hoplongtech.com/" target="_blank">hoplongtech.com</a> All rights reserved. 
+                    Copyright © 2020 <a href="https://hoplongtech.com/" target="_blank">hoplongtech.com</a> All rights reserved. 
                     </div>
                 </div>
             </div>            
         </div>
         <!-- /Footer Bottom Container -->
-        
-        
             <!--Back To Top-->
         <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
     </footer>
     <!-- //end Footer Container -->
 
     </div>
-   
-
 <!-- End Color Scheme
 ============================================ -->
-
-
-
 <!-- Include Libs & Plugins
 ============================================ -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -731,31 +643,141 @@
 <script type="text/javascript" src="{{url('public/homev2')}}/js/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/modernizr/modernizr-2.6.2.min.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/minicolors/jquery.miniColors.min.js"></script>
-
 <!-- Theme files
 ============================================ -->
-
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/application.js"></script>
-
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/homepage.js"></script>
-
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/toppanel.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/so_megamenu.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/addtocart.js"></script>  
-
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/application.js"></script>
-    <script type="text/javascript"><!--
-    // Check if Cookie exists
-        if($.cookie('display')){
-            view = $.cookie('display');
-        }else{
-            view = 'grid';
+<script type="text/javascript" src="{{url('public/homev2')}}/js/my_js.js"></script>
+<script type="text/javascript">
+var myapp = angular.module("myApp",['angularUtils.directives.dirPagination']);
+    $url = window.location.protocol + "//" + window.location.hostname;
+    myapp.controller("myCtrl",function($scope,$http){
+        $(".search-tab").hide();
+        $scope.close_tab = function(){
+            $(".search-tab").hide();
         }
-        if(view) display(view);
-    //--></script> 
 
-    <script type="text/javascript" src="{{url('public/homev2')}}/js/my_js.js"></script>
+        $scope.productSearch = function(product_search){
+            // console.log(product_search);
+            $(".search-tab-items").css('min-height',100);
+            $("#search-loader").addClass('search-loader');
+            $(".search-tab").show();
+            if(product_search != ''){
+                // $http.get($url + '/CodeHopLongTech/api/autoSearch/' + product_search).then(function(res){
+                $http.get($url + '/api/autoSearch/' + product_search).then(function(res){
+                    $scope.res_product_search = res.data.data;
+                    $("#search-loader").removeClass('search-loader');
+                }); 
+            }
+            if(product_search == ''){
+                $scope.res_product_search = [];
+            }
+                
+        };
 
+    // partnumber
+    var url = window.location.protocol + "//" + window.location.hostname;
+    var product_id = $('.ng_product_id').val();
+    var currentdate = new Date(); 
+        // if(currentdate.getMonth()+1 < 10){
+        //     var month = "0"+(currentdate.getMonth()+1);
+        // }
+        var currentTime = currentdate.getFullYear() + "-"
+        + (currentdate.getMonth()+1<10 ? "0"+(currentdate.getMonth()+1) : currentdate.getMonth()+1)  + "-"
+        + currentdate.getDate();
 
+        $http.get(url+'/api/getRateProduct/' + product_id).then(function(res){
+          $scope.getRateProduct = res.data;
+      });
+        $http.get(url+'/api/getCommentProduct/' + product_id).then(function(res){
+          $scope.getCommentProduct = res.data;
+      }); 
+        $scope.replyComment = function(idComment){
+          $http.get(url+'/api/getReplyCommentProduct/' + idComment).then(function(res){
+            $('.reply-comment').addClass('hide');
+            var togg = ($('.fa-reply').parent().parent().parent().parent().find('.reply-comment').removeClass('hide').addClass('show'));
+            $scope.getReplyCommentProduct = res.data;
+        }); 
+      };
+        // get partnumber
+        $http.get(url+'/api/getPartNumber/' + product_id).then(function(res){
+          for(var i=0; i<res.data.length; i++){
+            if(res.data[i]['price'] == '' || $.isNumeric(res.data[i]['price']) == false){
+              res.data[i]['price'] = "Liên hệ 1900.6536";
+              continue;
+          }
+          if((currentTime <= res.data[i]['time_discount'])){
+                    // console.log(res.data[i]['price']);
+                    var productPrice = res.data[i]['price'] - ((res.data[i]['price'] * res.data[i]['discount'])/100);
+                    res.data[i]['price'] = String(productPrice).replace(/(.)(?=(\d{3})+$)/g,'$1,')+" VNĐ";
+                    continue;
+                }
+                if($('.AuthCheck').val() == 'true'){
+                    var priceProduct = (res.data[i]['price_when_login'] != null) ? (res.data[i]['price_when_login']) : (res.data[i]['price'] > 0 ? (res.data[i]['price']) : res.data[i]['price']);
+
+                    var showPrice = ($(".Discount").val() != null) ? (Math.round(priceProduct - ((priceProduct/100) * $(".Discount").val()))) : priceProduct;
+                    res.data[i]['price'] = String(showPrice).replace(/(.)(?=(\d{3})+$)/g,'$1,')+" VNĐ";
+                    continue;
+                }
+                else{
+                    res.data[i]['price'] = res.data[i]['price'] > 0 ? String(res.data[i]['price']).replace(/(.)(?=(\d{3})+$)/g,'$1,')+'  VNĐ' : res.data[i]['price'];
+                    continue;
+                }
+            }
+            $scope.getPartNumber = res.data;
+        });
+        // get partnumber
+        // add to cart
+        $scope.quantity = 1;
+        $scope.addCart = function(idProduct,quantity){
+          $http.get(url+'/cart/add-to-cart/' + idProduct + '/' + quantity).then(function(res){
+            alert('Đã thêm sản phẩm vào giỏ hàng');
+            location.reload();
+        });
+      }
+      $scope.shopNow = function(idProduct,quantity){
+          $http.get(url+'/cart/shop-now/' + idProduct + '/' + quantity).then(function(res){
+            window.location.href = url+"/order";
+        });
+      }
+        // add to cart
+
+       // show hide dimension
+       $scope.showDimension = function(){
+        $(".fa-plus").addClass('hide');
+        $(".fa-plus").removeClass('show');
+        $(".fa-minus").addClass('show');
+        $(".fa-minus").removeClass('hide');
+        $(".togDimension").addClass('showDimension');
+        $(".togDimension").removeClass('hideDimension');            
+    }
+    $scope.hideDimension = function(){
+        $(".fa-minus").addClass('hide');
+        $(".fa-minus").removeClass('show');
+        $(".fa-plus").addClass('show');
+        $(".fa-plus").removeClass('hide');
+
+        $(".togDimension").addClass('hideDimension');
+        $(".togDimension").removeClass('showDimension');
+    }
+        // show hide dimension 
+    });
+     // share likedin
+    jQuery(document).ready(function($) {
+       $('.share').click(function() {
+         var NWin = window.open($(this).prop('href'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+         if (window.focus)
+         {
+           NWin.focus();
+       }
+       return false;
+   });
+    // partnumber
+    })
+</script>
 </body>
 </html>

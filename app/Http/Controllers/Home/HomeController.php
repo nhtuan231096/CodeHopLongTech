@@ -57,7 +57,7 @@ class HomeController extends Controller
 	}
 	public function index(){
 		$slider_active=Slider::where(['sorder'=>'1','type'=>0])->first();
-		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
+		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->orderBy('sorder','ASC')->get();
 		$company_news=News::limit(3)->where('category_id','42')->orderBy('id','DESC')->get();
 		$office=Office::where('status','enable')->orderBy('sorder','ASC')->get();
 		$actoffice=Office::where('sorder','1')->first();
@@ -67,7 +67,15 @@ class HomeController extends Controller
 		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
 		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
 		$conf = Conf_home_page::all()->first();
-		return view('home.index_1',[
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
+		$cat_copy_shn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',1)->limit(16)->get();	
+		$cat_copy_omron = CatCopy::orderBy('sorder_2','ASC')->where('sorder',2)->limit(16)->get();	
+		$cat_copy_atn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',3)->limit(16)->get();	
+		$cat_copy_id = CatCopy::orderBy('sorder_2','ASC')->where('sorder',4)->limit(16)->get();	
+		$cat_copy_ls = CatCopy::orderBy('sorder_2','ASC')->where('sorder',5)->limit(16)->get();	
+		$cat_copy_mit = CatCopy::orderBy('sorder_2','ASC')->where('sorder',6)->limit(16)->get();	
+		// $cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();	
+		return view('home.v2.home',[
 			'active'=>$slider_active,
 			'slider_homes'=>$slider_home,
 			'actoffice'=>$actoffice,
@@ -78,7 +86,15 @@ class HomeController extends Controller
 			'news_service'=>$news_service,
 			'supports'=>$supports,
 			'sp'=>$sp,	
-			'conf' => $conf
+			'conf' => $conf,
+			'categorys' => $categorys,
+			'cat_copy_shn'=>$cat_copy_shn,
+			'cat_copy_omron'=>$cat_copy_omron,
+			'cat_copy_atn'=>$cat_copy_atn,
+			'cat_copy_id'=>$cat_copy_id,
+			'cat_copy_ls'=>$cat_copy_ls,
+			'cat_copy_mit'=>$cat_copy_mit
+			// 'cat_copy'=>$cat_copy,
 		]);
 	}
 
@@ -86,59 +102,55 @@ class HomeController extends Controller
 		// $a = new Data;
 		// dd($a->DiscountAmount());
 		//toi uu
-		// Cache::flush();
+		Cache::flush();
 		
-		$pro = (new Product())->datas();
-		$pro2 = (new Product())->datas2();
-		$pro3 = (new Product())->datas3();
-		$pro4 = (new Product())->datas4();
+		// $pro = (new Product())->datas();
+		// $pro2 = (new Product())->datas2();
+		// $pro3 = (new Product())->datas3();
+		// $pro4 = (new Product())->datas4();
 		$slider=Slider::orderBy('sorder','ASC')->where(['status'=>'enable','type'=>1])->get();
 		$banners=Banner::limit(5)->get();
 
-		$categorys=Category::limit(16)->where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->get();
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
 		// dd($categorys);
 		
-		$parent_categorys=Category::limit(16)->where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->get();
+		$parent_categorys=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
 
-		// $best_seller = Cache::remember('best_seller',1*60,function() use($pro){
-		// 	return $pro->where('is_best_seller','enable')->get();
-		// });
-		$best_seller = $pro->where('is_best_seller','enable')->get();
-		// $new_product = Cache::remember('new_product',1*60,function() use($pro2){
-		// 	return $pro2->where('is_new_product','enable')->get();
-		// });
-		$new_product = $pro2->where('is_new_product','enable')->get();
+		$best_seller = Cache::remember('best_seller',1*60,function(){
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('is_best_seller','enable')->limit(16)->get();
+		});
+		// $best_seller = $pro->where('is_best_seller','enable')->limit(10)->get();
+		$new_product = Cache::remember('new_product',1*60,function() {
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('is_new_product','enable')->limit(16)->get();
+		});
+		// // $new_product = $pro2->where('is_new_product','enable')->limit(10)->get();
 
-		// $promotion = Cache::remember('promotion',1*60,function() use($pro3){
-		// 	return $pro3->where('is_promotion','enable')->get();
-		// });
-		$promotion = $pro3->where('is_promotion','enable')->get();
+		$promotion = Cache::remember('promotion',1*60,function() {
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('is_promotion','enable')->limit(16)->get();
+		});
+		// // $promotion = $pro3->where('is_promotion','enable')->limit(10)->get();
 
-		// $special_product = Cache::remember('special_product',1*60,function() use($pro4){
-		// 	return $pro4->where('special_product','enable')->get();
-		// });
-		$special_product = $pro4->where('special_product','enable')->get();
+		$special_product = Cache::remember('special_product',1*60,function() {
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('special_product','enable')->limit(16)->get();
+		});
+		// $special_product = $pro4->where('special_product','enable')->limit(10)->get();
 
-		// $company_news = Cache::remember('company_news',1*60,function() use($pro){
-		// 	return $pro->where('category_id','35')->get();
-		// });	
-		$company_news = $pro->where('category_id','35')->get();
+		$company_news = Cache::remember('company_news',1*60,function() {
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('category_id','35')->limit(16)->get();
+		});	
+		// $company_news = $pro->where('category_id','35')->limit(10)->get();
 
-		$cat_copy = CatCopy::orderBy('sorder_2','ASC')->get();	
-		$pro_copy = ProCopy::all();	
-		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
-		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
+		$cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();	
+		$pro_copy = ProCopy::limit(16)->get();	
+		$supports=Support::where(['status'=>'enable','type'=>'technical'])->limit(10)->get();
+		$sp=Support::where(['status'=>'enable','type'=>'business'])->limit(10)->get();
 		$partners=Partners::where('status','enable')->orderBy('sorder','DESC')->get();
 		$banner_top=News::limit(4)->where(['status'=>'enable','category_id'=>'41'])->get();
 		$slider_home=Slider::limit(6)->where(['status'=>'enable','type'=>0])->where('sorder','<>',1)->orderBy('sorder','ASC')->get();
 		$current_date = date('Y-m-d');
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
-		// dd($flash_sale);
 		$news= News::orderBy('id','desc')->limit(1)->get();
 
-		// $promotionOfPartner = $pro->where('category_id',)
-
-		// dd($date_diff);
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[
 			'sliders'=>$slider,
@@ -147,7 +159,7 @@ class HomeController extends Controller
 			'categorys1'=>$parent_categorys,
 			'best_seller'=>$best_seller,
 			'new_products'=>$new_product,
-			'special_products'=>$special_product,
+			'special_products'=>$best_seller,
 			'promotions'=>$promotion,
 			'news'=>$company_news,
 			'partners'=>$partners,
@@ -163,28 +175,30 @@ class HomeController extends Controller
 			]);
 	}
 	public function viewCate($slug,Request $req) {
-		$pro3 = (new Product())->datas3();
-		$pro2 = (new Product())->datas2();
+		// $pro3 = (new Product())->datas3();
+		// $pro2 = (new Product())->datas2();
 			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
 			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-			$new_product=Product::paginate(10)->Where('is_new_product','create')->where('status','enable');
-			$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();;
+			$new_product=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->paginate(10)->Where('is_new_product','create')->where('status','enable');
+			$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();
 			$category= Category::where('slug',$slug)->first();
-			$product= Product::where('slug',$slug)->first();
+			$product= Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('slug',$slug)->first();
 			$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
 			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
-			$others=Product::paginate(8)->where('category_id','<>','$id');
-			$promotion = $pro3->where('is_promotion','enable')->where('category_id',$category->id)->get();
+			$others=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->paginate(8)->where('category_id','<>','$id');
+			$promotion = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->paginate(8)->where('is_promotion','enable')->where('category_id',$category->id);
 
+
+			$cat = Category::where('parent_id',$category->id);
+			$childCategory = $cat->paginate(15);
 			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
 
 			if($category)
 			{	
-				$cate=Category::where('parent_id',$category->id)->paginate(15);
+				$cate=$cat->limit(15)->get();
 				$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
-				$products=Product::where('category_id',$category->id)->paginate(15);
-				// dd($products);
+				$products=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('category_id',$category->id)->paginate(15);
 				return view('home.v2.category_product',
 					['category'=>$category,
 					'categorys'=>$categorys,
@@ -195,6 +209,7 @@ class HomeController extends Controller
 					'products' => $products,
 					'categorys1'=>$categorys1,
 					'promotions'=>$promotion,
+					'childCategory'=>$childCategory,
 					]);
 			}
 		
@@ -205,42 +220,30 @@ class HomeController extends Controller
 	}
 	public function view($slug, Request $req)
 		{
-			$pro2 = (new Product())->datas2();
+			// $pro2 = (new Product())->datas2();
+			$pro3 = (new Product())->datas3();
+
 			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
 			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
 			$new_product=Product::paginate(10)->Where('is_new_product','create')->where('status','enable');
 			$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();;
 			$category= Category::where('slug',$slug)->first();
 			$product= Product::where('slug',$slug)->first();
-			$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
-			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
+			$supports=Support::where(['status'=>'enable','type'=>'technical'])->limit(10)->get();
+			$sp=Support::Where(['status'=>'enable','type'=>'business'])->limit(10)->get();
 			//sản phẩm khác
 			$others=Product::paginate(8)->where('category_id','<>','$id');
-			$pro3 = (new Product())->datas3();
-			$promotion = $pro3->where('is_promotion','enable')->get();
-			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
-			// if($category)
-			// {	$cate=Category::where('parent_id',$category->id)->paginate(15);
-			// 	$products=Product::where('category_id',$category->id)->paginate(15);
-			// 	// dd($products);
-			// 	return view('home.product-category',
-			// 		['category'=>$category,
-			// 		'categorys'=>$categorys,
-			// 		'partners'=>$partners,
-			// 		'supports'=>$supports,
-			// 		'sp'=>$sp,
-			// 		'cate'=>$cate,
-			// 		'products' => $products,
-			// 		'categorys1'=>$categorys1
-			// 		]);
-			// }
+			$promotion = Cache::remember('new_product',1*60,function() use($pro3){
+				return $pro3->where('is_promotion','enable')->limit(16)->get();
+			});
+			// $promotion = $pro3->where('is_promotion','enable')->limit(10)->get();
 			if($product)
 			{
 				$view = $product->view + 1;
 				$product->update(['view'=>$view]);
-				$new_product = Cache::remember('new_product',1*60,function() use($pro2){
-					return $pro2->where('is_new_product','enable')->get();
-				});
+				// $new_product = Cache::remember('new_product',1*60,function() use($pro2){
+				// 	return $pro2->where('is_new_product','enable')->limit(16)->get();
+				// });
 				$comment=Comment::orderBy('id','DESC')->where('status',1)->where('product_id',$product->id)->where('id_comment_reply',null)->paginate(5);
 				$sames=Product::where('category_id',$product->category_id)->where('id','<>','$product->id')->where('status','enable')->paginate(8);
 				$rates=Rate::where('status',1)->where('product_id',$product->id)->paginate(4);
@@ -257,12 +260,12 @@ class HomeController extends Controller
 				$cate=Category::where('id',$product->category_id)->first();
 				$cate_related = Category::where('parent_id',$cate->parent_id)->where('status','enable')->limit(15)->get();
 				// dd($cate->parent_id);
-				return view('home..v2.detail_product',[
+				return view('home.v2.detail_product',[
 					'product'=>$product,
 					'others'=>$others,
 					'partners'=>$partners,
 					'categorys'=>$categorys,
-					'new_products'=>$new_product,
+					// 'new_products'=>$new_product,
 					'supports'=>$supports,
 					'comments'=>$comment,
 					'sp'=>$sp,
@@ -559,7 +562,15 @@ public function recruitment(){
 		$project = News::where('type','project')->limit(12)->get();
 		$nproject = News::orderBy('id','DESC')->limit(12)->get();
 		$categorys1=Category::orderBy('sorder','DESC')->where(['status'=>'enable','parent_id'=>0])->limit(16)->get();
-		return view('home.contact',[
+		// return view('home.contact',[
+		// 	'project' => $project,
+		// 	'nproject' => $nproject,
+		// 	'categorys' => $categorys,
+		// 	'supports' => $supports,
+		// 	'sp' => $sp,
+		// 	'categorys1' => $categorys1,
+		// 	]);
+		return view('home.v2.contact_us',[
 			'project' => $project,
 			'nproject' => $nproject,
 			'categorys' => $categorys,
@@ -878,16 +889,33 @@ public function recruitment(){
 			'special_news' => $special_news
 		]);
 	}
+	// public function cate_news_page($slug){
+	// 	$id = News_Category::where('slug',$slug)->first()->id;
+	// 	$data = News::search()->where('category_id',$id)->where('status','enable')->orderBy('id','desc')->paginate(8);
+	// 	$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+	// 	$news_category = News_Category::where('status','enable')->get();
+	// 	$special_news = News::where('status','enable')->where('type','project')->orderBy('id','desc')->paginate(6);
+	// 	return view('home.news_cate_page',[
+	// 		'news' => $data,
+	// 		'categorys' => $categorys,
+	// 		'news_category' => $news_category,
+	// 		'special_news' => $special_news
+	// 	]);
+	// }
 	public function cate_news_page($slug){
 		$id = News_Category::where('slug',$slug)->first()->id;
-		$data = News::search()->where('category_id',$id)->where('status','enable')->orderBy('id','desc')->paginate(8);
+		$news = News::search()->where('category_id',$id)->where('status','enable')->orderBy('id','desc')->paginate(8);
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$news_category = News_Category::where('status','enable')->get();
 		$special_news = News::where('status','enable')->where('type','project')->orderBy('id','desc')->paginate(6);
-		return view('home.news_cate_page',[
-			'news' => $data,
+
+		$pro3 = (new Product())->datas3();
+		$promotion = $pro3->where('is_promotion','enable')->get();
+		return view('home.v2.news_page',[
+			'news' => $news,
 			'categorys' => $categorys,
 			'news_category' => $news_category,
+			'promotions'=>$promotion,
 			'special_news' => $special_news
 		]);
 	}
