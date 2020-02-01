@@ -74,6 +74,7 @@ class HomeController extends Controller
 		$cat_copy_id = CatCopy::orderBy('sorder_2','ASC')->where('sorder',4)->limit(16)->get();	
 		$cat_copy_ls = CatCopy::orderBy('sorder_2','ASC')->where('sorder',5)->limit(16)->get();	
 		$cat_copy_mit = CatCopy::orderBy('sorder_2','ASC')->where('sorder',6)->limit(16)->get();	
+		$special_news = News::where('status','enable')->where('type','project')->orderBy('id','desc')->paginate(4);
 		// $cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();	
 		return view('home.v2.home',[
 			'active'=>$slider_active,
@@ -93,7 +94,8 @@ class HomeController extends Controller
 			'cat_copy_atn'=>$cat_copy_atn,
 			'cat_copy_id'=>$cat_copy_id,
 			'cat_copy_ls'=>$cat_copy_ls,
-			'cat_copy_mit'=>$cat_copy_mit
+			'cat_copy_mit'=>$cat_copy_mit,
+			'special_news'=>$special_news
 			// 'cat_copy'=>$cat_copy,
 		]);
 	}
@@ -192,11 +194,10 @@ class HomeController extends Controller
 
 			$cat = Category::where('parent_id',$category->id);
 			$childCategory = $cat->paginate(15);
-			// $categorys=Category::orderBy('sorder','ASC')->paginate(10)->Where('parent_id','parent');
 
 			if($category)
 			{	
-				$cate=$cat->limit(15)->get();
+				$cate=Category::where('parent_id',$category->id)->limit(15)->get();
 				$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
 				$products=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('category_id',$category->id)->paginate(15);
 				return view('home.v2.category_product',

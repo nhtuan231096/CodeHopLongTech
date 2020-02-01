@@ -50,3 +50,7 @@ Route::get('autoSearch/{product_search}','\App\Http\Controllers\Home\HomeControl
 
 Route::get('getProductFlashSale/','\App\Http\Controllers\Admin\ProductController@getAllProduct');
 Route::get('getEditProductFlashSale/','\App\Http\Controllers\Admin\ProductController@getEditProduct');
+
+// route app
+	include('app/app.php');
+// route app

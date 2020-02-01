@@ -311,11 +311,11 @@
                           <div class="right-block">
                             <div class="button-group so-quickview cartinfo--left">
                                 <span>
-                                    <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng">
-                                        <a href="{{route('add_cart',['id'=>$itemProduct->id])}}">
+                                    <!-- <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng"> -->
+                                        <a class="addToCart addCart" href="{{route('add_cart',['id'=>$itemProduct->product_id])}}">
                                             <span style="color: #fff">Thêm vào giỏ</span>
                                         </a>
-                                    </button>
+                                    <!-- </button> -->
                                 </span>   
                                     <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
                                     </button>
@@ -396,11 +396,14 @@
                                                 <div class="button-group so-quickview cartinfo--left">
                                                     <span>
                                                         @if($itemProduct->price > 0)
-                                                        <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng">
-                                                            <a href="{{route('add_cart',['id'=>$itemProduct->id])}}">
+                                                        <!-- <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng"> -->
+                                                            <!-- <a href="{{route('add_cart',['id'=>$itemProduct->id])}}">
+                                                                <span style="color: #fff">Thêm vào giỏ</span>
+                                                            </a> -->
+                                                            <a class="addToCart addCart" href="{{route('add_cart',['id'=>$itemProduct->id])}}">
                                                                 <span style="color: #fff">Thêm vào giỏ</span>
                                                             </a>
-                                                        </button>
+                                                        <!-- </button> -->
                                                         @else
                                                         <a class="addToCart addCart" href="{{route('view',['slug'=>$itemProduct->slug])}}">Chi tiết</a>
                                                         @endif
@@ -453,11 +456,11 @@
                                                 <div class="button-group so-quickview cartinfo--left">
                                                     <span>
                                                         @if($promotion->price > 0)
-                                                        <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng">
-                                                            <a href="{{route('add_cart',['id'=>$promotion->id])}}">
+                                                        <!-- <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng"> -->
+                                                            <a class="addToCart addCart" href="{{route('add_cart',['id'=>$promotion->id])}}">
                                                                 <span style="color: #fff">Thêm vào giỏ</span>
                                                             </a>
-                                                        </button>
+                                                        <!-- </button> -->
                                                         @else
                                                         <a class="addToCart addCart" href="{{route('view',['slug'=>$promotion->slug])}}">
                                                             Chi tiết
@@ -506,11 +509,11 @@
                                        <div class="button-group so-quickview cartinfo--left">
                                         <span>
                                             @if($new_product->price > 0)
-                                            <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng">
-                                                <a href="{{route('add_cart',['id'=>$new_product->id])}}">
+                                            <!-- <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng"> -->
+                                                <a class="addToCart addCart" href="{{route('add_cart',['id'=>$new_product->id])}}">
                                                     <span style="color: #fff">Thêm vào giỏ</span>
                                                 </a>
-                                            </button>
+                                            <!-- </button> -->
                                             @else
                                             <a class="addToCart addCart" href="{{route('view',['slug'=>$new_product->slug])}}">
                                                 Chi tiết
@@ -571,11 +574,11 @@
                             <div class="button-group so-quickview cartinfo--left">
                                 <span>
                                     @if($new_product->price > 0)
-                                    <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng">
-                                        <a href="{{route('add_cart',['id'=>$new_product->id])}}">
+                                    <!-- <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng"> -->
+                                        <a class="addToCart addCart" href="{{route('add_cart',['id'=>$new_product->id])}}">
                                             <span style="color: #fff">Thêm vào giỏ</span>
                                         </a>
-                                    </button>
+                                    <!-- </button> -->
                                     @else
                                     <a class="addToCart addCart" href="{{route('view',['slug'=>$new_product->slug])}}">
                                         Chi tiết

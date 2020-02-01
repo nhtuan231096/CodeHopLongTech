@@ -626,7 +626,57 @@
                         </div>
                     </div>
                     </div>
-
+                    <!-- du an -->
+                    <div id="so_category_slider_191" class="so-category-slider container-slider module cate-slider2">
+                        <div class="modcontent">
+                            <div class="page-top">
+                                <div class="page-title-categoryslider">Dự án</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 our-member">
+                        <div class="overflow-owl-slider1">
+                            <div class="wrapper-owl-slider1">
+                                <div class="row slider-ourmember">
+                                    @foreach($special_news as $newsItem) 
+                                    <div class="item-about col-lg-6 col-md-6 col-sm-6">
+                                        <div class="item respl-item">
+                                            <div class="item-inner">
+                                                <div class="w-image-box">
+                                                    <div class="item-image">
+                                                        <a title="" href="{{route('tin_tuc_chi_tiet',['slug'=>$newsItem->slug])}}">
+                                                            <img width="160" height="160" src="{{url('uploads/news')}}/{{$newsItem->image_cover}}" alt="{{$newsItem->image_cover}}">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="info-member">
+                                                    <h2 class="cl-name"><a title="Jennifer lawrence" href="{{route('tin_tuc_chi_tiet',['slug'=>$newsItem->slug])}}">{{$newsItem->title}}</a></h2>
+                                                    <p class="cl-job">{{$newsItem->created_by}}</p>
+                                                    <p class="cl-des">{!!$newsItem->description!!}</p>
+                                                    <ul>
+                                                        <li>
+                                                            <a class="fa fa-f" title="Facebook" href="#"></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="fa fa-t" title="Twitter" href="#"></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="fa fa-g" title="google" href="#"></a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="fa fa-s" title="skyper" href="#"></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- du an -->
                 </div>
                 <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                     <div class="banners1 banner-t banners">
