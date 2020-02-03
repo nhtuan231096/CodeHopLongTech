@@ -156,7 +156,7 @@
                                         <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
                                     </div>
                                     <!-- <input type="hidden" name="route" value="product/search" /> -->
-                                    <div class="search-tab" style="position: absolute;width: 97%;z-index: 999;">
+                                    <div class="search-tab" style="position: absolute;width: 97%;z-index: 999; display: none">
                                         <div class="col-md-12 search-tab-items" style="border: 1px solid #3498db;background: #fff;border: 2px solid #e7e7e7;
                     border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
                                             <div class="media" ng-repeat="search_item in res_product_search ">

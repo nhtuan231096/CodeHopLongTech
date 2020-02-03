@@ -21,3 +21,21 @@ Route::post('comment/','\App\Http\Controllers\Home\AppController@commentProduct'
 Route::get('comment/{product_id}','\App\Http\Controllers\Home\AppController@getCommentByIdProduct');
 // order
 Route::post('order/','\App\Http\Controllers\Home\AppController@createOrder');
+//danh sach catalog
+Route::get('document/catalog','\App\Http\Controllers\Home\AppController@getCatalog');
+//danh sach manual
+Route::get('document/manual','\App\Http\Controllers\Home\AppController@getManual');
+//danh sach price list
+Route::get('document/pricelist','\App\Http\Controllers\Home\AppController@getPricelist');
+//lấy tài liệu theo id
+Route::get('document/{download_id}','\App\Http\Controllers\Home\AppController@getDocumentById');
+// tìm kiếm tài liệu theo tiêu đề
+Route::get('document/search/{title}','\App\Http\Controllers\Home\AppController@getDocumentByTitle');
+// chính sách đổi trả hàng 
+Route::get('policy/return-exchange','\App\Http\Controllers\Home\AppController@getPolicyRetunExchange');
+// chính sách bảo hành 
+Route::get('policy/warranty','\App\Http\Controllers\Home\AppController@getWarrantyPolicy');
+// chính sách thanh toán
+Route::get('policy/payment','\App\Http\Controllers\Home\AppController@getPaymentPolicy');
+// chính sách vận chuyển
+Route::get('policy/shipping','\App\Http\Controllers\Home\AppController@getShippingPolicy');

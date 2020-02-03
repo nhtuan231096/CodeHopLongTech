@@ -13,6 +13,8 @@ use App\Models\Comment;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\RedBill;
+use App\Models\Download_service;
+use App\Models\Terms;
 use Auth;
 use Mail;
 use App\Models\AdminNotification;
@@ -123,5 +125,41 @@ class AppController extends Controller
 			}
 		}
 		return $order;
+	}
+	public function getCatalog(){
+		$catalog=Download_service::limit(8)->where('type','2')->get();
+		return $catalog;
+	}
+	public function getManual(){
+		$manuals=Download_service::limit(8)->where('type','4')->get();
+		return $manuals;
+	}
+	public function getPricelist(){
+		$pricelist=Download_service::limit(8)->where('type','3')->get();
+		return $pricelist;
+	}
+	public function getDocumentById($download_id) {
+		$document = Download_service::find($download_id)->where('status','enable')->get();
+		return $document;
+	}
+	public function getDocumentByTitle($title) {
+		$document = Download_service::where('title','like','%'.$title.'%')->where('status','enable')->get();
+		return $document;
+	}
+	public function getPolicyRetunExchange(){
+		$policy = Terms::where('type_terms','doi_tra')->get();
+		return $policy;
+	}
+	public function getWarrantyPolicy(){
+		$policy = Terms::where('type_terms','bao_hanh')->get();
+		return $policy;
+	}
+	public function getPaymentPolicy(){
+		$policy = Terms::where('type_terms','thanh_toan')->get();
+		return $policy;
+	}
+	public function getShippingPolicy(){
+		$policy = Terms::where('type_terms','van_chuyen')->get();
+		return $policy;
 	}
 }

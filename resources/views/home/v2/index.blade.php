@@ -640,7 +640,7 @@
 
                             <div class="product-image-container">
                                 <a href="{{route('view_category',['slug'=>$shn->slug])}}" target="_self" title="">
-                                    <img height="100" src="{{url('uploads/category')}}/{{$shn->cover_image}}" class="img-1 img-responsive" alt="{{$shn->title}}">
+                                    <img style="width: 256px" height="100" src="{{url('uploads/category')}}/{{$shn->cover_image}}" class="img-1 img-responsive" alt="{{$shn->title}}">
                                 </a>
                             </div>
                       </div>

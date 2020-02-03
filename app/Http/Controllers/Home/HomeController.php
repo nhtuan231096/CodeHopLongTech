@@ -153,6 +153,13 @@ class HomeController extends Controller
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
 		$news= News::orderBy('id','desc')->limit(1)->get();
 
+		$cat_copy_shn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',1)->limit(8)->get();	
+		$cat_copy_omron = CatCopy::orderBy('sorder_2','ASC')->where('sorder',2)->limit(8)->get();	
+		$cat_copy_atn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',3)->limit(8)->get();	
+		$cat_copy_id = CatCopy::orderBy('sorder_2','ASC')->where('sorder',4)->limit(8)->get();	
+		$cat_copy_ls = CatCopy::orderBy('sorder_2','ASC')->where('sorder',5)->limit(8)->get();	
+		$cat_copy_mit = CatCopy::orderBy('sorder_2','ASC')->where('sorder',6)->limit(8)->get();	
+
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[
 			'sliders'=>$slider,
@@ -174,6 +181,12 @@ class HomeController extends Controller
 			'slider_homes'=>$slider_home,
 			'flash_sale'=> $flash_sale,
 			'latest_post'=>$news,
+			'cat_copy_shn'=>$cat_copy_shn,
+			'cat_copy_omron'=>$cat_copy_omron,
+			'cat_copy_atn'=>$cat_copy_atn,
+			'cat_copy_id'=>$cat_copy_id,
+			'cat_copy_ls'=>$cat_copy_ls,
+			'cat_copy_mit'=>$cat_copy_mit,
 			]);
 	}
 	public function viewCate($slug,Request $req) {
