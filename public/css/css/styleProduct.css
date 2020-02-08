@@ -1,0 +1,479 @@
+    html {
+        scroll-behavior: smooth
+    }
+    .wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .wrapper-nav.fixed {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 7000;
+        box-shadow: 0 0 5px 2px #ccc;
+    }
+
+    .wrapper-nav.fixed .nav-main {
+        height: 0px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+
+    .nav-main>ul {
+        margin-top: 0px;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .nav-main>ul>li {
+        list-style: none;
+    }
+
+    .nav-main>ul>li>a {
+        color: #333;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 1px 3.6px;
+    }
+    .content-area, .widget-area {
+       margin-bottom: 0; 
+   }
+   .site-main {
+    margin-bottom: 0;
+}
+.single-product .single-product-wrapper {
+    margin-bottom: 15px;
+}
+@media{
+    .single-product .woocommerce-tabs .wc-tabs li + li, .single-product .woocommerce-tabs .tm-tabs li + li, .single-product .techmarket-tabs .wc-tabs li + li, .single-product .techmarket-tabs .tm-tabs li + li {
+        padding-left: 36px;
+    }
+    /*ratting*/
+    .rating { 
+      border: none;
+      float: left;
+  }
+
+  .rating > input { display: none; } 
+  .rating > label:before { 
+      margin: 5px;
+      font-size: 1.14em;
+      font-family: FontAwesome;
+      display: inline-block;
+      content: "\f005";
+  }
+
+  .rating > .half:before { 
+      content: "\f089";
+      position: absolute;
+  }
+
+  .rating > label { 
+      color: #ddd; 
+      float: right; 
+  }
+
+  /***** CSS Magic to Highlight Stars on Hover *****/
+
+  .rating > input:checked ~ label, /* show gold star when clicked */
+  .rating:not(:checked) > label:hover, /* hover current star */
+  .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+  .rating > input:checked + label:hover, /* hover current star when changing rating */
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+  .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+  .form-group label{
+    font-weight: bold;
+}
+/*comments box*/
+.comments-container {
+    margin: 0px auto 15px;
+    width: 768px;
+}
+
+.comments-container h1 {
+    font-size: 36px;
+    color: #283035;
+    font-weight: 400;
+}
+
+.comments-container h1 a {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.comments-list {
+    margin-top: 30px;
+    position: relative;
+}
+
+/**
+ * Lineas / Detalles
+ -----------------------*/
+ .comments-list:before {
+    content: '';
+    width: 2px;
+    height: 100%;
+    background: #c7cacb;
+    position: absolute;
+    left: 32px;
+    top: 0;
+}
+
+.comments-list:after {
+    content: '';
+    position: absolute;
+    background: #c7cacb;
+    bottom: 0;
+    left: 27px;
+    width: 7px;
+    height: 7px;
+    border: 3px solid #dee1e3;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.reply-list:before, .reply-list:after {display: none;}
+.reply-list li:before {
+    content: '';
+    width: 60px;
+    height: 2px;
+    background: #c7cacb;
+    position: absolute;
+    top: 25px;
+    left: -55px;
+}
+
+
+.comments-list li {
+    margin-bottom: 15px;
+    display: block;
+    position: relative;
+}
+
+.comments-list li:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    width: 0;
+}
+
+.reply-list {
+    padding-left: 88px;
+    clear: both;
+    margin-top: 15px;
+}
+/**
+ * Avatar
+ ---------------------------*/
+ .comments-list .comment-avatar {
+    width: 65px;
+    height: 65px;
+    position: relative;
+    z-index: 99;
+    float: left;
+    border: 3px solid #FFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.comments-list .comment-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.reply-list .comment-avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.comment-main-level:after {
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+}
+/**
+ * Caja del Comentario
+ ---------------------------*/
+ .comments-list .comment-box {
+    width: 680px;
+    float: right;
+    position: relative;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
+.comments-list .comment-box:before, .comments-list .comment-box:after {
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    display: block;
+    border-width: 10px 12px 10px 0;
+    border-style: solid;
+    border-color: transparent #FCFCFC;
+    top: 8px;
+    left: -11px;
+}
+
+.comments-list .comment-box:before {
+    border-width: 11px 13px 11px 0;
+    border-color: transparent rgba(0,0,0,0.05);
+    left: -12px;
+}
+
+.reply-list .comment-box {
+    width: 610px;
+}
+.comment-box .comment-head {
+    background: #FCFCFC;
+    padding: 10px 12px;
+    border-bottom: 1px solid #E5E5E5;
+    overflow: hidden;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+.comment-box .comment-head i {
+    float: right;
+    margin-left: 14px;
+    position: relative;
+    top: 2px;
+    color: #A6A6A6;
+    cursor: pointer;
+    -webkit-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+    transition: color 0.3s ease;
+}
+
+.comment-box .comment-head i:hover {
+    color: #03658c;
+}
+
+.comment-box .comment-name {
+    color: #283035;
+    font-size: 14px;
+    font-weight: 700;
+    float: left;
+    margin-right: 10px;
+}
+
+.comment-box .comment-name a {
+    color: #283035;
+}
+
+.comment-box .comment-head span {
+    float: left;
+    color: #999;
+    font-size: 13px;
+    position: relative;
+    top: 1px;
+}
+
+.comment-box .comment-content {
+    background: #FFF;
+    padding: 12px;
+    font-size: 15px;
+    color: #595959;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
+.comment-box .comment-name.by-author:after {
+    content: 'author';
+    background: #03658c;
+    color: #FFF;
+    font-size: 12px;
+    padding: 3px 5px;
+    font-weight: 700;
+    margin-left: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.rm-background{
+    background: none;
+}
+/** =====================
+ * Responsive
+ ========================*/
+ @media only screen and (max-width: 766px) {
+    .comments-container {
+        width: 480px;
+    }
+
+    .comments-list .comment-box {
+        width: 390px;
+    }
+
+    .reply-list .comment-box {
+        width: 320px;
+    }
+}
+@media (min-width: 768px) {
+    .comments-container {
+        margin: 0px auto 15px;
+        width: 100%;
+    }
+    @media (min-width: 768px) {
+        .comments-list .comment-box {
+            width: 90%; 
+        }
+    }
+    .titlePro {
+        font-size: 16px;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+    #reviews .rating-histogram .rating-bar .rating-percentage-bar .rating-percentage {
+        height: 100%;
+        background-color: #59abe1;
+    }
+    .commentlist li.comment, .pings-list li.comment {
+        padding: 15px 0;
+    }
+    .single-product .woocommerce-tabs, .single-product .techmarket-tabs {
+        margin-bottom: 25px;
+    }
+    .products .list-view.product{
+        padding: 20px 15px;
+    }
+    /*comments box*/
+    /*pagination*/
+    .pagination {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+        border-radius: .25rem;
+    }
+    .pagination, .woocommerce-pagination {
+        padding: 1em 0;
+        border-width: 1px 0;
+        text-align: center;
+        clear: both;
+    }
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    .pagination>li {
+        display: inline;
+    }
+    .pagination>li>a, .pagination>li>span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+    .pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+        color: #777;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+    .pagination>li:first-child>a, .pagination>li:first-child>span {
+        margin-left: 0;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+        z-index: 3;
+        color: #fff;
+        cursor: default;
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+    .button_share {
+       display: block;
+       float: left;
+       padding: 0px 6px;
+       border:none;
+       background-color: #ececec;
+       text-decoration: none;
+       font-size: 17.6px;
+       color: #fff !important;
+       border-radius:4px;
+       margin-left: 5px;
+   }
+   .social{       
+    height: 28px;
+    width: 41px;
+    float: left;
+}
+.button_share:hover {
+   color: #fff;
+}
+/*pagination*/
+.single-product .single-product-header{
+    padding-bottom: 0px;
+}
+.show {
+    display: block;
+}
+.hide{
+    display: none;
+}
+.verticalMid{
+    vertical-align: middle!important;
+}
+.paginationPartNumber .pagination{
+    margin: 0;
+}
+.tog{
+    margin: 0 auto;
+    border: 3px solid #ddd;
+    border-radius: 50%;
+    padding: 10px;
+    width: 50px;
+}
+.tog:hover{
+    background: #9583ef;
+}
+.showDimension{
+    
+    max-height:100%;
+}
+.hideDimension{
+    max-height:350px;
+    overflow-x:auto;
+}
+.linkedin {
+   background-color: #0077b5;
+}
+html { visibility:hidden; }
+
+#content #primary {
+    flex: 0 0 86.333%;
+    max-width: 86.333%;
+    order: 2;
+}

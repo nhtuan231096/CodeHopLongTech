@@ -777,13 +777,19 @@
                                           <a href="#">Dành cho đại lý</a>
                                         </li>
                                         <li class="menu-item">
-                                          <a href="#">Chính sách bảo hành</a>
+                                          <a href="https://hoplongtech.com/tin-tuc/chinh-sach-bao-mat">Chính sách bảo mật</a>
                                         </li>
                                         <li class="menu-item">
-                                          <a href="#">Chính sách đổi trả</a>
+                                          <a href="https://hoplongtech.com/tin-tuc/chinh-sach-bao-hanh">Chính sách bảo hành</a>
                                         </li>
                                         <li class="menu-item">
-                                          <a href="#">Chính sách vận chuyển</a>
+                                          <a href="https://hoplongtech.com/tin-tuc/chinh-sach-doi-tra-hang-va-hoan-tien">Chính sách đổi trả</a>
+                                        </li>
+                                        <li class="menu-item">
+                                          <a href="https://hoplongtech.com/tin-tuc/chinh-sach-van-chuyen-giao-nhan-lap-dat">Chính sách vận chuyển</a>
+                                        </li>
+                                        <li class="menu-item">
+                                          <a href="https://hoplongtech.com/tin-tuc/hinh-thuc-thanh-toan">Hình thức thanh toán</a>
                                         </li>
                                       </ul>
                                     </div>

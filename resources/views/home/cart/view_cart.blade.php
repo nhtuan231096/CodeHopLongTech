@@ -545,7 +545,7 @@ th,tr,td {
 								<table>
 									<tr>
 										<td style="text-align: center;">
-											<b>BẢNG CHÀO GIÁ</b>
+											<b>BẢNG BÁO GIÁ</b>
 											<p style="font-size: 11px;margin-top: -10px;font-style: initial">{{(date('d-m-Y H:i:s'))}}</p>
 										</td>
 									</tr>

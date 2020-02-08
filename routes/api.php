@@ -47,3 +47,10 @@ Route::get('product-mass-delete','\App\Http\Controllers\Admin\ProductController@
 // route search product
 Route::get('autoSearch/{product_search}','\App\Http\Controllers\Home\HomeController@autoSearch');
 // route search product
+
+Route::get('getProductFlashSale/','\App\Http\Controllers\Admin\ProductController@getAllProduct');
+Route::get('getEditProductFlashSale/','\App\Http\Controllers\Admin\ProductController@getEditProduct');
+
+// route app
+	include('app/app.php');
+// route app

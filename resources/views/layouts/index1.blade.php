@@ -320,9 +320,9 @@
                         <li><a href="{{route('home_product')}}">Sản phẩm</a></li>                    
                         <li><a href="{{route('tuyen-dung')}}">Tuyển dụng</a></li> 
                         <li><a href="{{route('home_agency_posts')}}">Dành cho đại lý</a></li> 
-                        <li><a href="{{route('downloads')}}">Download</a></li>  
+                        <!-- <li><a href="{{route('downloads')}}">Download</a></li>   -->
                         <li><a href="{{route('tin_tuc')}}">Tin tức</a></li>                   
-                        <li><a href="{{route('projects')}}">Dự án</a></li>                   
+                        <!-- <li><a href="{{route('projects')}}">Dự án</a></li>                    -->
                         <li><a href="{{route('contact')}}">Liên hệ</a></li>
                       </ul>
                     </div>

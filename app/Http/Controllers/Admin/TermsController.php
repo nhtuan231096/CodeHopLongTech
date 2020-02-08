@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Terms;
 use App\Helper\Data;
+use App\Models\Product;
 
 /**
  * 
@@ -12,6 +13,7 @@ use App\Helper\Data;
 class TermsController extends Controller
 {
 	public function index(Data $data){
+
 		$id = isset(request()->id) ? request()->id : '';
 		$data_edit = Terms::find($id);
 		$datas = Terms::paginate(10);

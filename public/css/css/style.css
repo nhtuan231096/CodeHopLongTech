@@ -1,0 +1,126 @@
+@charset "UTF-8";
+/*!
+Template Name:  Techmarket HTML
+Template URI:   https://transvelo.github.io/techmarket-html/
+Author:         madrasthemes
+Author URI:     https://themeforest.net/user/madrasthemes/portfolio
+Description:    Techmarket Html is an answer for new trends in full resolution designs. Clean and smart WooCommerce theme with vertical and horizontal menu variants – ideal for any type of eCommerce shop websites.
+Version:        1.0.0
+License:        GNU General Public License v2 or later
+License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:    techmarket html
+Tags:           e-commerce, two-columns, left-sidebar, right-sidebar, custom-colors, custom-menu, featured-images, full-width-template, threaded-comments, footer-widgets, sticky-post
+
+This template, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+Techmarket is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
+
+Resetting and rebuilding styles have been helped along thanks to the fine work of
+Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
+along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+
+All sizing (typography, layout, padding/margins etc) are inspired by a modular scale that uses 12px/14px as base sizes with a 1.618 ratio.
+We use the excellent modular scale tool built by Tim Brown to calculate this. http://modularscale.com/scale/?px1=14&px2=12&ra1=1.618&ra2=0
+
+
+
+/**
+ * Global styles applied to all non-woocommerce theme components. Includes styles for;
+ *
+ * Typography
+ * Header
+ * Footer
+ * Main content area
+ * Accessiblity helper classes
+ * 404
+ * Comments
+ * Content (posts etc)
+ * Forms
+ * Media
+ * Menus
+ * pagination
+ * Post formats
+ * Widgets
+ */
+/**
+ * Global styles
+ */
+
+
+.page-footer .footer-header .row .media i{
+	font-size: 2.667em;
+    color: #fff;
+    margin-right: 0.55em;
+}
+
+.page-footer .footer-header .row .media-body .newsletter-body form{
+	position: relative;
+	margin-bottom: 0;
+	margin-right: 200px;
+}
+
+.page-footer .footer-header .row .media-body .newsletter-body form input{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+}
+
+.page-footer .footer-header .row .media-body .newsletter-body form button{
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 27px;
+	border-radius: 3px;
+}
+
+.page-footer .footer-header .footer-social-icons ul{
+	float: right;
+	margin-right: 145px;
+}
+
+.page-footer .footer-header .footer-social-icons ul li a{
+	color: #fff;
+}
+
+.page-footer .footer-header .footer-social-icons ul li a i{
+	color: #fff;
+}
+
+.page-footer .footer-body .col-sp ul{
+	margin-left: 0;
+}
+
+.page-footer .footer-body .col-sp ul li{
+	list-style-type: none;
+	display: inline-block;
+	width: 49%;
+}
+
+@media screen and (max-width: 1670px){
+	.page-footer .footer-header .row .media-body .newsletter-body form{
+		margin-right: 100px;
+	}
+	.page-footer .footer-body .col-sp ul li{
+		width: 48%;
+	}
+}
+
+@media screen and (max-width: 1400px){
+	.page-footer .footer-header .row .media-body .newsletter-body form{
+		margin-right: 0;
+	}
+}
+
+@media screen and (max-width: 991px){
+	.page-footer .footer-header .footer-social-icons ul{
+		margin-right: 0;
+	}
+
+	/*.page-footer .footer-body .col-footer{
+		display: inline-block;
+		width: 50%;
+	}*/
+}
+

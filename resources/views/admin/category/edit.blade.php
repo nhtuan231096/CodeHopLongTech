@@ -50,7 +50,8 @@
 	    
 	    	<div class="form-group">
 	    		<label for="">Meta description</label>
-	    		<textarea name="meta_description" id="content" class="form-control" placeholder="meta_description">{{$cate->meta_description}}</textarea>
+	    		<!-- <textarea name="meta_description" id="content" class="form-control" placeholder="meta_description">{{$cate->meta_description}}</textarea> -->
+	    		<input type="text" name="meta_description" class="form-control" id="meta_description" value="{{$cate->meta_description}}" placeholder="Meta description">
 	    	</div>
 	    	<div class="form-group">
 	    		<label for="">meta keywords</label>
