@@ -78,7 +78,8 @@ class OrderController extends Controller
 					'price' => $item['price'],
 					'quantity' => $item['quantity'],
 					'order_id' => $order->id,
-					'product_name' => $item['title']
+					'product_name' => $item['title'],
+					'product_image' => $item['image'],
 				];
 			}
 			if ($datas) {
@@ -127,7 +128,14 @@ class OrderController extends Controller
 						'order_id' => $order->id,
 						'content' => "Đơn hàng mới, order_id: #".$order->id
 					]);
-					return redirect()->route('order_success')->with('success','Đặt hàng thành công');
+					// return redirect()->route('order_success')->with('success','Đặt hàng thành công');
+					
+					$dataOrder = Order::where('order_id',$order->id)->first();
+					$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+					return view('home.v2.order_history',[
+						'categorys' => $categorys,
+						'order' => $dataOrder
+					]);
 				} else {
 					$order->delete();
 					return redirect()->route('error')->with('error','Có lỗi vui lòng thử lại');
@@ -149,7 +157,7 @@ class OrderController extends Controller
 	}
 	public function order_history(){
 		// dd(request()->getClientIp());
-		if (Auth::guard('customer')->check()) {
+		if (Auth::guard('customer')->check) {
 			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
 			$order = Order::where('user_id',Auth::guard('customer')->id())->paginate(10);
 			// dd($order);
@@ -288,4 +296,13 @@ class OrderController extends Controller
 			return redirect()->route('view_cart')->with('error','Mã ưu đãi không tồn tại!');
 		}
 	}
+
+	// public function customer_order_history(){
+	// 	$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+	// 	$order = Order::where('order_id',100)->first();
+	// 	return view('home.v2.order_history',[
+	// 		'categorys' => $categorys,
+	// 		'order' => $order
+	// 	]);
+	// }
 }

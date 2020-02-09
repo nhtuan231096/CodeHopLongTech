@@ -204,5 +204,19 @@ class Data
 		$datas = Terms::paginate(20);
 		return $datas;
 	}
+	public function check_order_status($stt){
+		$status = [
+			'1' => 'Đang chờ xử lý',
+			'2' => 'Xác nhận đặt hàng',
+			'3' => 'Đang giao hàng',
+			'4' => 'Đã giao hàng',
+			'5' => 'Hủy đơn hàng',
+		];
+		foreach ($status as $key => $value) {
+			if($stt == $key) {
+				return $value;
+			}
+		}
+	}
 }
 

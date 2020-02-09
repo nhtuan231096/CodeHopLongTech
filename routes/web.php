@@ -50,7 +50,7 @@ Route::get('admin/logout','Admin\AdminController@logout')->name('logout');
 Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],function(){
 	// rating
 	Route::post('/rate-product','HomeController@rateProduct')->name('rateProduct');
-
+	
 	// rating
 	// flash-sale
 	Route::get('/flash-sale','HomeController@flashSale')->name('flash-sale');
@@ -64,6 +64,8 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::post('/dat-lai-mat-khau','HomeController@resetPassword')->name('customer-reset-password');
 	Route::post('/dat-lai-password','HomeController@PostResetPassword')->name('reset-password');
 	Route::post('/dang-nhap','HomeController@login')->name('login_customer');
+    
+	Route::get('customer/order/history','OrderController@customer_order_history')->name('customer_order_history');
 
 	Route::get('/dang-nhap','HomeController@loginCustomer')->name('loginCustomer');
 
@@ -131,8 +133,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 
 	Route::get('order/history','OrderController@order_history')->name('order_history');
 	Route::get('order/detail/{id}','OrderController@order_hostiry_detail')->name('order_detail'); 
-	//end route order checkout 
-	
+	//end route order checkout 	
 
 
 	// route dang xuat customer
