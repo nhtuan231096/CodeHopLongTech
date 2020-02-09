@@ -5,13 +5,13 @@
 <div class="main-container container">
     <ul class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i></a></li>
-        <li><a href="#">Order History</a></li>
+        <li><a href="#">Thông tin đặt hàng</a></li>
     </ul>
     
     <div class="row">
         <!--Middle Part Start-->
         <div id="content" class="col-sm-9">
-            <h2 class="title">Order History: #{{$order->order_id}}</h2> 
+            <h2 class="title">Order ID: #{{$order->order_id}}</h2> 
             <div class="row">
                 <div class="col-md-3">
                     Ngày tạo order: {{date_format($order->created_at, 'd/m/Y')}}
