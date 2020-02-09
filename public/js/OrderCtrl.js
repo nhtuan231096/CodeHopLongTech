@@ -2,8 +2,8 @@
    var myapp = angular.module("myApp",[]);
 	myapp.controller("CtrlOrder",function($scope,$http){
 		$scope.detaiOrder = function($order_id){
-			// $url = window.location.protocol + "//" + window.location.hostname;
-			$url = window.location.protocol + "//" + window.location.hostname + "/CodeHopLongTech";
+			$url = window.location.protocol + "//" + window.location.hostname;
+			// $url = window.location.protocol + "//" + window.location.hostname + "/CodeHopLongTech";
 
 			// $http.get($url + '/CodeHopLongTech/api/getOrderDetail/' + $order_id).then(function(res){
 			// 	$scope.detail_order = res.data;
