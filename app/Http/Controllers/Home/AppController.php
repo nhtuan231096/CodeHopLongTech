@@ -15,6 +15,10 @@ use App\Models\OrderDetail;
 use App\Models\RedBill;
 use App\Models\Download_service;
 use App\Models\Terms;
+use App\User;
+use App\Models\User_group;
+use App\Models\CouponRule;
+use App\Models\CouponCode;
 use Auth;
 use Mail;
 use App\Models\AdminNotification;
@@ -161,5 +165,26 @@ class AppController extends Controller
 	public function getShippingPolicy(){
 		$policy = Terms::where('type_terms','van_chuyen')->get();
 		return $policy;
+	}
+	public function getAllUsers(){
+		return User::where('status','enable')->get();
+	}
+	public function getAllUsersGroup(){
+		return User_group::where('status','enable')->get();
+	}
+	public function addCouponRule(Request $req){
+		return CouponRule::create($req->all());
+	}
+	public function addCouponCode(Request $req){
+		return CouponCode::create($req->all());
+	}
+	public function editCouponCode(Request $req,$id){
+		$coupon = CouponCode::find($id);
+		$coupon->update($req->all());
+		return $coupon;
+	}
+	public function deleteCouponCode(Request $req){
+		$delete = CouponCode::destroy($req->id);
+		return $delete == true ? ["success" => "Xóa mã giảm giá thành công"] : ["error" => "Có lỗi vui lòng thử lại"];
 	}
 }

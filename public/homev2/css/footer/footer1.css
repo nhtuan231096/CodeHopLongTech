@@ -412,7 +412,8 @@
     background: url(../../image/icon/icon-contact.png) no-repeat left top;
     line-height: 25px;
     list-style: outside none none;
-    padding: 10px 0px 10px 40px; }
+    padding: 10px 0px 10px 40px;
+    text-transform: capitalize; }
   .typefooter-1 .infos-footer ul li a {
     color: #666;
     transition: all 0.3s ease 0s; }

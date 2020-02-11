@@ -39,3 +39,15 @@ Route::get('policy/warranty','\App\Http\Controllers\Home\AppController@getWarran
 Route::get('policy/payment','\App\Http\Controllers\Home\AppController@getPaymentPolicy');
 // chính sách vận chuyển
 Route::get('policy/shipping','\App\Http\Controllers\Home\AppController@getShippingPolicy');
+// danh sách tài khoản admin
+Route::get('admin/users','\App\Http\Controllers\Home\AppController@getAllUsers');
+// danh sách nhóm tài khoản admin
+Route::get('admin/user-group','\App\Http\Controllers\Home\AppController@getAllUsersGroup');
+// tạo quy tắc mã khuyến mãi 
+Route::post('coupon-rule/add','\App\Http\Controllers\Home\AppController@addCouponRule');
+// tạo mã khuyến mãi 
+Route::post('coupon-code/add','\App\Http\Controllers\Home\AppController@addCouponCode');
+// cập nhật mã khuyến mại
+Route::post('coupon-code/edit/{id}','\App\Http\Controllers\Home\AppController@editCouponCode');
+// Xóa mã khuyến mại
+Route::post('coupon-code/delete/','\App\Http\Controllers\Home\AppController@deleteCouponCode');

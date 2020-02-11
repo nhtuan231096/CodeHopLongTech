@@ -130,9 +130,15 @@ class OrderController extends Controller
 					]);
 					// return redirect()->route('order_success')->with('success','Đặt hàng thành công');
 					
+					// $dataOrder = Order::where('order_id',$order->id)->first();
+					// $categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+					// return view('home.v2.order_history',[
+					// 	'categorys' => $categorys,
+					// 	'order' => $dataOrder
+					// ]);
 					$dataOrder = Order::where('order_id',$order->id)->first();
 					$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-					return view('home.v2.order_history',[
+					return view('home.v2.order_information',[
 						'categorys' => $categorys,
 						'order' => $dataOrder
 					]);
@@ -305,4 +311,12 @@ class OrderController extends Controller
 	// 		'order' => $order
 	// 	]);
 	// }
+	public function orderInformation(){
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		$order = Order::where('order_id',100)->first();
+		return view('home.v2.order_information',[
+			'categorys' => $categorys,
+			'order' => $order
+		]);
+	}
 }

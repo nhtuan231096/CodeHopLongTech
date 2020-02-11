@@ -429,20 +429,19 @@ $(document).ready(function($) {
 	Page Category
 -------------------------------------------------- */
 
-// $(document).ready(function(){
-// 	$('#cat_accordion').cutomAccordion ({
-// 		eventType: 'click',
-// 		autoClose: true,
-// 		saveState: true,
-// 		disableLink: true,
-// 		speed: 'slow',
-// 		showCount: false,
-// 		autoExpand: true,
-// 		cookie	: 'dcjq-accordion-1',
-// 		classExpand	 : 'button-view'
-// 	});  
-// });
-
+$(document).ready(function(){
+	$('#cat_accordion').cutomAccordion ({
+		eventType: 'click',
+		autoClose: true,
+		saveState: true,
+		disableLink: true,
+		speed: 'slow',
+		showCount: false,
+		autoExpand: true,
+		cookie	: 'dcjq-accordion-1',
+		classExpand	 : 'button-view'
+	});  
+});
 
 $(function() {
 	var austDay = new Date(2019, 3 - 1, 28);
@@ -501,7 +500,7 @@ function display(view) {
 
 /* ---------------------------------------------------
 	Page Product Detail
--------------------------------------------------- */// URL that will be set as a source for iframe. 
+-------------------------------------------------- */
 
 $(document).ready(function() {
 	
@@ -547,8 +546,7 @@ $(document).ready(function() {
 		   youtube: {
 			  index: 'youtube.com/', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
 			  id: 'v=', // String that splits URL in a two parts, second part should be %id%
-			  // src: 'https://www.youtube.com/embed/%id%' // URL that will be set as a source for iframe. 
-			  src: 'h%id%' // URL that will be set as a source for iframe. 
+			  src: '//www.youtube.com/embed/%id%?autoplay=1' // URL that will be set as a source for iframe. 
 				},
 			}
 		}

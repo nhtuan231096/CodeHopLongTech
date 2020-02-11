@@ -66,6 +66,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::post('/dang-nhap','HomeController@login')->name('login_customer');
     
 	Route::get('customer/order/history','OrderController@customer_order_history')->name('customer_order_history');
+	Route::get('customer/order/order-information','OrderController@orderInformation')->name('orderInformation');
 
 	Route::get('/dang-nhap','HomeController@loginCustomer')->name('loginCustomer');
 
