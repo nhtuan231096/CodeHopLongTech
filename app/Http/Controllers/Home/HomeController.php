@@ -669,7 +669,8 @@ public function recruitment(){
 	}
 	public function forgotPassword(){
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
-		return view('home.customer.forgotPassword',[
+		// return view('home.customer.forgotPassword',[
+		return view('home.v2.customer.forgotPassword',[
 			'categorys' => $categorys
 		]);
 	}

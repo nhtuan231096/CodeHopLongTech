@@ -394,7 +394,7 @@
 
 /*#################### css for theme 2 ######################*/
 .so-categories .cat-wrap.theme2 .arrow {
-	background: url(../images/arrow.png) no-repeat;
+	background: url(../images/arrow.html) no-repeat;
 	margin-top: 6px;
 	width: 6px;
 	height: 7px;
@@ -442,13 +442,13 @@
 }
 
 .so-categories .cat-wrap.theme4 .so-categories-heading {
-	background: url(../images/bk.gif) repeat-x;
+	background: url(../images/bk.html) repeat-x;
 	height: 24px;
 	cursor: pointer;
 }
 
 .so-categories .cat-wrap.theme4 .so-categories-heading .icon_left {
-	background: url(../images/icon.png) no-repeat;
+	background: url(../images/icon.html) no-repeat;
 	margin-top: 8px;
 	width: 7px;
 	height: 7px;
@@ -457,7 +457,7 @@
 }
 
 .so-categories .cat-wrap.theme4 .so-categories-heading .icon_right {
-	background: url(../images/plus.gif) no-repeat;
+	background: url(../images/plus.html) no-repeat;
 	margin-top: 5px;
 	margin-right: 5px;
 	width: 13px;
@@ -466,7 +466,7 @@
 }
 
 .so-categories .cat-wrap.theme4 .so-categories-inner.selected .icon_right {
-	background: url(../images/minus.gif) no-repeat;
+	background: url(../images/minus.html) no-repeat;
 }
 
 .so-categories .cat-wrap.theme4 .so-categories-heading .cat-title {

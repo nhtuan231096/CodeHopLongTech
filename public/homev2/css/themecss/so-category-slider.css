@@ -1409,7 +1409,7 @@
     position: relative;
     width: 100%;
     margin: 0 auto;
-    background: url(../images/477.GIF) no-repeat scroll center center transparent;
+    background: url(../images/477-2.html) no-repeat scroll center center transparent;
     z-index: 0;
 }
 
@@ -1802,7 +1802,7 @@
 
 .container-slider .page-button ul li.preview:before {
     margin-right: 5px;
-    background: url("../images/mega_i.png") no-repeat scroll -30px -572px rgba(0, 0, 0, 0);
+    background: url("../images/mega_i.html") no-repeat scroll -30px -572px rgba(0, 0, 0, 0);
     content: "";
     height: 12px;
     width: 10px;
@@ -1812,7 +1812,7 @@
 }
 
 .container-slider .page-button ul li.next:before {
-    background: url("../images/mega_i.png") no-repeat scroll -31px -542px rgba(0, 0, 0, 0);
+    background: url("../images/mega_i.html") no-repeat scroll -31px -542px rgba(0, 0, 0, 0);
     content: "";
     height: 12px;
     width: 10px;
@@ -1933,7 +1933,7 @@
 .container-slider .icon-cate {
     position: absolute;
     z-index: 9999;
-    background: url("../images/mega_i.png") no-repeat scroll -10px -1127px rgba(0, 0, 0, 0);
+    background: url("../images/mega_i.html") no-repeat scroll -10px -1127px rgba(0, 0, 0, 0);
     bottom: -5px;
     height: 50px;
     right: -5px;

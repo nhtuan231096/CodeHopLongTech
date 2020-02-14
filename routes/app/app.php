@@ -51,3 +51,11 @@ Route::post('coupon-code/add','\App\Http\Controllers\Home\AppController@addCoupo
 Route::post('coupon-code/edit/{id}','\App\Http\Controllers\Home\AppController@editCouponCode');
 // Xóa mã khuyến mại
 Route::post('coupon-code/delete/','\App\Http\Controllers\Home\AppController@deleteCouponCode');
+// danh sách tin tức 
+Route::get('news/','\App\Http\Controllers\Home\AppController@getAllNews');
+// danh sách danh mục tin tức 
+Route::get('news-category/','\App\Http\Controllers\Home\AppController@getNewsCategory');
+// bình luận tin tức
+Route::post('comment-news/','\App\Http\Controllers\Home\AppController@addCommentNews');
+// sử dụng coupon code
+Route::post('get-couponcode/','\App\Http\Controllers\Home\AppController@useCouponCode');

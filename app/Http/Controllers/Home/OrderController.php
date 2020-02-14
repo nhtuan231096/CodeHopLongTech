@@ -18,6 +18,7 @@ use App\Models\Customer_type;
 use App\Models\CouponCode;
 use App\Models\CouponRule;
 use App\Models\CouponLog;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * 
@@ -196,7 +197,12 @@ class OrderController extends Controller
 		$points = Reward_points::first()->vip_guests;
 		$current_total_point = Auth::guard('customer')->user()->total_points > 0 ? Auth::guard('customer')->user()->total_points : 0;
 		$vip_guests = $current_total_point < $points ? ($points - $current_total_point) : 0;
-		return view('home.cart.myaccount',[
+		// return view('home.cart.myaccount',[
+		// 	'categorys' => $categorys,
+		// 	'vip_guests' => $vip_guests,
+		// 	'current_total_point' => $current_total_point,
+		// ]);
+		return view('home.v2.customer.myaccount',[
 			'categorys' => $categorys,
 			'vip_guests' => $vip_guests,
 			'current_total_point' => $current_total_point,
@@ -303,14 +309,14 @@ class OrderController extends Controller
 		}
 	}
 
-	// public function customer_order_history(){
-	// 	$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-	// 	$order = Order::where('order_id',100)->first();
-	// 	return view('home.v2.order_history',[
-	// 		'categorys' => $categorys,
-	// 		'order' => $order
-	// 	]);
-	// }
+	public function customer_order_history(){
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		$order = Order::where('user_id',Auth::guard('customer')->user()->id)->paginate(15);
+		return view('home.v2.order_history',[
+			'categorys' => $categorys,
+			'order' => $order
+		]);
+	}
 	public function orderInformation(){
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
 		$order = Order::where('order_id',100)->first();
@@ -318,5 +324,26 @@ class OrderController extends Controller
 			'categorys' => $categorys,
 			'order' => $order
 		]);
+	}
+
+	public function saveCustomer(Request $req){
+		if (Hash::check($req->old_password, Auth::guard('customer')->user()->password)) {
+			if (isset($req->new_password)) {
+				$this->validate($req, [
+					'new_password'=>'min:6',
+					'new_confirm' => 'same:new_password'
+				],[
+					'min'=>'Mật khẩu quá ngắn',
+					'same'=>'Mật khẩu xác nhận không trùng khớp'
+				]);
+				$pass = bcrypt($req->new_password);
+				$req->merge(['password'=>$pass]);
+			}
+			Customer::find(Auth::guard('customer')->user()->id)->update($req->all());
+			return redirect()->back()->with('success','Cập nhật thành công');
+		}
+		else {
+			return redirect()->back()->with('error','Mật khẩu không đúng');
+		}
 	}
 }

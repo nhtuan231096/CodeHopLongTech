@@ -1,8 +1,7 @@
 var admin = angular.module("admin",[]);
 admin.controller("flashSaleCtrl",function($scope,$http){
-	console.log('x');
-	// var url = window.location.protocol + "//" + window.location.hostname + '/CodeHopLongTech';
-	var url = window.location.protocol + "//" + window.location.hostname;
+	var url = window.location.protocol + "//" + window.location.hostname + '/CodeHopLongTech';
+	// var url = window.location.protocol + "//" + window.location.hostname;
 
 	var data_product_id = [];
 	var data_quantity = [];
@@ -24,7 +23,6 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 	$scope.range = [];
 		
 	$scope.getProducts = function(pageNumber,title=''){
-
     if(pageNumber===undefined){
       pageNumber = '1';
     }
@@ -78,7 +76,7 @@ admin.controller("flashSaleCtrl",function($scope,$http){
 		        data_cover_image.push(cover_image.val());
 		        data_category_id.push(category_id.val());
 		        data_discount.push(discount.val());
-		        console.log(discount.val());
+		        // console.log(discount.val());
 		        $('.data_product_id').val(data_product_id);
 		        $('.data_quantity').val(data_quantity);
 		        $('.data_title').val(data_title);

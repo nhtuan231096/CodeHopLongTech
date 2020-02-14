@@ -19,6 +19,9 @@ use App\User;
 use App\Models\User_group;
 use App\Models\CouponRule;
 use App\Models\CouponCode;
+use App\Models\News;
+use App\Models\News_Category;
+use App\Models\CommentNews;
 use Auth;
 use Mail;
 use App\Models\AdminNotification;
@@ -186,5 +189,27 @@ class AppController extends Controller
 	public function deleteCouponCode(Request $req){
 		$delete = CouponCode::destroy($req->id);
 		return $delete == true ? ["success" => "Xóa mã giảm giá thành công"] : ["error" => "Có lỗi vui lòng thử lại"];
+	}
+	public function getAllNews(){
+		$news = News::where('status','enable')->paginate(10);
+		return $news;
+	}
+	public function getNewsCategory(){
+		$news_category = News_Category::where('status','enable')->paginate(10);
+		return $news_category;
+	}
+	public function addCommentNews (Request $req) {
+		$comment = CommentNews::create($req->all());
+		return $comment;
+	}
+	public function useCouponCode(Request $req){
+		$data = [];
+		$couponcode = $req->couponcode;
+		$getCoupon = CouponCode::where('coupon_code',$couponcode)->first();
+		$data = [
+			"data_coupon_code" => $getCoupon,
+			"data_rule" => $getCoupon->rule,
+		];
+		return $data;
 	}
 }

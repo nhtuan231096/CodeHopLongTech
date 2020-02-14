@@ -50,8 +50,8 @@ Route::get('admin/logout','Admin\AdminController@logout')->name('logout');
 Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],function(){
 	// rating
 	Route::post('/rate-product','HomeController@rateProduct')->name('rateProduct');
-	
 	// rating
+
 	// flash-sale
 	Route::get('/flash-sale','HomeController@flashSale')->name('flash-sale');
 	// flash-sale
@@ -67,6 +67,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
     
 	Route::get('customer/order/history','OrderController@customer_order_history')->name('customer_order_history');
 	Route::get('customer/order/order-information','OrderController@orderInformation')->name('orderInformation');
+	Route::post('customer/my-account','OrderController@saveCustomer')->name('saveCustomer');
 
 	Route::get('/dang-nhap','HomeController@loginCustomer')->name('loginCustomer');
 
