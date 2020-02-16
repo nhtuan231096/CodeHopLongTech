@@ -82,6 +82,12 @@
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        .header-middle{
+            margin-bottom:0px!important; 
+        }
+        .header-top .container{
+            height: 38px!important;
+        }
     </style>
 </head>
 
@@ -362,7 +368,20 @@
                                                             <strong>SẢN PHẨM</strong>
                                                             <img class="label-hot" src="{{url('public/homev2')}}/image/catalog/menu/hot-icon.png" alt="icon items">
                                                         </a>
-                                                    </li><!-- 
+                                                    </li>
+                                                    <li class="">
+                                                        <p class="close-menu"></p>
+                                                        <a href="{{route('tuyen-dung')}}" class="clearfix">
+                                                            <strong>Tuyển dụng</strong>
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                        <p class="close-menu"></p>
+                                                        <a href="{{route('downloads')}}" class="clearfix">
+                                                            <strong>Tài liệu</strong>
+                                                        </a>
+                                                    </li>
+                                                    <!-- 
                                                     <li class="with-sub-menu hover">
                                                         <p class="close-menu"></p>
                                                         <a href="#" class="clearfix">

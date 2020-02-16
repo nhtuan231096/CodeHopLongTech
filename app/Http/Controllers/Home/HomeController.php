@@ -426,7 +426,20 @@ class HomeController extends Controller
 		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
 		$partners=Partners::limit(10)->where('status','enable')->orderBy('sorder','DESC')->get();
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(15);
-		return view('home.download',[
+		// return view('home.download',[
+		// 	'cats'=>$cat_id,
+		// 	'cat'=>$category,
+		// 	'categorys'=>$category,
+		// 	'categorys'=>$categorys,
+		// 	'supports'=>$supports,
+		// 	'catalog'=>$catalog,
+		// 	'pricelist'=>$pricelist,
+		// 	'manuals'=>$manuals,
+		// 	'software'=>$software,	
+		// 	'sp'=>$sp,	
+		// 	'partners'=>$partners,	
+		// ]);
+		return view('home.v2.download',[
 			'cats'=>$cat_id,
 			'cat'=>$category,
 			'categorys'=>$category,
@@ -448,7 +461,14 @@ class HomeController extends Controller
 		$download= Download_service::where('slug',$slug)->first();
 		if($download){
 			if($download){
-				return view('home.download-doc',['download'=>$download,'sp'=>$sp,'partners'=>$partners,'supports'=>$supports,'categorys'=>$categorys,]);
+				// return view('home.download-doc',['download'=>$download,'sp'=>$sp,'partners'=>$partners,'supports'=>$supports,'categorys'=>$categorys,]);
+				return view('home.v2.download-doc',
+					['download'=>$download,
+					'sp'=>$sp,
+					'partners'=>$partners,
+					'supports'=>$supports,
+					'categorys'=>$categorys
+				]);
 			}else{
 				return view('errors.404');
 			}
@@ -506,7 +526,7 @@ class HomeController extends Controller
 			'news_cat'=>$news
 			]);
 	}
-public function recruitment(){
+	public function recruitment(){
 		$office=Office::where('status','enable')->get();
 		$cat_work= CatWork::where('status','enable')->get();	
 		$add_work= AddressWork::where('status','enable')->get();
@@ -514,7 +534,19 @@ public function recruitment(){
 		$newswork=NewsWork::search()->orderBy('id','ASC')->limit(5)->get();
 		$news=NewsWork::search()->orderBy('id','DESC')->limit(5)->get();
 		$newsworks = News::Where('category_id','39')->limit(10)->get();
-		return view('home.recruitment',[
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(15);
+		// return view('home.recruitment',[
+		// 	'cat_work'=>$cat_work,
+		// 	'add_work'=>$add_work,
+		// 	'newswork'=>$newswork,
+		// 	'news_work'=>$newswork,
+		// 	'newsworks'=>$newsworks,
+		// 	'actoffice'=>$actoffice,
+		// 	'offices'=>$office,
+		// 	'news'=>$news
+		// ]);
+		return view('home.v2.recruitment',[
+			'categorys'=>$categorys,
 			'cat_work'=>$cat_work,
 			'add_work'=>$add_work,
 			'newswork'=>$newswork,
@@ -531,12 +563,19 @@ public function recruitment(){
 	$actoffice=Office::where('sorder','1')->first();
 	$cat_work= CatWork::where('status','enable')->get();	
 	$add_work= AddressWork::where('status','enable')->get();	
+	$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(15);
 		if($news){
 			if($news){
-				return view('home.recruitment-detail',['news'=>$news,'actoffice'=>$actoffice,
-			'offices'=>$office,'cat_work'=>$cat_work,
-			'add_work'=>$add_work,
-			]);
+				// return view('home.recruitment-detail',['news'=>$news,'actoffice'=>$actoffice,
+				// 'offices'=>$office,'cat_work'=>$cat_work,
+				// 'add_work'=>$add_work,
+				// ]);
+				return view('home.v2.recruitment-detail',[
+					'news'=>$news,'actoffice'=>$actoffice,
+					'offices'=>$office,'cat_work'=>$cat_work,
+					'add_work'=>$add_work,
+					'categorys'=>$categorys
+				]);
 			}else{
 				return view('errors.404');
 			}

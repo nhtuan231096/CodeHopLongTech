@@ -1,0 +1,22 @@
+Title,Slug,short_description,Meta_title,Meta_description,Cover_image,Cover_image_2,Cover_image_3,Cover_image_4,Cover_image_5,Video,Image_360,Category_id,List_price,Price,Price_when_login,In_stock,content,specifications,Feature,Dimension,Download_id,Actual_photo
+Tiêu Đề,Slug,short_description,Meta_title,Meta_description,Ảnh sản phẩm 1,Ảnh sản phẩm 2,Ảnh sản phẩm 3,Ảnh sản phẩm 4,Ảnh sản phẩm 5,Video,Ảnh 360,ID danh mục,Giá list,Giá bán,Giá đăg nhập,Tồn kho,Thông số kỹ thuật,Tổng Quan,Feature,Kích thước,download id,Ảnh thực tế
+test title,Test-title,Short description,day la meta title,day la meta description,admin_fx3uc-16mt-d.jpg,admin_fx3uc-16mt-d.jpg,admin_fx3uc-16mt-d.jpg,admin_fx3uc-16mt-d.jpg,admin_fx3uc-16mt-d.jpg,https://www.youtube.com/embed/eBl8cnAysGU,http://digi-cat.schneider-electric.com/360_images/Scroll_prod_1.html?prod_0=ATV310H075N4E,5404,3666666,2666666,1666666,1000,"{
+	""Dòng""			 		: 	""G100"",
+	""Điện áp vào""	 		       : 	""3 pha 200V"",
+	""Công suất (HD)"" 		       : 	""0.4 kW"",
+	""Capacity (HD)""	 	      	: 	""1kVA"",
+	""Dòng ra định mức (HD)""     : 	""2.5A"",
+	""Dòng vào định mức (HD)""  : 	""2.2A"",
+	""Bàn phím""				: 	""Bàn phím LED"",
+	""Loại UL""				       : 	""UL mở"",
+	""Bộ lọc EMC""			       :  	""Không có"",
+	""Reactor""				: 	""Không có"",
+	""Khả năng quá tải (HD)""	: 	""150% 1 phút"",
+	""Phương pháp điều khiển""	: 	""V/F, bù trượt, vectơ không cảm biến"",
+	""Chế độ hoạt động""		: 	""Chọn bàn phím, dải đầu cuối hoặc hoạt động truyền thông"",
+	""Làm mát""				: 	""Quạt làm mát cưỡng bức"",
+	""Nhiệt độ môi trường""	       : 	""-10-50℃"",
+	""Độ ẩm""					: 	""≤95% RH"",
+	""Cấp bảo vệ""				: 	""IP20"",
+	""Trọng lượng""			: 	""1.04kg""
+}","image1,image2,image3",<a href=”https://hoplongtech.com/products/ax4-4a”> hoplongtech </a>,dac-diem-chinh-atv310h037n4e.jpg,100,"admin_fx3uc-16mt-d.jpg,dien-dan-dung.jpg,lucle_pyf14a-e.jpg"

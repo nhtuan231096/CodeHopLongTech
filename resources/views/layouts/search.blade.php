@@ -747,7 +747,7 @@
                         </div>
                       </div>
                     </div>
-                    </footer
+                    </footer>
                   </div>
 
                   <script type="text/javascript" src="{{url('public/home')}}/assets/js/jquery.min.js"></script>
