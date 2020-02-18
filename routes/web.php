@@ -38,6 +38,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 	include('admin/coupon_code.php');
 	include('admin/rate.php');
 	include('admin/promotions.php');
+	include('admin/popup.php');
 	
 });
 // Route login admin

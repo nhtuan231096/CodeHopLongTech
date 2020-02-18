@@ -178,6 +178,7 @@
               <li><a href="{{route('webConfig')}}"> <i class="fa fa-object-group"></i>Web Configs</a></li>
               <li><a href="{{route('office')}}"> <i class="fa fa-building"></i>Office</a></li>
               <li><a href="{{route('service')}}"> <i class="fa fa-server"></i>Service</a></li>
+              <li><a href="{{route('popup')}}"> <i class="fa fa-server"></i>Quản lý popup</a></li>
             </ul>
           </li>
            <li class="treeview">

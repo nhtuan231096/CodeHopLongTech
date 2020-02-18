@@ -88,11 +88,34 @@
         .header-top .container{
             height: 38px!important;
         }
+        .content-popup h2, .content-popup span{
+            color:#fff;
+        }
     </style>
+    <link rel="stylesheet" href="{{url('public/homev2/css')}}/swc.css">
 </head>
 
 <body class="common-home res layout-1">
-    
+    <!-- popup -->
+    @if($popup)
+    <div id="boxes">
+        <div style="top: 234px!important; left: 50%; display: none;position: relative;padding:1px!important" id="dialog" class="window"> 
+            <div id="san">
+                <a href="#" class="close agree"><img src="close-icon.png" width="25" style="float:right; margin-right: -25px; margin-top: -20px;"></a>
+                <a href="{{$popup->link}}">
+                    <img src="{{url('uploads/file_service/popup')}}/{{$popup->cover_image}}" width="450">
+                </a>
+                <div class="content-popup" style="position: absolute;z-index: 100;top: 10%;left: 40%">
+                    <h2>tiêu đề</h2>
+                    <span class="text-1" style="font-size: 13px">nd 1</span>
+                    <!-- <span class="text-2">nd 2</span> -->
+                </div>
+            </div>
+        </div>
+        <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.4;" id="mask"></div>
+    </div>
+    @endif
+    <!-- popup -->
     <div id="wrapper" class="wrapper-fluid banners-effect-3">
 
     <!-- Header Container  -->
@@ -671,6 +694,7 @@
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/addtocart.js"></script>  
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/application.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/my_js.js"></script>
+<script src="{{url('public/homev2')}}/js/swc.js"></script>
 <script type="text/javascript">
 var myapp = angular.module("myApp",['angularUtils.directives.dirPagination']);
     $url = window.location.protocol + "//" + window.location.hostname;

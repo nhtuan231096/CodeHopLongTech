@@ -40,6 +40,7 @@ use App\Models\Customer_type;
 use App\Models\Terms;
 use App\Models\Rate;
 use App\Models\FlashSale;
+use App\Models\Popup;
 use App\Mail\ForgotPassword;
 use PDF;
 
@@ -48,8 +49,10 @@ class HomeController extends Controller
 	public function __construct(){
 		$this->middleware(function ($request, $next){
 			$custome_type = Customer_type::where('status',1)->get();
+			$popup = Popup::where('status',1)->first();
 			view()->share([
 				'custome_type' => $custome_type,
+				'popup' => $popup,
 				'cart' => new Data()
 			]);
         	return $next($request); 
