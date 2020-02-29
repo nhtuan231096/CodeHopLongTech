@@ -46,9 +46,22 @@
     <script type="text/javascript" src="{{url('public/homev2')}}/js/jquery-2.2.4.min.js"></script>
     <style type="text/css">
          body{font-family:'Open Sans', sans-serif;}
-         #myList .item-vertical{ display:none;}
+         .display_none {
+            display:none;
+         }
+         .display_block {
+            display:block;
+         }
+         /*#myList .item-vertical{ display:none;}*/
     </style>
+    <script type="text/javascript">
+        $('#show-verticalmenu').click(function(){
+            $('.item-vertical').addClass('display_block');
+            $('.item-vertical').removeClass('display_none');
+        });
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
+       <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43044974-10"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -56,6 +69,15 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-43044974-10');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Ads: 974233552 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-974233552"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-974233552');
     </script>
     <script id='autoAdsMaxLead-widget-script' src='https://cdn.autoads.asia/scripts/autoads-maxlead-widget.js?business_id=807e8c7d5f9e40898e3ff4e83c794894' type='text/javascript' charset='UTF-8' async></script>
     <style type="text/css">
@@ -92,22 +114,39 @@
             color:#fff;
         }
     </style>
+        <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KB52Z3Q');</script>
+    <!-- End Google Tag Manager <-->    </-->
     <link rel="stylesheet" href="{{url('public/homev2/css')}}/swc.css">
 </head>
 
 <body class="common-home res layout-1">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js">
+</script>
+<script type="text/javascript">
+ $(document).ready(function() {
+     if ($.cookie('pop') == null) {
+         $('#myModal').modal('show');
+         $.cookie('pop', '1');
+     }
+ });
+</script>
     <!-- popup -->
-    @if($popup)
+    @if(isset($popup))
     <div id="boxes">
-        <div style="top: 234px!important; left: 50%; display: none;position: relative;padding:1px!important" id="dialog" class="window"> 
+        <div style="top: 234px!important; left: 50%; display: none;position: relative;padding:1px!important;" id="dialog" class="window"> 
             <div id="san">
-                <a href="#" class="close agree"><img src="close-icon.png" width="25" style="float:right; margin-right: -25px; margin-top: -20px;"></a>
+                <a href="#" class="close agree"><img src="{{url('public/homev2')}}/image/catalog/flags/cancel.png" width="25" style="float:right; margin-right: -25px; margin-top: -20px;"></a>
                 <a href="{{$popup->link}}">
-                    <img src="{{url('uploads/file_service/popup')}}/{{$popup->cover_image}}" width="450">
+                    <img src="{{url('uploads/file_service/popup')}}/{{$popup->cover_image}}" width="{{$popup->width}}" height="{{$popup->height}}">
                 </a>
                 <div class="content-popup" style="position: absolute;z-index: 100;top: 10%;left: 40%">
-                    <h2>tiêu đề</h2>
-                    <span class="text-1" style="font-size: 13px">nd 1</span>
+                    <!-- <h2>tiêu đề</h2> -->
+                    <!-- <span class="text-1" style="font-size: 13px">nd 1</span> -->
                     <!-- <span class="text-2">nd 2</span> -->
                 </div>
             </div>
@@ -116,6 +155,10 @@
     </div>
     @endif
     <!-- popup -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB52Z3Q"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
     <div id="wrapper" class="wrapper-fluid banners-effect-3">
 
     <!-- Header Container  -->
@@ -311,7 +354,7 @@
                                                 <div class="container-mega">
                                                     <ul class="megamenu megamenu-left" id="myList" style="position: relative;">
                                                         @foreach($categorys as $itemCategory)
-                                                        <li class="item-vertical  with-sub-menu hover">
+                                                        <li class="item-vertical  with-sub-menu hovere display_none">
                                                             <p class="close-menu"></p>
                                                             <a href="{{route('view_category',[$itemCategory->slug])}}" class="clearfix">
                                                                 <img src="{{url('public/homev2')}}/image/catalog/menu/icons/ico10.png" alt="icon">

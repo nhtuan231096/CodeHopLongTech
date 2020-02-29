@@ -299,10 +299,12 @@
                         <div class="product-item-container">
                             <div class="left-block left-b">
                                 <div class="box-label">
-                                    <span class="label-product label-sale">-{{$itemProduct->discount}}%</span>
+                                    <!-- <span class="label-product label-sale"> -->
+                                        <!-- -{{$itemProduct->discount}}% -->
+                                    <!-- </span> -->
                                 </div>
                                 <div class="product-image-container">
-                                    <a href="{{route('view',['slug'=>$itemProduct->slug])}}" target="_self" title="{{$itemProduct->title}}">
+                                    <a href="{{route('view',['slug'=>$itemProduct->slug,'flash_sale_id'=>$itemProduct->flash_sale_id,'id'=>$itemProduct->id])}}" target="_self" title="{{$itemProduct->title}}">
                                         <?php $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
                                         <img style="height: 156px" src="{{url($urlImage)}}/{{$itemProduct->cover_image}}" class="img-1 img-responsive" alt="{{$itemProduct->title}}">
                                     </a>
@@ -312,7 +314,7 @@
                             <div class="button-group so-quickview cartinfo--left">
                                 <span>
                                     <!-- <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng"> -->
-                                        <a class="addToCart addCart" href="{{route('add_cart',['id'=>$itemProduct->product_id])}}">
+                                        <a class="addToCart addCart" href="{{route('add_cart_flash_sale',['id'=>$itemProduct->id])}}">
                                             <span style="color: #fff">Thêm vào giỏ</span>
                                         </a>
                                     <!-- </button> -->
@@ -337,7 +339,7 @@
                                                     
                                                 </div>
                                                 <p class="price">
-                                                  <span class="price-new">{{$cart->PriceProduct($itemProduct)}}</span>
+                                                  <span class="price-new">{{number_format($itemProduct->price)}}VNĐ</span>
                                                   <span class="price-old">{{number_format($itemProduct->list_price)}}VNĐ</span>
                                               </p>
                                           </div>

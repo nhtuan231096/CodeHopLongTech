@@ -496,12 +496,12 @@
 @if(Session::has('success'))
 <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>Success </strong> {{Session::get('success')}}
+    {{Session::get('success')}}
 </div>
 @elseif(Session::has('error'))
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>error </strong> {{Session::get('error')}}
+    {{Session::get('error')}}
 </div>
 @endif
 <div class="panel-body">
@@ -511,6 +511,7 @@
         <td>
             <button class="btn btn-danger btn-xs delete-all" data-url="">Delete All</button>
         </td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -528,6 +529,7 @@
     <th>Người tạo</th>
     <th>Trạng thái</th>
     <th>Thêm</th>
+    <th>Thêm Flash sales</th>
     <th>Tùy chỉnh</th>
 </tr>
 </thead>
@@ -542,6 +544,22 @@
       
          <td>
             <a href="{{route('list_1',['id'=>$product->id])}}"  onclick="return confirm('Bạn có chắn chắn muốn thêm mới sản phẩm???')" class="btn btn-xs btn-success fa fa-plus"></a>
+        </td>
+        <td>
+            <form style="width: 123px" action="{{route('addProductFlashSale')}}" method="POST" class="form-inline" role="form">
+                <div class="form-group">
+                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                    <input type="hidden" name="category_id" value="{{$product->category_id}}">
+                    <input type="hidden" name="cover_image" value="{{$product->cover_image}}">
+                    <input type="hidden" name="list_price" value="{{$product->list_price}}">
+                    <input type="hidden" name="title" value="{{$product->title}}">
+                    <input type="hidden" name="slug" value="{{$product->slug}}">
+                    <input style="width: 43px;font-size: 10px" name="quantity" class="form-control" placeholder="qty" required>
+                    <input style="width: 50px;font-size: 10px;padding: 3.4px" name="price" class="form-control" placeholder="price" required>
+                </div>
+                @csrf
+                <button type="submit" class="btn btn-xs btn-primary" onclick="return confirm('Xác nhận thêm sản phẩm {{$product->title}} vào danh sách flash sale')"><b style="font-size: 15px">+</b></button>
+            </form>
         </td>
         <td>
          <a href="{{route('editPro',['id'=>$product->id])}}" class="btn btn-xs btn-primary fa fa-edit" data-toggle="modal"></a>

@@ -59,5 +59,8 @@ Route::get('flash-sale-add','ProductController@addFlashSale')->name('addFlashSal
 Route::post('flash-sale-add','ProductController@saveFlashSale')->name('addFlashSale');
 Route::get('flash-sale-del/{id}','ProductController@delFlashSale')->name('delFlashSale');
 Route::get('flash-sale-edit/{id}','ProductController@editFlashSale')->name('editFlashSale');
+
+Route::post('add-product-flash-sale','ProductController@addProductFlashSale')->name('addProductFlashSale');
+Route::post('update-product-flash-sale','ProductController@updateProductFlashSale')->name('updateProductFlashSale');
 // flash_sale
  ?>

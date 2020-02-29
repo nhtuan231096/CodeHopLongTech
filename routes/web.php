@@ -109,6 +109,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::get('404.html','HomeController@error')->name('error');
 	// route gio hang
 	Route::get('cart/add-cart/{id}','HomeController@add_cart')->name('add_cart');
+	Route::get('cart/add-cart-flash-sale/{id}','HomeController@add_cart_flash_sale')->name('add_cart_flash_sale');
 	// cart api
 	Route::get('cart/add-to-cart/{id}/{quantity}','HomeController@add_cart');
 	Route::get('cart/shop-now/{id}/{quantity}','HomeController@shop_now');

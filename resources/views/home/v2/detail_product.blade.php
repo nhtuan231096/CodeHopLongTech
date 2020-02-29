@@ -188,7 +188,11 @@ html {
                 </div>
                 <div class="product-label form-group">
                     <div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
+                      @if($flashsale == 1)
+                        <span class="price-new" itemprop="price">{{number_format($product->price)}}</span>
+                      @else 
                         <span class="price-new" itemprop="price">{{$cart->PriceProduct($product)}}</span>
+                      @endif
                         <span class="price-old">{{$product->list_price > 0 ? number_format($product->list_price) : ''}}</span>
                     </div>
                     <div class="stock"><span>Tình trạng:</span> <span class="status-stock">Có sẵn</span></div>

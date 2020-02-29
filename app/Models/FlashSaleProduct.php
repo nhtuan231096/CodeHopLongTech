@@ -14,5 +14,15 @@ class FlashSaleProduct extends Model
 	public function flashSale(){
 		return $this->hasOne('\App\Models\FlashSale','id','flash_sale_id');
 	}
+	public function category()
+	{
+		return $this->hasOne('\App\Models\Category','id','category_id');
+	}	
+	public function countRate(){
+		return $this->hasMany('\App\Models\Rate','product_id','product_id')->where('status',1);
+	}
+	public function countComment(){
+		return $this->hasMany('\App\Models\Comment','product_id','product_id')->where('status',1);
+	}
 }
  ?>

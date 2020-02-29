@@ -21,6 +21,9 @@
 
 		<span><i style="font-size: 12px">(ảnh nền popup)</i></span>
 		<div class="clearfix"></div>
+		<span>Width(px): <input type="number" name="width"></span>
+		<span>Height(px): <input type="number" name="height"></span>
+		<div class="clearfix"></div>
 		<div class="container">
 			<div class="boxes" style="width: 450px;height:350px;border: 1px solid #000;margin:30px auto">
 				<select name="status" required>
@@ -47,16 +50,19 @@
 
 		<span><i style="font-size: 12px">(ảnh nền popup)</i></span>
 		<div class="clearfix"></div>
+		<span>Width(px): <input type="number" name="width" value="{{$data->width}}"></span>
+		<span>Height(px): <input type="number" name="height" value="{{$data->height}}"></span>
+		<div class="clearfix"></div>
 		<div class="container">
 			<input type="hidden" name="id" value="{{$data->id}}">
-			<div class="boxes" style="width: 450px;height:350px;border: 1px solid #000;margin:30px auto;background-image: url({{url('uploads/file_service/popup')}}/{{$data->cover_image}});">
+			<div class="boxes" style="width: 450px;height:350px;border: 1px solid #000;margin:30px auto;background-image: url({{url('uploads/file_service/popup')}}/{{$data->cover_image}});;background-size: cover">
 				<select name="status" required>
 					@if($data->status == 1)
 					<option selected value="1">Enable</option>
 					<option value="0">Disable</option>
 					@elseif($data->status == 0)
-					<option value="0">Disable</option>
-					<option selected value="1">Enable</option>
+					<option selected value="0">Disable</option>
+					<option value="1">Enable</option>
 					@endif
 				</select>
 				<input type="text" name="title" value="{{$data->title}}" placeholder="Tiêu đề">

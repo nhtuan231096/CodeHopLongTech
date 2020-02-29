@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Agency;
 use App\Models\Category;
 use App\Models\Download_service;
+use App\Models\FlashSaleProduct;
 use App\Models\Product;
 use App\Models\Banner;
 use App\Models\News;
@@ -49,10 +50,24 @@ class HomeController extends Controller
 	public function __construct(){
 		$this->middleware(function ($request, $next){
 			$custome_type = Customer_type::where('status',1)->get();
-			$popup = Popup::where('status',1)->first();
+			$ipCustomer = (\Request::ip());
+			$ipPopup = Popup::where('status',1)->first()->ip;
+			if(strpos($ipPopup,$ipCustomer) === false){
+				$popup = Popup::where('status',1)->first();
+				$ip = $popup->ip ? $ipCustomer.','.$popup->ip : $ipCustomer;
+				if(strlen($ip)>10000){
+					$popup->update([
+						'ip'=>$ipCustomer
+					]);
+				} else {
+					$popup->update([
+						'ip'=>$ip
+					]);
+				}
+			}
 			view()->share([
 				'custome_type' => $custome_type,
-				'popup' => $popup,
+				'popup' => isset($popup) ? $popup : null,
 				'cart' => new Data()
 			]);
         	return $next($request); 
@@ -123,26 +138,26 @@ class HomeController extends Controller
 		$parent_categorys=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
 
 		$best_seller = Cache::remember('best_seller',1*60,function(){
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('is_best_seller','enable')->limit(16)->get();
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_best_seller','enable')->limit(16)->get();
 		});
 		// $best_seller = $pro->where('is_best_seller','enable')->limit(10)->get();
 		$new_product = Cache::remember('new_product',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('is_new_product','enable')->limit(16)->get();
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_new_product','enable')->limit(16)->get();
 		});
 		// // $new_product = $pro2->where('is_new_product','enable')->limit(10)->get();
 
 		$promotion = Cache::remember('promotion',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('is_promotion','enable')->limit(16)->get();
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_promotion','enable')->limit(16)->get();
 		});
 		// // $promotion = $pro3->where('is_promotion','enable')->limit(10)->get();
 
 		$special_product = Cache::remember('special_product',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('special_product','enable')->limit(16)->get();
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('special_product','enable')->limit(16)->get();
 		});
 		// $special_product = $pro4->where('special_product','enable')->limit(10)->get();
 
 		$company_news = Cache::remember('company_news',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('category_id','35')->limit(16)->get();
+			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id','35')->limit(16)->get();
 		});	
 		// $company_news = $pro->where('category_id','35')->limit(10)->get();
 
@@ -198,15 +213,15 @@ class HomeController extends Controller
 		// $pro2 = (new Product())->datas2();
 			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
 			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-			$new_product=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->paginate(10)->Where('is_new_product','create')->where('status','enable');
+			$new_product=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(10)->Where('is_new_product','create')->where('status','enable');
 			$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();
 			$category= Category::where('slug',$slug)->first();
-			$product= Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('slug',$slug)->first();
+			$product= Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('slug',$slug)->first();
 			$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
 			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
-			$others=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->paginate(8)->where('category_id','<>','$id');
-			$promotion = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->paginate(8)->where('is_promotion','enable')->where('category_id',$category->id);
+			$others=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(8)->where('category_id','<>','$id');
+			$promotion = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(8)->where('is_promotion','enable')->where('category_id',$category->id);
 
 
 			$cat = Category::where('parent_id',$category->id);
@@ -216,7 +231,7 @@ class HomeController extends Controller
 			{	
 				$cate=Category::where('parent_id',$category->id)->limit(15)->get();
 				$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
-				$products=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('category_id',$category->id)->paginate(15);
+				$products=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id',$category->id)->paginate(15);
 				return view('home.v2.category_product',
 					['category'=>$category,
 					'categorys'=>$categorys,
@@ -240,7 +255,7 @@ class HomeController extends Controller
 		{
 			// $pro2 = (new Product())->datas2();
 			$pro3 = (new Product())->datas3();
-
+			$flashsale = 0;
 			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
 			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
 			$new_product=Product::paginate(10)->Where('is_new_product','create')->where('status','enable');
@@ -254,6 +269,10 @@ class HomeController extends Controller
 			$promotion = Cache::remember('new_product',1*60,function() use($pro3){
 				return $pro3->where('is_promotion','enable')->limit(16)->get();
 			});
+			if(request()->flash_sale_id){
+				$product->price = FlashSaleProduct::where('id',request()->id)->first()->price;
+				$flashsale = 1;
+			}
 			// $promotion = $pro3->where('is_promotion','enable')->limit(10)->get();
 			if($product)
 			{
@@ -299,6 +318,7 @@ class HomeController extends Controller
 					'percentRated'=>$percentRated,
 					'promotions'=>$promotion,
 					'cate'=>$cate_related,
+					'flashsale' => $flashsale 
 					]);
 			}
 			else
@@ -777,6 +797,24 @@ class HomeController extends Controller
 	// Controller Gio hang
 	public function add_cart($id,Data $cart){
 		$model = Product::find($id);
+		if(request()->quantity){
+			if ($model) {
+				for($i=0; $i < request()->quantity; $i++) {
+					$cart->add($model);
+				}
+			}	
+			return;
+		}
+		if ($model) {
+			$cart->add($model);
+			return redirect()->back()->with('success','Thêm sản phẩm vào giỏ hàng thành công!');
+		}
+		else {
+			return view('errors.404');
+		}
+	}
+	public function add_cart_flash_sale($id,Data $cart){
+		$model = FlashSaleProduct::find($id);
 		if(request()->quantity){
 			if ($model) {
 				for($i=0; $i < request()->quantity; $i++) {

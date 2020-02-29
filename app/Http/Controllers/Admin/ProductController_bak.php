@@ -22,7 +22,7 @@ class ProductController extends Controller
 {
      // product lrv
   public function product_lrv(){
-    $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','category_id','created_by','status','cover_image','list_price','slug','list_price']);
+    $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','category_id','created_by','status']);
     $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
     $user=User::all(['id','username']);
     return view('admin.product.product_lrv',[
@@ -605,6 +605,14 @@ public function post_import_price(Request $request){
     ]);
   }
   public function saveFlashSale(Request $req){
+    $data_product_id = (explode(",",$req->data_product_id[0]));
+    $data_quantity   = (explode(",",$req->data_quantity[0]));
+    $data_title   = (explode(",",$req->data_title[0]));
+    $data_slug   = (explode(",",$req->data_slug[0]));
+    $data_price   = (explode(",",$req->data_price[0]));
+    $data_cover_image   = (explode(",",$req->data_cover_image[0]));
+    $data_category_id   = (explode(",",$req->data_category_id[0]));
+    $data_discount   = (explode(",",$req->data_discount[0]));
     $img='';
     if ($req->hasFile('file_upload')) {
       $file=$req->file_upload;
@@ -612,35 +620,45 @@ public function post_import_price(Request $request){
       $img=$file->getClientOriginalName();
       $req->merge(['cover_image'=>$img]);
     } 
+    // dd($req->all());
     if($flashSale = FlashSale::create($req->all())){
-      return view('admin.product.add_flash_sale_success',[
-        'success'=>'Tạo Flash Sale thành công'
-      ]);
+      $i = 0;
+      foreach($data_product_id as $value){
+        $data = [
+          'product_id'=>(int)$data_product_id[$i],
+          'quantity'=>(int)$data_quantity[$i],
+          'title'=>$data_title[$i],
+          'slug'=>$data_slug[$i],
+          'list_price'=>(int)$data_price[$i],
+          'price'=>(int)$data_price[$i] - (((int)$data_price[$i]/100)*(int)$data_discount[$i]),
+          'cover_image'=>isset($data_cover_image[$i]) ? $data_cover_image[$i] : '',
+          'category_id'=>(int)$data_category_id[$i],
+          'discount'=>(int)$data_discount[$i],
+          'flash_sale_id'=>(int)$flashSale->id,
+        ];
+        // dd($data_discount);
+        $i++;
+        if(FlashSaleProduct::create($data)){
+          $data = '';
+        }
+        else{
+          $flashSale->delete();
+          return redirect()->back()->with('error','Có lỗi vui lòng thử lại');
+        }
+      }
     }
+    return redirect()->route('flash_sale')->with('success','Tạo Flash Sale thành công');
   }
   public function delFlashSale($id){
     FlashSale::destroy($id);
     return redirect()->back()->with('success','Xóa thành công');
   }
-  // public function editFlashSale($id){
-  //   $datas = FlashSale::find($id);
-  //   $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
-  //   $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
-  //   $user=User::all(['id','username']);
-  //   // dd($datas);
-  //   return view('admin.product.flash_sale_edit',[
-  //     'products'=>$products,
-  //     'categorys'=>$categorys,
-  //     'users'=>$user,
-  //     'datas'=>$datas
-  //   ]);
-  // }
   public function editFlashSale($id){
     $datas = FlashSale::find($id);
-    $products=FlashSaleProduct::where('flash_sale_id',$id)->paginate(15);
+    $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
     $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
     $user=User::all(['id','username']);
-    // dd($products);
+    // dd($datas);
     return view('admin.product.flash_sale_edit',[
       'products'=>$products,
       'categorys'=>$categorys,
@@ -666,26 +684,5 @@ public function post_import_price(Request $request){
   public function getEditProduct(){
     $datas = FlashSale::find(request()->flash_sale_id);
     return response()->json($datas->products);
-  }
-
-  public function addProductFlashSale(Request $req){
-    $flashSale = FlashSale::where('status',1)->orderBy('id','desc')->first();
-    $req->merge(['flash_sale_id'=>$flashSale->id]);
-    $check_product = FlashSaleProduct::where('product_id',$req->product_id)->where('flash_sale_id',$req->flash_sale_id)->get();
-    // dd($check_product->count());
-    if($check_product->count() > 0){
-      return redirect()->back()->with('error','Sản phẩm đã tồn tại trong chương trình flash sales');
-    }
-    if(FlashSaleProduct::create($req->all())){
-      return redirect()->back()->with('success','Thêm sản phẩm vào danh sách flash sales thành công');
-    }
-  }
-  public function updateProductFlashSale(Request $req){
-    if(isset($req->delete)){
-      FlashSaleProduct::destroy($req->id);
-      return redirect()->back()->with('success','Cập nhật thành công');
-    }
-    FlashSaleProduct::find($req->id)->update($req->all());
-    return redirect()->back()->with('success','Cập nhật thành công');
   }
 }
