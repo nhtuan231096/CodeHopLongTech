@@ -554,6 +554,7 @@
                     <input type="hidden" name="list_price" value="{{$product->list_price}}">
                     <input type="hidden" name="title" value="{{$product->title}}">
                     <input type="hidden" name="slug" value="{{$product->slug}}">
+                    <input type="hidden" name="pdp" value="{{$product->pdp}}">
                     <input style="width: 43px;font-size: 10px" name="quantity" class="form-control" placeholder="qty" required>
                     <input style="width: 50px;font-size: 10px;padding: 3.4px" name="price" class="form-control" placeholder="price" required>
                 </div>

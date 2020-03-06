@@ -238,19 +238,19 @@
         <div class="static-cates">
             <ul>
                 <li>
-                    <a href="#"><img src="{{url('public/homev2')}}/image/catalog/banners/cat1.jpg" alt="image"></a>
+                    <a href="https://hoplongtech.com/tin-tuc/chuong-trinh-khuyen-mai-mung-sinh-nhat-lan-thu-10-cung-hoplongtech"><img src="{{url('public/homev2')}}/image/catalog/banners/flash-sale-1.jpg" alt="image"></a>
                 </li>
                 <li>
-                    <a href="#"><img src="{{url('public/homev2')}}/image/catalog/banners/cat2.jpg" alt="image"></a>
+                    <a href="https://hoplongtech.com/tin-tuc/chuong-trinh-khuyen-mai-mung-sinh-nhat-lan-thu-10-cung-hoplongtech"><img src="{{url('public/homev2')}}/image/catalog/banners/flash-sale-2.jpg" alt="image"></a>
                 </li>
                 <li>
-                    <a href="#"><img src="{{url('public/homev2')}}/image/catalog/banners/cat3.jpg" alt="image"></a>
+                    <a href="https://hoplongtech.com/tin-tuc/chuong-trinh-khuyen-mai-mung-sinh-nhat-lan-thu-10-cung-hoplongtech"><img src="{{url('public/homev2')}}/image/catalog/banners/flash-sale-3.jpg" alt="image"></a>
                 </li>
                 <li>
-                    <a href="#"><img src="{{url('public/homev2')}}/image/catalog/banners/cat4.jpg" alt="image"></a>
+                    <a href="https://hoplongtech.com/tin-tuc/chuong-trinh-khuyen-mai-mung-sinh-nhat-lan-thu-10-cung-hoplongtech"><img src="{{url('public/homev2')}}/image/catalog/banners/flash-sale-4.jpg" alt="image"></a>
                 </li>
                 <li>
-                    <a href="#"><img src="{{url('public/homev2')}}/image/catalog/banners/cat5.jpg" alt="image"></a>
+                    <a href="https://hoplongtech.com/tin-tuc/chuong-trinh-khuyen-mai-mung-sinh-nhat-lan-thu-10-cung-hoplongtech"><img src="{{url('public/homev2')}}/image/catalog/banners/flash-sale-6.jpg" alt="image"></a>
                 </li>
             </ul>
         </div>
@@ -293,20 +293,20 @@
     <div class="modcontent">
         <div id="so_deal_1" class="so-deal style1">
             <div class="extraslider-inner products-list yt-content-slider" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="6" data-items_column0="5" data-items_column1="3" data-items_column2="2"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
-                @foreach($flash_sale->products as $itemProduct)
+                @foreach($flash_sale->products as $itemProductFlashSale)
                 <div class="item">         
                     <div class="item-inner product-layout transition product-grid">
                         <div class="product-item-container">
                             <div class="left-block left-b">
                                 <div class="box-label">
                                     <!-- <span class="label-product label-sale"> -->
-                                        <!-- -{{$itemProduct->discount}}% -->
+                                        <!-- -{{$itemProductFlashSale->discount}}% -->
                                     <!-- </span> -->
                                 </div>
                                 <div class="product-image-container">
-                                    <a href="{{route('view',['slug'=>$itemProduct->slug,'flash_sale_id'=>$itemProduct->flash_sale_id,'id'=>$itemProduct->id])}}" target="_self" title="{{$itemProduct->title}}">
-                                        <?php $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                                        <img style="height: 156px" src="{{url($urlImage)}}/{{$itemProduct->cover_image}}" class="img-1 img-responsive" alt="{{$itemProduct->title}}">
+                                    <a href="{{route('view',['slug'=>$itemProductFlashSale->slug,'flash_sale_id'=>$itemProductFlashSale->flash_sale_id,'id'=>$itemProductFlashSale->id])}}" target="_self" title="{{$itemProductFlashSale->title}}">
+                                        <?php $urlImage = ($itemProductFlashSale->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                                        <img style="height: 200px" src="{{url($urlImage)}}/{{$itemProductFlashSale->cover_image}}" class="img-1 img-responsive" alt="{{$itemProductFlashSale->title}}">
                                     </a>
                                 </div>
                           </div>
@@ -314,7 +314,7 @@
                             <div class="button-group so-quickview cartinfo--left">
                                 <span>
                                     <!-- <button type="button" class="addToCart addCart" title="Thêm vào giỏ hàng"> -->
-                                        <a class="addToCart addCart" href="{{route('add_cart_flash_sale',['id'=>$itemProduct->id])}}">
+                                        <a class="addToCart addCart" href="{{route('add_cart_flash_sale',['id'=>$itemProductFlashSale->id])}}">
                                             <span style="color: #fff">Thêm vào giỏ</span>
                                         </a>
                                     <!-- </button> -->
@@ -335,12 +335,12 @@
                                                         </div>
                                                         <span class="rating-num">( 2 )</span>
                                                     </div>
-                                                    <h4><a href="{{route('view',['slug'=>$itemProduct->slug])}}" title="{{$itemProduct->title}}" target="_self">{{$itemProduct->title}}</a></h4>
+                                                    <h4><a href="{{route('view',['slug'=>$itemProductFlashSale->slug])}}" title="{{$itemProductFlashSale->title}}" target="_self">{{$itemProductFlashSale->title}}</a></h4>
                                                     
                                                 </div>
                                                 <p class="price">
-                                                  <span class="price-new">{{number_format($itemProduct->price)}}VNĐ</span>
-                                                  <span class="price-old">{{number_format($itemProduct->list_price)}}VNĐ</span>
+                                                  <span class="price-new">{{number_format($itemProductFlashSale->price)}}VNĐ</span>
+                                                  <span class="price-old">{{number_format($itemProductFlashSale->list_price)}}VNĐ</span>
                                               </p>
                                           </div>
 
@@ -348,7 +348,7 @@
                                             <div class="available">
                                               <span class="color_width" data-title="50%" data-toggle='tooltip' style="width: 50%"></span>
                                           </div>                          
-                                          <p class="a2">Sold: <b>{{$itemProduct->sold}}</b>  </p>
+                                          <p class="a2">Sold: <b>{{$itemProductFlashSale->sold}}</b>  </p>
                                       </div>
                                   </div>
                               </div>      

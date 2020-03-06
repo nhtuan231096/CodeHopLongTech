@@ -129,18 +129,24 @@
 </script>
 <script type="text/javascript">
  $(document).ready(function() {
-     if ($.cookie('pop') == null) {
-         $('#myModal').modal('show');
-         $.cookie('pop', '1');
-     }
+    if ($.cookie('pop') == null) {
+        $('#myModal').modal('show');
+        $.cookie('pop', '1');
+    }
+    document.body.addEventListener('keypress', function(e) {
+        if(e.key == "Escape"){
+            $('#boxes').hide(200);
+        }
+    });
  });
 </script>
     <!-- popup -->
-    @if(isset($popup))
+    <!-- @if(isset($popup)) -->
     <div id="boxes">
         <div style="top: 234px!important; left: 50%; display: none;position: relative;padding:1px!important;" id="dialog" class="window"> 
             <div id="san">
-                <a href="#" class="close agree"><img src="{{url('public/homev2')}}/image/catalog/flags/cancel.png" width="25" style="float:right; margin-right: -25px; margin-top: -20px;"></a>
+                <a href="#" class="close agree"><img src="http://img.freepik.com/free-icon/cancel-button_318-122842.jpg?size=338&ext=jpg" width="25" style="width: 48px;
+height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                 <a href="{{$popup->link}}">
                     <img src="{{url('uploads/file_service/popup')}}/{{$popup->cover_image}}" width="{{$popup->width}}" height="{{$popup->height}}">
                 </a>
@@ -153,7 +159,7 @@
         </div>
         <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.4;" id="mask"></div>
     </div>
-    @endif
+    <!-- @endif -->
     <!-- popup -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB52Z3Q"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
