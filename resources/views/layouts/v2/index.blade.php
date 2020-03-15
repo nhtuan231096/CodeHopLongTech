@@ -141,9 +141,9 @@
  });
 </script>
     <!-- popup -->
-    <!-- @if(isset($popup)) -->
+    @if(isset($popup))
     <div id="boxes">
-        <div style="top: 234px!important; left: 50%; display: none;position: relative;padding:1px!important;" id="dialog" class="window"> 
+        <div style="top: 234px!important; left: 50%; top: 20%;display: none;position: relative;padding:1px!important;" id="dialog" class="window"> 
             <div id="san">
                 <a href="#" class="close agree"><img src="http://img.freepik.com/free-icon/cancel-button_318-122842.jpg?size=338&ext=jpg" width="25" style="width: 48px;
 height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
@@ -159,7 +159,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
         </div>
         <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.4;" id="mask"></div>
     </div>
-    <!-- @endif -->
+    @endif
     <!-- popup -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB52Z3Q"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -354,7 +354,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                 <span>  Danh mục     </span>
                                             </button>
                                         </div>
-                                        <div class="vertical-wrapper" >
+                                        <!-- <div class="vertical-wrapper" >
                                             <span id="remove-verticalmenu" class="fa fa-times"></span>
                                             <div class="megamenu-pattern">
                                                 <div class="container-mega">
@@ -378,11 +378,6 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                                                         <ul>
                                                                                             <li>
                                                                                                 <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
-                                                                                                <!-- <ul>
-                                                                                                    @foreach($child->childs2 as $chil)
-                                                                                                    <li><a href="{{route('view_category',['slug'=>$chil->slug])}}" >{{$chil->title}}</a></li>
-                                                                                                    @endforeach
-                                                                                                </ul> -->
                                                                                             </li>
                                                                                         </ul>
                                                                                     </div>
@@ -409,7 +404,58 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div> -->
+                                        <!-- menu -->
+                                        <div class="vertical-wrapper">
+                                            <span id="remove-verticalmenu" class="fa fa-times"></span>
+                                            <div class="megamenu-pattern">
+                                                <div class="container-mega">
+                                                    <ul class="megamenu megamenu-left" id="myList">
+                                                        @foreach($categorys as $itemCategory)
+                                                        <li class="item-vertical  with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="{{route('view_category',[$itemCategory->slug])}}" class="clearfix">
+                                                                <img src="{{url('public/homev2')}}/image/catalog/menu/icons/ico10.png" alt="icon">
+                                                                <span>{{$itemCategory->title}}</span>
+                                                                <b class="fa-angle-right"></b>
+                                                            </a>
+                                                            <div class="sub-menu" data-subwidth="60" style="width: 729.6px; display: none; right: 0px;">
+                                                                <div class="content" style="display: none;">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row">
+                                                                                @foreach($itemCategory->childs as $child)
+                                                                                <div class="col-md-4 static-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                               <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        @endforeach
+                                                        <li class="loadmore" id="loadMore">
+                                                            <i class="fa fa-plus-square-o"></i>
+                                                            <span class="more-view">Xem thêm</span>
+                                                        </li>
+
+                                                        <li class="loadmore" id="lessMore" style="display: none;">
+                                                            <i class="fa fa-plus-square-o"></i>
+                                                            <span class="more-view">Rút gọn</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <!-- menu -->
                                     </nav>
                             </div>
                         </div>

@@ -9,6 +9,11 @@
     .typeheader-1{
         margin-bottom:0!important;
     }
+    @media only screen and (max-width: 460px){
+      .block-policy1 {
+            display: none;
+        }
+    }
 </style>
 <!-- Main Container  -->
 <div class="main-container">
