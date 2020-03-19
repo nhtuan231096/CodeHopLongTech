@@ -51,8 +51,9 @@ class HomeController extends Controller
 		$this->middleware(function ($request, $next){
 			$custome_type = Customer_type::where('status',1)->get();
 			$ipCustomer = (\Request::ip());
-			$ipPopup = Popup::where('status',1)->first()->ip;
-			if(strpos($ipPopup,$ipCustomer) === false){
+			$enablePopup = Popup::where('status',1)->get()->count() > 0 ? true : false;
+			$ipPopup = $enablePopup == true ? Popup::where('status',1)->first()->ip : '';
+			if($enablePopup == true && strpos($ipPopup,$ipCustomer) === false){
 				$popup = Popup::where('status',1)->first();
 				$ip = $popup->ip ? $ipCustomer.','.$popup->ip : $ipCustomer;
 				if(strlen($ip)>10000){
@@ -1071,7 +1072,7 @@ class HomeController extends Controller
     // getPartNumber for api
     public function getPartNumber($product_id,Data $helperData){
     	$product = Product::find($product_id);
-		$partNumber = Product::where('category_id',$product->category_id)->where('id','<>',$product_id)->where('status','enable')->limit(20)->get();
+		$partNumber = Product::where('category_id',isset($product->category_id) ? $product->category_id : 0)->where('id','<>',$product_id)->where('status','enable')->limit(20)->get();
 		foreach ($partNumber as $item) {
 			$item->short_description = strip_tags($item->short_description);
 			// $item->price = $helperData->PriceProduct($item);
@@ -1106,4 +1107,3 @@ class HomeController extends Controller
     	]);
     }
 }
- ?>

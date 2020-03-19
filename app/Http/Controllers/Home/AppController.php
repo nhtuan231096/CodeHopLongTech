@@ -64,32 +64,32 @@ class AppController extends Controller
 	// }
 	public function getCategories () {
 		$categories=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
-		return $categories;
+		return response()->json($categories);
 	}
 	public function getCategoryByParentId ($parent_id){
 		$categories=Category::where(['parent_id'=>$parent_id,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
-		return $categories;
+		return response()->json($categories);
 	}
 	public function getProductByCategoryId ($category_id) {
 		$products = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('status','enable')->where('category_id',$category_id)->paginate(16);
-		return $products;
+		return response()->json($products);
 	}
 	public function getProductByTitle ($title) {
 		$products = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('status','enable')->where('title','like','%'.$title.'%')->paginate(8);
-		return $products;
+		return response()->json($products);
 	}
 	public function getProductById ($product_id) {
 		$product = Product::where('id',$product_id)->where('status','enable')->first();
-		return $product;
+		return response()->json($product);
 	}
 	public function commentProduct (Request $req) {
 		$comment = Comment::create($req->all());
-		return $comment;
+		return response()->json($comment);
 	}
 	public function getCommentByIdProduct($product_id) {
 		$comments = Comment::where('product_id',$product_id)->where('status',1)->paginate(8);
 		if (($comments->count()>0)) {
-			return $comments;
+			return response()->json($comments);
 		}
 		else {
 			return json_encode(['errors'=>'Comment not found']);
@@ -135,45 +135,47 @@ class AppController extends Controller
 	}
 	public function getCatalog(){
 		$catalog=Download_service::limit(8)->where('type','2')->get();
-		return $catalog;
+		return response()->json($catalog);
 	}
 	public function getManual(){
 		$manuals=Download_service::limit(8)->where('type','4')->get();
-		return $manuals;
+		return response()->json($manuals);
 	}
 	public function getPricelist(){
 		$pricelist=Download_service::limit(8)->where('type','3')->get();
-		return $pricelist;
+		return response()->json($pricelist);
 	}
 	public function getDocumentById($download_id) {
 		$document = Download_service::find($download_id)->where('status','enable')->get();
-		return $document;
+		return response()->json($document);
 	}
 	public function getDocumentByTitle($title) {
 		$document = Download_service::where('title','like','%'.$title.'%')->where('status','enable')->get();
-		return $document;
+		return response()->json($document);
 	}
 	public function getPolicyRetunExchange(){
 		$policy = Terms::where('type_terms','doi_tra')->get();
-		return $policy;
+		return response()->json($policy);
 	}
 	public function getWarrantyPolicy(){
 		$policy = Terms::where('type_terms','bao_hanh')->get();
-		return $policy;
+		return response()->json($policy);
 	}
 	public function getPaymentPolicy(){
 		$policy = Terms::where('type_terms','thanh_toan')->get();
-		return $policy;
+		return response()->json($policy);
 	}
 	public function getShippingPolicy(){
 		$policy = Terms::where('type_terms','van_chuyen')->get();
-		return $policy;
+		return response()->json($policy);
 	}
 	public function getAllUsers(){
-		return User::where('status','enable')->get();
+		$users = User::where('status','enable')->get();
+		return response()->json($users);
 	}
 	public function getAllUsersGroup(){
-		return User_group::where('status','enable')->get();
+		$userGroup = User_group::where('status','enable')->get();
+		return response()->json($userGroup);
 	}
 	public function addCouponRule(Request $req){
 		return CouponRule::create($req->all());
@@ -192,11 +194,11 @@ class AppController extends Controller
 	}
 	public function getAllNews(){
 		$news = News::where('status','enable')->paginate(10);
-		return $news;
+		return response()->json($news);
 	}
 	public function getNewsCategory(){
 		$news_category = News_Category::where('status','enable')->paginate(10);
-		return $news_category;
+		return response()->json($news_category);
 	}
 	public function addCommentNews (Request $req) {
 		$comment = CommentNews::create($req->all());
