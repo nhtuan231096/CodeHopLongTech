@@ -519,6 +519,7 @@ public function orderListPro1($id, Request $req){
 public function import_price(){
   return view('admin.product.import_price');
 } 
+// import price, image, stock
 public function post_import_price(Request $request){
   if ($request->file('file') != null ){
     $file = $request->file('file');
@@ -564,6 +565,16 @@ public function post_import_price(Request $request){
               // dd(!empty($pr));
             if(!empty($pr)){
               $pr->update(['actual_photo'=>$value['actual_photo']]);
+            }
+          }
+        }
+        // import stock
+        if(isset($request->import_stock)){
+          foreach ($data as $key => $value) {
+            $pr = Product::select('title','in_stock')->where('title',(string)$value['title'])->limit(1);
+              // dd(!empty($pr));
+            if(!empty($pr)){
+              $pr->update(['in_stock'=>$value['quantity']]);
             }
           }
         }
