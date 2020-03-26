@@ -50,10 +50,10 @@
 }
 
 .input-box {
-	padding: 15px;
-	padding-left: 40px;
+	/*padding: 15px;*/
+	/*padding-left: 40px;*/
 	border-bottom-color: #f4f4f4;
-	border-bottom: 1px solid rgba(23,24,26,0.15);
+	/*border-bottom: 1px solid rgba(23,24,26,0.15);*/
 }
 
 .input-box select:focus {

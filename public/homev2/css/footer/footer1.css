@@ -306,8 +306,11 @@
     overflow: unset; }
   .typefooter-1 .footer-top {
     border-radius: 5px;
-    padding: 30px 15px;
-    margin-top: -50px; }
+    /*padding: 30px 15px;*/
+    /*margin-top: -50px; */
+    padding: 55px 15px;
+    margin-top: 0;
+  }
   .typefooter-1 .footer-middle {
     padding-top: 55px;
     padding-bottom: 30px; }
@@ -315,7 +318,7 @@
     width: 40%;
     float: left; }
   .typefooter-1 .newsletter-footer1 .newsletter .title-block .page-heading {
-    font-size: 18px;
+    font-size: 18px!important;
     line-height: 42px;
     font-weight: 600;
     text-transform: uppercase;

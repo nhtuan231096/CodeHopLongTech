@@ -1699,7 +1699,7 @@ header,
 }
 
 .footer-top:after {
-	background: #121212 none repeat scroll 0 0;
+	
 	content: "";
 	height: 100%;
 	left: 0;

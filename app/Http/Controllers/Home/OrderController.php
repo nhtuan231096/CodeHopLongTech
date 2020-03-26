@@ -317,12 +317,14 @@ class OrderController extends Controller
 			'order' => $order
 		]);
 	}
-	public function orderInformation(){
+	public function orderInformation($id){
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-		$order = Order::where('order_id',100)->first();
+		$order = Order::where('order_id',$id)->first();
+		$orderDetail = OrderDetail::where('order_id',$id)->get();
 		return view('home.v2.order_information',[
 			'categorys' => $categorys,
-			'order' => $order
+			'order' => $order,
+			'orderDetail' => $orderDetail
 		]);
 	}
 

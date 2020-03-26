@@ -19,6 +19,7 @@
                             <td class="text-center">Order ID</td>
                             <td class="text-center">Trạng thái</td>
                             <td class="text-center">Tổng tiền</td>
+                            <td class="text-center"></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,9 @@
                             <td class="text-center">{{$cart->check_order_status($order_item->status)}}</td>
                             <td class="text-center">
                                 {{number_format($order_item->total_order_price)}}
+                            </td>
+                            <td class="text-center">
+                                <a href="{{route('orderInformation',['id'=>$order_item->order_id])}}" class="fa fa-eye" target="_blank"></a>
                             </td>
                         </tr>
                         @endforeach

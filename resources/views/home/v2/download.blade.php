@@ -134,10 +134,10 @@ setTimeout(function () {
                     <div class="section-products-carousel-tabs-wrap" role="tabpanel">
                         <header class="section-header" style="position: unset;margin-top: 50px">     
                             <ul role="tablist" class="nav nav-tabs justify-content-end">
-                                <li role="presentation" class="active nav-item"><a style="padding: 5px 20px;" class="nav-link active" role="tab" href="#tab-catalog" data-toggle="tab">Catalog</a></li>
-                                <li role="presentation" class="nav-item"><a style="padding: 5px 20px;" class="nav-link " role="tab" href="#tab-pricelist" data-toggle="tab">Price list</a></li>
-                                <li role="presentation" class="nav-item"><a style="padding: 5px 20px;" class="nav-link " role="tab" href="#tab-manuals" data-toggle="tab">Manuals</a></li>
-                                <li role="presentation" class="nav-item"><a style="padding: 5px 20px;" class="nav-link " role="tab" href="#tab-software" data-toggle="tab">Software</a></li>
+                                <li role="presentation" class="active nav-item"><a style="padding: 12px 20px 3px 20px;" class="nav-link active" role="tab" href="#tab-catalog" data-toggle="tab">Catalog</a></li>
+                                <li role="presentation" class="nav-item"><a style="padding: 12px 20px 3px 20px;" class="nav-link " role="tab" href="#tab-pricelist" data-toggle="tab">Price list</a></li>
+                                <li role="presentation" class="nav-item"><a style="padding: 12px 20px 3px 20px;" class="nav-link " role="tab" href="#tab-manuals" data-toggle="tab">Manuals</a></li>
+                                <li role="presentation" class="nav-item"><a style="padding: 12px 20px 3px 20px;" class="nav-link " role="tab" href="#tab-software" data-toggle="tab">Software</a></li>
                             </ul>
                         </header>
                         <div class="tab-content">

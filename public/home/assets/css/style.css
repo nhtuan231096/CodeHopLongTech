@@ -28709,6 +28709,7 @@ article .products .landscape-product-card .more-link {
 }
 .section-landscape-products-carousel .section-title,
 .section-products-carousel .section-title {
+    padding: 8px 10px;
     font-size: 1.5em;
     font-weight: normal;
     color: #090909;
@@ -30694,12 +30695,13 @@ form.track_order input[type="submit"] {
     align-items: baseline;
 }
 .section-products-carousel-tabs .nav {
-    margin: 0;
+    margin: -0.5px 0px;
     align-items: center;
 }
 @media (min-width: 700px) {
     .section-products-carousel-tabs .nav-item + .nav-item {
-        margin-left: 2.556em;
+        /*margin-left: 2.556em;*/
+        margin-left: 0px;
     }
 }
 .section-products-carousel-tabs .nav-link {

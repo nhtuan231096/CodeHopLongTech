@@ -426,11 +426,19 @@ class HomeController extends Controller
 		$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();
 		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
 		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
-		$product = Product::search()->paginate(20);
+		$products = Product::search()->paginate(20);
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(15);
 		// dd($product);
-		return view('home.list-product',[
-			'product'=>$product,
+		// return view('home.list-product',[
+		// 	'product'=>$product,
+		// 	'categorys'=>$categorys,
+		// 	'supports' => $supports,
+		// 	'sp' => $sp,
+		// 	'partners' => $partners,
+		// 	'categorys1'=>$categorys1
+		// ]);
+		return view('home.v2.list-product',[
+			'products'=>$products,
 			'categorys'=>$categorys,
 			'supports' => $supports,
 			'sp' => $sp,
