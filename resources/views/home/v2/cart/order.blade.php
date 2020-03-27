@@ -46,15 +46,15 @@
 								<fieldset id="account">
 								  <div class="form-group required">
 									<label for="input-payment-firstname" class="control-label">Họ tên</label>
-									<input type="text" class="form-control" id="input-payment-firstname" placeholder="Họ tên" value="{{ isset(Auth::guard('customer')->user()->name) ? Auth::guard('customer')->user()->name : ''}}" name="name">
+									<input type="text" class="form-control" id="input-payment-firstname" placeholder="Họ tên" value="{{ isset(Auth::guard('customer')->user()->name) ? Auth::guard('customer')->user()->name : ''}}" name="name" required>
 								  </div>
 								  <div class="form-group required">
 									<label for="input-payment-email" class="control-label">E-Mail</label>
-									<input type="email" class="form-control" id="input-payment-email" placeholder="E-Mail" value="{{ isset(Auth::guard('customer')->user()->email) ? Auth::guard('customer')->user()->email : ''}}" name="email">
+									<input type="email" class="form-control" id="input-payment-email" placeholder="E-Mail" value="{{ isset(Auth::guard('customer')->user()->email) ? Auth::guard('customer')->user()->email : ''}}" name="email" required>
 								  </div>
 								  <div class="form-group required">
 									<label for="input-payment-telephone" class="control-label">Số điện thoại</label>
-									<input type="phone" class="form-control" id="input-payment-telephone" placeholder="Số điện thoại" value="{{ isset(Auth::guard('customer')->user()->phone) ? Auth::guard('customer')->user()->phone : ''}}" name="phone">
+									<input type="phone" class="form-control" id="input-payment-telephone" placeholder="Số điện thoại" value="{{ isset(Auth::guard('customer')->user()->phone) ? Auth::guard('customer')->user()->phone : ''}}" name="phone" required>
 								  </div>
 								</fieldset>
 							  </div>
@@ -67,11 +67,11 @@
 								<fieldset id="address" class="required">
 								  <div class="form-group required">
 									<label for="input-payment-address-1" class="control-label">Địa chỉ</label>
-									<input type="text" class="form-control" id="input-payment-address-1" placeholder="Địa chỉ nhận hàng" value="{{ isset(Auth::guard('customer')->user()->address) ? Auth::guard('customer')->user()->address : ''}}" name="address">
+									<input type="text" class="form-control" id="input-payment-address-1" placeholder="Địa chỉ nhận hàng" value="{{ isset(Auth::guard('customer')->user()->address) ? Auth::guard('customer')->user()->address : ''}}" name="address" required>
 								  </div>
 								  <div class="form-group required">
 									<label for="input-payment-city" class="control-label">Thành phố</label>
-									<select id="city" class="form-control" required="required">
+									<select id="city" class="form-control" required>
 						                <option value="">Chọn thành phố</option>
 						                @foreach($cart->city() as $k=>$itemCity)
 						                <option value="{{$k}}">{{$itemCity}}</option>

@@ -354,7 +354,8 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                 <span>  Danh mục     </span>
                                             </button>
                                         </div>
-                                        <!-- <div class="vertical-wrapper" >
+                                        <!-- //--- -->
+                                        <div class="vertical-wrapper" >
                                             <span id="remove-verticalmenu" class="fa fa-times"></span>
                                             <div class="megamenu-pattern">
                                                 <div class="container-mega">
@@ -404,7 +405,8 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
+                                        <!-- //--- -->
                                         <!-- menu -->
                                         <div class="vertical-wrapper">
                                             <span id="remove-verticalmenu" class="fa fa-times"></span>
