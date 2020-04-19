@@ -132,6 +132,20 @@
 			</div>
 		</div>
 		@endif
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="">Áp dụng cho khách hàng đăng nhập</label>
+				<select name="customer_login" class="form-control">
+					@if(isset($dataRule->id) && $dataRule->customer_login == 1)
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+					@else
+					<option value="0">Disable</option>
+					<option value="1">Enable</option>
+					@endif
+				</select>
+			</div>
+		</div>
 	</div>
 
 	@csrf

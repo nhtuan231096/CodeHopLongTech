@@ -10,6 +10,7 @@ use App\Models\Reward_points;
 use App\Models\Customer;
 use Mail;
 use App\Mail\ConfirmOrder;
+use App\Mail\OrderSuccess;
 
 /**
  * 
@@ -62,23 +63,77 @@ class OrderController extends Controller
 		$updateStt = $orderModel->update(['status'=>$stt]);
 
 		if($stt == 4){
+			$input = Order::where('order_id',$id)->first();
+			$inputDetail = OrderDetail::where('order_id',$id)->get();
+
+
+			// check cong diem tai khoản
 			$reward_points = Reward_points::first();
 			$formatTotalPrice = filter_var($orderDetail->total_price, FILTER_SANITIZE_NUMBER_INT);
 			$points = round($formatTotalPrice/$reward_points->money, 0, PHP_ROUND_HALF_DOWN);
 			
+			// create random password
+			$char = "qwertyuiopasdfghjklmnbvcxz1234567890";
+			$randomPasssWord = $this->rand_chars($char, 6);
+			// create random password
+			
 			$id_customer = $orderDetail->user_id;
-			$customer = Customer::find($id_customer);
-			$currentPoints = $customer->reward_points;
-			$currentTotalPoints = $customer->total_points;
-			$addPoints = $currentPoints + $points;
-			$addTotalPoints = $currentTotalPoints + $points;
+			
+			$order = 
+			[
+				'id'=>$id,
+	        	'name'=>$input["name"],
+	        	'email'=>$input["email"], 
+	        	'total_price'=>$input['total_price'],  
+	        	'address'=>$input['address'],
+	        	'phone'=>$input['phone'], 
+	        	'created_at'=>$input['created_at'], 
+	        	'orderDetails[]'=>$inputDetail,
+	        	'reward_point' => $points,
+	        	'password' => $randomPasssWord,
+	        	'redeem_money' => $reward_points->redeem_money
+			];
 
-			$customer->update([
-				'reward_points' => $addPoints,
-				'total_points' => $addTotalPoints
-			]);
-	
+			if($id_customer) {
+				$order['new_account'] = false;
+				$customer = Customer::find($id_customer);
+				$currentPoints = $customer->reward_points;
+				$currentTotalPoints = $customer->total_points;
+				$addPoints = $currentPoints + $points;
+				$addTotalPoints = $currentTotalPoints + $points;
+				
+				$customer->update([
+					'reward_points' => $addPoints,
+					'total_points' => $addTotalPoints
+				]);
+			}
+			//check cong diem
+
+			if (!$id_customer) {
+				$order['new_account'] = true;
+				$password = bcrypt($randomPasssWord);
+				Customer::create([
+					"name"=>$input["name"],
+					"email"=>$input["email"],
+					"phone"=>$input["phone"],
+					"address"=>$input["address"],
+					"reward_points"=>$points,
+					"total_points"=>$points,
+					"password"=>$password
+				]);
+			} 
+
+			// gui mail khi don hang hoan thanh
+		    Mail::to($input['email'])->send(new OrderSuccess($order));
+			// gui mail khi don hang hoan thanh
 		}
 		return redirect()->back()->with('success','Cập nhật trạng thái thành công');
 	}
+	// create random password
+	public function rand_chars($c, $l, $u = FALSE) 
+	{
+		if (!$u) for ($s = '', $i = 0, $z = strlen($c)-1; $i < $l; $x = rand(0,$z), $s .= $c{$x}, $i++);
+		else for ($i = 0, $z = strlen($c)-1, $s = $c{rand(0,$z)}, $i = 1; $i != $l; $x = rand(0,$z), $s .= $c{$x}, $s = ($s{$i} == $s{$i-1} ? substr($s,0,-1) : $s), $i=strlen($s));
+		return $s;
+	} 
 }

@@ -207,7 +207,7 @@
 	</div>
 	
 	 <div class="buttons">
-        <div class="pull-left"><a href="{{route('home_product')}}" class="btn btn-primary">Tiếp tục mua hàng</a></div>
+        <div style="margin-bottom: 15px" class="pull-left"><a href="{{route('home_product')}}" class="btn btn-primary">Tiếp tục mua hàng</a></div>
         <div class="pull-right"><a href="{{route('order')}}" class="btn btn-primary">Đặt hàng</a></div>
       </div>
     </div>

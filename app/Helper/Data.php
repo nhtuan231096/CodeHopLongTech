@@ -170,7 +170,7 @@ class Data
 		if(Auth::guard('customer')->check()){
 			 $priceProduct = isset($product['price_when_login']) ? ($product['price_when_login']) : ($product['price'] > 0 ? ($product['price']) : $product['price']);
 			 $showPrice = !empty($this->DiscountAmount()) ? number_format(round($priceProduct - (($priceProduct/100) * $this->DiscountAmount()))) : $priceProduct;
-			 return ($showPrice)." VNĐ";
+			 return $showPrice > 0 ? (is_numeric($showPrice) ? number_format($showPrice)." VNĐ" : $showPrice." VNĐ") : $showPrice ." VNĐ";
 		}
 		
 		else{

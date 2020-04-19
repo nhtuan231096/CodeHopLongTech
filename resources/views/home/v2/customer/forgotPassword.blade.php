@@ -2,7 +2,7 @@
 @section('mainContainer')
 <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
 <!-- Main Container  -->
-@if(Auth::guard('customer')->check())
+@if(!Auth::guard('customer')->check())
 <div class="main-container container">
 	<ul class="breadcrumb">
 		<li><a href="{{route('home')}}"><i class="fa fa-home"></i></a></li>
@@ -67,12 +67,12 @@
 		            @endif
 		            <li><a href="{{route('forgotPassword')}}">Quên mật khẩu</a>
 		            </li>
-		            <li><a href="{{route('my_account')}}">Tài khoản của tôi</a>
-		            </li>
-		            <li><a href="{{route('customer_order_history')}}">Order History</a>
-		            </li>
-		            <li><a href="{{route('logout_customer')}}">Đăng xuất</a>
-		            </li>
+		            <!-- <li><a href="{{route('my_account')}}">Tài khoản của tôi</a> -->
+		            <!-- </li> -->
+		            <!-- <li><a href="{{route('customer_order_history')}}">Order History</a> -->
+		            <!-- </li> -->
+		            <!-- <li><a href="{{route('logout_customer')}}">Đăng xuất</a> -->
+		            <!-- </li> -->
 		        </ul>
 			</div>
 		</aside>

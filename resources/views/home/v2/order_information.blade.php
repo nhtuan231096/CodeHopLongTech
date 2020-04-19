@@ -106,21 +106,24 @@
                             </td>
                             <td class="text-right">{{number_format($order->ship_cod)}}</td>
                         </tr>
-                        @elseif(($order->total_vat)>0)
+                        @endif
+                        @if(($order->total_vat)>0)
                         <tr>
                             <td colspan="3"></td>
                             <td class="text-right"><b>VAT (10%)</b>
                             </td>
                             <td class="text-right">{{number_format($order->total_vat)}}</td>
                         </tr>
-                        @elseif(($order->use_coupon_code)>0)
+                        @endif
+                        @if(($order->use_coupon_code)>0)
                         <tr>
                             <td colspan="3"></td>
                             <td class="text-right"><b>Mã giảm giá</b>
                             </td>
                             <td class="text-right">{{number_format($order->use_coupon_code)}}</td>
                         </tr>
-                        @elseif(($order->reduced_price)>0)
+                        @endif
+                        @if(($order->reduced_price)>0)
                         <tr>
                             <td colspan="3"></td>
                             <td class="text-right"><b>Đổi điểm</b>

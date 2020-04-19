@@ -197,6 +197,7 @@ class OrderController extends Controller
 		$points = Reward_points::first()->vip_guests;
 		$current_total_point = Auth::guard('customer')->user()->total_points > 0 ? Auth::guard('customer')->user()->total_points : 0;
 		$vip_guests = $current_total_point < $points ? ($points - $current_total_point) : 0;
+		$reward_points = Reward_points::first();
 		// return view('home.cart.myaccount',[
 		// 	'categorys' => $categorys,
 		// 	'vip_guests' => $vip_guests,
@@ -206,6 +207,7 @@ class OrderController extends Controller
 			'categorys' => $categorys,
 			'vip_guests' => $vip_guests,
 			'current_total_point' => $current_total_point,
+			'reward_points' => $reward_points,
 		]);
 	}
 
@@ -222,6 +224,12 @@ class OrderController extends Controller
 			// get current time
 			$currentTime = date('Y-m-d');
 			// Check usage time
+			if ($coupon->rule->customer_login == 1) {
+				if (!Auth::guard('customer')->check()) {
+					return redirect()->route('view_cart')->with('error','Mã ưu đãi không tồn tại!'); 
+				}
+			}
+
 			if($rule->from_date <= $currentTime && $currentTime <=$rule->to_date){
 				// check uses per coupon
 				if($coupon->times_used < $rule->uses_per_coupon) {
@@ -283,8 +291,12 @@ class OrderController extends Controller
 							];
 							// add total to session
 							$cart->add_coupon($data_uses_coupon);
-							// dd($data_uses_coupon);
-							return view('home.cart.view_cart',[
+							// return view('home.cart.view_cart',[
+							// 	'categorys' => $categorys,
+							// 	'cart' => $cart,
+							// 	'data_uses_coupon' => $data_uses_coupon
+							// ]);
+							return view('home.v2.view_cart',[
 								'categorys' => $categorys,
 								'cart' => $cart,
 								'data_uses_coupon' => $data_uses_coupon

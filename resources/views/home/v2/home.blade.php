@@ -662,49 +662,78 @@
                     <div id="so_category_slider_191" class="so-category-slider container-slider module cate-slider2">
                         <div class="modcontent">
                             <div class="page-top">
-                                <div class="page-title-categoryslider">Dự án</div>
+                                <div class="page-title-categoryslider">Flash Sale</div>
                             </div>
                         </div>
                         <div class="col-md-12 our-member">
-                        <div class="overflow-owl-slider1">
-                            <div class="wrapper-owl-slider1">
-                                <div class="row slider-ourmember">
-                                    @foreach($project as $newsItem) 
-                                    <div class="item-about col-lg-6 col-md-6 col-sm-6">
-                                        <div class="item respl-item">
-                                            <div class="item-inner">
-                                                <div class="w-image-box">
-                                                    <div class="item-image">
-                                                        <a title="" href="{{route('tin_tuc_chi_tiet',['slug'=>$newsItem->slug])}}">
-                                                            <img style="height: 160px" width="160" height="160" src="{{url('uploads/news')}}/{{$newsItem->image_cover}}" alt="{{$newsItem->image_cover}}">
-                                                        </a>
-                                                    </div>
+                        <div class="products-list row nopadding-xs so-filter-gird grid infinite-scroll">
+                            @foreach($flash_sale_products as $itemFlashSale)
+                            <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
+                                        
+                                        <div class="product-image-container second_img">
+                                            <a href="product.html" target="_self" title="Lastrami bacon">
+                                                <img src="image/catalog/demo/product/270/e1.jpg" class="img-1 img-responsive" alt="image1">
+                                                <img src="image/catalog/demo/product/270/e10.jpg" class="img-2 img-responsive" alt="image2">
+                                            </a>
+                                        </div>
+                                        <!--quickview--> 
+                                        <div class="so-quickview">
+                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                        </div>                                                     
+                                        <!--end quickview-->
+
+                                        
+                                    </div>
+                                    <div class="right-block">
+                                        <div class="button-group so-quickview cartinfo--left">
+                                            <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                <span>Add to cart </span>   
+                                            </button>
+                                            <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                            </button>
+                                            <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                            </button>
+                                            
+                                        </div>
+                                        <div class="caption hide-cont">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
                                                 </div>
-                                                <div class="info-member">
-                                                    <h2 class="cl-name"><a title="Jennifer lawrence" href="{{route('tin_tuc_chi_tiet',['slug'=>$newsItem->slug])}}">{{$newsItem->title}}</a></h2>
-                                                    <p class="cl-job">{{$newsItem->created_by}}</p>
-                                                    <p class="cl-des">{!!$newsItem->description!!}</p>
-                                                    <ul>
-                                                        <li>
-                                                            <a class="fa fa-f" title="Facebook" href="#"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="fa fa-t" title="Twitter" href="#"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="fa fa-g" title="google" href="#"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="fa fa-s" title="skyper" href="#"></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                <span class="rating-num">( 2 )</span>
                                             </div>
+                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Lastrami bacon</a></h4>
+                                            
+                                        </div>
+                                        <p class="price">
+                                          <span class="price-new">$80.00</span>
+                                          
+                                        </p>
+                                        <div class="description item-desc hidden">
+                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est . </p>
+                                        </div>
+                                        <div class="list-block hidden">
+                                            <button class="addToCart btn-button" type="button" title="Add to Cart" onclick="cart.add('101', '1');"><i class="fa fa-shopping-basket"></i>
+                                            </button>
+                                            <button class="wishlist btn-button" type="button" title="Add to Wish List" onclick="wishlist.add('101');"><i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="compare btn-button" type="button" title="Compare this Product" onclick="compare.add('101');"><i class="fa fa-refresh"></i>
+                                            </button>
+                                            <!--quickview-->                                                      
+                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i></a>                                                        
+                                            <!--end quickview-->
                                         </div>
                                     </div>
-                                    @endforeach
+
                                 </div>
                             </div>
+                            @endforeach
+                            {{ $flash_sale_products->links() }}
                         </div>
                     </div>
                     </div>
@@ -809,4 +838,20 @@
         });
     });
 </script>
+<script type="text/javascript" style="{{url('public/homev2/js')}}/jquery.jscroll.min.js"></script>
+<!-- <script type="text/javascript">
+    $('ul.pagination').hide();
+    $(function() {
+        $('.infinite-scroll').jscroll({
+            autoTrigger: true,
+            loadingHtml: '<img class="center-block" src="/images/loading.gif" alt="Loading..." />',
+            padding: 0,
+            nextSelector: '.pagination li.active + li a',
+            contentSelector: 'div.infinite-scroll',
+            callback: function() {
+                $('ul.pagination').remove();
+            }
+        });
+    });
+</script> -->
 @stop

@@ -88,10 +88,30 @@
 							</div>
 						</fieldset>
 					</div>
+					<div class="col-sm-6">
+						<fieldset id="reward_point">
+							<legend>Thông tin điểm thưởng</legend>
+							<!-- <div class="form-group">
+								<label for="input-company" class="control-label">Điểm xét hạng:</label>
+
+								<input disabled type="text" class="form-control"  placeholder="{{Auth::guard('customer')->user()->total_points}}">
+
+							</div> -->
+							<div class="form-group">
+								<label for="input-address-1" class="control-label">Điểm thưởng:</label>
+								<input disabled type="text" class="form-control"  placeholder="{{Auth::guard('customer')->user()->reward_points}}">
+							</div>
+							<div class="form-group">
+								<label class="control-label">
+									Mỗi 1 điểm sẽ quy đổi bằng {{$reward_points->redeem_money}}đ, điểm sẽ được sử dụng khi quý khách mua hàng 
+								</label>
+							</div>
+						</fieldset>
+					</div>
 				</div>
 				@csrf
 				<div class="buttons clearfix">
-					<div class="pull-right">
+					<div class="pull-right" style="margin:10px 0">
 						<input type="submit" class="btn btn-md btn-primary" value="Lưu thay đổi">
 					</div>
 				</div>

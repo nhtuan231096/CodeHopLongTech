@@ -95,7 +95,7 @@
 								<fieldset id="address" class="required">
 								  <div class="form-group required">
 									<label for="input-payment-city" class="control-label">Hình thức giao hàng</label>
-									<select name="shipping_method" id="input" class="form-control" required>
+									<select name="shipping_method" id="input" class="form-control class_shipping_method" required>
 						                <option value="">Hình thức giao hàng</option>
 						                @foreach($cart->shipping_method() as $key => $item)
 						                <option value="{{$item}}">{{$item}}</option>
@@ -269,6 +269,7 @@
 										<span class="text-muted" id="ship_cod">0</span>
 									</td>
 								  </tr>
+								  @if(!empty(request()->session()->get('price_reduced')))
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Mã giảm giá:</strong></td>
 									<td class="text-right">
@@ -278,6 +279,39 @@
 	        							@endif
 									</td>
 								  </tr>
+								  @endif
+								  <tr>
+								  	<td class="text-right" colspan="4"><strong>Điểm thưởng:</strong></td>
+								  	<td class="text-right">
+										
+								  		<!-- //--- -->
+								  		@if(Auth::guard('customer')->check())
+										<div class="chkbxx reward_points" style="width: 10%;float: left;">
+							              <!-- <input type="checkbox" value="None"/>
+							                <label for="chkbx"></label> -->
+							              </div>
+							              <form action="{{route('use_redeem_money')}}" method="POST" style="width: 100%;float: right;margin-bottom: 0px">
+							                <div class="chkbxx use_reward_points check_use_reward_points" style="width: 10%;margin-right:15px;float: right; display: none;cursor: pointer;">
+							                  <button type="button" class="rm_style_button" style="padding: 2.5px;margin-left: 6px">
+							                    <a href="#"><span style="margin-left: 12px;" class="fa fa-check"></span></a>
+							                  </button>
+							                  <span style="margin-left: 12px;height: 32.5px" class="btn btn-md btn-danger fa fa-remove un_rm_style_button"></span>
+							                </div>
+							                <span style="line-height: 2.3;"  class="text-right" style="text-decoration: underline;">
+							                  <i class="reward_points pull-right" style="text-decoration: underline;cursor: pointer;">Sử dụng điểm thưởng ({{Auth::guard('customer')->user()->reward_points}})</i>
+							                  <div class="form-group use_reward_points" style="display: none;margin-bottom: 0px">
+							                    <label class="sr-only" for="">label</label>
+							                    <input style="width: 36%;float: right;" name="redeem_money" id="redeem_money" type="number" class="form-control" placeholder="Bạn có {{Auth::guard('customer')->user()->reward_points}} điểm" min="0" max="{{Auth::guard('customer')->user()->reward_points}}" required>
+							                  </div>
+							                </span>
+							                @csrf
+							              </form>
+							            @endif
+										<!-- //--- -->
+
+								  	</td>
+								  </tr>
+								  @if(isset($data_red_bill['red_bill_company']))
 								  <tr>
 									<td class="text-right" colspan="4"><strong>VAT (10%):</strong></td>
 									@if(isset($data_red_bill['red_bill_company']))
@@ -287,6 +321,7 @@
 										<td class="text-right">0</td>
 									@endif
 								  </tr>
+								  @endif
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Tổng tiền:</strong></td>
 									<?php 
@@ -397,6 +432,13 @@
 </div>
 @endif
 <!-- //--- -->
+<script type="text/javascript">
+	$("#city").val("");
+	$(".class_shipping_method").val("");
+	$("#input_payment_method").val("");
+	$("#redeem_money").val("");
+	$(".un_rm_style_button").hide();
+</script>
 <script type="text/javascript">
 // var ship_code = 0;
 // var shipping_fee = 0;
@@ -569,14 +611,86 @@ $('#fa-fa-check').click(function(){
 
 var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
   var TotalCart = parseInt(ship_cod) + parseInt(shipping_fee) + parseInt(getTotalPrice) - parseInt(reduced_price);
-  // console.log(ship_cod);
-  // console.log(shipping_fee);
-  // console.log(getTotalPrice);
-  // console.log(reduced_price);
   var formatTotalPrice = String(TotalCart).replace(/(.)(?=(\d{3})+$)/g,'$1,');
   $('#totalPrice').text(formatTotalPrice);
 
 }
 </script>
 <!-- //--- -->
+
+
+<?php if(Auth::guard('customer')->check()): ?>
+<script src="//code.jquery.com/jquery.js"></script>
+<script>
+  $('.reward_points').click(function(){
+    $('.reward_points').css("display","none");
+    $('.use_reward_points').css("display","block");
+  });
+
+  $('.fa-remove').click(function(){
+    $('.reward_points').css("display","block");
+    $('.use_reward_points').css("display","none");
+  });
+  $('.rm_style_button').click(function(){
+    function formatNumber(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+    var points = <?php echo $cart->Reward_points()->redeem_money?>;
+    var auth_point = <?php echo Auth::guard('customer')->user()->reward_points ?>;
+    var money = $('#redeem_money').val();
+    if(money <= auth_point && money > 0) 
+    {
+      // var total_price = <?php echo $cart_total?>;
+      var total_price = $('#totalPrice').text();
+      total_price = total_price.replace(',','');
+	  total_price = total_price.replace(',','');
+	  total_price = total_price.replace(',','');
+
+      var total = total_price - (money * points);
+      var reduced_price = (money * points);
+      $('#totalPrice').text(formatNumber(total));
+      $('#reward_point').val(formatNumber(total));
+      $('#redeem_money_point').val(formatNumber(money));
+      $('#reduced_price').val(formatNumber(reduced_price));
+      $('.rm_style_button').hide();
+      $('.un_rm_style_button').show();
+      $('#redeem_money').attr('disabled','disabled');
+      alert('Bạn đã sử dụng ' + money + ' điểm và được giảm ' + reduced_price + 'đ');
+    }
+
+    else{
+      alert('Giá trị nhập vào không hợp lệ');
+    }
+    // console.log(points * money);
+
+    // alert($('#redeem_money').val());
+    // $('.reward_points').css("display","block");
+    // $('.use_reward_points').css("display","none");
+  });
+
+  $(".un_rm_style_button").click(function(){
+  	function formatNumber(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+  	$(".un_rm_style_button").hide();
+  	$('.rm_style_button').show();
+  	var total_price = $('#totalPrice').text();
+  	total_price = total_price.replace(',','');
+	total_price = total_price.replace(',','');
+	total_price = total_price.replace(',','');
+
+	var reduced_price = $('#reduced_price').val();
+	reduced_price = reduced_price.replace(',','');
+	reduced_price = reduced_price.replace(',','');
+	reduced_price = reduced_price.replace(',','');
+
+	var total = parseInt(reduced_price) + parseInt(total_price);
+	$('#reduced_price').val(formatNumber(reduced_price));
+	$('#totalPrice').text(formatNumber(total));
+    $('#reward_point').val(formatNumber(total));
+    $('#redeem_money').removeAttr('disabled','disabled');
+  });
+</script>
+@endif
 @stop()

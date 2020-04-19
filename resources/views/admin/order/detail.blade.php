@@ -70,7 +70,7 @@
 				<td><b>Người nhận:</b> {{$order->name}}</td>
 				<td><b>Số điện thoại:</b> {{$order->phone}}</td>
 				<td>
-                    <b>Đổi điểm thưởng:</b> -{{isset($order->reduced_price) ? $order->reduced_price : 0}}
+                    <b>Đổi điểm thưởng:</b> -{{isset($order->reduced_price) ? number_format($order->reduced_prices) : 0}}
                 </td>
                 <td>
                     <span style="margin-right: 31px">
@@ -328,7 +328,7 @@
                 </td>
                 
                 <td>
-                	 -{{$order->reduced_price}}
+                	 -{{number_format($order->reduced_price)}}
                 </td>
             </tr>
             @endif

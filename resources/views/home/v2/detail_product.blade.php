@@ -15,6 +15,7 @@ html {
     font-size: 13px;
 }
 </style>
+<script src="https://360player.io/static/dist/scripts/embed.js" async></script>
 <link rel="stylesheet" href="{{url('public/css')}}/styleProduct.css">
 <link rel="stylesheet" href="{{url('public/homev2')}}/css/mystyle.css">
 <script type="text/javascript" src="{{url('public/homev2/js/customize')}}/megamenu.js"></script>
@@ -143,24 +144,50 @@ html {
                     <a data-index="0" class="img thumbnail " data-image="{{url($urlImage)}}/{{$product->cover_image}}" title="">
                         <img src="{{url($urlImage)}}/{{$product->cover_image}}" title="" alt="">
                     </a>
-                    @elseif($product->cover_image_2)
+                    @endif
+                    @if($product->cover_image_2)
                     <a data-index="1" class="img thumbnail " data-image="{{url($urlImage)}}/{{$product->cover_image_2}}" title="">
                         <img src="{{url($urlImage)}}/{{$product->cover_image_2}}" title="" alt="">
                     </a>
-                    @elseif($product->cover_image_3)
+                    @endif
+                    @if($product->cover_image_3)
                     <a data-index="2" class="img thumbnail " data-image="{{url($urlImage)}}/{{$product->cover_image_3}}" title="">
                         <img src="{{url($urlImage)}}/{{$product->cover_image_3}}" title="" alt="">
                     </a>
-                    @elseif($product->cover_image_4)
+                    @endif
+                    @if($product->cover_image_4)
                     <a data-index="3" class="img thumbnail " data-image="{{url($urlImage)}}/{{$product->cover_image_4}}" title="">
                         <img src="{{url($urlImage)}}/{{$product->cover_image_4}}" title="" alt="">
                     </a>
-                    @elseif($product->cover_image_5)
+                    @endif
+                    @if($product->cover_image_5)
                     <a data-index="4" class="img thumbnail " data-image="{{url($urlImage)}}/{{$product->cover_image_5}}" title="">
                         <img src="{{url($urlImage)}}/{{$product->cover_image_5}}" title="" alt="">
                     </a>
                     @endif
+                    @if($product->image_360)
+                    <div class="img thumbnail" style="position: relative;">
+                        <img src="https://hoplongtech.com/public/home/assets/images/360.png" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" title="">
+                        <button style="position: absolute;top: 0;right: 0;width:125px;height: 125px; opacity: 0" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#image_360"></button>
+                    </div>
+                    @endif
                 </div>
+            </div>
+
+            <div id="image_360" class="modal fade" role="dialog">
+              <div class="modal-dialog" style="max-width: 678px">
+
+                <!-- Modal content-->
+                <div class="modal-content text-center">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{$product->title}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <iframe style="margin-bottom: 66px" src="{{$product->image_360}}" scrolling="no" frameborder="0" width=560 height=315 allowfullscreen data-token="k6f7rb"></iframe>                            
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="content-product-right col-md-7 col-sm-12 col-xs-12">
                 @if(Session::has('success'))
@@ -223,7 +250,7 @@ html {
                       </ins>
                       <ul>
                           <li>Quà tặng trị giá <b style="color: red">200.000đ</b> (Áp dụng sản phẩm tự động hóa công nghiệp <b style="color:#2A9332">SCHNEIDER ELECTRIC</b>)</li>
-                          <li>Nhập mã <b style="color: red">HOPLONG</b> giảm thêm 1% dành cho toàn bộ đơn hàng từ <b style="color: red">01/01 đến 28/02/2020</b></li>
+                          <li>Nhập mã <b style="color: red">HOPLONG</b> giảm thêm 1% dành cho toàn bộ đơn hàng từ <b style="color: red">01/01 đến 20/04/2020</b></li>
                           <li>Tặng <b style="color: red">voucher 20.000đ khi đánh giá 5*</b> (Áp dụng cho đơn hàng từ 200.000đ)</li>
                           <li>Đăng nhập <b style="color: red">để nhận giá tốt nhất</b></li>
                       </ul>
@@ -367,7 +394,7 @@ html {
 
 <div class="producttab ">
     <div class="tabsslider horizontal-tabs  col-xs-12">
-        <ul class="nav nav-tabs wrapper-nav" id="navbar">
+        <ul class="nav nav-tabs wrapper-nav" id="navbar" style="padding: 12px;position: sticky;">
             <li class="active"><a href="#thong-so">THÔNG SỐ KỸ THUẬT</a></li>
             <li class="item_nonactive"><a href="#tong-quan">Tổng quan</a></li>
             <!-- <li class="item_nonactive "><a href="#kick-thuoc">Kích thước</a></li> -->
@@ -875,7 +902,6 @@ html {
   @endforeach
 </div>
 </div>
-
 <!-- end Related  Products-->
 <!-- //bao gia -->
 <div class="modal fade" id="modal-id">

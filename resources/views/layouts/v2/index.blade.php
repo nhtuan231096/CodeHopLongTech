@@ -45,7 +45,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">   
     <script type="text/javascript" src="{{url('public/homev2')}}/js/jquery-2.2.4.min.js"></script>
     <style type="text/css">
-         body{font-family:'Open Sans', sans-serif;}
+         /*body{font-family:'Open Sans', sans-serif;}*/
+         .common-home .typefooter-1 {margin-top: 0px;}
+         .typefooter-1 .footer-top {padding: 30px 15px;}
          .display_none {
             display:none;
          }
@@ -112,6 +114,11 @@
         }
         .content-popup h2, .content-popup span{
             color:#fff;
+        }
+        @media only screen and (max-width: 480px){
+            #myList{
+                display: block!important;
+            }
         }
     </style>
         <!-- Google Tag Manager -->
@@ -444,7 +451,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             </div>
                                                         </li>
                                                         @endforeach
-                                                        <li class="loadmore" id="loadMore">
+                                                        <!-- <li class="loadmore" id="loadMore">
                                                             <i class="fa fa-plus-square-o"></i>
                                                             <span class="more-view">Xem thêm</span>
                                                         </li>
@@ -452,7 +459,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                         <li class="loadmore" id="lessMore" style="display: none;">
                                                             <i class="fa fa-plus-square-o"></i>
                                                             <span class="more-view">Rút gọn</span>
-                                                        </li>
+                                                        </li> -->
                                                     </ul>
                                                 </div>
                                             </div>

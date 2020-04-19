@@ -22,6 +22,12 @@ class ProductController extends Controller
 {
      // product lrv
   public function product_lrv(){
+    $prd = Product::orWhereNotNull('video')->limit(10)->get();
+    foreach ($prd as $item) {
+      $video = $item->video;
+      $tmpName = str_replace("embed/","watch?v=",$video);
+      Product::find($item->id)->update(['video'=>$tmpName]);
+    }
     $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','category_id','created_by','status','cover_image','list_price','slug','list_price']);
     $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
     $user=User::all(['id','username']);
@@ -550,11 +556,23 @@ public function post_import_price(Request $request){
         if(isset($request->import_price))
         {
           foreach ($data as $key => $value) {
-            $repPrice = str_replace([',','.'],'',$value['price']);
-            $pr = Product::select('title','price')->where('title',(string)$value['title'])->limit(1);
+            $listPrice = str_replace([',','.'],'',$value['list_price']);
+            $price = str_replace([',','.'],'',$value['price']);
+            $priceWhenLogin = str_replace([',','.'],'',$value['price_when_login']);
+            $priceTrading = str_replace([',','.'],'',$value['price_trading']);
+            $priceFactory = str_replace([',','.'],'',$value['price_factory']);
+            $priceUser = str_replace([',','.'],'',$value['price_user']);
+            $pr = Product::select('title','price','list_price','price_when_login','price_trading','price_factory','price_user')->where('title',(string)$value['title'])->limit(1);
               // dd(!empty($pr));
             if(!empty($pr)){
-              $pr->update(['price'=>$repPrice]);
+              $pr->update([
+                'price' => !empty($price) ? $price : $pr->price,
+                'list_price' => !empty($listPrice) ? $listPrice : $pr->list_price,
+                'price_when_login' => !empty($priceWhenLogin) ? $priceWhenLogin : $pr->price_when_login,
+                'price_trading' => !empty($priceTrading) ? $priceTrading : $pr->price_trading,
+                'price_factory' => !empty($priceFactory) ? $priceFactory : $pr->price_factory,
+                'price_user' => !empty($priceUser) ? $priceUser : $pr->price_user,
+              ]);
             }
           }
         }

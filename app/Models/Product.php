@@ -10,19 +10,19 @@ class Product extends Model
 	protected $table='product';
 	public $field_where = '';
 	public $field_value = '';
-	protected $fillable=['id','title','slug','short_description','content','sorder','feature','specifications','dimension','line_up','catalog','created_by','cover_image','meta_title','meta_description','modified_by','meta_keywords','status','price','price_when_login','warranty','promotion','category_id','product_code','download_id','is_best_seller','is_promotion','is_new_product','special_product','comment','created_at','updated_at','capacity','in_stock','discount','time_discount','image_360','video','list_price','cover_image_2','cover_image_3','cover_image_4','cover_image_5','view','actual_photo','pdp'
+	protected $fillable=['id','title','slug','short_description','content','sorder','feature','specifications','dimension','line_up','catalog','created_by','cover_image','meta_title','meta_description','modified_by','meta_keywords','status','price','price_when_login','price_trading','price_factory','price_user','warranty','promotion','category_id','product_code','download_id','is_best_seller','is_promotion','is_new_product','special_product','comment','created_at','updated_at','capacity','in_stock','discount','time_discount','image_360','video','list_price','cover_image_2','cover_image_3','cover_image_4','cover_image_5','view','actual_photo','pdp'
 	];
 	public function scopeDatas($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
+		return $query->select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','cover_image_3','cover_image_4','cover_image_5','time_discount','discount','pdp')->orderBy('id','DESC');
 	}
 	public function scopeDatas2($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
+		return $query->select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','cover_image_3','cover_image_4','cover_image_5','time_discount','discount','pdp')->orderBy('id','DESC');
 	}
 	public function scopeDatas3($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
+		return $query->select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','cover_image_3','cover_image_4','cover_image_5','time_discount','discount','pdp')->orderBy('id','DESC');
 	}
 	public function scopeDatas4($query){
-		return $query->select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->orderBy('id','DESC');
+		return $query->select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','cover_image_3','cover_image_4','cover_image_5','time_discount','discount','pdp')->orderBy('id','DESC');
 	}
 
 	public function scopeSearch($query)
@@ -56,7 +56,7 @@ class Product extends Model
 			// 	return $query->where('title','like','%'.request()->title.'%')->orwhere('category_id',$cate_id);
 			// }
 			// dd($cate->first()->id);
-			return $query->select('id','title','created_at','slug','category_id','created_by','status')->where('title','like','%'.request()->title.'%')->orwhere('meta_title','like','%'.request()->title.'%');
+			return $query->select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','cover_image_3','cover_image_4','cover_image_5','time_discount','discount','pdp')->where('title','like','%'.request()->title.'%')->orwhere('meta_title','like','%'.request()->title.'%');
 		}	
 		if(!empty(request()->created_by) && empty(request()->search) && empty(request()->status) && empty(request()->category_id))
 		{

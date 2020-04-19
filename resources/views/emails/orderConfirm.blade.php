@@ -10,4 +10,4 @@
 <p><span style="font-weight: bold">Email:</span> {{$order['email']}}</p>
 <p><span style="font-weight: bold">Số điện thoại:</span> {{$order['phone']}}</p>
 <p><span style="font-weight: bold">Địa chỉ nhận hàng:</span> {{$order['address']}}</p>
-<p><span style="font-weight: bold">Tổng tiền:</span> {{$order['total_price']}}</p>
+<p><span style="font-weight: bold">Tổng tiền:</span> {{number_format($order['total_price'])}}</p>
