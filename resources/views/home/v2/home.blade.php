@@ -659,6 +659,7 @@
                     </div>
                     </div> -->
                     <!-- du an -->
+                    @if(isset($flash_sale_products))
                     <div id="so_category_slider_191" class="so-category-slider container-slider module cate-slider2">
                         <div class="modcontent">
                             <div class="page-top">
@@ -737,6 +738,7 @@
                         </div>
                     </div>
                     </div>
+                    @endif
                     <!-- du an -->
                 </div>
                 <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">

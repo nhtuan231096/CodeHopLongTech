@@ -16,4 +16,7 @@ Route::get('/edit-account/{id}','AccountController@editAccount')->name('editAcco
 Route::post('/edit-account/{id}','AccountController@postEditAccount')->name('editAccount');
 Route::get('/info-account','AccountController@infoAccount')->name('infoAccount');
 Route::post('/info-account/change-password','AccountController@changePassword')->name('changePassword');
+
+//sales rep
+Route::get('/account/sales-rep','AccountController@salesRep')->name('sales_rep');
  ?>

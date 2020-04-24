@@ -201,6 +201,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{route('account_group')}}"><i class="fa fa-object-group"></i> Nhóm tài khoản quản trị</a></li>
+              <li><a href="{{route('sales_rep')}}"><i class="fa fa-object-group"></i> Đại diện bán hàng</a></li>
               <li><a href="{{route('account')}}"><i class="fa fa-user-circle"></i> Tài khoản quản trị</a></li>
               <li><a href="{{route('customer_group')}}"><i class="fa fa-users"></i> Nhóm khách hàng</a></li>
               <li><a href="{{route('customer_adm')}}"><i class="fa fa-user"></i> Khách hàng</a></li>

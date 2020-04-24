@@ -119,5 +119,11 @@ class AccountController extends Controller
 		$pass=bcrypt($req->password);
 		dd($pass);
 	}
+
+	// sales rep
+	// todo
+	public function salesRep(){
+		dd(1);
+	}
 }
  ?>

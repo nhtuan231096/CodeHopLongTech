@@ -43,9 +43,7 @@
 								<label class="sr-only" for="">label</label>
 								<input type="email" name="email" class="form-control" id="" placeholder="Email" required>
 							</div>
-						
-							
-						
+							@csrf
 							<button type="submit" class="btn btn-primary">Gửi</button>
 						</form>
 					</div>

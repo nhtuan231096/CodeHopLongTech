@@ -59,3 +59,9 @@ Route::get('news-category/','\App\Http\Controllers\Home\AppController@getNewsCat
 Route::post('comment-news/','\App\Http\Controllers\Home\AppController@addCommentNews');
 // sử dụng coupon code
 Route::post('get-couponcode/','\App\Http\Controllers\Home\AppController@useCouponCode');
+//quen mat khau
+Route::post('customer/forgot-password','\App\Http\Controllers\Home\AppController@forgotPassword');
+// flash sales
+Route::get('flash-sale/products','\App\Http\Controllers\Home\AppController@flashSale');
+// filter product by price
+Route::get('products','\App\Http\Controllers\Home\AppController@getFilterProductByPrice');

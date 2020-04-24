@@ -4,6 +4,8 @@ use Auth;
 use App\Models\Reward_points;
 use App\Models\AdminNotification;
 use App\Models\Terms;
+use App\Models\CouponCode;
+use App\Models\CouponRule;
 
 class Data
 {
@@ -21,15 +23,28 @@ class Data
 				$this->items[$model->id]['quantity'] +=1;
 			}
 			else {
-				// dd(Auth::guard('customer')->user()->cusGroup);
 				$priceDiscount = date('Y-m-d') <= $model->time_discount ? $model->price - (($model->price*$model->discount)/100)
 				 : (Auth::guard('customer')->check() ? 
 				 	(isset($model->price_when_login) ? $model->price_when_login : $model->price)
 				 : $model->price);
-				 // dd($priceDiscount);
-				 if(isset(Auth::guard('customer')->user()->cusGroup)){
-					 $priceDiscount = !empty($this->DiscountAmount()) ? number_format(round($priceDiscount - (($priceDiscount/100) * $this->DiscountAmount()))) : $priceDiscount;
-				 }
+				 // if(isset(Auth::guard('customer')->user()->cusGroup)){
+					//  $priceDiscount = !empty($this->DiscountAmount()) ? number_format(round($priceDiscount - (($priceDiscount/100) * $this->DiscountAmount()))) : $priceDiscount;
+				 // }
+				 //---
+				 if(Auth::guard('customer')->check()){
+					$priceDiscount = isset($model['price_when_login']) ? ($model['price_when_login']) : ($model['price'] > 0 ? ($model['price']) : $model['price']);
+					$customer_type = Auth::guard('customer')->user()->companyType;
+					if($customer_type->id == 1 || $customer_type->id == 2 || $customer_type->id == 3 || $customer_type->id == 4){
+						$priceDiscount = $model->price_factory;
+					}
+					if($customer_type->id == 5){
+						$priceDiscount = $model->price_trading;
+					}
+					if($customer_type->id == 6){
+						$priceDiscount = $model->price_user;
+					}
+				  }
+				 //---
 				 $priceDiscount = str_replace(",","",$priceDiscount);
 				 // dd($priceDiscount);
 				$this->items[$model->id] = [
@@ -157,7 +172,6 @@ class Data
 	}
 
 	public function PriceProduct($product){
-		// dd($product);
 		$product = (object) $product;
 		$price = $product['price'];
 		if($price == '' || is_numeric($price) == false){
@@ -168,9 +182,24 @@ class Data
 			return number_format($productPrice)." VNĐ";
 		}
 		if(Auth::guard('customer')->check()){
-			 $priceProduct = isset($product['price_when_login']) ? ($product['price_when_login']) : ($product['price'] > 0 ? ($product['price']) : $product['price']);
-			 $showPrice = !empty($this->DiscountAmount()) ? number_format(round($priceProduct - (($priceProduct/100) * $this->DiscountAmount()))) : $priceProduct;
-			 return $showPrice > 0 ? (is_numeric($showPrice) ? number_format($showPrice)." VNĐ" : $showPrice." VNĐ") : $showPrice ." VNĐ";
+			 // $priceProduct = isset($product['price_when_login']) ? ($product['price_when_login']) : ($product['price'] > 0 ? ($product['price']) : $product['price']);
+			 // $showPrice = !empty($this->DiscountAmount()) ? number_format(round($priceProduct - (($priceProduct/100) * $this->DiscountAmount()))) : $priceProduct;
+			 // return $showPrice > 0 ? (is_numeric($showPrice) ? number_format($showPrice)." VNĐ" : $showPrice." VNĐ") : $showPrice ." VNĐ";
+
+			//---
+			$priceProduct = isset($product['price_when_login']) ? ($product['price_when_login']) : ($product['price'] > 0 ? ($product['price']) : $product['price']);
+			$customer_type = Auth::guard('customer')->user()->companyType;
+			if($customer_type->id == 1 || $customer_type->id == 2 || $customer_type->id == 3 || $customer_type->id == 4){
+				$priceProduct = $product->price_factory;
+			}
+			if($customer_type->id == 5){
+				$priceProduct = $product->price_trading;
+			}
+			if($customer_type->id == 6){
+				$priceProduct = $product->price_user;
+			}
+			return number_format($priceProduct);
+			//---
 		}
 		
 		else{
@@ -217,6 +246,19 @@ class Data
 				return $value;
 			}
 		}
+	}
+
+	public function couponCode(){
+		$currentTime = date('Y-m-d');
+		$couponCode = CouponCode::all();
+		$rule = CouponRule::where('status',1)->where('from_date','<=',$currentTime)->where('to_date','>=',$currentTime)->get();
+		$dataCoupons = [];
+		foreach ($rule as $itemRule) {
+			foreach($itemRule->couponCode as $itemCouponCode) {
+				$dataCoupons[] = $itemCouponCode;
+			}
+		}
+		return $dataCoupons;
 	}
 }
 

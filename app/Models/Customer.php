@@ -20,7 +20,7 @@ class Customer extends Authenticatable
      */
     protected $table = 'customer';
     protected $fillable = [
-		'name','email','company','customer_group_id','business_areas','tax_code','phone','address','password','status','cover_image','account_type','company_type_id','reward_points','total_points'
+		'name','email','company','customer_group_id','business_areas','tax_code','phone','address','password','status','cover_image','account_type','company_type_id','reward_points','total_points','sales_rep_id'
 	];
 	protected $hidden = [
         'password', 'remember_token',

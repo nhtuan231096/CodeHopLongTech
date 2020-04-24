@@ -212,6 +212,7 @@ class OrderController extends Controller
 	}
 
 	public function usesCoupon(Request $req, Data $cart){
+		$getCoupon = $cart->couponCode();
 		if(isset($req->update_cart)){
 			$cart->updateQuantity($req->id,$req->quantity);
 			return redirect()->route('view_cart')->with('success','Cập nhật giỏ hàng thành công');
@@ -261,6 +262,7 @@ class OrderController extends Controller
 							$cart->add_coupon($data_uses_coupon);
 							// dd($data_uses_coupon);
 							return view('home.v2.view_cart',[
+								'getCoupon' => $getCoupon,
 								'categorys' => $categorys,
 								'cart' => $cart,
 								'data_uses_coupon' => $data_uses_coupon,
@@ -297,6 +299,7 @@ class OrderController extends Controller
 							// 	'data_uses_coupon' => $data_uses_coupon
 							// ]);
 							return view('home.v2.view_cart',[
+								'getCoupon' => $getCoupon,
 								'categorys' => $categorys,
 								'cart' => $cart,
 								'data_uses_coupon' => $data_uses_coupon

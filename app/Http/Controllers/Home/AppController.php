@@ -25,8 +25,10 @@ use App\Models\CommentNews;
 use Auth;
 use Mail;
 use App\Models\AdminNotification;
+use App\Models\FlashSale;
 use App\Mail\OrderSendMail;
 use App\Mail\OrderSendMailNotification;
+use App\Mail\ForgotPassword;
 
 /**
  * 
@@ -213,5 +215,45 @@ class AppController extends Controller
 			"data_rule" => $getCoupon->rule,
 		];
 		return $data;
+	}
+	public function forgotPassword(Request $req){
+		$check = Customer::where('email',$req->email);
+		if($check->count() > 0){
+			$data = 
+			[
+	        	'email'=>$req->email,
+	        	'password'=>($check->first()->password)
+			];
+		    Mail::to($req->email)->send(new ForgotPassword($data));
+
+			return response()->json(true, Response::HTTP_OK);
+		}
+		else{
+			return redirect()->json('error','Email not found in the system');
+		}
+	}
+	public function flashSale(){
+		$current_date = date('Y-m-d');
+		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
+		if ($flash_sale) {
+			return response()->json($flash_sale->products, Response::HTTP_OK);
+		} else {
+			return response()->json(["error"=>"Flash sale not found"]);
+		}
+	}
+	public function getFilterProductByPrice(Request $req){
+		try {
+		  	$price_from = $req->price['from'];
+			$price_to = $req->price['to'];
+			$products = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')
+						->where('price','>=',(int)$price_from)
+						->where('price','<=',(int)$price_to)->paginate(16);
+			return response()->json($products, Response::HTTP_OK);
+		}
+
+		//catch exception
+		catch(ModelNotFoundException $exception) {
+		  return 'Message: ' .$e->getMessage();
+		}
 	}
 }

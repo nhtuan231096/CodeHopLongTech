@@ -143,26 +143,26 @@ class HomeController extends Controller
 		$parent_categorys=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
 
 		$best_seller = Cache::remember('best_seller',1*60,function(){
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_best_seller','enable')->limit(16)->get();
+			return Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_best_seller','enable')->limit(16)->get();
 		});
 		// $best_seller = $pro->where('is_best_seller','enable')->limit(10)->get();
 		$new_product = Cache::remember('new_product',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_new_product','enable')->limit(16)->get();
+			return Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_new_product','enable')->limit(16)->get();
 		});
 		// // $new_product = $pro2->where('is_new_product','enable')->limit(10)->get();
 
 		$promotion = Cache::remember('promotion',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_promotion','enable')->limit(16)->get();
+			return Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('is_promotion','enable')->limit(16)->get();
 		});
 		// // $promotion = $pro3->where('is_promotion','enable')->limit(10)->get();
 
 		$special_product = Cache::remember('special_product',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('special_product','enable')->limit(16)->get();
+			return Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('special_product','enable')->limit(16)->get();
 		});
 		// $special_product = $pro4->where('special_product','enable')->limit(10)->get();
 
 		$company_news = Cache::remember('company_news',1*60,function() {
-			return Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id','35')->limit(16)->get();
+			return Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id','35')->limit(16)->get();
 		});	
 		// $company_news = $pro->where('category_id','35')->limit(10)->get();
 
@@ -218,15 +218,15 @@ class HomeController extends Controller
 		// $pro2 = (new Product())->datas2();
 			$categorys1=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','DESC')->paginate(26);
 			$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
-			$new_product=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(10)->Where('is_new_product','create')->where('status','enable');
+			$new_product=Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(10)->Where('is_new_product','create')->where('status','enable');
 			$partners=Partners::Where('status','enable')->orderBy('sorder','DESC')->get();
 			$category= Category::where('slug',$slug)->first();
-			$product= Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('slug',$slug)->first();
+			$product= Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('slug',$slug)->first();
 			$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
 			$sp=Support::limit(10)->Where(['status'=>'enable','type'=>'business'])->get();
 			//sản phẩm khác
-			$others=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(8)->where('category_id','<>','$id');
-			$promotion = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(8)->where('is_promotion','enable')->where('category_id',$category->id);
+			$others=Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(8)->where('category_id','<>','$id');
+			$promotion = Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->paginate(8)->where('is_promotion','enable')->where('category_id',$category->id);
 
 
 			$cat = Category::where('parent_id',$category->id);
@@ -236,7 +236,7 @@ class HomeController extends Controller
 			{	
 				$cate=Category::where('parent_id',$category->id)->limit(15)->get();
 				$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
-				$products=Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id',$category->id)->paginate(15);
+				$products=Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id',$category->id)->paginate(15);
 				return view('home.v2.category_product',
 					['category'=>$category,
 					'categorys'=>$categorys,
@@ -769,7 +769,7 @@ class HomeController extends Controller
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		$check = Customer::where('email',$req->email)->where('password',$req->password);
 		if($check) {
-			return view('home.customer.resetPassword',[
+			return view('home.v2.customer.resetPassword',[
 				'email' => $req->email,
 				'password' => $req->password,
 				'categorys' => $categorys
@@ -856,6 +856,7 @@ class HomeController extends Controller
 		}
 	}
 	public function shopNow(Data $cart){
+		// $getCoupon = $cart->couponCode();
 		$model = Product::find(request()->id);
 		if(request()->quantity){
 			if ($model) {
@@ -872,10 +873,12 @@ class HomeController extends Controller
 
 	public function view_cart(Data $cart){
 		
+		$getCoupon = $cart->couponCode();
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		return view('home.v2.view_cart',[
 			'categorys' => $categorys,
-			'cart' => $cart 
+			'cart' => $cart,
+			'getCoupon' => $getCoupon
 		]);
 	}
 	public function delete_cart($id, Data $cart){
@@ -1096,7 +1099,7 @@ class HomeController extends Controller
 
     public function autoSearch($product_search,Data $helperData){
     	if($product_search != ''){
-    		$res = Product::select('id','price','price_when_login','title','slug','cover_image','time_discount','discount')->where('title','like','%'.$product_search.'%')->where('status','enable')->paginate(10);
+    		$res = Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','time_discount','discount')->where('title','like','%'.$product_search.'%')->where('status','enable')->paginate(10);
     		foreach ($res as $key => $value) {
     			$price = $helperData->PriceProduct($value);
     			$value->price_product = $price;
