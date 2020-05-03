@@ -265,7 +265,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                     <div class="middle-right col-lg-3 col-md-3 col-sm-3">                  
                         <!--cart-->
                         <div class="shopping_cart">
-                            <div id="cart" class="btn-shopping-cart">
+                            <div id="cart" class="btn-shopping-cart pull-right">                       
                                 <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <div class="shopcart">
                                         <span class="icon-c"><i class="fa fa-shopping-bag"></i></span>
@@ -323,7 +323,73 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                 </ul>
                                 @endif
                             </div>
+                            <!-- //import order -->
+                            <div id="cart" class="btn-shopping-cart pull-left">                       
+                                <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                    <div class="shopcart">
+                                        <span class="icon-c"><i class="fa fa-shopping-cart"></i></span>
+                                        <div class="shopcart-inner">
+                                            <p class="text-shopping-cart"></p>
+                                            <span class="total-shopping-cart cart-total-full">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                    <li>
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                
+                                                    <tr>
+                                                        <td class="text-center"> <a class="cart_product_name" href="" style="font-size: 14px">Đặt hàng bằng file .csv</a> 
+                                                        </td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <p class="text-center"> 
+                                                <a class="btn view-cart" href="{{url('/uploads/1.0.1/sampleImport.csv')}}">
+                                                    <i class="fa fa-download" style="margin-right: 5px"></i>Tải file mẫu
+                                                </a>
+                                                <a class="btn view-cart" data-toggle="modal" href='#modal-id'>
+                                                    <i class="fa fa-upload" style="margin-right: 5px"></i>Nhập file csv
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- //import order -->
+
                         </div>
+                        <!-- //modal import file csv -->
+                        <div class="modal fade" id="modal-id">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{route('import_cart_csv')}}" method="POST" role="form" enctype="multipart/form-data">
+                                            <legend>Tải lên file csv để đặt hàng</legend>
+                                        
+                                            <div class="form-group">
+                                                <label for="">File csv</label>
+                                                <input style="padding: 0" type="file" class="form-control" name="file">
+                                            </div>
+                                        
+                                            @csrf                                        
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Hủy</button>
+                                            <button type="submit" class="btn btn-primary pull-right">Tải</button>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //end modal import file csv -->
                     </div>
                 </div>
             </div>

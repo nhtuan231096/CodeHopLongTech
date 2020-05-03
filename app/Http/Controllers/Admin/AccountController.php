@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
 use App\Models\User_group;
+use App\Models\Customer;
+use App\Models\SalesRep;
 use Illuminate\Http\Request;
 /**
 * 
@@ -123,7 +125,54 @@ class AccountController extends Controller
 	// sales rep
 	// todo
 	public function salesRep(){
-		dd(1);
+		$salesRep = SalesRep::all();
+		return view('admin.sales_rep.index',[
+			'salesRep' => $salesRep
+		]);
+	}
+	public function newSalesRep()
+	{
+		$users = User::where('status','enable')->get();
+		$customers = Customer::where('status',1)->get(); 
+		$data = '';
+		if (isset(request()->id)) {
+			$data = SalesRep::find(request()->id);
+			// foreach ($data->customer as $itemCus) {
+			// 	dd($itemCus);
+			// }
+		}
+		return view('admin.sales_rep.add',[
+			'users' => $users,
+			'customers' => $customers,
+			'data' => $data
+		]);
+	}
+
+	public function saveSalesRep(Request $req){
+
+		$userSaleRep = SalesRep::where('user_id',$req->user_id);
+		if (isset($req->salesRepId)) {
+			Customer::where('sales_rep_id', $req->salesRepId)->update([
+				'sales_rep_id' => 0
+			]);
+			$userSaleRep->update([
+				'status'=>$req->status
+			]);
+		}
+		$userSaleRep = $userSaleRep->first();
+
+		if ($userSaleRep == null) {
+			$userSaleRep = SalesRep::create([
+				'user_id' => $req->user_id,
+				'created_by' => Auth::guard('admin')->user()->username
+			]);	
+		}
+		foreach ($req->customers as $key => $customer) {
+			Customer::where('id',$customer)->update([
+				'sales_rep_id' => $userSaleRep->id
+			]);
+		}
+		return redirect()->route('sales_rep')->with('success','Cập nhật thành công');
 	}
 }
  ?>

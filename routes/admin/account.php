@@ -19,4 +19,6 @@ Route::post('/info-account/change-password','AccountController@changePassword')-
 
 //sales rep
 Route::get('/account/sales-rep','AccountController@salesRep')->name('sales_rep');
+Route::get('/account/sales-rep/new-sales-rep','AccountController@newSalesRep')->name('new_sales_rep');
+Route::post('/account/sales-rep/new-sales-rep','AccountController@saveSalesRep')->name('new_sales_rep');
  ?>

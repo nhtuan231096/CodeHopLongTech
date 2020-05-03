@@ -8,7 +8,7 @@ class CouponLog extends Model
 {
 	protected $table='coupon_code_log';
 	protected $fillable=[
-		'coupon_code_id','coupon_code','customer','ip','updated_at','rule_id'
+		'coupon_code_id','coupon_code','customer','ip','updated_at','rule_id','order_id'
 	];
 
 	public function rule(){

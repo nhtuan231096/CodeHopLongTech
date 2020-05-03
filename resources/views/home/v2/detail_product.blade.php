@@ -14,6 +14,14 @@ html {
 .producttab .tabsslider.horizontal-tabs .nav-tabs li a{
     font-size: 13px;
 }
+.outstock::before {
+  content: "\f057"!important;
+  font-family: FontAwesome;
+  display: inline-block;
+  color: red!important;
+  margin-right: 5px;
+  margin-left: 10px;
+}
 </style>
 <script src="https://360player.io/static/dist/scripts/embed.js" async></script>
 <link rel="stylesheet" href="{{url('public/css')}}/styleProduct.css">
@@ -222,7 +230,11 @@ html {
                       @endif
                         <span class="price-old">{{$product->list_price > 0 ? number_format($product->list_price) : ''}}</span>
                     </div>
-                    <div class="stock"><span>Tình trạng:</span> <span class="status-stock">Có sẵn</span></div>
+                    @if($product->in_stock > 0)
+                    <div class="stock"><span>Số lượng:</span> <span class="status-stock">{{$product->in_stock}}</span></div>
+                    @else
+                    <div class="stock"><span>Tình trạng:</span> <span class="status-stock outstock">Không có sẵn</span></div>
+                    @endif
                 </div>
                 <div class="product-box-desc">
                     <div class="inner-box-desc">

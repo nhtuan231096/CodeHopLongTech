@@ -37,6 +37,9 @@
 		                <td class="text-left">Sản phẩm</td>
 		                <!-- <td class="text-left">Model</td> -->
 		                <td class="text-left">Số lượng</td>
+		                @if (isset(current($cart->items)['message']))
+		                <td class="text-right">Tình trạng hàng</td>
+		                @endif
 		                <td class="text-right">Đơn giá</td>
 		                <td class="text-right">Tổng tiền</td>
 		              </tr>
@@ -54,7 +57,11 @@
 		                    <!-- <button type="submit" data-toggle="tooltip" title="Update" class="btn btn-primary"><i class="fa fa-clone"></i></button> -->
 		                    <input type="hidden" type="id" name="id[]" value="{{$item['id']}}">
 		                    <a href="{{route('delete_cart',['id'=>$item['id']])}}"><i class="fa fa-times-circle" style="font-size: large; vertical-align: middle;"></i></a>
-		                    </span></div></td>
+		                    </span></div>
+		                </td>
+						@if (isset($item['message']))
+		                <td class="text-right" style="width: 200px">{{$item['message']}}</td>
+		                @endif
 		                <td class="text-right">{{number_format($item['price'])}}</td>
 		                <td class="text-right">{{number_format($item['price']*$item['quantity'])}}</td>
 		              </tr>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\WebCf;
 use App\Models\Popup;
+use App\Models\CoreConfig;
 use Illuminate\Http\Request;
 /**
 * 
@@ -52,6 +53,34 @@ class WebConfigController extends Controller
 		}
 		else{
 			Popup::create($req->all());
+		}
+		return redirect()->back()->with('success','Cập nhật thành công');
+	}
+	public function config() {
+		$dataConfig = CoreConfig::all();
+		$data = [];
+		foreach ($dataConfig as $value) {
+			$cf = [$value->path_config=>$value->value];
+			$data = array_merge($data,$cf);
+		}
+	    return view('admin.webConfig.config',[
+	    	'dataConfig' => $data
+	    ]);
+	}
+	public function configSave(Request $req){
+		foreach ($req->all() as $key => $value) {
+			$config = CoreConfig::where('path_config',$key);
+			if ($config->count() > 0) {
+				$config->first()->update([
+					"path_config" => $key,
+					"value" => $value
+				]);
+			} else {
+				CoreConfig::create([
+					"path_config" => $key,
+					"value" => $value
+				]);
+			}
 		}
 		return redirect()->back()->with('success','Cập nhật thành công');
 	}

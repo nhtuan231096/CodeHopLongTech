@@ -14,4 +14,8 @@ class SalesRep extends Model
 	public function customer(){
 		return $this->hasMany('\App\Models\Customer','sales_rep_id','id');
 	}	
+
+	public function user() {
+		return $this->hasOne('\App\User','id','user_id');
+	}
 }

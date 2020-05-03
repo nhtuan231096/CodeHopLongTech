@@ -141,8 +141,12 @@
 			          <!-- <input type="text" name="data_uses_coupon" value="{{isset($data_uses_coupon['coupon_code']) ? $data_uses_coupon['coupon_code'] : ''}}"> -->
 			          <input type="hidden" name="data_uses_coupon" value="{{!empty(request()->session()->get('coupon_code')) ? request()->session()->get('coupon_code') : ''}}">
 			          <input type="hidden" name="use_coupon_code" value="{{!empty(request()->session()->get('price_reduced')) ? request()->session()->get('price_reduced') : ''}}">
+			          <!-- check config free ship -->
+			          @if($cart->getCoreConfig()['free_ship'] == 0) 
 			          <input type="hidden" name="shipping_fee" id="shipping_fee_1" value="0">
 			          <input type="hidden" name="ship_cod" id="ship_code" value="0">
+			          @endif
+			          <!--end check config free ship -->
 			          @csrf
 					<!-- //--- -->
 
@@ -260,7 +264,11 @@
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Phí vận chuyển:</strong></td>
 									<td class="text-right">
+										@if($cart->getCoreConfig()['free_ship'] == 1) 
+										<span class="text-muted"><i>Miễn phí</i></span>
+										@else
 										<span class="text-muted" id="shipping_fee">0</span>
+										@endif
 									</td>
 								  </tr>
 								  <tr>
@@ -301,7 +309,7 @@
 							                  <i class="reward_points pull-right" style="text-decoration: underline;cursor: pointer;">Sử dụng điểm thưởng ({{Auth::guard('customer')->user()->reward_points}})</i>
 							                  <div class="form-group use_reward_points" style="display: none;margin-bottom: 0px">
 							                    <label class="sr-only" for="">label</label>
-							                    <input style="width: 36%;float: right;" name="redeem_money" id="redeem_money" type="number" class="form-control" placeholder="Bạn có {{Auth::guard('customer')->user()->reward_points}} điểm" min="0" max="{{Auth::guard('customer')->user()->reward_points}}" required>
+							                    <input style="width: 36%;float: right;" name="redeem_money" id="redeem_money" type="number" class="form-control" placeholder="Bạn có {{Auth::guard('customer')->user()->reward_points}} điểm" min="0" max="{{Auth::guard('customer')->user()->reward_points}}">
 							                  </div>
 							                </span>
 							                @csrf
@@ -431,6 +439,9 @@
 	</div>
 </div>
 @endif
+
+<!-- check config free ship -->
+@if($cart->getCoreConfig()['free_ship'] == 0) 
 <!-- //--- -->
 <script type="text/javascript">
 	$("#city").val("");
@@ -616,6 +627,8 @@ var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
 
 }
 </script>
+<!-- end check config free ship -->
+@endif
 <!-- //--- -->
 
 

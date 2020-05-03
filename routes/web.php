@@ -57,6 +57,9 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::get('/flash-sale','HomeController@flashSale')->name('flash-sale');
 	// flash-sale
 
+	//import cart to csv
+	Route::post('import-cart-csv','OrderController@importCartCsv')->name('import_cart_csv');
+
 	//update route customer  
 	Route::get('/dang-ky','HomeController@formRegister')->name('register_customer');
 	Route::post('/dang-ky','HomeController@register')->name('register_customer');

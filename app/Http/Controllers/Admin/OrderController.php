@@ -6,8 +6,13 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\AdminNotification;
 use App\Helper\Data; 
+use App\User;
 use App\Models\Reward_points;
 use App\Models\Customer;
+use App\Models\SalesRep;
+use App\Models\SalesRepOrder;
+use App\Models\CouponLog;
+use App\Models\CouponCode;
 use Mail;
 use App\Mail\ConfirmOrder;
 use App\Mail\OrderSuccess;
@@ -106,6 +111,10 @@ class OrderController extends Controller
 					'reward_points' => $addPoints,
 					'total_points' => $addTotalPoints
 				]);
+
+				// check sales rep
+				$this->totalSales($id, $id_customer, $input['total_price']);
+				// check sales rep
 			}
 			//check cong diem
 
@@ -136,4 +145,42 @@ class OrderController extends Controller
 		else for ($i = 0, $z = strlen($c)-1, $s = $c{rand(0,$z)}, $i = 1; $i != $l; $x = rand(0,$z), $s .= $c{$x}, $s = ($s{$i} == $s{$i-1} ? substr($s,0,-1) : $s), $i=strlen($s));
 		return $s;
 	} 
+
+	public function totalSales($order_id, $id_customer, $total_price){
+		$useCouponCode = CouponLog::where('order_id',$order_id)->first();
+		$couponCodeId = $useCouponCode->coupon_code_id;
+		$couponCode = CouponCode::find($couponCodeId);
+		$userName = $couponCode->created_by;
+		$user = User::where('username',$userName)->first();
+		$salesRepByUserId = SalesRep::where('user_id',$user->id);
+
+		// log sale rep order
+		$salesRepId = Customer::find($id_customer)->sales_rep_id;
+		$salesRep = SalesRep::find($salesRepId);
+		if($salesRep) {
+			SalesRepOrder::create([
+				'customer_email' => Customer::find($id_customer)->email,
+				'user_email' => User::find($salesRep->user_id)->email,
+				'sales_rep_id' => $salesRep->id,
+				'total_price' => $total_price,
+			]);
+		}
+		// log sale rep order
+		// check customer use coupon 
+		if ($salesRepByUserId->count() > 0) {
+			$salesRep = $salesRepByUserId->first();
+			$totalPriceSalesRep = $salesRep->total_sales;
+			$total = $totalPriceSalesRep + $total_price;
+			$salesRep->update(['total_sales'=>$total]);
+		}
+		// check customer sales rep 
+		else {
+			$salesRepId = Customer::find($id_customer)->sales_rep_id;
+			$salesRep = SalesRep::find($salesRepId);
+			$totalPriceSalesRep = $salesRep->total_sales;
+			$total = $totalPriceSalesRep + $total_price;
+			$salesRep->update(['total_sales'=>$total]);
+		}
+	
+	}
 }

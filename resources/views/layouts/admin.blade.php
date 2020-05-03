@@ -121,6 +121,9 @@
           <li class="header">HEADER</li>
           <!-- Optionally, you can add icons to the links -->
           <li class="active"><a href="{{route('HomeAdmin')}}"><i class="fa fa-dashboard"></i> <span>Bảng điều khiển</span></a></li>
+          <!-- check user sale rep -->
+          <?php $checkSalesRep = Auth::guard('admin')->user()->userSaleRep ?>
+          @if(!isset($checkSalesRep->id))
           <li class="treeview">
             <a href="#"><i class="fa fa-laptop"></i> <span>Quản lý sản phẩm</span>
               <span class="pull-right-container">
@@ -183,6 +186,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
+              <li><a href="{{route('coreConfig')}}"><i class="fa fa-cog"></i>Cấu hình Chung</a></li>
               <li><a href="{{route('banner')}}"><i class="fa fa-image"> </i>Banner</a></li>
               <li><a href="{{route('webConfig')}}"> <i class="fa fa-object-group"></i>Web Configs</a></li>
               <li><a href="{{route('office')}}"> <i class="fa fa-building"></i>Office</a></li>
@@ -267,6 +271,20 @@
           <li><a href="{{route('service2')}}"><i class="fa fa-server"></i> <span>Service</span></a></li>
           <li><a href="{{route('download')}}"><i class="fa fa-download"></i> <span>Download</span></a></li>
           <li><a href="{{route('infoAccount')}}"><i class="fa fa-info-circle"></i> <span>Thông tin tài khoản</span></a></li>
+          @else 
+          <li class="treeview">
+            <a href="#"><i class="fa fa-money"></i> <span>Coupon</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{route('couppon_rule')}}"> <i class="fa fa-object-group"></i>Quy tắc mã giảm giá</a></li>
+              <li><a href="{{route('couppon_code')}}"> <i class="fa fa-server"></i>Mã giảm giá</a></li>
+              <li><a href="{{route('couppon_code_log')}}"> <i class="fa fa-sticky-note"></i>Nhật ký mã giảm giá</a></li>
+            </ul>
+          </li>      
+          @endif
         </ul>
         <!-- /.sidebar-menu -->
       </section>

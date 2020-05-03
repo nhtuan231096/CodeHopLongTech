@@ -47,4 +47,8 @@ class User extends Authenticatable
 
     }
     public $remember_token=false;
+
+    public function userSaleRep() {
+        return $this->hasOne('App\Models\SalesRep','user_id','id');
+    }
 }

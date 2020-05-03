@@ -9,6 +9,7 @@ use App\Models\AdminNotification;
 use App\Models\RedBill;
 use App\Models\Customer;
 use App\Models\Reward_points;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Auth;
 use Mail;
@@ -19,6 +20,7 @@ use App\Models\CouponCode;
 use App\Models\CouponRule;
 use App\Models\CouponLog;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * 
@@ -102,6 +104,7 @@ class OrderController extends Controller
 						'rule_id'=>$couponCodeRuleId,
 						'coupon_code'=>$couponCode,
 						'customer'=>$req->name,
+						'order_id'=>$order->id
 					];
 					CouponLog::create($data);
 					$coupon_code = CouponCode::where('coupon_code',$req->data_uses_coupon)->first();
@@ -361,6 +364,71 @@ class OrderController extends Controller
 		}
 		else {
 			return redirect()->back()->with('error','Mật khẩu không đúng');
+		}
+	}
+	public function importCartCsv(Request $request) {
+		if ($request->file('file') != null ){
+	    $file = $request->file('file');
+	      // File Details 
+	    $filename = $file->getClientOriginalName();
+	    $extension = $file->getClientOriginalExtension();
+	    $tempPath = $file->getRealPath();
+	    $fileSize = $file->getSize();
+	    $mimeType = $file->getMimeType();
+
+	      // Valid File Extensions
+	    $valid_extension = array("csv");
+	      // 2MB in Bytes
+	    $maxFileSize = 2097152; 
+
+
+	    $path = $request->file('file')->getRealPath();
+	    $data = Excel::load($path, function($reader) {})->get()->toArray();
+	    if (count($data) > 0) {
+	        $data = array_slice($data, 0, 10000);
+	        $csv_header_fields = [];
+	        $type = $request->type;
+	        // import cart
+	        if(isset($request->file)){
+	          foreach ($data as $value) {
+	              $products[] = $value['ma_san_pham'];
+	          }
+	          $pr = Product::whereIn('slug',$products)->get();
+	        }
+	        foreach ($pr as $itemPr) {
+	        	foreach ($data as $itemData) {
+	        		if ($itemData['ma_san_pham'] == $itemPr->slug) {
+	        			$itemPr->quantity = $itemData['so_luong'];
+	        			$this->add_cart($itemPr);
+	        		}
+	        	}
+	        }
+	        return redirect()->route('view_cart')->with('success','Import sản phẩm vào giỏ hàng thành công');
+	    }
+	    return redirect()->back()->with('error','Có lỗi vui lòng thử lại');
+	  }
+	  return redirect()->back()->with('error','Có lỗi vui lòng thử lại');
+	}
+
+	public function add_cart($product){
+		$cart = new Data;
+		// check price product and stock
+		if($product->quantity && $product->price > 0){ 
+			if ($product->in_stock > $product->quantity) {
+				// for($i=0; $i < $product->quantity; $i++) {
+				// 	$cart->add($product);
+				// }
+				$product->message = "Đủ hàng";
+			}
+			else if($product->in_stock < $product->quantity) {
+				$out_stock = $product->quantity - $product->in_stock;
+				$in_stock = isset($product->in_stock) ? $product->in_stock : 0;
+				$product->message = "Còn ".$in_stock." sản phẩm trong kho, ".$out_stock." sản phẩm còn lại đặt hàng 2-4w";
+			}
+			for($i=0; $i < $product->quantity; $i++) {
+				$cart->add($product);
+			}
+			return;
 		}
 	}
 }

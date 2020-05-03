@@ -6,6 +6,7 @@ use App\Models\AdminNotification;
 use App\Models\Terms;
 use App\Models\CouponCode;
 use App\Models\CouponRule;
+use App\Models\CoreConfig;
 
 class Data
 {
@@ -34,14 +35,16 @@ class Data
 				 if(Auth::guard('customer')->check()){
 					$priceDiscount = isset($model['price_when_login']) ? ($model['price_when_login']) : ($model['price'] > 0 ? ($model['price']) : $model['price']);
 					$customer_type = Auth::guard('customer')->user()->companyType;
-					if($customer_type->id == 1 || $customer_type->id == 2 || $customer_type->id == 3 || $customer_type->id == 4){
-						$priceDiscount = $model->price_factory;
-					}
-					if($customer_type->id == 5){
-						$priceDiscount = $model->price_trading;
-					}
-					if($customer_type->id == 6){
-						$priceDiscount = $model->price_user;
+					if(isset($customer_type)) {
+						if($customer_type->id == 1 || $customer_type->id == 2 || $customer_type->id == 3 || $customer_type->id == 4){
+							$priceDiscount = $model->price_factory;
+						}
+						if($customer_type->id == 5){
+							$priceDiscount = $model->price_trading;
+						}
+						if($customer_type->id == 6){
+							$priceDiscount = $model->price_user;
+						}
 					}
 				  }
 				 //---
@@ -53,7 +56,8 @@ class Data
 				'slug' => $model->slug,
 				'price' => $priceDiscount,
 				'quantity' => 1,
-				'image' => $model->cover_image
+				'image' => $model->cover_image,
+				'message' => isset($model->message) ? $model->message : ""
 				];
 			}
 			// dd($this->items);
@@ -189,15 +193,18 @@ class Data
 			//---
 			$priceProduct = isset($product['price_when_login']) ? ($product['price_when_login']) : ($product['price'] > 0 ? ($product['price']) : $product['price']);
 			$customer_type = Auth::guard('customer')->user()->companyType;
-			if($customer_type->id == 1 || $customer_type->id == 2 || $customer_type->id == 3 || $customer_type->id == 4){
-				$priceProduct = $product->price_factory;
+			if(isset($customer_type)) {
+				if($customer_type->id == 1 || $customer_type->id == 2 || $customer_type->id == 3 || $customer_type->id == 4){
+					$priceProduct = $product->price_factory;
+				}
+				if($customer_type->id == 5){
+					$priceProduct = $product->price_trading;
+				}
+				if($customer_type->id == 6){
+					$priceProduct = $product->price_user;
+				}
 			}
-			if($customer_type->id == 5){
-				$priceProduct = $product->price_trading;
-			}
-			if($customer_type->id == 6){
-				$priceProduct = $product->price_user;
-			}
+			
 			return number_format($priceProduct);
 			//---
 		}
@@ -259,6 +266,16 @@ class Data
 			}
 		}
 		return $dataCoupons;
+	}
+
+	public function getCoreConfig() {
+		$dataConfig = CoreConfig::all();
+		$data = [];
+		foreach ($dataConfig as $value) {
+			$cf = [$value->path_config=>$value->value];
+			$data = array_merge($data,$cf);
+		}
+		return $data;
 	}
 }
 

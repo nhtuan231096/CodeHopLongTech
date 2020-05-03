@@ -98,7 +98,7 @@ class HomeController extends Controller
 		// $cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();	
 		$current_date = date('Y-m-d');
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
-		$flash_sale_products = FlashSaleProduct::where('flash_sale_id',$flash_sale->id)->paginate(10);
+		$flash_sale_products = $flash_sale ? FlashSaleProduct::where('flash_sale_id',$flash_sale->id)->paginate(10) : null;
 		return view('home.v2.home',[
 			'active'=>$slider_active,
 			'slider_homes'=>$slider_home,
