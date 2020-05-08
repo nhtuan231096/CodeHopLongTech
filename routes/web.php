@@ -39,7 +39,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 	include('admin/rate.php');
 	include('admin/promotions.php');
 	include('admin/popup.php');
-	
+
 });
 // Route login admin
 Route::get('admin/login.html','Admin\AdminController@login')->name('login');
@@ -60,7 +60,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	//import cart to csv
 	Route::post('import-cart-csv','OrderController@importCartCsv')->name('import_cart_csv');
 
-	//update route customer  
+	//update route customer
 	Route::get('/dang-ky','HomeController@formRegister')->name('register_customer');
 	Route::post('/dang-ky','HomeController@register')->name('register_customer');
 	Route::get('/quen-mat-khau','HomeController@forgotPassword')->name('forgotPassword');
@@ -68,7 +68,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::post('/dat-lai-mat-khau','HomeController@resetPassword')->name('customer-reset-password');
 	Route::post('/dat-lai-password','HomeController@PostResetPassword')->name('reset-password');
 	Route::post('/dang-nhap','HomeController@login')->name('login_customer');
-    
+
 	Route::get('customer/order/history','OrderController@customer_order_history')->name('customer_order_history');
 	Route::get('customer/order/order-information/{id}','OrderController@orderInformation')->name('orderInformation');
 	Route::post('customer/my-account','OrderController@saveCustomer')->name('saveCustomer');
@@ -95,20 +95,20 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::get('news/{slug}','HomeController@detail_news')->name('detail_news');
 	Route::get('news-category/{slug}','HomeController@detail_catnews')->name('detail_catnews');
 
-	// route tin tuc 
+	// route tin tuc
 	Route::get('tin-tuc','HomeController@news_page')->name('tin_tuc');
 	Route::get('tin-tuc/{slug}','HomeController@detail_news_page')->name('tin_tuc_chi_tiet');
 	Route::get('tin-tuc/danh-muc/{slug}','HomeController@cate_news_page')->name('danh_muc_tin_tuc');
-	
-	
+
+
 	// module danh cho dai ly
-	Route::get('agency','HomeController@agency_posts')->name('home_agency_posts'); 
-	Route::get('danh-muc-bai-viet/{slug}/{id}','HomeController@agency_posts_by_category')->name('postsCategory'); 
-	Route::get('bai-viet/{slug}/{id}','HomeController@agency_posts_detail')->name('detailPost'); 
+	Route::get('agency','HomeController@agency_posts')->name('home_agency_posts');
+	Route::get('danh-muc-bai-viet/{slug}/{id}','HomeController@agency_posts_by_category')->name('postsCategory');
+	Route::get('bai-viet/{slug}/{id}','HomeController@agency_posts_detail')->name('detailPost');
 
 	//route my acoount
-	Route::get('my-account','OrderController@my_account')->name('my_account'); 
-	
+	Route::get('my-account','OrderController@my_account')->name('my_account');
+
 	Route::get('404.html','HomeController@error')->name('error');
 	// route gio hang
 	Route::get('cart/add-cart/{id}','HomeController@add_cart')->name('add_cart');
@@ -130,7 +130,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 
 	// route order checkout
 	Route::post('/uses-coupon','OrderController@usesCoupon')->name('usesCoupon');
-	
+
 	Route::post('/order/red-bill','OrderController@order')->name('red_bill');
 	Route::get('/order/red-bill','OrderController@order')->name('red_bill');
 	Route::post('/order/redeem-money','OrderController@order')->name('use_redeem_money');
@@ -139,8 +139,8 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::get('/order_success','OrderController@order_success')->name('order_success');
 
 	Route::get('order/history','OrderController@order_history')->name('order_history');
-	Route::get('order/detail/{id}','OrderController@order_hostiry_detail')->name('order_detail'); 
-	//end route order checkout 	
+	Route::get('order/detail/{id}','OrderController@order_hostiry_detail')->name('order_detail');
+	//end route order checkout
 
 
 	// route dang xuat customer
@@ -155,6 +155,8 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::get('/product-category/{slug}','HomeController@viewCate')->name('view_category');
 	// Route::get('/partners','HomeController@view')->name('categorys');
 	Route::get('/products/{slug}','HomeController@view')->name('view');
+    //page chi tiet san pham ko header
+    Route::get('/product/{slug}','AppController@view');
 	Route::post('/comment','HomeController@comment')->name('comment');
 	Route::post('/send-mail','HomeController@send_mail')->name('send_mail');
 	Route::get('/confirm/{id}','HomeController@confirm')->name('confirm');
@@ -165,13 +167,13 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 
 
 
-	
+
 	});
 	//end update route customer
 
 
-	
-	
+
+
 
 // Auth::routes();
 

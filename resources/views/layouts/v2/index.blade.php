@@ -353,7 +353,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                 <a class="btn view-cart" href="{{url('/uploads/1.0.1/sampleImport.csv')}}">
                                                     <i class="fa fa-download" style="margin-right: 5px"></i>Tải file mẫu
                                                 </a>
-                                                <a class="btn view-cart" data-toggle="modal" href='#modal-id'>
+                                                <a class="btn view-cart" data-toggle="modal" href='#modal-import'>
                                                     <i class="fa fa-upload" style="margin-right: 5px"></i>Nhập file csv
                                                 </a>
                                             </p>
@@ -365,7 +365,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
 
                         </div>
                         <!-- //modal import file csv -->
-                        <div class="modal fade" id="modal-id">
+                        <div class="modal fade" id="modal-import">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
