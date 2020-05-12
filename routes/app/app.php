@@ -75,7 +75,10 @@ Route::post('customer/forgot-password','\App\Http\Controllers\Home\AppController
 Route::get('flash-sale/products','\App\Http\Controllers\Home\AppController@flashSale');
 // filter product by price
 Route::get('products','\App\Http\Controllers\Home\AppController@getFilterProductByPrice');
-// filter product by price
+// slider
 Route::get('slider','\App\Http\Controllers\Home\AppController@getSlider');
 // san pham lien quan
 //Route::get('products/related/{idProduct}','\App\Http\Controllers\Home\AppController@getProductRelated');
+
+// điều khoản
+Route::get('terms','\App\Http\Controllers\Home\AppController@getTerms');

@@ -80,7 +80,12 @@ class AppController extends Controller
     public function getCategoryByParentId($parent_id)
     {
         $categories = Category::where(['parent_id' => $parent_id, 'status' => 'enable'])->orderBy('sorder', 'ASC')->limit(16)->get();
-        return response()->json($categories);
+        if ($categories) {
+            return response()->json($categories, Response::HTTP_OK);
+        }
+        else {
+            return json_encode(['errors' => 'Category not found']);
+        }
     }
 
     public function getProductByCategoryId($category_id)
@@ -126,6 +131,9 @@ class AppController extends Controller
     public function getProductById($product_id)
     {
         $product = Product::where('id', $product_id)->where('status', 'enable')->first();
+        if(!$product) {
+            return json_encode(['errors' => 'Product not found']);
+        }
         $related = Product::where('category_id', $product->category_id)->paginate(12);
         $link = request()->root() . '/product/' . $product->slug;
         $data = [
@@ -347,12 +355,20 @@ class AppController extends Controller
     public function getFilterProductByPrice(Request $req)
     {
         try {
-            $price_from = $req->price['from'];
-            $price_to = $req->price['to'];
-            $products = Product::select('id', 'price', 'price_when_login', 'title', 'slug', 'cover_image', 'cover_image_2', 'time_discount', 'discount')
-                ->where('price', '>=', (int)$price_from)
-                ->where('price', '<=', (int)$price_to)->paginate(16);
-            return response()->json($products, Response::HTTP_OK);
+            $products = Product::select('*');
+            if ($req->price['from'] != '' && $req->price['to'] != '') {
+                $price_from = $req->price['from'];
+                $price_to = $req->price['to'];
+                $products->where('price', '>=', (int)$price_from)
+                    ->where('price', '<=', (int)$price_to);
+            }
+            if ($req->category_id != ''){
+                $products->where('category_id', $req->category_id);
+            }
+            if ($req->catalog != ''){
+                $products->where('catalog', $req->catalog);
+            }
+            return response()->json($products->paginate(10), Response::HTTP_OK);
         } //catch exception
         catch (ModelNotFoundException $exception) {
             return 'Message: ' . $e->getMessage();
@@ -408,6 +424,11 @@ class AppController extends Controller
     }
 
     public function promotionProducts(){
+        $products = Product::where('is_promotion','enable')->where('status','enable')->paginate(16);
+        return response()->json($products, Response::HTTP_OK);
+    }
+
+    public function getTerms(){
         $products = Product::where('is_promotion','enable')->where('status','enable')->paginate(16);
         return response()->json($products, Response::HTTP_OK);
     }
