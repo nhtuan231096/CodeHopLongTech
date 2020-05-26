@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Http\Request;
+
 // đăng ký tài khoản
 Route::post('create-account-customer/','\App\Http\Controllers\Home\AppController@createAccountCustomer');
 // loại hình công ty
@@ -68,7 +70,7 @@ Route::get('news-category/','\App\Http\Controllers\Home\AppController@getNewsCat
 // bình luận tin tức
 Route::post('comment-news/','\App\Http\Controllers\Home\AppController@addCommentNews');
 // sử dụng coupon code
-Route::post('get-couponcode/','\App\Http\Controllers\Home\AppController@useCouponCode');
+Route::post('get-coupon-code/','\App\Http\Controllers\Home\AppController@useCouponCode');
 //quen mat khau
 Route::post('customer/forgot-password','\App\Http\Controllers\Home\AppController@forgotPassword');
 // flash sales
@@ -80,5 +82,22 @@ Route::get('slider','\App\Http\Controllers\Home\AppController@getSlider');
 // san pham lien quan
 //Route::get('products/related/{idProduct}','\App\Http\Controllers\Home\AppController@getProductRelated');
 
-// điều khoản
-Route::get('terms','\App\Http\Controllers\Home\AppController@getTerms');
+// danh mục tuyển dụng
+Route::get('recruitment/category','\App\Http\Controllers\Home\AppController@getCategoryRecruitment');
+
+// danh sách tin tuyển dụng
+Route::get('recruitment','\App\Http\Controllers\Home\AppController@getRecruitment');
+
+// tin tuyển dụng theo danh mục
+Route::get('category/{category_id}/recruitment','\App\Http\Controllers\Home\AppController@getRecruitmentByCategoryId');
+
+// chi tiết tuyển dụng theo id
+Route::get('recruitment/{id}','\App\Http\Controllers\Home\AppController@getRecruitmentById');
+
+// login
+Route::post('login','\App\Http\Controllers\Home\AppController@loginCustomer');
+
+// thông tin khách hàng
+Route::middleware('auth:api')->get('/customer', function(Request $request) {
+    return $request->user();
+});

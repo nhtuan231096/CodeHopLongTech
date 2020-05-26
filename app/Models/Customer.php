@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Models;
 
 
@@ -7,11 +7,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
- * 
+ *
  */
 class Customer extends Authenticatable
 {
-	use Notifiable;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +26,7 @@ class Customer extends Authenticatable
         'password', 'remember_token',
     ];
     public $remember_token=false;
-    
+
     public function cusGroup(){
         return $this->hasOne('\App\Models\Customer_group','id','customer_group_id');
     }
@@ -43,7 +43,7 @@ class Customer extends Authenticatable
             if(!empty(request()->name) && empty(request()->email) && empty(request()->customer_group_id))
             {
                 return $query->where('name','like','%'.request()->name.'%');
-            }   
+            }
             if(empty(request()->name) && !empty(request()->email) && empty(request()->customer_group_id))
             {
                 return $query->where('email','like','%'.request()->email.'%');
@@ -54,15 +54,15 @@ class Customer extends Authenticatable
             }
             if(!empty(request()->name) && !empty(request()->email) && empty(request()->customer_group_id))
             {
-                return $query->where('name','like','%'.request()->name.'%')->where('email','like','%'.$request()->email.'%');
+                return $query->where('name','like','%'.request()->name.'%')->where('email','like','%'.request()->email.'%');
             }
             if(!empty(request()->name) && !empty(request()->email) && !empty(request()->customer_group_id))
             {
-                return $query->where('name','like','%'.request()->name.'%')->where('email','like','%'.$request()->email.'%')->where('customer_group_id','=',$request()->customer_group_id);
+                return $query->where('name','like','%'.request()->name.'%')->where('email','like','%'.request()->email.'%')->where('customer_group_id','=',request()->customer_group_id);
             }
             if(empty(request()->name) && !empty(request()->email) && !empty(request()->customer_group_id))
             {
-                return $query->where('email','like','%'.$request()->email.'%')->where('customer_group_id','=',$request()->customer_group_id);
+                return $query->where('email','like','%'.request()->email.'%')->where('customer_group_id','=',request()->customer_group_id);
             }
         }
 }

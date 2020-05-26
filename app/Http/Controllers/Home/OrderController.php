@@ -431,4 +431,41 @@ class OrderController extends Controller
 			return;
 		}
 	}
+	public function trackingOrder(){
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		return view('home.v2.order_tracking', [
+			'categorys' => $categorys
+		]);
+	}
+	public function getTrackingOrder(Request $req){
+		$order = Order::where('order_id',$req->order_id)->first();
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		return view('home.v2.order_tracking', [
+			'categorys' => $categorys,
+			'order' => $order
+		]);
+	}
+
+	public function warranty(){
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		return view('home.v2.customer.warranty', [
+			'categorys' => $categorys
+		]);
+	}
+
+	public function getWarranty(Request $req){
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+	    $url = "http://sales.hoplong.com:8002/api/API_hoplongtech/GetTimeBH/".$req->series;
+	    $ch = curl_init();
+		  curl_setopt($ch, CURLOPT_URL,$url);
+		  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		  $response = curl_exec($ch);
+		  $result = json_decode($response);
+		  curl_close($ch); // Close the connection
+		  if (empty($result)) return redirect()->back()->with('error','Không tìm thấy số series');
+		  return view('home.v2.customer.warranty', [
+			'categorys' => $categorys,
+			'dataWarranty' => isset($result[0]) ? $result[0] : [],
+		]);
+	}
 }

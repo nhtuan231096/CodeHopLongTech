@@ -300,8 +300,8 @@
 							              </div>
 							              <form action="{{route('use_redeem_money')}}" method="POST" style="width: 100%;float: right;margin-bottom: 0px">
 							                <div class="chkbxx use_reward_points check_use_reward_points" style="width: 10%;margin-right:15px;float: right; display: none;cursor: pointer;">
-							                  <button type="button" class="rm_style_button" style="padding: 2.5px;margin-left: 6px">
-							                    <a href="#"><span style="margin-left: 12px;" class="fa fa-check"></span></a>
+							                  <button type="button" class="rm_style_button" style="padding: 6px;margin-left: 6px">
+							                    <a href="#"><span style="margin-left:0 4px;" class="fa fa-check"></span></a>
 							                  </button>
 							                  <span style="margin-left: 12px;height: 32.5px" class="btn btn-md btn-danger fa fa-remove un_rm_style_button"></span>
 							                </div>
@@ -309,7 +309,7 @@
 							                  <i class="reward_points pull-right" style="text-decoration: underline;cursor: pointer;">Sử dụng điểm thưởng ({{Auth::guard('customer')->user()->reward_points}})</i>
 							                  <div class="form-group use_reward_points" style="display: none;margin-bottom: 0px">
 							                    <label class="sr-only" for="">label</label>
-							                    <input style="width: 36%;float: right;" name="redeem_money" id="redeem_money" type="number" class="form-control" placeholder="Bạn có {{Auth::guard('customer')->user()->reward_points}} điểm" min="0" max="{{Auth::guard('customer')->user()->reward_points}}">
+							                    <input style="width: 56%;float: right;" name="redeem_money" id="redeem_money" type="number" class="form-control" placeholder="Bạn có {{Auth::guard('customer')->user()->reward_points}} điểm" min="0" max="{{Auth::guard('customer')->user()->reward_points}}">
 							                  </div>
 							                </span>
 							                @csrf

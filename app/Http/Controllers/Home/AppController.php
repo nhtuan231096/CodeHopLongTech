@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\CatWork;
+use App\Models\NewsWork;
 use App\Models\Rate;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -33,6 +35,8 @@ use App\Models\FlashSale;
 use App\Mail\OrderSendMail;
 use App\Mail\OrderSendMailNotification;
 use App\Mail\ForgotPassword;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 /**
  *
@@ -66,10 +70,10 @@ class AppController extends Controller
         return response()->json($customer_type);
     }
     // public function getCustomerByEmail(){
-    // 	$userid = Auth::guard('customer')->user();
-    // 	// $token_key = makeRandomTokenKey();
+    //  $userid = Auth::guard('customer')->user();
+    //  // $token_key = makeRandomTokenKey();
 
-    // 		return $userid;
+    //      return $userid;
     // }
     public function getCategories()
     {
@@ -135,11 +139,15 @@ class AppController extends Controller
             return json_encode(['errors' => 'Product not found']);
         }
         $related = Product::where('category_id', $product->category_id)->paginate(12);
+        $rate = $this->caculateRate($product);
         $link = request()->root() . '/product/' . $product->slug;
+        $comments = Comment::where('product_id', $product_id)->where('status', 1)->paginate(8);
         $data = [
             'product' => $product,
             'related' => $related,
-            'link' => $link
+            'link' => $link,
+            'rate' => $rate,
+            'comments' => $comments
         ];
         return response()->json($data, Response::HTTP_OK);
     }
@@ -312,11 +320,14 @@ class AppController extends Controller
         $data = [];
         $couponcode = $req->couponcode;
         $getCoupon = CouponCode::where('coupon_code', $couponcode)->first();
+        if(empty($getCoupon)) {
+            return response()->json(["error" => "Coupon code does not exist"]);
+        }
         $data = [
             "data_coupon_code" => $getCoupon,
             "data_rule" => $getCoupon->rule,
         ];
-        return $data;
+        return $getCoupon;
     }
 
     public function forgotPassword(Request $req)
@@ -332,7 +343,7 @@ class AppController extends Controller
 
             return response()->json(true, Response::HTTP_OK);
         } else {
-            return redirect()->json('error', 'Email not found in the system');
+            return response()->json('error', 'Email not found in the system');
         }
     }
 
@@ -386,9 +397,9 @@ class AppController extends Controller
     }
 
 //    public function getProductRelated($idProduct) {
-//	    $product = Product::find($idProduct);
-//	    if ($product) {
-//	        $related = Product::where('category_id',$product->category_id)->paginate(12);
+//      $product = Product::find($idProduct);
+//      if ($product) {
+//          $related = Product::where('category_id',$product->category_id)->paginate(12);
 //            return response()->json($related, Response::HTTP_OK);
 //        }
 //    }
@@ -401,12 +412,43 @@ class AppController extends Controller
     public function view($slug, Request $req)
     {
         $product = Product::where('slug', $slug)->first();
+
+        $view = $product->view + 1;
+        $product->update(['view'=>$view]);
+        // $new_product = Cache::remember('new_product',1*60,function() use($pro2){
+        //  return $pro2->where('is_new_product','enable')->limit(16)->get();
+        // });
+        $comment=Comment::orderBy('id','DESC')->where('status',1)->where('product_id',$product->id)->where('id_comment_reply',null)->paginate(5);
+        $sames=Product::where('category_id',$product->category_id)->where('id','<>','$product->id')->where('status','enable')->paginate(8);
+        $rates=Rate::where('status',1)->where('product_id',$product->id)->paginate(4);
+        $countRates=Rate::where('status',1)->where('product_id',$product->id)->count();
+        $countRate1=Rate::where('status',1)->where('product_id',$product->id)->where('rate',1)->count();
+        $countRate2=Rate::where('status',1)->where('product_id',$product->id)->where('rate',2)->count();
+        $countRate3=Rate::where('status',1)->where('product_id',$product->id)->where('rate',3)->count();
+        $countRate4=Rate::where('status',1)->where('product_id',$product->id)->where('rate',4)->count();
+        $countRate5=Rate::where('status',1)->where('product_id',$product->id)->where('rate',5)->count();
+        $average = $countRate5 + $countRate4 + $countRate3 + $countRate2 + $countRate1;
+        $average = $average == 0 ? 1 : $average;
+        $percentRated = (($countRate5*5)+($countRate4*4)+($countRate3*3)+($countRate2*2)+($countRate1*1))/$average;
+
+        $cate=Category::where('id',$product->category_id)->first();
+
         if ($product) {
             $categorys = Category::where(['priority' => 1, 'parent_id' => 0, 'status' => 'enable'])->orderBy('sorder', 'ASC')->paginate(18);
             // dd($cate->parent_id);
             return view('home.v2.only_detail_product', [
                 'product' => $product,
                 'categorys' => $categorys,
+                // 'new_products'=>$new_product,
+                'comments'=>$comment,
+                'rates'=>$rates,
+                'countRates'=>$countRates,
+                'countRate1'=>$countRate1,
+                'countRate2'=>$countRate2,
+                'countRate3'=>$countRate3,
+                'countRate4'=>$countRate4,
+                'countRate5'=>$countRate5,
+                'percentRated'=>$percentRated,
             ]);
         } else {
             return view('errors.404');
@@ -428,8 +470,54 @@ class AppController extends Controller
         return response()->json($products, Response::HTTP_OK);
     }
 
-    public function getTerms(){
-        $products = Product::where('is_promotion','enable')->where('status','enable')->paginate(16);
-        return response()->json($products, Response::HTTP_OK);
+    public function getCategoryRecruitment(){
+        $cat_work= CatWork::where('status','enable')->paginate(15);
+        return response()->json($cat_work, Response::HTTP_OK);
+    }
+
+    public function getRecruitment(){
+        $news=NewsWork::search()->orderBy('id','DESC')->where('status','enable')->paginate(10);
+        if(!$news) return response()->json(["error" => "Job not found"]);
+        return response()->json($news, Response::HTTP_OK);
+    }
+
+    public function getRecruitmentByCategoryId($categoryId){
+        $newsworks = NewsWork::Where('cat_work_id',$categoryId)->where('status','enable')->paginate(10);
+        if(!$newsworks) return response()->json(["error" => "Job not found"]);
+        return response()->json($newsworks, Response::HTTP_OK);
+    }
+
+    public function getRecruitmentById($id){
+        $newswork = NewsWork::find($id);
+        if(!$newswork) return response()->json(["error" => "Job not found"]);
+        return response()->json($newswork, Response::HTTP_OK);
+    }
+
+
+    /**
+     * Login user and create token
+     *
+     * @param  [string] email
+     * @param  [string] password
+     * @param  [boolean] remember_me
+     * @return [string] access_token
+     * @return [string] token_type
+     * @return [string] expires_at
+     */
+    public function loginCustomer(Request $request)
+    {
+        $credentials = request(['email', 'password']);
+        $token = Str::random(60);
+        if(Auth::guard('customer')->attempt($credentials)){
+            Auth::guard('customer')->user()->forceFill([
+                'api_token' => $token,
+            ])->save();
+            return ['token' => $token];
+        }
+        else {
+            return response()->json([
+                'message' => 'Login unsuccessful'
+            ], 401);
+        }
     }
 }

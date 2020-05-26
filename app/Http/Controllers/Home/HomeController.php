@@ -98,6 +98,7 @@ class HomeController extends Controller
 		// $cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();	
 		$current_date = date('Y-m-d');
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
+
 		$flash_sale_products = $flash_sale ? FlashSaleProduct::where('flash_sale_id',$flash_sale->id)->paginate(10) : null;
 		return view('home.v2.home',[
 			'active'=>$slider_active,
@@ -567,8 +568,8 @@ class HomeController extends Controller
 		$cat_work= CatWork::where('status','enable')->get();	
 		$add_work= AddressWork::where('status','enable')->get();
 		$actoffice=Office::where('sorder','1')->first();	
-		$newswork=NewsWork::search()->orderBy('id','ASC')->limit(5)->get();
-		$news=NewsWork::search()->orderBy('id','DESC')->limit(5)->get();
+		$newswork=NewsWork::search()->orderBy('id','ASC')->limit(10)->get();
+		$news=NewsWork::search()->orderBy('id','DESC')->limit(10)->get();
 		$newsworks = News::Where('category_id','39')->limit(10)->get();
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(15);
 		// return view('home.recruitment',[

@@ -60,6 +60,13 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	//import cart to csv
 	Route::post('import-cart-csv','OrderController@importCartCsv')->name('import_cart_csv');
 
+	Route::get('tracking-order','OrderController@trackingOrder')->name('trackingOrder');
+	Route::post('tracking-order','OrderController@getTrackingOrder')->name('trackingOrder');
+
+	// tra cứu bảo hành
+	Route::get('warranty','OrderController@warranty')->name('warranty');
+	Route::post('warranty','OrderController@getWarranty')->name('warranty');
+
 	//update route customer
 	Route::get('/dang-ky','HomeController@formRegister')->name('register_customer');
 	Route::post('/dang-ky','HomeController@register')->name('register_customer');

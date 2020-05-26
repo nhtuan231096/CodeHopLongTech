@@ -4,7 +4,7 @@ return [
     'debug_blacklist' => [
         '_COOKIE' => array_keys($_COOKIE),
         '_SERVER' => array_keys($_SERVER),
-        '_ENV' => array_keys($_ENV),        
+        '_ENV' => array_keys($_ENV),
     ],
     /*
     |--------------------------------------------------------------------------
@@ -241,7 +241,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
     ],
 
 ];
