@@ -15,6 +15,8 @@ use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Category;
 use App\Models\Quotes_product;
+use App\Models\FlashSale;
+use App\Models\FlashSaleProduct;
 
 class ProductController extends Controller
 {
@@ -584,5 +586,103 @@ public function post_import_price(Request $request){
     return view('admin.product.tool_product_check',[
       'products'=>$products,
     ]);
+  }
+
+  public function flash_sale_index(){
+    $datas = FlashSale::orderBy('id','desc')->paginate(10);
+    return view('admin.product.flash_sale',[
+      'datas' => $datas
+    ]);
+  }
+  public function addFlashSale(){
+    $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
+    $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
+    $user=User::all(['id','username']);
+    return view('admin.product.flash_sale_add',[
+      'products'=>$products,
+      'categorys'=>$categorys,
+      'users'=>$user
+    ]);
+  }
+  public function saveFlashSale(Request $req){
+    $data_product_id = (explode(",",$req->data_product_id[0]));
+    $data_quantity   = (explode(",",$req->data_quantity[0]));
+    $data_title   = (explode(",",$req->data_title[0]));
+    $data_slug   = (explode(",",$req->data_slug[0]));
+    $data_price   = (explode(",",$req->data_price[0]));
+    $data_cover_image   = (explode(",",$req->data_cover_image[0]));
+    $data_category_id   = (explode(",",$req->data_category_id[0]));
+    $data_discount   = (explode(",",$req->data_discount[0]));
+    $img='';
+    if ($req->hasFile('file_upload')) {
+      $file=$req->file_upload;
+      $file->move(base_path('uploads/flash_sale'),$file->getClientOriginalName());
+      $img=$file->getClientOriginalName();
+      $req->merge(['cover_image'=>$img]);
+    } 
+    // dd($req->all());
+    if($flashSale = FlashSale::create($req->all())){
+      $i = 0;
+      foreach($data_product_id as $value){
+        $data = [
+          'product_id'=>(int)$data_product_id[$i],
+          'quantity'=>(int)$data_quantity[$i],
+          'title'=>$data_title[$i],
+          'slug'=>$data_slug[$i],
+          'list_price'=>(int)$data_price[$i],
+          'price'=>(int)$data_price[$i] - (((int)$data_price[$i]/100)*(int)$data_discount[$i]),
+          'cover_image'=>isset($data_cover_image[$i]) ? $data_cover_image[$i] : '',
+          'category_id'=>(int)$data_category_id[$i],
+          'discount'=>(int)$data_discount[$i],
+          'flash_sale_id'=>(int)$flashSale->id,
+        ];
+        // dd($data_discount);
+        $i++;
+        if(FlashSaleProduct::create($data)){
+          $data = '';
+        }
+        else{
+          $flashSale->delete();
+          return redirect()->back()->with('error','Có lỗi vui lòng thử lại');
+        }
+      }
+    }
+    return redirect()->route('flash_sale')->with('success','Tạo Flash Sale thành công');
+  }
+  public function delFlashSale($id){
+    FlashSale::destroy($id);
+    return redirect()->back()->with('success','Xóa thành công');
+  }
+  public function editFlashSale($id){
+    $datas = FlashSale::find($id);
+    $products=Product::search()->orderBy('id','DESC')->paginate(15,['id','title','slug','price','price_when_login','cover_image','id','category_id','created_by','status']);
+    $categorys=Category::orderBy('id','ASC')->get(['id','title','parent_id']);
+    $user=User::all(['id','username']);
+    // dd($datas);
+    return view('admin.product.flash_sale_edit',[
+      'products'=>$products,
+      'categorys'=>$categorys,
+      'users'=>$user,
+      'datas'=>$datas
+    ]);
+  }
+
+  public function getAllProduct(){
+    if(request()->title){
+
+        $products = Product::where("title", "LIKE", "%".request()->title."%")
+
+            ->paginate(15);      
+
+    }else{
+
+      $products = Product::where('status','enable')->where('price','>',0)->paginate(15);
+
+    }
+    return response()->json($products);
+  }
+  public function getEditProduct(){
+    $datas = FlashSale::find(request()->flash_sale_id);
+    return response()->json($datas->products);
   }
 }

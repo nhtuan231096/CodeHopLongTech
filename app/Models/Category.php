@@ -52,12 +52,16 @@ class Category extends Model
 	
 	public function childs()
 		{
-			return $this->hasMany('\App\Models\Category','parent_id','id')->orderBy('sorder','ASC')->limit(18);
+			return $this->hasMany('\App\Models\Category','parent_id','id')->orderBy('sorder','ASC')->limit(12);
+		}	
+	public function childCate()
+		{
+			return $this->hasMany('\App\Models\Category','parent_id','id')->orderBy('sorder','ASC')->limit(30);
 		}	
 	public function childs2()
 	{		
-		return $this->hasMany('\App\Models\Category','parent_id','id')->where('status','enable')->orderBy('sorder','DESC')->limit(15);
+		return $this->hasMany('\App\Models\Category','parent_id','id')->where('status','enable')->orderBy('sorder','DESC')->limit(3);
 	}	
 
 }
- ?>
+?>

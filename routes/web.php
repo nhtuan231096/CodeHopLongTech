@@ -52,8 +52,12 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::post('/rate-product','HomeController@rateProduct')->name('rateProduct');
 
 	// rating
+	// flash-sale
+	Route::get('/flash-sale','HomeController@flashSale')->name('flash-sale');
+	// flash-sale
 
 	//update route customer  
+	Route::get('/dang-ky','HomeController@formRegister')->name('register_customer');
 	Route::post('/dang-ky','HomeController@register')->name('register_customer');
 	Route::get('/quen-mat-khau','HomeController@forgotPassword')->name('forgotPassword');
 	Route::post('/quen-mat-khau','HomeController@postForgotPassword')->name('forgotPassword');

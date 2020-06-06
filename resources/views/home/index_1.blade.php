@@ -31,6 +31,7 @@
     </script>
     <script src="{{url('public/js')}}/angular.min.js"></script>
     <script src="{{url('public/js')}}/SearchCtrl.js"></script>
+    <script id='autoAdsMaxLead-widget-script' src='https://cdn.autoads.asia/scripts/autoads-maxlead-widget.js?business_id=807e8c7d5f9e40898e3ff4e83c794894' type='text/javascript' charset='UTF-8' async></script>
     <link rel="stylesheet" href="{{url('public/css')}}/mystyle.css"> </head>
     <body class="page-template-default page page-id-614 site_layout_1 header_style_2 sticky_menu wpb-js-composer js-comp-ver-5.4.7 vc_responsive">
         <div id="wrapper" ng-app="my_app" ng-controller="SearchCtrl">
@@ -370,11 +371,11 @@
                         <ul id="menu-main-menu-1" class="main_menu_nav">
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2 current_page_item menu-item-13"><a href="{{route('home')}}">Trang chủ</a></li>
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-560"><a href="{{route('home_product')}}">Sản phẩm</a> </li>
-                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-560"><a href="https://hoplongtech.com/robot">Robot</a> </li>
+                            <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-560"><a href="https://hoplongtech.com/robot">Robot</a> </li> -->
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-560"><a href="https://schneider.hoplongtech.com">SE</a> </li>
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-560"><a href="{{route('home_agency_posts')}}">Dành cho đại lý</a> </li>
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1528"><a href="{{route('tuyen-dung')}}">Tuyển dụng </a> </li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-524"><a href="{{route('projects')}}">Dự án</a> </li>
+                            <!-- <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-524"><a href="{{route('projects')}}">Dự án</a> </li> -->
                             <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1368"><a href="{{route('contact')}}">Liên hệ</a> </li>
                         </ul>
                     </div>
@@ -761,14 +762,22 @@
                                                 <h4 class="widget_title no_stripe">Dịch vụ</h4>
                                                 <div class="menu-extra-links-container">
                                                     <ul id="menu-extra-links" class="menu">
-                                                    @foreach($cart->getTerms() as $item)
-                                                        @if($item->type_terms == "bao_hanh" || $item->type_terms == "thanh_toan" || $item->type_terms == "doi_tra" || $item->type_terms == "van_chuyen")         
-                                                        <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a href="{{route('view_terms',['type'=>'doi_tra'])}}">Quy định đổi trả hàng</a></li>
-                                                        <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="{{route('view_terms',['type'=>'van_chuyen'])}}">Chính sách vận chuyển</a></li>
+                                                        <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
+                                                            <a href="https://hoplongtech.com/tin-tuc/chinh-sach-bao-mat">Chính sách bảo mật</a>
+                                                        </li>
+                                                        <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164">
+                                                            <a href="https://hoplongtech.com/tin-tuc/chinh-sach-bao-hanh">Chính sách bảo hành</a>
+                                                        </li>
                                                         </br>
-                                                        <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165"><a href="{{route('view_terms',['type'=>'bao_hanh'])}}">Bảo hành sản phẩm</a></li>
-                                                        @endif
-                                                    @endforeach
+                                                        <li id="menu-item-165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-165">
+                                                            <a href="https://hoplongtech.com/tin-tuc/chinh-sach-van-chuyen-giao-nhan-lap-dat">Chính sách vận chuyển</a>
+                                                        </li>
+                                                        <li id="menu-item-166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-166">
+                                                            <a href="https://hoplongtech.com/tin-tuc/chinh-sach-doi-tra-hang-va-hoan-tien">Chính sách đổi trả/hoàn tiền</a>
+                                                        </li>
+                                                        <li id="menu-item-167" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-167">
+                                                            <a href="https://hoplongtech.com/tin-tuc/hinh-thuc-thanh-toan">Hình thức thanh toán</a>
+                                                        </li>
                                                 </ul>
                                             </div>
                                             <div class="footer_n"> 
@@ -809,7 +818,6 @@
                                                     }(document, 'script', 'facebook-jssdk'));
                                                 }, 0);
                                             </script>
-                                            <div class="fb-customerchat" page_id="673301269359074" ref=""></div>
                                         </section>
                                     </div>
 

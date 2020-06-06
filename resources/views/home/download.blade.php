@@ -112,7 +112,7 @@
                                 <div class="products-carousel" data-ride="tm-slick-carousel" data-wrap=".products" data-slick="{&quot;infinite&quot;:false,&quot;slidesToShow&quot;:7,&quot;slidesToScroll&quot;:7,&quot;dots&quot;:true,&quot;arrows&quot;:false,&quot;responsive&quot;:[{&quot;breakpoint&quot;:700,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:780,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesToScroll&quot;:3}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:4}},{&quot;breakpoint&quot;:1400,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesToScroll&quot;:5}}]}">
                                     <div class="container-fluid">
                                         <div class="woocommerce">
-                                            <div class="products">                                                         
+                                            <div class="products">     
                                                 @foreach($pricelist as $price)                                                 
                                                 <div class="product"> 
                                                     <a href="{{route('view_doc',['slug'=>$price->slug])}}" class="woocommerce-LoopProduct-link" rel="dofollow">
@@ -127,7 +127,7 @@
                                                             </ins>
                                                             <span class="amount">{{$price->title}}</span>
                                                         </span>
-                                                        <h2 class="woocommerce-loop-product__title"> {{$price->category->title}}</h2>
+                                                        <h2 class="woocommerce-loop-product__title"> @if(isset($price->category->title)){{$price->category->title}}@endif</h2>
                                                     </a>
                                                 </div>
                                                 @endforeach

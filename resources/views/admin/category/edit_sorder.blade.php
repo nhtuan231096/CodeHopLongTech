@@ -74,7 +74,7 @@
 				<div class="clearfix"></div>
 				<img width="100px" src="{{url('uploads/category')}}/{{$cate->cover_image}}" alt="image">
 				<input type="file" name="upload_file" class="form-control" id="upload_file" placeholder="">
-				<input type="hidden" name="created_by" value="{{Auth::user()->username}}">
+				<input type="hidden" name="created_by" value="{{Auth::guard('admin')->user()->username}}">
 			</div>
 		</div>
 		<div class="col-md-7">

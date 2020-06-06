@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html ng-app="admin" ng-controller="AdminController">
+<!-- <html ng-app="admin" ng-controller="AdminController"> -->
+<html ng-app="admin">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +19,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+  <script src="https://code.jquery.com/jquery-2.2.4.js" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+  <!-- <script src="{{url('public/js')}}/angular.js"></script> -->
+  <script src="{{url('public/tinymce')}}/js/tinymce/tinymce.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
@@ -121,6 +129,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{route('product_lrv')}}"><i class="fa fa-align-center"></i>Sản phẩm</a></li>
+              <li><a href="{{route('flash_sale')}}"><i class="fa fa-tags"></i>Flash Sale</a></li>
               <li><a href="{{route('tool_product_check')}}"><i class="fa fa-toolbox"></i></i>Tool Heath Product Check</a></li>
               <li><a href="{{route('importProduct')}}"><i class="fa fa-cloud-upload"></i>Import sản phẩm</a></li>
               <li><a href="{{route('import_price')}}"><i class="fa fa-cloud-upload"></i>Import cập nhật sản phẩm</a></li>
@@ -378,11 +387,7 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="https://code.jquery.com/jquery-2.2.4.js" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
-<script src="{{url('public/js')}}/angular.js"></script>
-<script src="{{url('public/tinymce')}}/js/tinymce/tinymce.min.js"></script>
+
 <script>
   tinymce.init({ 
     selector:'textarea',
