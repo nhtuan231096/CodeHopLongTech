@@ -245,7 +245,12 @@
 								<tbody>
 								  @foreach($cart->items as $item)
 								  <tr>
-									<td class="text-center"><a href=""><img width="60px" src="{{url('uploads/product')}}/{{$item['image']}}" alt="Xitefun Causal Wear Fancy Shoes" title="Xitefun Causal Wear Fancy Shoes" class="img-thumbnail"></a></td>
+									<td class="text-center">
+										<a href="">
+											<?php $urlImage = ($item['pdp'] == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+											<img width="60px" src="{{$urlImage}}/{{$item['image']}}" alt="{{$item['title']}}" title="{{$item['title']}}" class="img-thumbnail">
+										</a>
+									</td>
 									<td class="text-left"><a href="">{{$item['title']}}</a></td>
 									<td class="text-left"><div class="input-group btn-block" style="min-width: 100%;">
 										<!-- <input type="text" name="quantity" value="1" size="1" class="form-control">
@@ -357,7 +362,7 @@
 							<!-- <br> -->
 							<label class="control-label" for="confirm_agree">
 							  <input type="checkbox" checked="checked" value="1" required="" class="validate required" id="confirm_agree" name="confirm agree">
-							  <span>Tôi đã đọc và đồng ý với các <a class="agree" href="{{route('terms_purc')}}"><b>Điều khoản</b></a></span> </label>
+							  <span>Tôi đã đọc và đồng ý với các <a class="agree" href="https://hoplongtech.com/tin-tuc/danh-muc/chinh-sach-quy-dinh"><b>Điều khoản</b></a></span> </label>
 
 							<label class="control-label pull-right" for="confirm_agree">
 								@if(isset($data_red_bill['red_bill_company']))

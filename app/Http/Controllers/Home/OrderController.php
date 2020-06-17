@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Helper\Data;
@@ -19,11 +19,12 @@ use App\Models\Customer_type;
 use App\Models\CouponCode;
 use App\Models\CouponRule;
 use App\Models\CouponLog;
+use App\Models\RewardPointLog;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
 /**
- * 
+ *
  */
 class OrderController extends Controller
 {
@@ -34,7 +35,7 @@ class OrderController extends Controller
             'cart' => new Data(),
             'custome_type' => $custome_type
         	]);
-        	return $next($request); 
+        	return $next($request);
 		});
 	}
 	public function order(){
@@ -62,7 +63,7 @@ class OrderController extends Controller
 			$req->shipping_fee > 0 ? $req->merge(['shipping_fee'=>$req->shipping_fee]) : 0;
 			$req->ship_cod > 0 ? $req->merge(['ship_cod'=>$req->ship_cod]) : 0;
 			$req->use_coupon_code > 0 ? $req->merge(['use_coupon_code'=>$req->use_coupon_code]) : 0;
-			$toTalFormat = str_replace(',','',$req->total_order_price); 
+			$toTalFormat = str_replace(',','',$req->total_order_price);
 			// $toTalFormat > 0 ? $req->merge(['total_order_price'=>$toTalFormat]) : 0;
 			// $totalVat = $req->vat > 0 ? ($req->total_price - $req->reduced_price - $req->use_coupon_code)/10 : 0;
 			$totalVat = $req->total_vat > 0 ? $req->total_vat : 0;
@@ -118,13 +119,13 @@ class OrderController extends Controller
 
 						$id = Auth::guard('customer')->user()->id;
 						$customer = Customer::find($id);
-						$currentPoints = $customer->reward_points;						
+						$currentPoints = $customer->reward_points;
 						$customer->update([
 							'reward_points' => $currentPoints - $req->redeem_money
 						]);
 
 					}
-					
+
 					Mail::to($req->email)->send(new OrderSendMail($order));
 					Mail::to('info.hoplongtech@gmail.com')->send(new OrderSendMailNotification($order));
 					$cart->clear();
@@ -133,7 +134,7 @@ class OrderController extends Controller
 						'content' => "Đơn hàng mới, order_id: #".$order->id
 					]);
 					// return redirect()->route('order_success')->with('success','Đặt hàng thành công');
-					
+
 					// $dataOrder = Order::where('order_id',$order->id)->first();
 					// $categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
 					// return view('home.v2.order_history',[
@@ -201,14 +202,54 @@ class OrderController extends Controller
 		$current_total_point = Auth::guard('customer')->user()->total_points > 0 ? Auth::guard('customer')->user()->total_points : 0;
 		$vip_guests = $current_total_point < $points ? ($points - $current_total_point) : 0;
 		$reward_points = Reward_points::first();
-		// return view('home.cart.myaccount',[
+		
+		// return view('home.v2.customer.myaccount',[
 		// 	'categorys' => $categorys,
 		// 	'vip_guests' => $vip_guests,
 		// 	'current_total_point' => $current_total_point,
+		// 	'reward_points' => $reward_points,
 		// ]);
-		return view('home.v2.customer.myaccount',[
+
+		$orders = Order::where('user_id',Auth::guard('customer')->user()->id);
+		$countOrders = $orders->get()->count();
+		$date = date('Y-m-d', time());
+		$orderOfTheDay = $orders->Where('created_at','like','%'.$date.'%')->get()->count();
+		$countOrdersSuccess = $orders->Where('status',4)->get()->count();  /*status complete = 4*/
+		$sales = $orders->Where('status',4)->pluck('total_price')->toArray();
+        $salesTotal = 0;
+		foreach ($sales as $item) {
+			$zitem=filter_var($item, FILTER_SANITIZE_NUMBER_INT);
+			$salesTotal += $zitem;
+		}
+		return view('home.v2.customer.myAccount',[
 			'categorys' => $categorys,
 			'vip_guests' => $vip_guests,
+			'current_total_point' => $current_total_point,
+			'reward_points' => $reward_points,
+
+			'orderOfTheDay'=>$orderOfTheDay,
+			'countOrders'=>$countOrders,
+			'countOrdersSuccess'=>$countOrdersSuccess,
+			'salesTotal'=>$salesTotal,
+		]);
+	}
+
+	public function edit_acc_customer(){
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		$points = Reward_points::first()->vip_guests;
+		$current_total_point = Auth::guard('customer')->user()->total_points > 0 ? Auth::guard('customer')->user()->total_points : 0;
+		$vip_guests = $current_total_point < $points ? ($points - $current_total_point) : 0;
+		$reward_points = Reward_points::first();
+		
+		// return view('home.v2.customer.myaccount',[
+		// 	'categorys' => $categorys,
+		// 	'vip_guests' => $vip_guests,
+		// 	'current_total_point' => $current_total_point,
+		// 	'reward_points' => $reward_points,
+		// ]);
+
+		return view('home.v2.customer.editAccount',[
+			'categorys' => $categorys,
 			'current_total_point' => $current_total_point,
 			'reward_points' => $reward_points,
 		]);
@@ -230,7 +271,7 @@ class OrderController extends Controller
 			// Check usage time
 			if ($coupon->rule->customer_login == 1) {
 				if (!Auth::guard('customer')->check()) {
-					return redirect()->route('view_cart')->with('error','Mã ưu đãi không tồn tại!'); 
+					return redirect()->route('view_cart')->with('error','Mã ưu đãi không tồn tại!');
 				}
 			}
 
@@ -240,7 +281,7 @@ class OrderController extends Controller
 					// check confitions
 					$conditions = $rule->conditions;
 					$condition_for = $rule->condition_for;
-		
+
 
 					$price_reduced = $rule->price_reduced;
 					if($conditions == '<='){
@@ -252,7 +293,7 @@ class OrderController extends Controller
 							if (stripos($price_reduced, "%") !== false) {
 								$price_reduced = str_replace('%','',$price_reduced);
 								$price_reduced = $price_reduced < 100 ? ($cart->total_amount/100) * $price_reduced : 0;
-								// dd($price_reduced);		    
+								// dd($price_reduced);
 							}
 							$total_amount = $cart->total_amount - $price_reduced;
 
@@ -284,7 +325,7 @@ class OrderController extends Controller
 							if (stripos($price_reduced, "%") !== false) {
 								$price_reduced = str_replace('%','',$price_reduced);
 								$price_reduced = $price_reduced < 100 ? ($cart->total_amount/100) * $price_reduced : 0;
-								// dd($price_reduced);		    
+								// dd($price_reduced);
 							}
 
 							$total_amount = $cart->total_amount - $price_reduced;
@@ -296,17 +337,17 @@ class OrderController extends Controller
 							];
 							// add total to session
 							$cart->add_coupon($data_uses_coupon);
-							// return view('home.cart.view_cart',[
-							// 	'categorys' => $categorys,
-							// 	'cart' => $cart,
-							// 	'data_uses_coupon' => $data_uses_coupon
-							// ]);
-							return view('home.v2.view_cart',[
-								'getCoupon' => $getCoupon,
+							return view('home.cart.view_cart',[
 								'categorys' => $categorys,
 								'cart' => $cart,
 								'data_uses_coupon' => $data_uses_coupon
 							]);
+							// return view('home.v2.view_cart',[
+							// 	'getCoupon' => $getCoupon,
+							// 	'categorys' => $categorys,
+							// 	'cart' => $cart,
+							// 	'data_uses_coupon' => $data_uses_coupon
+							// ]);
 						}
 						else {
 						return redirect()->route('view_cart')->with('error','Chưa đủ điều kiện sử dụng mã!');
@@ -320,7 +361,7 @@ class OrderController extends Controller
 			else{
 				return redirect()->route('view_cart')->with('error','Mã ưu đãi đã hết hạn sử dụng!');
 			}
-				
+
 		}
 		else{
 			return redirect()->route('view_cart')->with('error','Mã ưu đãi không tồn tại!');
@@ -330,7 +371,12 @@ class OrderController extends Controller
 	public function customer_order_history(){
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
 		$order = Order::where('user_id',Auth::guard('customer')->user()->id)->paginate(15);
-		return view('home.v2.order_history',[
+		// return view('home.v2.order_history',[
+		// 	'categorys' => $categorys,
+		// 	'order' => $order
+		// ]);
+
+		return view('home.v2.order_history_new',[
 			'categorys' => $categorys,
 			'order' => $order
 		]);
@@ -339,10 +385,33 @@ class OrderController extends Controller
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
 		$order = Order::where('order_id',$id)->first();
 		$orderDetail = OrderDetail::where('order_id',$id)->get();
-		return view('home.v2.order_information',[
+		// return view('home.v2.order_information',[
+		// 	'categorys' => $categorys,
+		// 	'order' => $order,
+		// 	'orderDetail' => $orderDetail
+		// ]);
+
+		return view('home.v2.order_information_new',[
 			'categorys' => $categorys,
 			'order' => $order,
 			'orderDetail' => $orderDetail
+		]);
+	}
+
+	public function customer_reward_point(){
+		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+		$rewardPoint = RewardPointLog::where('customer_id', Auth::guard('customer')->user()->id);
+		$total = 0;
+		foreach ($rewardPoint->get() as $key => $value) {
+			if ($value->point > 0) {
+				$total += $value->point;
+			}
+		}
+		$rewardPoint = $rewardPoint->paginate(10);
+		return view('home.v2.customer.rewardPoint',[
+			'categorys' => $categorys,
+			'rewardPoint' => $rewardPoint,
+			'totalPoint' => $total,
 		]);
 	}
 
@@ -369,7 +438,7 @@ class OrderController extends Controller
 	public function importCartCsv(Request $request) {
 		if ($request->file('file') != null ){
 	    $file = $request->file('file');
-	      // File Details 
+	      // File Details
 	    $filename = $file->getClientOriginalName();
 	    $extension = $file->getClientOriginalExtension();
 	    $tempPath = $file->getRealPath();
@@ -379,7 +448,7 @@ class OrderController extends Controller
 	      // Valid File Extensions
 	    $valid_extension = array("csv");
 	      // 2MB in Bytes
-	    $maxFileSize = 2097152; 
+	    $maxFileSize = 2097152;
 
 
 	    $path = $request->file('file')->getRealPath();
@@ -413,7 +482,7 @@ class OrderController extends Controller
 	public function add_cart($product){
 		$cart = new Data;
 		// check price product and stock
-		if($product->quantity && $product->price > 0){ 
+		if($product->quantity && $product->price > 0){
 			if ($product->in_stock > $product->quantity) {
 				// for($i=0; $i < $product->quantity; $i++) {
 				// 	$cart->add($product);

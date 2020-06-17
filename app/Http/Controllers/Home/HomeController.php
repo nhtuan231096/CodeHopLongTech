@@ -42,7 +42,9 @@ use App\Models\Terms;
 use App\Models\Rate;
 use App\Models\FlashSale;
 use App\Models\Popup;
+use App\Models\CouponCode;
 use App\Mail\ForgotPassword;
+use App\Mail\WelcomeEmail;
 use PDF;
 
 class HomeController extends Controller
@@ -276,7 +278,12 @@ class HomeController extends Controller
 				return $pro3->where('is_promotion','enable')->limit(16)->get();
 			});
 			if(request()->flash_sale_id){
-				$product->price = FlashSaleProduct::where('id',request()->id)->first()->price;
+				$dataProduct = (json_decode(json_encode($product)));
+				$productFlasSale = FlashSaleProduct::where('id',request()->id)->first();
+				$dataProduct->price = $productFlasSale->price;
+				$dataProduct->quantity = $productFlasSale->quantity;
+				$dataProduct->sold = $productFlasSale->sold;
+				$dataProduct->flash_sale_id = $productFlasSale->flash_sale_id;
 				$flashsale = 1;
 			}
 			// $promotion = $pro3->where('is_promotion','enable')->limit(10)->get();
@@ -324,7 +331,8 @@ class HomeController extends Controller
 					'percentRated'=>$percentRated,
 					'promotions'=>$promotion,
 					'cate'=>$cate_related,
-					'flashsale' => $flashsale 
+					'flashsale' => $flashsale ,
+					'dataProduct' => isset($dataProduct) ? $dataProduct : []
 					]);
 			}
 			else
@@ -735,6 +743,11 @@ class HomeController extends Controller
 		$dataCustomer = $req->all();
 		$password = bcrypt($req->password);
 		$req->merge(['password'=>$password]);
+
+		$coupon = CouponCode::where('apply_new_customer',1)->first();
+		if(isset($coupon->coupon_code)){
+			Mail::to($req->email)->send(new WelcomeEmail($coupon));
+		}
 		// dd($req->all());
 		$addData = Customer::create($req->all());
 		// dd($addData);
@@ -829,6 +842,21 @@ class HomeController extends Controller
 	}
 	public function add_cart_flash_sale($id,Data $cart){
 		$model = FlashSaleProduct::find($id);
+		
+		//check stock
+		if(isset($model->sold)) {
+			$qtyItemCart = 0;
+			foreach ($cart->items as $k => $value) {
+				if ($value['id'] == request()->id) {
+					$qtyItemCart = $value['quantity'];
+				} 
+			}
+			if($model->sold + request()->quantity + $qtyItemCart > $model->quantity) 
+			{
+				return redirect()->back()->with('error','Số lượng sản phẩm trong kho không đủ');
+			}
+		}
+
 		if(request()->quantity){
 			if ($model) {
 				for($i=0; $i < request()->quantity; $i++) {
@@ -847,6 +875,20 @@ class HomeController extends Controller
 	}
 	public function shop_now($id,Data $cart){
 		$model = Product::find($id);
+		//check stock
+		if(isset($model->sold)) {
+			$qtyItemCart = 0;
+			foreach ($cart->items as $k => $value) {
+				if ($value['id'] == request()->id) {
+					$qtyItemCart = $value['quantity'];
+				} 
+			}
+			if($model->sold + request()->quantity + $qtyItemCart > $model->quantity) 
+			{
+				return redirect()->back()->with('error','Số lượng sản phẩm trong kho không đủ');
+			}	
+		}
+		
 		if(request()->quantity){
 			if ($model) {
 				for($i=0; $i < request()->quantity; $i++) {
@@ -858,7 +900,23 @@ class HomeController extends Controller
 	}
 	public function shopNow(Data $cart){
 		// $getCoupon = $cart->couponCode();
+		$modelProductFlashSale = FlashSaleProduct::where('product_id',request()->id)->where('flash_sale_id',request()->flash_sale_id)->first();
+		
 		$model = Product::find(request()->id);
+		//check stock
+		if(isset($modelProductFlashSale)) {
+			$qtyItemCart = 0;
+			foreach ($cart->items as $k => $value) {
+				if ($value['id'] == request()->id) {
+					$qtyItemCart = $value['quantity'];
+				} 
+			}
+			if($modelProductFlashSale->sold + request()->quantity + $qtyItemCart > $modelProductFlashSale->quantity) 
+			{
+				return redirect()->back()->with('error','Số lượng sản phẩm trong kho không đủ');
+			}	
+		}
+
 		if(request()->quantity){
 			if ($model) {
 				for($i=0; $i < request()->quantity; $i++) {
@@ -1100,7 +1158,7 @@ class HomeController extends Controller
 
     public function autoSearch($product_search,Data $helperData){
     	if($product_search != ''){
-    		$res = Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','time_discount','discount')->where('title','like','%'.$product_search.'%')->where('status','enable')->paginate(10);
+    		$res = Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','time_discount','discount','pdp')->where('title','like','%'.$product_search.'%')->where('status','enable')->paginate(10);
     		foreach ($res as $key => $value) {
     			$price = $helperData->PriceProduct($value);
     			$value->price_product = $price;

@@ -94,11 +94,14 @@ class AppController extends Controller
 
     public function getProductByCategoryId($category_id)
     {
-        $products = Product::select('id', 'price', 'price_when_login', 'title', 'slug', 'cover_image', 'cover_image_2', 'time_discount', 'discount')->where('status', 'enable')->where('category_id', $category_id)->paginate(16);
+        $products = Product::select('id', 'price', 'price_when_login', 'title', 'slug', 'cover_image', 'cover_image_2', 'time_discount', 'discount','pdp')->where('status', 'enable')->where('category_id', $category_id)->paginate(16);
         foreach ($products as $itemProduct) {
             $rate = $this->caculateRate($itemProduct);
             $itemProduct->rate = $rate;
+            $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+            $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
         }
+        return $products;
         return response()->json($products, Response::HTTP_OK);
     }
 
@@ -116,7 +119,11 @@ class AppController extends Controller
     }
 
     public function getProductByTitle ($title) {
-        $products = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount')->where('status','enable')->where('title','like','%'.$title.'%')->paginate(8);
+        $products = Product::select('id','price','price_when_login','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('status','enable')->where('title','like','%'.$title.'%')->paginate(8);
+        foreach ($products as $itemProduct) {
+            $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+            $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
+        }
         return response()->json($products);
     }
 
@@ -138,16 +145,38 @@ class AppController extends Controller
         if(!$product) {
             return json_encode(['errors' => 'Product not found']);
         }
+        $urlImage = ($product->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+        $product->cover_image = $urlImage.'/'.$product->cover_image;
+
         $related = Product::where('category_id', $product->category_id)->paginate(12);
+        foreach ($related as $itemProduct) {
+            $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+            $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
+        }
         $rate = $this->caculateRate($product);
         $link = request()->root() . '/product/' . $product->slug;
         $comments = Comment::where('product_id', $product_id)->where('status', 1)->paginate(8);
+
+        $content = $product->content;
+        $weight = json_decode($content, true);
+        if(isset($weight['Trọng lượng'])) {
+            $weight = $weight['Trọng lượng'];
+            $unit = preg_replace("/[^a-zA-Z]+/", "", $weight);
+            $weight = preg_replace("/[^0-9.]+/", "", $weight);
+            
+            $data_weight = [
+                'weight' => $weight,
+                'unit' => $unit,
+            ];
+        }
+
         $data = [
             'product' => $product,
             'related' => $related,
             'link' => $link,
             'rate' => $rate,
-            'comments' => $comments
+            'comments' => $comments,
+            'data_weight' => isset($data_weight) ? $data_weight : ''
         ];
         return response()->json($data, Response::HTTP_OK);
     }
@@ -352,6 +381,10 @@ class AppController extends Controller
         $current_date = date('Y-m-d');
         $flash_sales = FlashSale::where('status', 1)->orderBy('id', 'desc')->where('end_time', '>', $current_date)->first();
         $dataProduct = FlashSale::where('status', 1)->orderBy('id', 'desc')->where('end_time', '>', $current_date)->first()->products;
+        foreach ($dataProduct as $itemProduct) {
+            $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+            $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
+        }
         if ($flash_sales) {
             $data = [
                 "flash_sales" => $flash_sales,
@@ -379,7 +412,12 @@ class AppController extends Controller
             if ($req->catalog != ''){
                 $products->where('catalog', $req->catalog);
             }
-            return response()->json($products->paginate(10), Response::HTTP_OK);
+            $dataProduct = $products->paginate(10);
+            foreach ($dataProduct as $itemProduct) {
+                $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+                $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
+            }
+            return response()->json($dataProduct, Response::HTTP_OK);
         } //catch exception
         catch (ModelNotFoundException $exception) {
             return 'Message: ' . $e->getMessage();
@@ -457,16 +495,28 @@ class AppController extends Controller
 
     public function bestSellers(){
         $products = Product::where('is_best_seller','enable')->paginate(16);
+        foreach ($products as $itemProduct) {
+            $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+            $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
+        }
         return response()->json($products, Response::HTTP_OK);
     }
 
     public function newProducts(){
         $products = Product::where('is_new_product','enable')->where('status','enable')->paginate(16);
+        foreach ($products as $itemProduct) {
+            $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+            $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
+        }
         return response()->json($products, Response::HTTP_OK);
     }
 
     public function promotionProducts(){
         $products = Product::where('is_promotion','enable')->where('status','enable')->paginate(16);
+        foreach ($products as $itemProduct) {
+            $urlImage = ($itemProduct->pdp == 1) ? 'uploads/product_new/cover_image' : 'uploads/product';
+            $itemProduct->cover_image = $urlImage.'/'.$itemProduct->cover_image;
+        }
         return response()->json($products, Response::HTTP_OK);
     }
 
@@ -519,5 +569,27 @@ class AppController extends Controller
                 'message' => 'Login unsuccessful'
             ], 401);
         }
+    }
+    
+    public function getProductWeight($id){
+        $product = Product::find($id);
+        $content = $product->content;
+        $weight = json_decode($content, true);
+        if(isset($weight['Trọng lượng'])) {
+            $weight = $weight['Trọng lượng'];
+            $unit = preg_replace("/[^a-zA-Z]+/", "", $weight);
+            $weight = preg_replace("/[^0-9.]+/", "", $weight);
+            
+            $data = [
+                'weight' => $weight,
+                'unit' => $unit,
+            ];
+            return response()->json($data, Response::HTTP_OK);
+        }
+        else {
+            return response()->json([
+                'error' => 'Data not found!'
+            ], 401);
+        }  
     }
 }

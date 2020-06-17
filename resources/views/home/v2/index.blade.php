@@ -346,9 +346,10 @@
 
                                           <div class="item-available">
                                             <div class="available">
-                                              <span class="color_width" data-title="50%" data-toggle='tooltip' style="width: 50%"></span>
+                                                <?php $sold = $itemProductFlashSale->sold * (100/$itemProductFlashSale->quantity) ?>
+                                              <span class="color_width" data-title="{{$sold}}%" data-toggle='tooltip' style="width: {{$sold}}%"></span>
                                           </div>                          
-                                          <p class="a2">Sold: <b>{{$itemProductFlashSale->sold}}</b>  </p>
+                                          <p class="a2">Đã bán: <b>{{$itemProductFlashSale->sold}}</b>  </p>
                                       </div>
                                   </div>
                               </div>      

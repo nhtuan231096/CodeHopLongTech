@@ -42,6 +42,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 });
 // Route login admin
+
 Route::get('admin/login.html','Admin\AdminController@login')->name('login');
 Route::post('admin/login.html','Admin\AdminController@post_login')->name('login');
 
@@ -64,8 +65,8 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::post('tracking-order','OrderController@getTrackingOrder')->name('trackingOrder');
 
 	// tra cứu bảo hành
-	Route::get('warranty','OrderController@warranty')->name('warranty');
-	Route::post('warranty','OrderController@getWarranty')->name('warranty');
+	Route::get('kiem-tra-bao-hanh','OrderController@warranty')->name('warranty');
+	Route::post('kiem-tra-bao-hanh','OrderController@getWarranty')->name('warranty');
 
 	//update route customer
 	Route::get('/dang-ky','HomeController@formRegister')->name('register_customer');
@@ -76,6 +77,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::post('/dat-lai-password','HomeController@PostResetPassword')->name('reset-password');
 	Route::post('/dang-nhap','HomeController@login')->name('login_customer');
 
+	Route::get('customer/order/reward-point','OrderController@customer_reward_point')->name('customer_reward_point');
 	Route::get('customer/order/history','OrderController@customer_order_history')->name('customer_order_history');
 	Route::get('customer/order/order-information/{id}','OrderController@orderInformation')->name('orderInformation');
 	Route::post('customer/my-account','OrderController@saveCustomer')->name('saveCustomer');
@@ -113,8 +115,9 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	Route::get('danh-muc-bai-viet/{slug}/{id}','HomeController@agency_posts_by_category')->name('postsCategory');
 	Route::get('bai-viet/{slug}/{id}','HomeController@agency_posts_detail')->name('detailPost');
 
-	//route my acoount
+	//route my account
 	Route::get('my-account','OrderController@my_account')->name('my_account');
+	Route::get('edit-account','OrderController@edit_acc_customer')->name('edit_acc_customer');
 
 	Route::get('404.html','HomeController@error')->name('error');
 	// route gio hang
@@ -172,7 +175,7 @@ Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],functio
 	// Route::get('/hot-news/{slug}.html','HomeController@get_news')->name('hot-news');
 	Route::get('/project/{slug}','HomeController@detail_project')->name('detail_project');
 
-
+	Route::get('/api/get-content-product/{slug}','AppController@viewProduct')->name('product.get.content');
 
 
 	});

@@ -9,5 +9,7 @@ Route::get('couppon-code','CouponCodeController@index_couppon_code')->name('coup
 Route::post('couppon-code','CouponCodeController@couppon_code_add')->name('couppon_code');
 Route::get('couppon-code-del','CouponCodeController@delCoupon')->name('delCoupon');
 
+Route::get('apply-couppon-code/{id}','CouponCodeController@applyCoupon')->name('applyCoupon');
+
 
 Route::get('couppon-code-log','CouponCodeController@couppon_code_log')->name('couppon_code_log');

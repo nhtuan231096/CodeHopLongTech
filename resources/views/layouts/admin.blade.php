@@ -154,7 +154,7 @@
               <ul class="treeview-menu">
                 <li><a href="{{route('list-cat-1')}}"><i class="fa fa-thumb-tack"> </i>Danh mục sao chép</a></li>
                 <li><a href="{{route('list-pro-1')}}"><i class="fa fa-star"> </i>Sản phẩm sao chép</a></li>
-              
+
               </ul>
             </li>
           @endif
@@ -162,7 +162,18 @@
           @if(Auth::Guard('admin')->user()->group_id==1)
           <li><a href="{{route('category')}}"><i class="fa fa-table"></i> <span>Danh mục sản phẩm</span></a></li>
           <li><a href="{{route('partners')}}"><i class="fa fa-th"></i> <span>Hãng sản phẩm</span></a></li>
-          <li><a href="{{route('order_admin')}}"><i class="fa fa-briefcase"></i> <span>Quản lý bán hàng</span></a></li>
+{{--          <li><a href="{{route('order_admin')}}"><i class="fa fa-briefcase"></i> <span>Quản lý bán hàng</span></a></li>--}}
+            <li class="treeview">
+                <a href="#"><i class="fa fa-briefcase"></i> <span>Quản lý bán hàng</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('order_admin')}}"> <i class="fa fa-building"></i>Đơn hàng</a></li>
+                    <li><a href="{{route('order_create')}}"> <i class="fa fa-object-group"></i>Tạo đơn hàng</a></li>
+                </ul>
+            </li>
           <li class="treeview">
             <a href="#"><i class="fa fa-money"></i> <span>Coupon, Điểm thưởng</span>
               <span class="pull-right-container">
@@ -175,7 +186,7 @@
               <li><a href="{{route('couppon_code')}}"> <i class="fa fa-server"></i>Mã giảm giá</a></li>
               <li><a href="{{route('couppon_code_log')}}"> <i class="fa fa-sticky-note"></i>Nhật ký mã giảm giá</a></li>
             </ul>
-          </li>          
+          </li>
           <li><a href="{{route('slider')}}"><i class="fa fa-image"></i> <span>Quản lý slider</span></a></li>
           <li><a href="{{route('about_us')}}"><i class="fa fa-home"></i> <span>Quản lý trang giới thiệu</span></a></li>
           <li><a href="{{route('supporter')}}"><i class="fa fa-users"></i><span>Supporter</span></a></li>
@@ -271,7 +282,7 @@
           <li><a href="{{route('service2')}}"><i class="fa fa-server"></i> <span>Service</span></a></li>
           <li><a href="{{route('download')}}"><i class="fa fa-download"></i> <span>Download</span></a></li>
           <li><a href="{{route('infoAccount')}}"><i class="fa fa-info-circle"></i> <span>Thông tin tài khoản</span></a></li>
-          @else 
+          @else
           <li class="treeview">
             <a href="#"><i class="fa fa-money"></i> <span>Coupon</span>
               <span class="pull-right-container">
@@ -283,7 +294,7 @@
               <li><a href="{{route('couppon_code')}}"> <i class="fa fa-server"></i>Mã giảm giá</a></li>
               <li><a href="{{route('couppon_code_log')}}"> <i class="fa fa-sticky-note"></i>Nhật ký mã giảm giá</a></li>
             </ul>
-          </li>      
+          </li>
           @endif
         </ul>
         <!-- /.sidebar-menu -->
@@ -295,7 +306,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1 style="font-family: sans-serif;"> 
+        <h1 style="font-family: sans-serif;">
           @yield('title')
         </h1>
         <ol class="breadcrumb">
@@ -409,7 +420,7 @@
 
 
 <script>
-  tinymce.init({ 
+  tinymce.init({
     selector:'textarea',
     plugins: "image code",
     image_title: true,

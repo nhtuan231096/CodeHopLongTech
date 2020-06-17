@@ -41,6 +41,7 @@
 						<th>Mã giảm giá</th>
 						<th>Số lượt sử dụng tối đa</th>
 						<th>Số lượt đã sử dụng</th>
+						<th>Áp dụng cho khách tạo mới tài khoản</th>
 						<th>Quy định</th>
 						<th>Bắt đầu</th>
 						<th>Kết thúc</th>
@@ -57,6 +58,10 @@
 						<td>{{$item->coupon_code}}</td>
 						<td>{{isset($item->rule->uses_per_coupon) ? $item->rule->uses_per_coupon : ''}}</td>
 						<td>{{$item->times_used}}</td>
+						<td>
+							<?php $status = $item->apply_new_customer == 1 ? 'check' : 'ban';?>
+							<a href="{{route('applyCoupon',['id'=>$item->id])}}" class="fa fa-{{$status}} btn btn-md"></a>
+						</td>
 						<td>{{isset($item->rule->name) ? $item->rule->name : ''}}</td>
 						<td>{{isset($item->rule->from_date) ? $item->rule->from_date : ''}}</td>
 						<td>{{isset($item->rule->to_date) ? $item->rule->to_date : ''}}</td>

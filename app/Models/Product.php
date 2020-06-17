@@ -41,7 +41,6 @@ class Product extends Model
 		// }
 		// // tool_check_product
 
-
 		if(empty(request()->title) && empty(request()->category_id) && empty(request()->created_by) && empty(request()->status) )
 		{
 			return $query;

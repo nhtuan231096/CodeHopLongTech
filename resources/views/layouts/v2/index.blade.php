@@ -247,7 +247,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                             <div class="media" ng-repeat="search_item in res_product_search ">
                                               <span ng-click="close_tab()" style="position: absolute;top: 10px;right: 15px;font-size: 16px;z-index: 50;font-weight: bold;cursor: pointer;">x</span>
                                                 <a class="pull-left" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank">
-                                                    <img width="80" class="media-object" src="{{url('uploads/product')}}/@{{search_item['cover_image']}}" alt="Image">
+                                                    <img width="80" class="media-object" src="@{{search_item['pdp'] == 1 ? 'uploads/product_new/cover_image' : 'uploads/product'}}/@{{search_item['cover_image']}}" alt="Image">
                                                 </a>
                                                 <div class="media-body">
                                                     <a class="" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank" style="font-size: 15px;font-weight: 700;margin-bottom: 0px;letter-spacing: -.04em;line-height: 1;padding: 10px 0 0;">@{{search_item['title']}}</a>
@@ -282,19 +282,17 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <li>
                                         <table class="table table-striped">
                                             <tbody>
-                                                
                                                     @foreach($cart->items as $item)
                                                     <tr>
                                                         <td class="text-center" style="width:70px">
                                                             <a href="product.html">
-                                                                <img src="{{url('uploads/product')}}/{{$item['image']}}" alt="{{$item['image']}}" style="width:70px" title="{{$item['image']}}" class="preview">
+                                                                <?php $urlImage = ($item['pdp'] == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
+                                                                <img src="{{$urlImage}}/{{$item['image']}}" alt="{{$item['image']}}" style="width:70px" title="{{$item['image']}}" class="preview">
                                                             </a>
                                                         </td>
                                                         <td class="text-left"> <a class="cart_product_name" href="">{{$item['title']}}</a> 
                                                         </td>
-                                                        <td class="text-center">x {{$item['quantity']}}</td>
-                                                        <td class="text-center">{{number_format($item['price'])}}đ</td>
-                                                        <td class="text-right">
+                                                        
                                                             <!-- <a href="product.html" class="fa fa-edit"></a> -->
                                                         </td>
                                                         <td class="text-right">
@@ -353,7 +351,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                 <a class="btn view-cart" href="{{url('/uploads/1.0.1/sampleImport.csv')}}">
                                                     <i class="fa fa-download" style="margin-right: 5px"></i>Tải file mẫu
                                                 </a>
-                                                <a class="btn view-cart" data-toggle="modal" href='#modal-import'>
+                                                <a class="btn view-cart" data-toggle="modal" href='#modal-import-csv'>
                                                     <i class="fa fa-upload" style="margin-right: 5px"></i>Nhập file csv
                                                 </a>
                                             </p>
@@ -365,7 +363,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
 
                         </div>
                         <!-- //modal import file csv -->
-                        <div class="modal fade" id="modal-import">
+                        <div class="modal fade" id="modal-import-csv">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -377,7 +375,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                         
                                             <div class="form-group">
                                                 <label for="">File csv</label>
-                                                <input style="padding: 0" type="file" class="form-control" name="file">
+                                                <input type="file" class="form-control" name="file">
                                             </div>
                                         
                                             @csrf                                        
@@ -588,13 +586,13 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <strong>Voucher</strong>
                                                             <img class="label-hot" src="{{url('public/homev2')}}/image/catalog/menu/new-icon.png" alt="icon items">
                                                         </a>
-                                                    </li>
+                                                    </li> -->
                                                     <li class="">
                                                         <p class="close-menu"></p>
-                                                        <a href="{{route('downloads')}}" class="clearfix">
-                                                            <strong>Khuyến mại</strong>
+                                                        <a href="{{route('contact')}}" class="clearfix">
+                                                            <strong>Liên hệ</strong>
                                                         </a>
-                                                    </li> -->
+                                                    </li> 
                                                     <li class="with-sub-menu hover">
                                                         <a href="{{route('home')}}">Về Hoplong</a>
                                                     </li>
@@ -612,8 +610,9 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                     <div class="bottom3">                        
                         <div class="telephone hidden-xs hidden-sm hidden-md">
                             <ul class="blank"> 
-                                <li><a href="#"><i class="fa fa-truck"></i>Theo dõi đơn hàng của bạn</a></li> 
+                                <li><a href="{{route('trackingOrder')}}"><i class="fa fa-truck"></i>Theo dõi đơn hàng của bạn</a></li> 
                                 <li><a href="#"><i class="fa fa-phone-square"></i>Hotline 1900.6536</a></li> 
+                                <li><a href="{{route('warranty')}}"><i class="fa fa-search"></i>Tra cứu bảo hành</a></li> 
                             </ul>
                         </div>  
                         <div class="signin-w hidden-md hidden-sm hidden-xs">

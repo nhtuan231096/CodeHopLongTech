@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('productj','\App\Http\Controllers\Admin\ProductController@proJson');
 Route::get('createdby','\App\Http\Controllers\Admin\ProductController@createdby');
 Route::get('category','\App\Http\Controllers\Admin\ProductController@category');
@@ -54,3 +55,9 @@ Route::get('getEditProductFlashSale/','\App\Http\Controllers\Admin\ProductContro
 // route app
 	include('app/app.php');
 // route app
+
+Route::get('getProducts','\App\Http\Controllers\Admin\OrderController@getProducts');
+
+Route::post('createOrderApi','\App\Http\Controllers\Admin\OrderController@createOrderApi');
+
+

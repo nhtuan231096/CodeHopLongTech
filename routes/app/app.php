@@ -94,10 +94,12 @@ Route::get('category/{category_id}/recruitment','\App\Http\Controllers\Home\AppC
 // chi tiết tuyển dụng theo id
 Route::get('recruitment/{id}','\App\Http\Controllers\Home\AppController@getRecruitmentById');
 
+// trọng lượng sản phẩm
+Route::get('product-weight/{id}','\App\Http\Controllers\Home\AppController@getProductWeight');
+
 // login
 Route::post('login','\App\Http\Controllers\Home\AppController@loginCustomer');
 
-// thông tin khách hàng
 Route::middleware('auth:api')->get('/customer', function(Request $request) {
     return $request->user();
 });

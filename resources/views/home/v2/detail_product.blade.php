@@ -204,6 +204,12 @@ html {
                     <strong>{{Session::get('success')}}</strong>
                 </div>
                 @endif
+                @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>{{Session::get('error')}}</strong>
+                </div>
+                @endif
                 <div class="title-product">
                     <h1>{{$product->title}}</h1>
                 </div>
@@ -224,7 +230,7 @@ html {
                 <div class="product-label form-group">
                     <div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
                       @if($flashsale == 1)
-                        <span class="price-new" itemprop="price">{{number_format($product->price)}}</span>
+                        <span class="price-new" itemprop="price">{{number_format($dataProduct->price)}}</span>
                       @else 
                         <span class="price-new" itemprop="price">{{$cart->PriceProduct($product)}}</span>
                       @endif
@@ -270,7 +276,7 @@ html {
                   </div>
                   <form enctype="multipart/form-data" action="{{route('shopNow')}}" method="post" class="cart"> 
                     @csrf
-                    @if($product->price > 0)
+                    @if($product->price > 0 || $flashsale == 1)
                     <div class="form-group box-info-product">
                         <div class="option quantity">
                             <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
@@ -282,7 +288,10 @@ html {
                                 <span class="input-group-addon product_quantity_up">+</span>
                             </div>
                         </div>
-
+                        @if($flashsale == 1)
+                          <input type="hidden" name="sold" value="{{$dataProduct->sold}}">
+                          <input type="hidden" name="flash_sale_id" value="{{$dataProduct->flash_sale_id}}">
+                        @endif 
                         <div class="cart">
                             <button class="btn btn-primary btn-lg" name="addCart" value="true" style="font-weight: bold; font-size: 16px;"> 
                                 <i style="margin-right: 5px" class="fa fa-shopping-cart"></i>Thêm giỏ hàng
@@ -327,7 +336,7 @@ html {
             <div>
               <div class="media">
                 <!-- <a class="pull-left" href="{{route('view',[$product->slug])}}"> -->
-                  <a class="pull-left" href="{{url('')}}/@{{itemPartNumber['slug']}}">
+                  <a class="pull-left" href="{{url('')}}/products/@{{itemPartNumber['slug']}}">
                     <img ng-if="itemPartNumber['pdp'] == 1" width="70px" class="media-object" src="{{url('uploads/product_new/cover_image/')}}/@{{itemPartNumber['cover_image']}}" alt="Image">
                     <img ng-if="itemPartNumber['pdp'] == 0" width="70px" class="media-object" src="{{url('uploads/product/')}}/@{{itemPartNumber['cover_image']}}" alt="Image">
                 </a>

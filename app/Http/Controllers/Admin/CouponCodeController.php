@@ -96,4 +96,25 @@ class CouponCodeController extends Controller
 			'dataLog' => $dataLog
 		]);
 	}
+
+	public function applyCoupon(){
+		$coupon = CouponCode::find(request()->id);
+		if($coupon->apply_new_customer == 1){
+			$coupon->update([
+				'id'=>request()->id,
+				'apply_new_customer' => 0,
+			]);	
+		}
+		else{
+			CouponCode::select('*')->update([
+				'apply_new_customer' => 0,
+			]);
+			$coupon->update([
+				'id'=>request()->id,
+				'apply_new_customer' => 1,
+			]);	
+		}
+		
+		return redirect()->back()->with('success','Cập nhật thành công');
+	}
 }

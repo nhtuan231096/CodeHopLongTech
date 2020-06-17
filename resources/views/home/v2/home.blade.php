@@ -299,7 +299,12 @@
                                         <div class="right-block">
                                             <div class="button-group so-quickview cartinfo--left">
                                                 <button type="button" class="addToCart" title="">
-                                                    <span>Xem chi tiết </span>   
+                                                    <!-- <span>Xem chi tiết </span>    -->
+                                                    <span>
+                                                        <a style="color: #fff" href="{{route('view_category',['slug'=>$shn->slug])}}">
+                                                            Xem chi tiết 
+                                                        </a>
+                                                    </span>   
                                                 </button>
                                             </div>
                                             <div class="caption hide-cont">

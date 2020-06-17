@@ -57,6 +57,7 @@ class Data
 				'price' => $priceDiscount,
 				'quantity' => 1,
 				'image' => $model->cover_image,
+				'pdp' => $model->pdp,
 				'message' => isset($model->message) ? $model->message : ""
 				];
 			}
