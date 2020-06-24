@@ -46,6 +46,9 @@ use App\Models\CouponCode;
 use App\Mail\ForgotPassword;
 use App\Mail\WelcomeEmail;
 use PDF;
+use App\Models\SelectionToolCategory;
+use App\Models\SelectionToolPartners;
+use App\Models\SelectionToolProduct;
 
 class HomeController extends Controller
 {
@@ -1178,6 +1181,16 @@ class HomeController extends Controller
     		'promotions' => $promotion,
     		'flash_sale' => $flash_sale,
     		'products' => $flash_sale->products()->paginate(15)
+    	]);
+    }
+
+    public function selectionTool(){
+    	$parentCategory = SelectionToolCategory::where('parent_id', 0)->where('status', 1)->orderBy('sorder','ASC')->get();
+		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+
+    	return view('home.v2.selection_tool.index',[
+    		'parentCategory' => $parentCategory,
+    		'categorys' => $categorys,
     	]);
     }
 }

@@ -60,4 +60,7 @@ Route::get('getProducts','\App\Http\Controllers\Admin\OrderController@getProduct
 
 Route::post('createOrderApi','\App\Http\Controllers\Admin\OrderController@createOrderApi');
 
+Route::get('selectionTool/getSubCategory/{category_id}','\App\Http\Controllers\Home\SelectionToolController@getSubCategory');
+Route::post('selectionTool/getProductsByPartnersId/','\App\Http\Controllers\Home\SelectionToolController@getProductsByPartnersId');
+
 

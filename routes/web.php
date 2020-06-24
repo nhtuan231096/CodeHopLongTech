@@ -39,6 +39,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 	include('admin/rate.php');
 	include('admin/promotions.php');
 	include('admin/popup.php');
+	include('admin/selection_tool.php');
 
 });
 // Route login admin
@@ -50,6 +51,9 @@ Route::post('admin/login.html','Admin\AdminController@post_login')->name('login'
 Route::get('admin/logout','Admin\AdminController@logout')->name('logout');
 
 Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],function(){
+	// selection tool
+	Route::get('/selection-tool','HomeController@selectionTool')->name('selectionTool');
+
 	// rating
 	Route::post('/rate-product','HomeController@rateProduct')->name('rateProduct');
 	// rating

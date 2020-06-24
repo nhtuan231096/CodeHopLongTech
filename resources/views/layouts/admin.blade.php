@@ -158,7 +158,18 @@
               </ul>
             </li>
           @endif
-
+          <li class="treeview">
+              <a href="#"><i class="fa fa-cog"></i> <span>Selection Tool</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+            <ul class="treeview-menu">
+              <li><a href="{{route('selectionToolCategory')}}"><i class="fa fa-window-restore"> </i>Danh mục</a></li>
+              <li><a href="{{route('selectionToolPartners')}}"><i class="fa fa-users"> </i>Hãng</a></li>
+              <li><a href="{{route('selectionToolProduct')}}"><i class="fa fa-bars"> </i>Sản phẩm</a></li>
+            </ul>
+          </li>
           @if(Auth::Guard('admin')->user()->group_id==1)
           <li><a href="{{route('category')}}"><i class="fa fa-table"></i> <span>Danh mục sản phẩm</span></a></li>
           <li><a href="{{route('partners')}}"><i class="fa fa-th"></i> <span>Hãng sản phẩm</span></a></li>

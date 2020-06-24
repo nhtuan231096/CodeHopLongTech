@@ -328,7 +328,7 @@ class AppController extends Controller
 
     public function getAllNews()
     {
-        $news = News::where('status', 'enable')->paginate(10);
+        $news = News::where('status', 'enable')->orderBy('id','desc')->paginate(10);
         return response()->json($news);
     }
 
