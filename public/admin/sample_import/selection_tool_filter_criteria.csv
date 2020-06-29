@@ -1,0 +1,4 @@
+title,value,category_id,status,sorder
+cân nặng,"100g,300g,600g,900g ",8,1,1
+kích thước,"150x200,200x300",9,1,2
+điện áp,"120v,220v",10,1,3

@@ -26,6 +26,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
   <!-- <script src="{{url('public/js')}}/angular.js"></script> -->
   <script src="{{url('public/tinymce')}}/js/tinymce/tinymce.min.js"></script>
+    <style>
+        .panel-title-cus{
+            font-size: 22px;
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
@@ -167,6 +172,7 @@
             <ul class="treeview-menu">
               <li><a href="{{route('selectionToolCategory')}}"><i class="fa fa-window-restore"> </i>Danh mục</a></li>
               <li><a href="{{route('selectionToolPartners')}}"><i class="fa fa-users"> </i>Hãng</a></li>
+              <li><a href="{{route('selectionToolFilter')}}"><i class="fa fa-certificate"> </i>Tiêu chí lọc sản phẩm</a></li>
               <li><a href="{{route('selectionToolProduct')}}"><i class="fa fa-bars"> </i>Sản phẩm</a></li>
             </ul>
           </li>
