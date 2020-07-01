@@ -33,19 +33,14 @@ class SelectionToolController extends Controller
         $filter = SelectionToolProduct::select('*');
         foreach($req->data as $itemFilter) {
             if(!empty($itemFilter['name_filter'])) {
-                $filter->whereJsonContains('attributes',[$itemFilter['name_filter']=>$itemFilter['value_filter']]);
-            }
+                $dataFilter = '"'.$itemFilter['name_filter'] . '":"'.$itemFilter['value_filter'].'"';
+                // $filter->whereJsonContains('attributes',[$itemFilter['name_filter']=>$itemFilter['value_filter']]);
+                $filter->where('attributes', 'like', '%'.$dataFilter.'%');            }
             if(!empty($req->partner_id)){
                 $filter->where('partner_id',$req->partner_id);
             }
         }
         return $filter->limit(15)->get();
-
-        if ($products) {
-            return response()->json($products, Response::HTTP_OK);
-        } else {
-            return json_encode(['errors' => 'Product not found']);
-        }
     }
 
     public function getDataFilterByCateId(Request $req)
