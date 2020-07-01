@@ -184,7 +184,17 @@ class SelectionToolController extends Controller
                     'title.required' => 'Tiêu đề không được để trống',
                     'title.unique' => 'Tiêu đề đã tồn tại'
                 ]);
-                $edit = $partners->update($req->all());
+                $edit = $partners->update([
+                    'title' => $req->title,
+                    'slug' => $req->slug,
+                    'sorder' => $req->sorder,
+                    'price' => $req->price,
+                    'description' => $req->description,
+                    'content' => $req->content,
+                    'partner_id' => $req->partner_id,
+                    'attributes' => $req->attribute,
+                    'catalog' => $req->catalog,
+                ]);
                 if ($edit) {
                     return redirect()->route('selectionToolProduct')->with('success', 'Cập nhật thành công');
                 }

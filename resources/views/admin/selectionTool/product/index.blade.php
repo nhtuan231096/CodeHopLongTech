@@ -84,7 +84,7 @@
                 <label for="">Thuộc tính</label>
                 <input type="" name="attribute" class="form-control" id=""
                        @if(isset($edit->id)) value="{{$edit->attributes}}"
-                       @endif placeholder='VD: "kích thước" : "120x50", "cân nặng" : "500g"'>
+                       @endif placeholder='VD: {"kích thước" : "120x50", "cân nặng" : "500g"}'>
             </div>
             <div class="form-group">
                 <label for="">Catalog</label>

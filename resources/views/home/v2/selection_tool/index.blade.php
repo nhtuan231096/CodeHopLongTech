@@ -33,12 +33,12 @@
     <link href="{{url('public/homev2')}}/css/themecss/so-newletter-popup.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/footer/footer1.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/header/header1.css" rel="stylesheet">
-    <link id="color_scheme" href="{{url('public/homev2')}}/css/theme.css" rel="stylesheet"> 
+    <link id="color_scheme" href="{{url('public/homev2')}}/css/theme.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/responsive.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/my_style.css" rel="stylesheet">
      <!-- Google web fonts
     ============================================ -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script type="text/javascript" src="{{url('public/homev2')}}/js/jquery-2.2.4.min.js"></script>
     <style type="text/css">
          /*body{font-family:'Open Sans', sans-serif;}*/
@@ -103,7 +103,7 @@
           100% { transform: rotate(360deg); }
         }
         .header-middle{
-            margin-bottom:0px!important; 
+            margin-bottom:0px!important;
         }
         .header-top .container{
             height: 38px!important;
@@ -153,7 +153,7 @@
     <!-- popup -->
     @if(isset($popup))
     <div id="boxes">
-        <div style="top: 234px!important; left: 50%; top: 20%;display: none;position: relative;padding:1px!important;" id="dialog" class="window"> 
+        <div style="top: 234px!important; left: 50%; top: 20%;display: none;position: relative;padding:1px!important;" id="dialog" class="window">
             <div id="san">
                 <a href="#" class="close agree"><img src="http://img.freepik.com/free-icon/cancel-button_318-122842.jpg?size=338&ext=jpg" width="25" style="width: 48px;
 height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
@@ -174,19 +174,19 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB52Z3Q"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    
+
     <div id="wrapper" class="wrapper-fluid banners-effect-3">
 
     <!-- Header Container  -->
     <header id="header" class=" typeheader-1">
-        
+
         <!-- Header Top -->
         <div class="header-top hidden-compact">
             <div class="container">
                 <div class="row">
                     <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
                         <div class="hidden-md hidden-sm hidden-xs welcome-msg">Công ty cổ phần công nghệ Hợp Long /
-                            <span>Chúc mừng năm mới</span> 
+                            <span>Chúc mừng năm mới</span>
                         </div>
                         <ul class="top-link list-inline hidden-lg ">
                             <li class="account" id="my_account">
@@ -197,7 +197,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <li><a href="{{route('loginCustomer')}}"><i class="fa fa-pencil-square-o"></i> Đăng nhập</a></li>
                                 </ul>
                             </li>
-                        </ul>            
+                        </ul>
                     </div>
                     <div class="header-top-right collapsed-block col-lg-5 col-md-4 col-sm-6 col-xs-8">
                         <ul class="top-link list-inline lang-curr">
@@ -215,7 +215,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                         </ul>
                                     </form>
                                 </div>
-                                
+
                             </li>
                         </ul>
                     </div>
@@ -262,13 +262,13 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     </div>
                                 </form>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- //end Search -->
-                    <div class="middle-right col-lg-3 col-md-3 col-sm-3">                  
+                    <div class="middle-right col-lg-3 col-md-3 col-sm-3">
                         <!--cart-->
                         <div class="shopping_cart">
-                            <div id="cart" class="btn-shopping-cart pull-right">                       
+                            <div id="cart" class="btn-shopping-cart pull-right">
                                 <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <div class="shopcart">
                                         <span class="icon-c"><i class="fa fa-shopping-bag"></i></span>
@@ -288,14 +288,14 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                     @foreach($cart->items as $item)
                                                     <tr>
                                                         <td class="text-center" style="width:70px">
-                                                            <a href="product.html">
+                                                            <a href="">
                                                                 <?php $urlImage = ($item['pdp'] == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
                                                                 <img src="{{$urlImage}}/{{$item['image']}}" alt="{{$item['image']}}" style="width:70px" title="{{$item['image']}}" class="preview">
                                                             </a>
                                                         </td>
-                                                        <td class="text-left"> <a class="cart_product_name" href="">{{$item['title']}}</a> 
+                                                        <td class="text-left"> <a class="cart_product_name" href="">{{$item['title']}}</a>
                                                         </td>
-                                                        
+
                                                             <!-- <a href="product.html" class="fa fa-edit"></a> -->
                                                         </td>
                                                         <td class="text-right">
@@ -317,7 +317,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <p class="text-right"> <a class="btn view-cart" href="{{route('view_cart')}}"><i class="fa fa-shopping-cart"></i>Xem giỏ hàng</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="{{route('order')}}"><i class="fa fa-share"></i>Đặt hàng</a> 
+                                            <p class="text-right"> <a class="btn view-cart" href="{{route('view_cart')}}"><i class="fa fa-shopping-cart"></i>Xem giỏ hàng</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="{{route('order')}}"><i class="fa fa-share"></i>Đặt hàng</a>
                                             </p>
                                         </div>
                                     </li>
@@ -325,7 +325,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                 @endif
                             </div>
                             <!-- //import order -->
-                            <div id="cart" class="btn-shopping-cart pull-left">                       
+                            <div id="cart" class="btn-shopping-cart pull-left">
                                 <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <div class="shopcart">
                                         <span class="icon-c"><i class="fa fa-shopping-cart"></i></span>
@@ -340,9 +340,9 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <li>
                                         <table class="table table-striped">
                                             <tbody>
-                                                
+
                                                     <tr>
-                                                        <td class="text-center"> <a class="cart_product_name" href="" style="font-size: 14px">Đặt hàng bằng file .csv</a> 
+                                                        <td class="text-center"> <a class="cart_product_name" href="" style="font-size: 14px">Đặt hàng bằng file .csv</a>
                                                         </td>
                                                     </tr>
                                             </tbody>
@@ -350,7 +350,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     </li>
                                     <li>
                                         <div>
-                                            <p class="text-center"> 
+                                            <p class="text-center">
                                                 <a class="btn view-cart" href="{{url('/uploads/1.0.1/sampleImport.csv')}}">
                                                     <i class="fa fa-download" style="margin-right: 5px"></i>Tải file mẫu
                                                 </a>
@@ -375,13 +375,13 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <div class="modal-body">
                                         <form action="{{route('import_cart_csv')}}" method="POST" role="form" enctype="multipart/form-data">
                                             <legend>Tải lên file csv để đặt hàng</legend>
-                                        
+
                                             <div class="form-group">
                                                 <label for="">File csv</label>
                                                 <input type="file" class="form-control" name="file">
                                             </div>
-                                        
-                                            @csrf                                        
+
+                                            @csrf
                                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Hủy</button>
                                             <button type="submit" class="btn btn-primary pull-right">Tải</button>
                                             <div class="clearfix"></div>
@@ -400,12 +400,12 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
         <div class="header-bottom hidden-compact">
             <div class="container">
                 <div class="row">
-                    
+
                     <div class="bottom1 menu-vertical col-lg-2 col-md-3 col-sm-3">
                         <div class="responsive so-megamenu megamenu-style-dev ">
                             <div class="so-vertical-menu ">
-                                <nav class="navbar-default">    
-                                    
+                                <nav class="navbar-default">
+
                                     <div class="container-megamenu vertical">
                                         <div id="menuHeading">
                                             <div class="megamenuToogle-wrapper">
@@ -416,14 +416,14 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <span></span>
                                                             <span></span>
                                                         </div>
-                                                        Danh mục                          
+                                                        Danh mục
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                     
+
                                         <div class="navbar-header">
-                                            <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle">      
+                                            <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle">
                                                 <i class="fa fa-bars"></i>
                                                 <span>  Danh mục     </span>
                                             </button>
@@ -463,7 +463,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </li>   
+                                                        </li>
                                                         @endforeach
                                                         <li class="loadmore" id="loadMore">
                                                             <i class="fa fa-plus-square-o"></i>
@@ -474,7 +474,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <i class="fa fa-plus-square-o"></i>
                                                             <span class="more-view">Rút gọn</span>
                                                         </li>
-                                                            
+
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -537,7 +537,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                         </div>
 
                     </div>
-                    
+
                     <!-- Main menu -->
                     <div class="main-menu-w col-lg-10 col-md-9">
                         <div class="responsive so-megamenu megamenu-style-dev">
@@ -550,7 +550,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                             <span class="icon-bar"></span>
                                         </button>
                                     </div>
-                                    
+
                                     <div class="megamenu-wrapper">
                                         <span id="remove-megamenu" class="fa fa-times"></span>
                                         <div class="megamenu-pattern">
@@ -575,7 +575,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <strong>Tài liệu</strong>
                                                         </a>
                                                     </li>
-                                                    <!-- 
+                                                    <!--
                                                     <li class="with-sub-menu hover">
                                                         <p class="close-menu"></p>
                                                         <a href="#" class="clearfix">
@@ -595,12 +595,12 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                         <a href="{{route('contact')}}" class="clearfix">
                                                             <strong>Liên hệ</strong>
                                                         </a>
-                                                    </li> 
+                                                    </li>
                                                     <li class="with-sub-menu hover">
                                                         <a href="{{route('home')}}">Về Hoplong</a>
                                                     </li>
                                                 </ul>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -609,26 +609,26 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                         </div>
                     </div>
                     <!-- //end Main menu -->
-                                      
-                    <div class="bottom3">                        
+
+                    <div class="bottom3">
                         <div class="telephone hidden-xs hidden-sm hidden-md">
-                            <ul class="blank"> 
-                                <li><a href="{{route('trackingOrder')}}"><i class="fa fa-truck"></i>Theo dõi đơn hàng của bạn</a></li> 
-                                <li><a href="#"><i class="fa fa-phone-square"></i>Hotline 1900.6536</a></li> 
-                                <li><a href="{{route('warranty')}}"><i class="fa fa-search"></i>Tra cứu bảo hành</a></li> 
+                            <ul class="blank">
+                                <li><a href="{{route('trackingOrder')}}"><i class="fa fa-truck"></i>Theo dõi đơn hàng của bạn</a></li>
+                                <li><a href="#"><i class="fa fa-phone-square"></i>Hotline 1900.6536</a></li>
+                                <li><a href="{{route('warranty')}}"><i class="fa fa-search"></i>Tra cứu bảo hành</a></li>
                             </ul>
-                        </div>  
+                        </div>
                         <div class="signin-w hidden-md hidden-sm hidden-xs">
-                            <ul class="signin-link blank"> 
-                                @if(Auth::guard('customer')->check())                           
-                                <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('my_account')}}">Hi {{Auth::guard('customer')->user()->name}}</a> </li> 
+                            <ul class="signin-link blank">
+                                @if(Auth::guard('customer')->check())
+                                <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('my_account')}}">Hi {{Auth::guard('customer')->user()->name}}</a> </li>
                                 @else
-                                <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('loginCustomer')}}">Đăng nhập </a> / <a href="{{route('register_customer')}}">Đăng ký</a></li> 
-                                @endif                               
-                            </ul>                       
-                        </div>                  
+                                <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('loginCustomer')}}">Đăng nhập </a> / <a href="{{route('register_customer')}}">Đăng ký</a></li>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -653,13 +653,21 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                 </a>
                 <div class="list-group collapse">
                     @foreach($itemCate->getSubCategory() as $itemSubCate)
-                    <a href="javascript:void(0);" class="list-group-item" data-toggle="collapse" style="padding-left: 35px">
+                    <a href="javascript:void(0);" ng-click="getFilterByCategoryId({{$itemSubCate->id}})" class="list-group-item" data-toggle="collapse" style="padding-left: 35px">
                         <i class="fa fa-chevron"></i>
                         {{$itemSubCate->title}}
                     </a>
                     <div class="list-group collapse" >
-                        @foreach($itemSubCate->getPartners() as $itemPartners)
-                        <a href="javascript:void(0);" ng-click="getProductsByPartners({{$itemPartners->id}})" class="list-group-item">{{$itemPartners->title}}</a>
+                        @foreach($itemSubCate->getSubCategory() as $itemSubCatelv2)
+                        <a href="javascript:void(0);" ng-click="getFilterByCategoryId({{$itemSubCate->id}})" data-toggle="collapse" class="list-group-item">
+                            <i class="fa fa-chevron"></i>
+                            {{$itemSubCatelv2->title}}
+                        </a>
+                            <div class="list-group collapse" >
+                                @foreach($itemSubCatelv2->getPartners() as $itemPartners)
+                                    <a href="javascript:void(0);" ng-click="getProductsFilterPartner({{$itemPartners->id}})" class="list-group-item" style="padding-left: 65px;">{{$itemPartners->title}}</a>
+                                @endforeach
+                            </div>
                         @endforeach
                     </div>
                     @endforeach
@@ -669,46 +677,12 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
         </div>
         <div class="col-md-3">
             <div class="filter-product hidden">
-                <div class="group">
-                    <label for="">Điện áp cung cấp </label>
+                <div class="group" ng-repeat="itemFilter in dataFilter">
+                    <label for="">@{{ itemFilter['title'] }}</label>
                     <br>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'200-240','voltage')">200-240</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'380-480','voltage')">380-480</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'525-600','voltage')">525-600</span>
-                </div>
-                <div class="group">
-                    <label for="">Đầu vào cảm biến  </label>
-                    <br>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'K','sensor_input')">K</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'E','sensor_input')">E</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'T','sensor_input')">T</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'L','sensor_input')">L</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'N','sensor_input')">N</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'U','sensor_input')">U</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'R','sensor_input')">R</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'S','sensor_input')">S</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'B','sensor_input')">B</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'C','sensor_input')">C</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'G','sensor_input')">G</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'PLLII','sensor_input')">PLII</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'DPt100Ω','sensor_input')">DPt100Ω</span>
-                </div>
-                <div class="group">
-                    <label for="">Đầu ra điều khiển 1   </label>
-                    <br>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'DPt100Ω','sensor_input')">Dòng 4-20mA</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'DPt100Ω','sensor_input')">0-20mA</span>
-                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'DPt100Ω','sensor_input')">SSR</span>
-                </div>
-                <div class="group">
-                    <label for="">Chức năng đặc biệt  </label>
-                    <br>
-                    <span class="label label-xs label-info pointer">2 Kênh</span>
-                </div>
-                <div class="group">
-                    <label for="">Kích thước</label>
-                    <br>
-                    <span class="label label-xs label-info pointer">122x30</span>
+{{--                    <span class="label label-xs label-info pointer" ng-click="getProductsByPartners(partners_id,'200-240','voltage')">200-240</span>--}}
+                    <span class="label label-xs label-info pointer" ng-repeat="valueFilter in itemFilter['detail']['data']"
+                          ng-click="getProductsFilter( itemFilter['title'], valueFilter['value'] )">@{{ valueFilter['value'] }}</span>
                 </div>
             </div>
         </div>
@@ -737,16 +711,16 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
       </div>
       <script type="text/javascript">
          $(function() {
-         
+
          // delegated handler
          $(".list-group-tree").on('click', "[data-toggle=collapse]", function(){
            $(this).toggleClass('in')
             $(this).next(".list-group.collapse").collapse('toggle');
-           
+
            // next up, when you click, dynamically load contents with ajax - THEN toggle
            return false;
          })
-         
+
          });
       </script>
 
@@ -754,7 +728,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
     <!-- Footer Container -->
     <footer class="footer-container typefooter-1">
         <!-- Footer Top Container -->
- 
+
             <div class="container">
                 <div class="row footer-top">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -778,7 +752,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <div class="page-heading font-title">
                                         Đăng ký để nhận khuyến mãi
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="block_content">
@@ -805,9 +779,9 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                     </div>
                 </div>
             </div>
-      
+
         <!-- /Footer Top Container -->
-        
+
         <div class="footer-middle ">
             <div class="container">
                 <div class="row">
@@ -906,7 +880,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <img src="{{url('public/homev2')}}/image/catalog/appstore.png" alt="Aps Store"></br></br>
                                     <img src="{{url('public/homev2')}}/image/catalog/googleplay.png" alt="CH Play">
                                 </div>
-                                    
+
                             </div>
                         </div>
                     </div>
@@ -924,7 +898,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <li><a href="#">Chăm sóc khách hàng</a></li>
                                     <li><a href="#">Tin tức</a></li>
                                     <li><a href="#">Liên hệ</a></li>
-                                </ul>  
+                                </ul>
                                 <p>Quà tặng trị giá 200.000đ (Áp dụng sản phẩm tự động hóa công nghiệp SCHNEIDER ELECTRIC)</br> Nhập mã HOPLONG giảm thêm 1% dành cho toàn bộ đơn hàng từ 01/01 đến 28/02/2020. Tặng voucher 20.000đ khi đánh giá 5* </br>(Áp dụng cho đơn hàng từ 200.000đ)</p>
                             </div>
                         </div>
@@ -940,10 +914,10 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
             <div class="copyright-w">
                 <div class="container">
                     <div class="copyright">
-                    Copyright © 2020 <a href="https://hoplongtech.com/" target="_blank">hoplongtech.com</a> All rights reserved. 
+                    Copyright © 2020 <a href="https://hoplongtech.com/" target="_blank">hoplongtech.com</a> All rights reserved.
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
         <!-- /Footer Bottom Container -->
             <!--Back To Top-->
@@ -973,7 +947,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/homepage.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/toppanel.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/so_megamenu.js"></script>
-<script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/addtocart.js"></script>  
+<script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/addtocart.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/application.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/my_js.js"></script>
 </body>

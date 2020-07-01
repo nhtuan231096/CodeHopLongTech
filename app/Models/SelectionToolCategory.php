@@ -1,8 +1,8 @@
-<?php 
+<?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 /**
-* 
+*
 */
 class SelectionToolCategory extends Model
 {
@@ -19,7 +19,7 @@ class SelectionToolCategory extends Model
 		if(!empty(request()->title))
 		{
 			return $query->where('title','like','%'.request()->title.'%');
-		}		
+		}
 	}
 
 	public function getSubCategory(){
@@ -29,4 +29,8 @@ class SelectionToolCategory extends Model
 	public function getPartners(){
 		return $this->hasMany('App\Models\SelectionToolPartners','category_id','id')->get();
 	}
+
+    public function getFilter(){
+        return $this->hasMany('App\Models\SelectionToolFilter','category_id','id')->limit(20)->get();
+    }
 }

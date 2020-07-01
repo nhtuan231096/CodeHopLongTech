@@ -17,50 +17,45 @@ use Auth;
  */
 class SelectionToolController extends Controller
 {
-    
+
     public function getSubCategory($category_id)
     {
         $subCategory = SelectionToolCategory::where(['parent_id' => $category_id, 'status' => 1])->orderBy('sorder', 'ASC')->get();
         if ($subCategory) {
             return response()->json($subCategory, Response::HTTP_OK);
-        }
-        else {
+        } else {
             return json_encode(['errors' => 'Category not found']);
         }
     }
 
-    public function getProductsByPartnersId(Request $req){
-        $keyword_filter = $req->keyword_filter;
-        $partners_id = $req->partners_id;
-        $type = $req->type;
-        if ( !empty($keyword_filter) ) {
-            if($type == 'voltage') {
-                $keyword_filter = explode("-",$keyword_filter);
-                $products = SelectionToolProduct::where([
-                    'partner_id' => $partners_id, 
-                    'status' => 1
-                ])->where('voltage','>=',$keyword_filter[0])
-                    ->where('voltage','<=',$keyword_filter[1])
-                    ->orderBy('sorder', 'ASC')->paginate(50);
+    public function getProductsFilter(Request $req)
+    {
+        $filter = SelectionToolProduct::select('*');
+        foreach($req->data as $itemFilter) {
+            if(!empty($itemFilter['name_filter'])) {
+                $filter->whereJsonContains('attributes',[$itemFilter['name_filter']=>$itemFilter['value_filter']]);
             }
-
-            if($type == 'sensor_input') {
-                $products = SelectionToolProduct::where([
-                    'partner_id' => $partners_id, 
-                    'status' => 1])
-                    ->where('sensor_input','like','%'.$keyword_filter.'%')
-                    ->orderBy('sorder', 'ASC')->paginate(50);
+            if(!empty($req->partner_id)){
+                $filter->where('partner_id',$req->partner_id);
             }
-
-        } else {
-            $products = SelectionToolProduct::where(['partner_id' => $partners_id, 'status' => 1])->orderBy('sorder', 'ASC')->paginate(50);
         }
+        return $filter->limit(15)->get();
+
         if ($products) {
             return response()->json($products, Response::HTTP_OK);
-        }
-        else {
+        } else {
             return json_encode(['errors' => 'Product not found']);
         }
     }
 
+    public function getDataFilterByCateId(Request $req)
+    {
+        $category_id = $req->category_id;
+        $category = SelectionToolCategory::find($category_id);
+        $dataFilter = $category->getFilter();
+        foreach ($dataFilter as $itemFilter) {
+            $itemFilter->detail = $itemFilter->detail();
+        }
+        return response()->json($dataFilter, Response::HTTP_OK);
+    }
 }
