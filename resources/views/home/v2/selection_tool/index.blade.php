@@ -116,6 +116,10 @@
                 display: block!important;
             }
         }
+        .filter-active{
+            background: red;
+            color: #fff;
+        }
     </style>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -665,7 +669,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     </a>
                                     <div class="list-group collapse" >
                                         @foreach($itemSubCatelv2->getPartners() as $itemPartners)
-                                            <a href="javascript:void(0);" ng-click="getProductsFilterPartner({{$itemPartners->id}})" class="list-group-item" style="padding-left: 65px;">{{$itemPartners->title}}</a>
+                                            <a href="javascript:void(0);" ng-click="getProductsFilterPartner({{$itemPartners->id}},{{$itemPartners->title}})" class="list-group-item" style="padding-left: 65px;">{{$itemPartners->title}}</a>
                                         @endforeach
                                     </div>
                                 @endforeach
@@ -675,17 +679,23 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                 @endforeach
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4" style="overflow-wrap: break-word;">
+            <div>
+                <span ng-repeat="itemArr in array_filter" ng-if="itemArr['name_filter'] != '' " class="label label-xs label-info pointer">@{{ itemArr['name_filter'] }}:@{{ itemArr['value_filter'] }}
+                    <span ng-click="removeItemFilter(itemArr['name_filter'])" style="color: #4e3b3bcc; font-size: 16px; padding: 5px 0px 5px 5px;">x</span>
+                </span>
+            </div>
             <div class="filter-product hidden">
                 <div class="group" ng-repeat="itemFilter in dataFilter">
                     <label style="font-size: 14px;font-weight: bold;">@{{ itemFilter['title'] }}</label>
                     <br>
-                    <span style="margin:1px" class="label label-xs label-info pointer" ng-repeat="valueFilter in itemFilter['detail']['data']"
-                          ng-click="getProductsFilter( itemFilter['title'], valueFilter['value'] )">@{{ valueFilter['value'] }}</span>
+                    <span style="margin:1px;" class="label label-xs label-info pointer" ng-repeat="valueFilter in itemFilter['detail']['data']"
+                          ng-click="getProductsFilter( itemFilter['title'], valueFilter['value'] )" id="@{{ itemFilter['title'].replace(' ', '') }}@{{ valueFilter['value'].replace(' ', '') }}">@{{ valueFilter['value'] }}</span>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -706,6 +716,17 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                 </tr>
                 </tbody>
             </table>
+            <div ng-show="totalPages != 0">
+                <ul class="pagination">
+                    <li ng-show="currentPage != 1"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,1)">«</a></li>
+                    <li ng-show="currentPage != 1"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,currentPage-1)">‹ Prev</a></li>
+                    <li ng-repeat="i in range" ng-class="{active : currentPage == i}">
+                        <a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,i)">@{{i}}</a>
+                    </li>
+                    <li ng-show="currentPage != totalPages"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,currentPage+1)">Next ›</a></li>
+                    <li ng-show="currentPage != totalPages"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,totalPages)">»</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <script type="text/javascript">

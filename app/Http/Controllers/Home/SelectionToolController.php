@@ -40,7 +40,7 @@ class SelectionToolController extends Controller
                 $filter->where('partner_id',$req->partner_id);
             }
         }
-        return $filter->limit(15)->get();
+        return $filter->paginate(20);
     }
 
     public function getDataFilterByCateId(Request $req)
