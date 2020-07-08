@@ -718,13 +718,13 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
             </table>
             <div ng-show="totalPages != 0">
                 <ul class="pagination">
-                    <li ng-show="currentPage != 1"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,1)">«</a></li>
-                    <li ng-show="currentPage != 1"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,currentPage-1)">‹ Prev</a></li>
+                    <li ng-show="currentPage != 1"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,1, 1)">«</a></li>
+                    <li ng-show="currentPage != 1"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,currentPage-1, 1)">‹ Prev</a></li>
                     <li ng-repeat="i in range" ng-class="{active : currentPage == i}">
-                        <a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,i)">@{{i}}</a>
+                        <a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,i, 1)">@{{i}}</a>
                     </li>
-                    <li ng-show="currentPage != totalPages"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,currentPage+1)">Next ›</a></li>
-                    <li ng-show="currentPage != totalPages"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,totalPages)">»</a></li>
+                    <li ng-show="currentPage != totalPages"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,currentPage+1, 1)">Next ›</a></li>
+                    <li ng-show="currentPage != totalPages"><a href="" ng-click="getProductsFilter(name_filter,value_filter,partner_id,totalPages, 1)">»</a></li>
                 </ul>
             </div>
         </div>

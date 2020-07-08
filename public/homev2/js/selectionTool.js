@@ -23,14 +23,10 @@ selectionTool.controller("selectionToolCtrl", function ($scope, $http) {
         $scope.getProductsFilter('', '', partner_id);
     }
 
-    $scope.getProductsFilter = function (name_filter, value_filter, partner_id = '', pageNumber) {
+    $scope.getProductsFilter = function (name_filter, value_filter, partner_id = '', pageNumber, is_pagination = 0) {
         $scope.name_filter = name_filter;
         $scope.value_filter = value_filter;
         $scope.partner_id = partner_id;
-
-        if (pageNumber === undefined) {
-            pageNumber = '1';
-        }
 
         var data = {
             name_filter: name_filter,
@@ -38,12 +34,19 @@ selectionTool.controller("selectionToolCtrl", function ($scope, $http) {
             partner_id: partner_id
         }
 
-        var checkExistFilter = $scope.checkExistFilter(array_filter, data);
+        if(is_pagination == 0) {
+            var checkExistFilter = $scope.checkExistFilter(array_filter, data);
+        }
         // console.log('array_filter', array_filter);
         // console.log('data', data);
         if (checkExistFilter != true) {
             array_filter.push(data);
         }
+
+        if (pageNumber === undefined) {
+            pageNumber = '1';
+        }
+
         var data_filter = {
             data: array_filter,
             partner_id: $scope.partners_id
