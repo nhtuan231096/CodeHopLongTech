@@ -20,7 +20,7 @@ class SelectionToolController extends Controller
 
     public function getSubCategory($category_id)
     {
-        $subCategory = SelectionToolCategory::where(['parent_id' => $category_id, 'status' => 1])->orderBy('sorder', 'ASC')->get();
+        $subCategory = SelectionToolCategory::where(['parent_id' => $category_id, 'status' => 1])->orderByRaw('ISNULL(sorder), sorder ASC')->get();
         if ($subCategory) {
             return response()->json($subCategory, Response::HTTP_OK);
         } else {

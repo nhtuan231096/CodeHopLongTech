@@ -662,17 +662,25 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                 {{$itemSubCate->title}}
                             </a>
                             <div class="list-group collapse" >
-                                @foreach($itemSubCate->getSubCategory() as $itemSubCatelv2)
-                                    <a href="javascript:void(0);" ng-click="getFilterByCategoryId({{$itemSubCatelv2->id}})" data-toggle="collapse" class="list-group-item">
-                                        <i class="fa fa-chevron"></i>
-                                        {{$itemSubCatelv2->title}}
-                                    </a>
+                                @if($itemSubCate->getSubCategory()->count() > 0 )
+                                    @foreach($itemSubCate->getSubCategory() as $itemSubCatelv2)
+                                        <a href="javascript:void(0);" ng-click="getFilterByCategoryId({{$itemSubCatelv2->id}})" data-toggle="collapse" class="list-group-item">
+                                            <i class="fa fa-chevron"></i>
+                                            {{$itemSubCatelv2->title}}
+                                        </a>
+                                        <div class="list-group collapse" >
+                                            @foreach($itemSubCatelv2->getPartners() as $itemPartners)
+                                                <a href="javascript:void(0);" ng-click="getProductsFilterPartner({{$itemPartners->id}},{{$itemPartners->title}})" class="list-group-item" style="padding-left: 65px;">{{$itemPartners->title}}</a>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                @else
                                     <div class="list-group collapse" >
-                                        @foreach($itemSubCatelv2->getPartners() as $itemPartners)
+                                        @foreach($itemSubCate->getPartners() as $itemPartners)
                                             <a href="javascript:void(0);" ng-click="getProductsFilterPartner({{$itemPartners->id}},{{$itemPartners->title}})" class="list-group-item" style="padding-left: 65px;">{{$itemPartners->title}}</a>
                                         @endforeach
                                     </div>
-                                @endforeach
+                                @endif
                             </div>
                         @endforeach
                     </div>

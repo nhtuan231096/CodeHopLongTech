@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -76,7 +76,7 @@ class HomeController extends Controller
 				'popup' => isset($popup) ? $popup : null,
 				'cart' => new Data()
 			]);
-        	return $next($request); 
+        	return $next($request);
 		});
 	}
 	public function index(){
@@ -92,15 +92,15 @@ class HomeController extends Controller
 		$sp=Support::limit(10)->where(['status'=>'enable','type'=>'business'])->get();
 		$conf = Conf_home_page::all()->first();
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
-		$cat_copy_shn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',1)->limit(16)->get();	
-		$cat_copy_omron = CatCopy::orderBy('sorder_2','ASC')->where('sorder',2)->limit(16)->get();	
-		$cat_copy_atn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',3)->limit(16)->get();	
-		$cat_copy_id = CatCopy::orderBy('sorder_2','ASC')->where('sorder',4)->limit(16)->get();	
-		$cat_copy_ls = CatCopy::orderBy('sorder_2','ASC')->where('sorder',5)->limit(16)->get();	
-		$cat_copy_mit = CatCopy::orderBy('sorder_2','ASC')->where('sorder',6)->limit(16)->get();	
+		$cat_copy_shn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',1)->limit(16)->get();
+		$cat_copy_omron = CatCopy::orderBy('sorder_2','ASC')->where('sorder',2)->limit(16)->get();
+		$cat_copy_atn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',3)->limit(16)->get();
+		$cat_copy_id = CatCopy::orderBy('sorder_2','ASC')->where('sorder',4)->limit(16)->get();
+		$cat_copy_ls = CatCopy::orderBy('sorder_2','ASC')->where('sorder',5)->limit(16)->get();
+		$cat_copy_mit = CatCopy::orderBy('sorder_2','ASC')->where('sorder',6)->limit(16)->get();
 		// $special_news = News::where('status','enable')->where('type','project')->orderBy('id','desc')->paginate(4);
 		$project = News::where('category_id','33')->orderBy('id','DESC')->paginate(18);
-		// $cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();	
+		// $cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();
 		$current_date = date('Y-m-d');
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
 
@@ -115,7 +115,7 @@ class HomeController extends Controller
 			'img_companys'=>$img_company,
 			'news_service'=>$news_service,
 			'supports'=>$supports,
-			'sp'=>$sp,	
+			'sp'=>$sp,
 			'conf' => $conf,
 			'categorys' => $categorys,
 			'cat_copy_shn'=>$cat_copy_shn,
@@ -135,7 +135,7 @@ class HomeController extends Controller
 		// dd($a->DiscountAmount());
 		//toi uu
 		Cache::flush();
-		
+
 		// $pro = (new Product())->datas();
 		// $pro2 = (new Product())->datas2();
 		// $pro3 = (new Product())->datas3();
@@ -145,7 +145,7 @@ class HomeController extends Controller
 
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
 		// dd($categorys);
-		
+
 		$parent_categorys=Category::where(['parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->limit(16)->get();
 
 		$best_seller = Cache::remember('best_seller',1*60,function(){
@@ -169,11 +169,11 @@ class HomeController extends Controller
 
 		$company_news = Cache::remember('company_news',1*60,function() {
 			return Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id','35')->limit(16)->get();
-		});	
+		});
 		// $company_news = $pro->where('category_id','35')->limit(10)->get();
 
-		$cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();	
-		$pro_copy = ProCopy::limit(16)->get();	
+		$cat_copy = CatCopy::orderBy('sorder_2','ASC')->limit(16)->get();
+		$pro_copy = ProCopy::limit(16)->get();
 		$supports=Support::where(['status'=>'enable','type'=>'technical'])->limit(10)->get();
 		$sp=Support::where(['status'=>'enable','type'=>'business'])->limit(10)->get();
 		$partners=Partners::where('status','enable')->orderBy('sorder','DESC')->get();
@@ -183,12 +183,12 @@ class HomeController extends Controller
 		$flash_sale = FlashSale::where('status',1)->orderBy('id','desc')->where('end_time','>',$current_date)->first();
 		$news= News::orderBy('id','desc')->limit(1)->get();
 
-		$cat_copy_shn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',1)->limit(8)->get();	
-		$cat_copy_omron = CatCopy::orderBy('sorder_2','ASC')->where('sorder',2)->limit(8)->get();	
-		$cat_copy_atn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',3)->limit(8)->get();	
-		$cat_copy_id = CatCopy::orderBy('sorder_2','ASC')->where('sorder',4)->limit(8)->get();	
-		$cat_copy_ls = CatCopy::orderBy('sorder_2','ASC')->where('sorder',5)->limit(8)->get();	
-		$cat_copy_mit = CatCopy::orderBy('sorder_2','ASC')->where('sorder',6)->limit(8)->get();	
+		$cat_copy_shn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',1)->limit(8)->get();
+		$cat_copy_omron = CatCopy::orderBy('sorder_2','ASC')->where('sorder',2)->limit(8)->get();
+		$cat_copy_atn = CatCopy::orderBy('sorder_2','ASC')->where('sorder',3)->limit(8)->get();
+		$cat_copy_id = CatCopy::orderBy('sorder_2','ASC')->where('sorder',4)->limit(8)->get();
+		$cat_copy_ls = CatCopy::orderBy('sorder_2','ASC')->where('sorder',5)->limit(8)->get();
+		$cat_copy_mit = CatCopy::orderBy('sorder_2','ASC')->where('sorder',6)->limit(8)->get();
 
 		$date = Carbon::now()->toDateTimeString();
 		return view('home.v2.index',[
@@ -239,7 +239,7 @@ class HomeController extends Controller
 			$childCategory = $cat->paginate(15);
 
 			if($category)
-			{	
+			{
 				$cate=Category::where('parent_id',$category->id)->limit(15)->get();
 				$curentCate=Category::where('parent_id',$category->parent_id)->paginate(15);
 				$products=Product::select('id','price','list_price','price_when_login','price_trading','price_factory','price_user','title','slug','cover_image','cover_image_2','time_discount','discount','pdp')->where('category_id',$category->id)->paginate(15);
@@ -256,7 +256,7 @@ class HomeController extends Controller
 					'childCategory'=>$childCategory,
 					]);
 			}
-		
+
 			else
 			{
 				return view('errors.404');
@@ -346,7 +346,7 @@ class HomeController extends Controller
 	public function comment(Request $req){
 		$img='';
 		$file=$req->upload_file;
-		if($file) { 
+		if($file) {
 			$file->move(base_path('uploads/comment'),$file->getClientOriginalName());
 			$img=$file->getClientOriginalName();
 			$req->merge(['cover_image'=>$img]);
@@ -357,26 +357,26 @@ class HomeController extends Controller
 		$comment = Comment::create($req->all());
 		return redirect()->back()->with('success','Bình luận của bạn đã được gửi');
 	}
-	
+
 	public function send_mail(Request $req){
 		$input = $req->all();
 		$quotes=Quotes_product::create($input);
         Mail::send('mail', array(
         	'id'=>$quotes->id,
         	'name'=>$input["name"],
-        	'email'=>$input["email"], 
-        	'content'=>$input['content'],  
+        	'email'=>$input["email"],
+        	'content'=>$input['content'],
         	'product'=>$input['product'],
-			'product_id'=>$input['product_id'], 
-        	'phone'=>$input['phone']), 
+			'product_id'=>$input['product_id'],
+        	'phone'=>$input['phone']),
         function($message){
 	        // $message->from(email, 'Hoplongtech');
 	        $message->to('info@hoplongtech.com.vn', 'Hoplongtech')->subject('Yêu cầu báo giá sản phẩm');
 	    });
 	    $slug = $input['slug'];
         Session::flash('flash_message', 'Send message successfully!');
-		return redirect()->route('view',['slug'=>$slug])->with('success','Yêu cầu báo giá thành công');	
-		// $req->session()->flash('success', 'Tạo bài viết thành công!')	
+		return redirect()->route('view',['slug'=>$slug])->with('success','Yêu cầu báo giá thành công');
+		// $req->session()->flash('success', 'Tạo bài viết thành công!')
 	}
 
 
@@ -433,7 +433,7 @@ class HomeController extends Controller
 	}
 	public function productJson(){
 	    return Product::paginate(10);
-	  	}  
+	  	}
 	public function filter($filter){
 		return Product::where('capacity',$filter)->get();
 	}
@@ -464,7 +464,7 @@ class HomeController extends Controller
 	}
 	public function downloads(){
 		$cat_id=Download_service::search()->orderBy('id','DESC')->paginate(8);
-		$category=Category::where('status','enable')->get();		
+		$category=Category::where('status','enable')->get();
 		$catalog=Download_service::limit(8)->where('type','2')->get();
 		// dd($catalog);
 		$pricelist=Download_service::limit(8)->where('type','3')->get();
@@ -483,9 +483,9 @@ class HomeController extends Controller
 		// 	'catalog'=>$catalog,
 		// 	'pricelist'=>$pricelist,
 		// 	'manuals'=>$manuals,
-		// 	'software'=>$software,	
-		// 	'sp'=>$sp,	
-		// 	'partners'=>$partners,	
+		// 	'software'=>$software,
+		// 	'sp'=>$sp,
+		// 	'partners'=>$partners,
 		// ]);
 		return view('home.v2.download',[
 			'cats'=>$cat_id,
@@ -496,11 +496,11 @@ class HomeController extends Controller
 			'catalog'=>$catalog,
 			'pricelist'=>$pricelist,
 			'manuals'=>$manuals,
-			'software'=>$software,	
-			'sp'=>$sp,	
-			'partners'=>$partners,	
+			'software'=>$software,
+			'sp'=>$sp,
+			'partners'=>$partners,
 		]);
-	}	
+	}
 	public function view_doc($slug){
 		$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(15);
 		$supports=Support::limit(10)->where(['status'=>'enable','type'=>'technical'])->get();
@@ -532,7 +532,7 @@ class HomeController extends Controller
 		@readfile($file_name);
 		}
 	public function document($slug){
-		$document= Product::where('slug',$slug)->first();	
+		$document= Product::where('slug',$slug)->first();
 		$file_name=base_path('uploads/download/').$document->taiLieu->file_download;
 		header('Content-Type:application/pdf');
 		header('Content-Disposition:inline; filename="'.$file_name.'"');
@@ -553,7 +553,7 @@ class HomeController extends Controller
 		}
 		if($lang == 'cn'){
 			$file_name=base_path('uploads/download/').$document->taiLieu->file_download_cn;
-		}	
+		}
 		header('Content-Type:application/pdf');
 		header('Content-Disposition:inline; filename="'.$file_name.'"');
 		header('Content-Transfer-Encoding:binary');
@@ -576,9 +576,9 @@ class HomeController extends Controller
 	}
 	public function recruitment(){
 		$office=Office::where('status','enable')->get();
-		$cat_work= CatWork::where('status','enable')->get();	
+		$cat_work= CatWork::where('status','enable')->get();
 		$add_work= AddressWork::where('status','enable')->get();
-		$actoffice=Office::where('sorder','1')->first();	
+		$actoffice=Office::where('sorder','1')->first();
 		$newswork=NewsWork::search()->orderBy('id','ASC')->limit(10)->get();
 		$news=NewsWork::search()->orderBy('id','DESC')->limit(10)->get();
 		$newsworks = News::Where('category_id','39')->limit(10)->get();
@@ -603,14 +603,14 @@ class HomeController extends Controller
 			'actoffice'=>$actoffice,
 			'offices'=>$office,
 			'news'=>$news
-		]);	
+		]);
 	}
 	public function recruitment2($id){
 	$news= NewsWork::where('id',$id)->first();
 	$office=Office::where('status','enable')->get();
 	$actoffice=Office::where('sorder','1')->first();
-	$cat_work= CatWork::where('status','enable')->get();	
-	$add_work= AddressWork::where('status','enable')->get();	
+	$cat_work= CatWork::where('status','enable')->get();
+	$add_work= AddressWork::where('status','enable')->get();
 	$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(15);
 		if($news){
 			if($news){
@@ -705,7 +705,7 @@ class HomeController extends Controller
 			if($tintuc){
 				return view('home.tintuc',['tintuc'=>$tintuc,'actoffice'=>$actoffice,
 			'offices'=>$office,'related'=>$related,
-			
+
 			]);
 			}else{
 				return view('errors.404');
@@ -719,7 +719,7 @@ class HomeController extends Controller
 		return view('home.game');
 	}
 	public function lucky(){
-		return view('home.lucky');	
+		return view('home.lucky');
 	}
 	public function History(){
 		$actoffice=Office::where('sorder','1')->first();
@@ -727,7 +727,7 @@ class HomeController extends Controller
 		$sp=Support::where(['status'=>'enable','type'=>'business'])->limit(10)->get();
 		$supports=Support::where(['status'=>'enable','type'=>'technical'])->limit(10)->get();
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
-		return view('home.history_company',['offices'=>$office,'actoffice'=>$actoffice,'categorys'=>$categorys,'supports'=>$supports,'sp'=>$sp,]);	
+		return view('home.history_company',['offices'=>$office,'actoffice'=>$actoffice,'categorys'=>$categorys,'supports'=>$supports,'sp'=>$sp,]);
 	}
 
 	public function formRegister(){
@@ -736,7 +736,7 @@ class HomeController extends Controller
 			'categorys'=>$categorys
 		]);
 	}
-	//update controller customer 
+	//update controller customer
 	public function register(Request $req){
 		$this->validate($req,[
 			'email' => 'unique:customer,email',
@@ -769,7 +769,7 @@ class HomeController extends Controller
 	public function postForgotPassword(Request $req){
 		$check = Customer::where('email',$req->email);
 		if($check->count() > 0){
-			$data = 
+			$data =
 			[
 	        	'email'=>$req->email,
 	        	'password'=>($check->first()->password)
@@ -832,7 +832,7 @@ class HomeController extends Controller
 				for($i=0; $i < request()->quantity; $i++) {
 					$cart->add($model);
 				}
-			}	
+			}
 			return;
 		}
 		if ($model) {
@@ -845,16 +845,16 @@ class HomeController extends Controller
 	}
 	public function add_cart_flash_sale($id,Data $cart){
 		$model = FlashSaleProduct::find($id);
-		
+
 		//check stock
 		if(isset($model->sold)) {
 			$qtyItemCart = 0;
 			foreach ($cart->items as $k => $value) {
 				if ($value['id'] == request()->id) {
 					$qtyItemCart = $value['quantity'];
-				} 
+				}
 			}
-			if($model->sold + request()->quantity + $qtyItemCart > $model->quantity) 
+			if($model->sold + request()->quantity + $qtyItemCart > $model->quantity)
 			{
 				return redirect()->back()->with('error','Số lượng sản phẩm trong kho không đủ');
 			}
@@ -865,7 +865,7 @@ class HomeController extends Controller
 				for($i=0; $i < request()->quantity; $i++) {
 					$cart->add($model);
 				}
-			}	
+			}
 			return;
 		}
 		if ($model) {
@@ -884,40 +884,12 @@ class HomeController extends Controller
 			foreach ($cart->items as $k => $value) {
 				if ($value['id'] == request()->id) {
 					$qtyItemCart = $value['quantity'];
-				} 
-			}
-			if($model->sold + request()->quantity + $qtyItemCart > $model->quantity) 
-			{
-				return redirect()->back()->with('error','Số lượng sản phẩm trong kho không đủ');
-			}	
-		}
-		
-		if(request()->quantity){
-			if ($model) {
-				for($i=0; $i < request()->quantity; $i++) {
-					$cart->add($model);
 				}
-			}	
-			return;
-		}
-	}
-	public function shopNow(Data $cart){
-		// $getCoupon = $cart->couponCode();
-		$modelProductFlashSale = FlashSaleProduct::where('product_id',request()->id)->where('flash_sale_id',request()->flash_sale_id)->first();
-		
-		$model = Product::find(request()->id);
-		//check stock
-		if(isset($modelProductFlashSale)) {
-			$qtyItemCart = 0;
-			foreach ($cart->items as $k => $value) {
-				if ($value['id'] == request()->id) {
-					$qtyItemCart = $value['quantity'];
-				} 
 			}
-			if($modelProductFlashSale->sold + request()->quantity + $qtyItemCart > $modelProductFlashSale->quantity) 
+			if($model->sold + request()->quantity + $qtyItemCart > $model->quantity)
 			{
 				return redirect()->back()->with('error','Số lượng sản phẩm trong kho không đủ');
-			}	
+			}
 		}
 
 		if(request()->quantity){
@@ -925,7 +897,35 @@ class HomeController extends Controller
 				for($i=0; $i < request()->quantity; $i++) {
 					$cart->add($model);
 				}
-			}	
+			}
+			return;
+		}
+	}
+	public function shopNow(Data $cart){
+		// $getCoupon = $cart->couponCode();
+		$modelProductFlashSale = FlashSaleProduct::where('product_id',request()->id)->where('flash_sale_id',request()->flash_sale_id)->first();
+
+		$model = Product::find(request()->id);
+		//check stock
+		if(isset($modelProductFlashSale)) {
+			$qtyItemCart = 0;
+			foreach ($cart->items as $k => $value) {
+				if ($value['id'] == request()->id) {
+					$qtyItemCart = $value['quantity'];
+				}
+			}
+			if($modelProductFlashSale->sold + request()->quantity + $qtyItemCart > $modelProductFlashSale->quantity)
+			{
+				return redirect()->back()->with('error','Số lượng sản phẩm trong kho không đủ');
+			}
+		}
+
+		if(request()->quantity){
+			if ($model) {
+				for($i=0; $i < request()->quantity; $i++) {
+					$cart->add($model);
+				}
+			}
 			if(request()->addCart){
 				return redirect()->back()->with('success','Thêm sản phẩm vào giỏ hàng thành công');
 			}
@@ -934,7 +934,7 @@ class HomeController extends Controller
 	}
 
 	public function view_cart(Data $cart){
-		
+
 		$getCoupon = $cart->couponCode();
 		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
 		return view('home.v2.view_cart',[
@@ -954,7 +954,7 @@ class HomeController extends Controller
 		$cart->update($id,$qty);
 		return redirect()->back();
 	}
-	
+
 	public function clear_cart(Data $cart){
 		$cart->clear();
 		return redirect()->back();
@@ -983,9 +983,9 @@ class HomeController extends Controller
 			'news_service'=>$news_service,
 			'agency_posts' => $agency_posts,
 			'agency_featured_posts' => $agency_featured_posts,
-			'cates' => $cates	
+			'cates' => $cates
 		]);
-		
+
 	}
 	public function agency_posts_by_category($slug,$id){
 		$slider_active=Slider::where(['sorder'=>'1','type'=>0])->first();
@@ -1008,7 +1008,7 @@ class HomeController extends Controller
 			'news_service'=>$news_service,
 			'post_by_category' => $post_by_category,
 			'agency_featured_posts' => $agency_featured_posts,
-			'cates' => $cates	
+			'cates' => $cates
 		]);
 	}
 	public function agency_posts_detail($slug,$id){
@@ -1032,7 +1032,7 @@ class HomeController extends Controller
 			'news_service'=>$news_service,
 			'post_detail' => $post_detail,
 			'agency_featured_posts' => $agency_featured_posts,
-			'cates' => $cates	
+			'cates' => $cates
 		]);
 	}
 	public function news_page(){
@@ -1154,7 +1154,7 @@ class HomeController extends Controller
 			$item->short_description = strip_tags($item->short_description);
 			// $item->price = $helperData->PriceProduct($item);
 		}
-		
+
 		return json_encode($partNumber);
     }
     // getPartNumber for api
@@ -1185,8 +1185,8 @@ class HomeController extends Controller
     }
 
     public function selectionTool(){
-    	$parentCategory = SelectionToolCategory::where('parent_id', 0)->where('status', 1)->orderBy('sorder','ASC')->get();
-		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderBy('sorder','ASC')->limit(15)->get();
+    	$parentCategory = SelectionToolCategory::where('parent_id', 0)->where('status', 1)->orderByRaw('ISNULL(sorder), sorder ASC')->get();
+		$categorys=Category::where(['status'=>'enable','priority'=>1,'parent_id'=>0])->orderByRaw('ISNULL(sorder), sorder ASC')->limit(15)->get();
 
     	return view('home.v2.selection_tool.index',[
     		'parentCategory' => $parentCategory,

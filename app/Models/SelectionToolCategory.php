@@ -23,14 +23,14 @@ class SelectionToolCategory extends Model
 	}
 
 	public function getSubCategory(){
-		return $this->hasMany('App\Models\SelectionToolCategory','parent_id','id')->orderBy('sorder','asc')->get();
+		return $this->hasMany('App\Models\SelectionToolCategory','parent_id','id')->orderByRaw('ISNULL(sorder), sorder ASC')->get();
 	}
 
 	public function getPartners(){
-		return $this->hasMany('App\Models\SelectionToolPartners','category_id','id')->orderBy('sorder','asc')->get();
+		return $this->hasMany('App\Models\SelectionToolPartners','category_id','id')->orderByRaw('ISNULL(sorder), sorder ASC')->get();
 	}
 
     public function getFilter(){
-        return $this->hasMany('App\Models\SelectionToolFilter','category_id','id')->limit(20)->orderBy('sorder','asc')->get();
+        return $this->hasMany('App\Models\SelectionToolFilter','category_id','id')->limit(20)->orderByRaw('ISNULL(sorder), sorder ASC')->get();
     }
 }
