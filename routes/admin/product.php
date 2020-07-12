@@ -1,4 +1,4 @@
-<?php 
+<?php
 Route::get('product-lrv','ProductController@product_lrv')->name('product_lrv');
 Route::post('product-lrv','ProductController@add_product_lrv')->name('product_lrv');
 Route::get('product-detele/{id}','ProductController@delPro')->name('delPro');
@@ -51,7 +51,7 @@ Route::post('import_price','ProductController@post_import_price')->name('import_
 
 // route mass delete product
 Route::delete('massDelete','ProductController@mass_delete')->name('massDelete');
-// route mass delete product
+
 Route::get('tool-product-check','ProductController@tool_product_check')->name('tool_product_check');
 // flash_sale
 Route::get('flash-sale','ProductController@flash_sale_index')->name('flash_sale');

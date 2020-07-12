@@ -2,6 +2,12 @@
 @section('title','Selection Tool: quản lý sản phẩm')
 @section('links','selection tool')
 @section('main')
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script>
+        var app = angular.module('admin', ['admin']);
+    </script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <div class="col-md-5">
         <form action="{{route('SelectionToolAddProduct')}}" method="POST" class="" role="form"
               enctype="multipart/form-data">
@@ -49,8 +55,8 @@
                     @foreach($partners as $item)
                         <?php
                         $selected = '';
-                        if (isset($edit->item)) {
-                            $selected = $item->id == $edit->partners_id ? "selected" : '';
+                        if (isset($edit->id)) {
+                            $selected = $item->id == $edit->partner_id ? "selected" : '';
                         }
                         ?>
                         <option {{$selected}} value="{{$item->id}}">{{$item->title}}
@@ -141,6 +147,9 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <td>
+                            <button class="btn btn-danger btn-xs delete-all" data-url="">Delete All</button>
+                        </td>
                         <th>ID</th>
                         <th>Tiêu đề</th>
                         <th>Slug</th>
@@ -156,12 +165,15 @@
                     <tbody>
                     @foreach($products as $itemProduct)
                         <tr>
+                            <td>
+                                <input type="checkbox" name="check" class="checkbox" value="{{$itemProduct->id}}" data-id="{{$itemProduct->id}}">
+                            </td>
                             <td>{{$itemProduct->id}}</td>
                             <td>{{$itemProduct->title}}</td>
                             <td>{{$itemProduct->slug}}</td>
                             <td>{{$itemProduct->sorder}}</td>
-                            <td>{{$itemProduct->partners()->category()->title}}</td>
-                            <td>{{$itemProduct->partners()->title}}</td>
+                            <td>{{($itemProduct->partners() && $itemProduct->partners()->category()) ? $itemProduct->partners()->category()->title : ''}}</td>
+                            <td>{{($itemProduct->partners()) ? $itemProduct->partners()->title : ''}}</td>
                             <td>{{$itemProduct->status == 1 ? "enable" : "disable"}}</td>
                             <td>{{$itemProduct->created_by}}</td>
                             <td>{{$itemProduct->created_at}}</td>
@@ -207,4 +219,65 @@
             </form>
         </div>
     </div>
+
+    <!-- mass delete -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".checkbox").prop('checked', false);
+            $("#check_all").prop('checked', false);
+
+            $('#check_all').on('click', function(e) {
+                if($(this).is(':checked',true))
+                {
+                    $(".checkbox").prop('checked', true);
+                } else {
+                    $(".checkbox").prop('checked',false);
+                }
+
+            });
+            $('.checkbox').on('click',function(){
+                if($('.checkbox:checked').length == $('.checkbox').length){
+                    $('#check_all').prop('checked',true);
+                }else{
+                    $('#check_all').prop('checked',false);
+                }
+            });
+            $('.delete-all').on('click', function(e) {
+
+                var idsArr = [];
+                $(".checkbox:checked").each(function() {
+                    idsArr.push($(this).attr('data-id'));
+                });
+                if(idsArr.length <=0)
+                {
+                    alert("Vui lòng chọn sản phẩm cần xóa.");
+                }  else {
+                    if(confirm("Bạn có chắc chắn muốn xóa các sản phẩm đã chọn không?")){
+                        var strIds = idsArr.join(",");
+                        $.ajax({
+                            url: "{{ route('selectionToolMassDeleteProduct') }}",
+                            type: 'DELETE',
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: 'ids='+strIds,
+                            success: function (data) {
+                                if (data['status']==true) {
+                                    $(".checkbox:checked").each(function() {
+                                        $(this).parents("tr").remove();
+                                    });
+                                    alert(data['message']);
+                                    location.reload();
+                                } else {
+                                    alert('Có lỗi vui lòng thử lại!!');
+                                }
+                            },
+                            error: function (data) {
+                                alert(data.responseText);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+    <!--end mass delete -->
 @stop()

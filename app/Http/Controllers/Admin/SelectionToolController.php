@@ -134,7 +134,7 @@ class SelectionToolController extends Controller
     {
         $del = SelectionToolPartners::destroy($req->id);
         try {
-            return redirect()->route('selectionToolPoduct')->with('success', 'Xóa thành công');
+            return redirect()->back()->with('success', 'Xóa thành công');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -441,5 +441,28 @@ class SelectionToolController extends Controller
             }
             return redirect()->back()->with('success', 'Import thành công');
         }
+    }
+
+    public function mass_delete_product(Request $request){
+        $ids = $request->ids;
+        SelectionToolProduct::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'message'=>"Xóa sản phẩm thành công."]);
+    }
+
+    public function mass_delete_partners(Request $request){
+        $ids = $request->ids;
+        SelectionToolPartners::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'message'=>"Xóa thành công."]);
+    }
+
+    public function mass_delete_category(Request $request){
+        $ids = $request->ids;
+        SelectionToolCategory::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'message'=>"Xóa thành công."]);
+    }
+    public function mass_delete_filter(Request $request){
+        $ids = $request->ids;
+        SelectionToolFilter::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'message'=>"Xóa thành công."]);
     }
 }

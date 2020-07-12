@@ -2,6 +2,12 @@
 @section('title','Selection Tool: quản lý hãng')
 @section('links','selection tool')
 @section('main')
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script>
+        var app = angular.module('admin', ['admin']);
+    </script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <div class="col-md-3">
         <form action="{{route('SelectionToolAddPartners')}}" method="POST" class="" role="form"
               enctype="multipart/form-data">
@@ -95,6 +101,9 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <td>
+                            <button class="btn btn-danger btn-xs delete-all" data-url="">Delete All</button>
+                        </td>
                         <th>ID</th>
                         <th>Tiêu đề</th>
                         <th>Sorder</th>
@@ -108,6 +117,9 @@
                     <tbody>
                     @foreach($partners as $item)
                         <tr>
+                            <td>
+                                <input type="checkbox" name="check" class="checkbox" value="{{$item->id}}" data-id="{{$item->id}}">
+                            </td>
                             <td>{{$item->id}}</td>
                             <td>{{$item->title}}</td>
                             <td>{{$item->sorder}}</td>
@@ -157,4 +169,64 @@
             </form>
         </div>
     </div>
+    <!-- mass delete -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".checkbox").prop('checked', false);
+            $("#check_all").prop('checked', false);
+
+            $('#check_all').on('click', function(e) {
+                if($(this).is(':checked',true))
+                {
+                    $(".checkbox").prop('checked', true);
+                } else {
+                    $(".checkbox").prop('checked',false);
+                }
+
+            });
+            $('.checkbox').on('click',function(){
+                if($('.checkbox:checked').length == $('.checkbox').length){
+                    $('#check_all').prop('checked',true);
+                }else{
+                    $('#check_all').prop('checked',false);
+                }
+            });
+            $('.delete-all').on('click', function(e) {
+
+                var idsArr = [];
+                $(".checkbox:checked").each(function() {
+                    idsArr.push($(this).attr('data-id'));
+                });
+                if(idsArr.length <=0)
+                {
+                    alert("Vui lòng chọn sản phẩm cần xóa.");
+                }  else {
+                    if(confirm("Bạn có chắc chắn muốn xóa các mục đã chọn không?")){
+                        var strIds = idsArr.join(",");
+                        $.ajax({
+                            url: "{{ route('selectionToolMassDeletePartners') }}",
+                            type: 'DELETE',
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: 'ids='+strIds,
+                            success: function (data) {
+                                if (data['status']==true) {
+                                    $(".checkbox:checked").each(function() {
+                                        $(this).parents("tr").remove();
+                                    });
+                                    alert(data['message']);
+                                    location.reload();
+                                } else {
+                                    alert('Có lỗi vui lòng thử lại!!');
+                                }
+                            },
+                            error: function (data) {
+                                alert(data.responseText);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+    <!--end mass delete -->
 @stop()

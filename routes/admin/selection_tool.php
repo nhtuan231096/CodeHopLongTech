@@ -29,3 +29,11 @@ Route::get('selection-tool/filter/detail/delete','SelectionToolController@select
 Route::get('selection-tool/filter/Edit','SelectionToolController@selectionToolFilterEdit')->name('searchFilterDetail');
 Route::post('selection-tool/filter/update','SelectionToolController@selectionToolFilterDetailUpdate')->name('selectionToolFilterDetailUpdate');
 
+// route mass delete selection product
+Route::delete('selection-tool-mass-delete-product','SelectionToolController@mass_delete_product')->name('selectionToolMassDeleteProduct');
+// route mass delete selection partners
+Route::delete('selection-tool-mass-delete-partners','SelectionToolController@mass_delete_partners')->name('selectionToolMassDeletePartners');
+// route mass delete selection category
+Route::delete('selection-tool-mass-delete-category','SelectionToolController@mass_delete_category')->name('selectionToolMassDeleteCategory');
+// route mass delete selection filter
+Route::delete('selection-tool-mass-delete-filter','SelectionToolController@mass_delete_filter')->name('selectionToolMassDeleteFilter');
