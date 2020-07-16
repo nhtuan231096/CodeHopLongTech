@@ -96,6 +96,8 @@ selectionTool.controller("selectionToolCtrl", function ($scope, $http) {
     }
 
     $scope.getFilterByCategoryId = function (category_id) {
+        $scope.array_filter = [];
+        array_filter = [];
         var data = {
             category_id: category_id
         }

@@ -25,6 +25,6 @@ class SelectionToolFilter extends Model
 	    return $this->hasOne('App\Models\SelectionToolCategory','id','category_id')->first();
     }
     public function detail(){
-        return $this->hasMany('App\Models\SelectionToolFilterDetail','filter_criteria_id','id')->search()->orderBy('sorder','asc')->paginate(15);
+        return $this->hasMany('App\Models\SelectionToolFilterDetail','filter_criteria_id','id')->search()->orderBy('sorder','asc')->paginate(200);
     }
 }
