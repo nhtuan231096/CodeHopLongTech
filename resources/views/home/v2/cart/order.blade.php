@@ -6,14 +6,14 @@
 	<ul class="breadcrumb">
 		<li><a href="{{route('home')}}"><i class="fa fa-home"></i></a></li>
 		<li><a href="#">Thanh toán</a></li>
-		
+
 	</ul>
-	
+
 	<div class="row">
 		<!--Middle Part Start-->
 		<div id="content" class="col-sm-12">
 		  <h2 class="title">Thanh toán</h2>
-		  	<form action="{{route('order')}}" method="POST" role="form">
+		  	<form action="{{route('order')}}" method="POST" role="form" id="form-order">
 			  <div class="so-onepagecheckout row">
 					<div class="col-left col-sm-3">
 					  <!-- <div class="panel panel-default">
@@ -78,7 +78,7 @@
 						                @endforeach
 						            </select>
 								  </div>
-								  
+
 								  <!-- <div class="checkbox"> -->
 									<!-- <label> -->
 									  <!-- <input type="checkbox" checked="checked" value="1" name="shipping_address"> -->
@@ -111,8 +111,8 @@
 						                @endforeach
 						            </select>
 								  </div>
-								  
-								  
+
+
 								  <!-- <div class="checkbox"> -->
 									<!-- <label> -->
 									  <!-- <input type="checkbox" checked="checked" value="1" name="shipping_address"> -->
@@ -123,7 +123,7 @@
 					  </div>
 					</div>
 
-					
+
 					<!-- //--- -->
 					  <input type="hidden" name="status" value="1">
 			          <?php $totalAmount = !empty(request()->session()->get('price_reduced')) ? $cart->total_amount - (request()->session()->get('price_reduced')) : $cart->total_amount?>
@@ -142,7 +142,7 @@
 			          <input type="hidden" name="data_uses_coupon" value="{{!empty(request()->session()->get('coupon_code')) ? request()->session()->get('coupon_code') : ''}}">
 			          <input type="hidden" name="use_coupon_code" value="{{!empty(request()->session()->get('price_reduced')) ? request()->session()->get('price_reduced') : ''}}">
 			          <!-- check config free ship -->
-			          @if($cart->getCoreConfig()['free_ship'] == 0) 
+			          @if(!empty($cart->getCoreConfig()) && $cart->getCoreConfig()['free_ship'] == 0)
 			          <input type="hidden" name="shipping_fee" id="shipping_fee_1" value="0">
 			          <input type="hidden" name="ship_cod" id="ship_code" value="0">
 			          @endif
@@ -172,7 +172,7 @@
 										<input type="radio" name="Flat Shipping Rate">
 										Flat Shipping Rate - $7.50</label>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="col-sm-6  checkout-payment-methods">
@@ -185,7 +185,7 @@
 									  <label>
 										<input type="radio" checked="checked" name="Cash On Delivery">Cash On Delivery</label>
 									</div>
-									
+
 									<div class="radio">
 									  <label>
 										<input type="radio" name="Paypal">Paypal</label>
@@ -193,13 +193,13 @@
 								</div>
 							</div>
 						</div> -->
-						
-						
-							
+
+
+
 						<!-- </div> -->
-					
-					
-					
+
+
+
 					<!-- <div class="col-sm-12">
 					  <div class="panel panel-default">
 						<div class="panel-heading">
@@ -213,7 +213,7 @@
 							  <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-coupon" value="Apply Coupon">
 							  </span></div>
 							</div>
-							
+
 							<div class="col-sm-6">
 							<div class="input-group">
 							  <input type="text" class="form-control" id="input-voucher" placeholder="Enter your gift voucher code here" value="" name="voucher">
@@ -269,7 +269,7 @@
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Phí vận chuyển:</strong></td>
 									<td class="text-right">
-										@if($cart->getCoreConfig()['free_ship'] == 1) 
+										@if(!empty($cart->getCoreConfig()) && $cart->getCoreConfig()['free_ship'] == 1)
 										<span class="text-muted"><i>Miễn phí</i></span>
 										@else
 										<span class="text-muted" id="shipping_fee">0</span>
@@ -296,7 +296,7 @@
 								  <tr>
 								  	<td class="text-right" colspan="4"><strong>Điểm thưởng:</strong></td>
 								  	<td class="text-right">
-										
+
 								  		<!-- //--- -->
 								  		@if(Auth::guard('customer')->check())
 										<div class="chkbxx reward_points" style="width: 10%;float: left;">
@@ -337,7 +337,7 @@
 								  @endif
 								  <tr>
 									<td class="text-right" colspan="4"><strong>Tổng tiền:</strong></td>
-									<?php 
+									<?php
 					                    $cart_total = isset($data_red_bill['red_bill_company']) ? ($cart->total_amount + (($totalAmount * 10) / 100)) : $cart->total_amount;
 					                    $cart_total = (!empty(request()->session()->get('price_reduced'))) ? $cart_total - request()->session()->get('price_reduced') : $cart_total;
 					                ?>
@@ -385,6 +385,7 @@
 						        @endif
 							<div class="buttons">
 							  <div class="pull-right">
+								<input type="button" class="btn btn-primary" id="btn-pay" value="Thanh toán và đặt hàng">
 								<input type="submit" class="btn btn-primary" id="button-confirm" value="Xác nhận đặt hàng">
 							  </div>
 							</div>
@@ -397,7 +398,7 @@
 		  </form>
 		</div>
 		<!--Middle Part End -->
-		
+
 	</div>
 </div>
 <div class="modal fade" id="modal-id">
@@ -445,8 +446,9 @@
 </div>
 @endif
 
+<input type="hidden" id="url-pay" value="{{route('formPay')}}">
 <!-- check config free ship -->
-@if($cart->getCoreConfig()['free_ship'] == 0) 
+@if(!empty($cart->getCoreConfig()) && $cart->getCoreConfig()['free_ship'] == 0)
 <!-- //--- -->
 <script type="text/javascript">
 	$("#city").val("");
@@ -474,7 +476,7 @@ $('#input_payment_method').change(function(){
     TotalPrice = TotalPrice.replace(',','');
     TotalPrice = TotalPrice.replace(',','');
     TotalPrice = TotalPrice.replace(',','');
-      
+
   var value = $('#input_payment_method').val();
   var cartTotal = TotalPrice;
   if(value == 'Thanh toán tiền mặt khi nhận hàng'){
@@ -491,7 +493,7 @@ $('#input_payment_method').change(function(){
     $('#ship_cod').text('0');
     ship_code = 0;
   }
-  
+
   // $('#ship_code').val(ship_code);
   var getShipCod = $('#ship_code').val(ship_code);
   var getShippingFee = $('#shipping_fee_1');
@@ -499,12 +501,12 @@ $('#input_payment_method').change(function(){
   var format_reward_point = String(reduced_price.val()).replace(',','');
   var format_reward_point = String(format_reward_point).replace(',','');
   check(getShipCod.val(),getShippingFee.val(),getTotalPrice,format_reward_point);
-});  
+});
 // end ship cod
 
 // shipping fee
 $('#city option[value=""]').attr('selected','selected');
-$('#city').change(function(){ 
+$('#city').change(function(){
   var getTotalPrice = $('#getTotalPrice').text();
     getTotalPrice = getTotalPrice.replace(',','');
     getTotalPrice = getTotalPrice.replace(',','');
@@ -523,7 +525,7 @@ $('#city').change(function(){
     // cartTotal = cartTotal.replace(',','');
     // cartTotal = cartTotal.replace(',','');
     // console.log(show_shipping_fee);
-    
+
     if(cartTotal >= 5000000){
       // return shipping_fee;
       shipping_fee = 0;
@@ -605,15 +607,15 @@ $('#fa-fa-check').click(function(){
     var total_price = <?php echo $cart_total?>;
     var total = total_price - (money * points);
     var reduced_price = (money * points);
-    
+
     // $('#totalPrice').text(formatNumber(total));
-    check(getShipCod.val(),getShippingFee.val(),getTotalPrice,reduced_price); 
+    check(getShipCod.val(),getShippingFee.val(),getTotalPrice,reduced_price);
 
 
     $('#reward_point').val(formatNumber(total));
     $('#redeem_money_point').val(formatNumber(money));
     $('#reduced_price').val(formatNumber(reduced_price));
-    
+
     // $('.reward_points').css("display","block");
     alert('Bạn đã sử dụng '+money+' điểm để đổi '+ formatNumber(reduced_price))+ 'đ';
   }
@@ -622,7 +624,7 @@ $('#fa-fa-check').click(function(){
     alert('Giá trị nhập vào không hợp lệ');
   }
 <?php endif ?>
-}); 
+});
 // reward point
 
 var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
@@ -656,7 +658,7 @@ var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
     var points = <?php echo $cart->Reward_points()->redeem_money?>;
     var auth_point = <?php echo Auth::guard('customer')->user()->reward_points ?>;
     var money = $('#redeem_money').val();
-    if(money <= auth_point && money > 0) 
+    if(money <= auth_point && money > 0)
     {
       // var total_price = <?php echo $cart_total?>;
       var total_price = $('#totalPrice').text();
@@ -711,4 +713,19 @@ var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
   });
 </script>
 @endif
+
+{{--    paypal--}}
+<script type="text/javascript">
+    $("#btn-pay").hide();
+    $("#input_payment_method").click(function(){
+        if($(this).val() == "Thanh toán bằng thẻ quốc tế Visa, Master, JCB") {
+            $("#btn-pay").show();
+            $("#button-confirm").hide();
+        } else {
+            $("#btn-pay").hide();
+            $("#button-confirm").show();
+        }
+    });
+</script>
+{{--    paypal--}}
 @stop()

@@ -15,7 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <!-- Favicon
     ============================================ -->
-    <link rel="icon" href="{{url('uploads/logo/Logo-hl.png')}}" sizes="25x32" />
+<!-- <link rel="icon" href="{{url('uploads/logo/Logo-hl.png')}}" sizes="25x32" /> -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url('uploads/logo/favicon.png')}}">
+
     <!-- Libs CSS
     ============================================ -->
     <link rel="stylesheet" href="{{url('public/homev2')}}/css/bootstrap/css/bootstrap.min.css">
@@ -35,26 +37,26 @@
     <link href="{{url('public/homev2')}}/css/themecss/so-newletter-popup.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/footer/footer1.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/header/header1.css" rel="stylesheet">
-    <link id="color_scheme" href="{{url('public/homev2')}}/css/theme.css" rel="stylesheet"> 
+    <link id="color_scheme" href="{{url('public/homev2')}}/css/theme.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/responsive.css" rel="stylesheet">
     <link href="{{url('public/homev2')}}/css/my_style.css" rel="stylesheet">
     <script src="{{url('public/js')}}/angular.min.js"></script>
     <script src="{{url('public/js')}}/dirPagination.js"></script>
-     <!-- Google web fonts
-    ============================================ -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">   
+    <!-- Google web fonts
+   ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script type="text/javascript" src="{{url('public/homev2')}}/js/jquery-2.2.4.min.js"></script>
     <style type="text/css">
-         /*body{font-family:'Open Sans', sans-serif;}*/
-         .common-home .typefooter-1 {margin-top: 0px;}
-         .typefooter-1 .footer-top {padding: 30px 15px;}
-         .display_none {
+        /*body{font-family:'Open Sans', sans-serif;}*/
+        .common-home .typefooter-1 {margin-top: 0px;}
+        .typefooter-1 .footer-top {padding: 30px 15px;}
+        .display_none {
             display:none;
-         }
-         .display_block {
+        }
+        .display_block {
             display:block;
-         }
-         /*#myList .item-vertical{ display:none;}*/
+        }
+        /*#myList .item-vertical{ display:none;}*/
     </style>
     <script type="text/javascript">
         $('#show-verticalmenu').click(function(){
@@ -63,52 +65,52 @@
         });
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-       <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43044974-10"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'UA-43044974-10');
+        gtag('config', 'UA-43044974-10');
     </script>
     <!-- Global site tag (gtag.js) - Google Ads: 974233552 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-974233552"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'AW-974233552');
+        gtag('config', 'AW-974233552');
     </script>
     <script id='autoAdsMaxLead-widget-script' src='https://cdn.autoads.asia/scripts/autoads-maxlead-widget.js?business_id=807e8c7d5f9e40898e3ff4e83c794894' type='text/javascript' charset='UTF-8' async></script>
     <style type="text/css">
         .search-loader {
-          border: 6px solid #f3f3f3;
-          border-radius: 50%;
-          border-top: 6px solid #3498db;
-          width: 70px;
-          height: 70px;
-          position: absolute;
-          top:15%;
-          right: 50%;
-          -webkit-animation: spin 2s linear infinite; /* Safari */
-          animation: spin 2s linear infinite;
+            border: 6px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 6px solid #3498db;
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            top:15%;
+            right: 50%;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
         }
 
         /* Safari */
         @-webkit-keyframes spin {
-          0% { -webkit-transform: rotate(0deg); }
-          100% { -webkit-transform: rotate(360deg); }
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
         }
 
         @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .header-middle{
-            margin-bottom:0px!important; 
-        }
+        /*.header-middle{
+            margin-bottom:0px!important;
+        }*/
         .header-top .container{
             height: 38px!important;
         }
@@ -121,36 +123,36 @@
             }
         }
     </style>
-        <!-- Google Tag Manager -->
+    <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KB52Z3Q');</script>
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KB52Z3Q');</script>
     <!-- End Google Tag Manager <-->    </-->
-    <link rel="stylesheet" href="{{url('public/homev2/css')}}/swc.css">
+<link rel="stylesheet" href="{{url('public/homev2/css')}}/swc.css">
 </head>
 
 <body class="common-home res layout-1">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js">
 </script>
 <script type="text/javascript">
- $(document).ready(function() {
-    if ($.cookie('pop') == null) {
-        $('#myModal').modal('show');
-        $.cookie('pop', '1');
-    }
-    document.body.addEventListener('keypress', function(e) {
-        if(e.key == "Escape"){
-            $('#boxes').hide(200);
+    $(document).ready(function() {
+        if ($.cookie('pop') == null) {
+            $('#myModal').modal('show');
+            $.cookie('pop', '1');
         }
+        document.body.addEventListener('keypress', function(e) {
+            if(e.key == "Escape"){
+                $('#boxes').hide(200);
+            }
+        });
     });
- });
 </script>
-    <!-- popup -->
-    @if(isset($popup))
+<!-- popup -->
+@if(isset($popup))
     <div id="boxes">
-        <div style="top: 234px!important; left: 50%; top: 20%;display: none;position: relative;padding:1px!important;" id="dialog" class="window"> 
+        <div style="top: 234px!important; left: 50%; top: 20%;display: none;position: relative;padding:1px!important;" id="dialog" class="window">
             <div id="san">
                 <a href="#" class="close agree"><img src="http://img.freepik.com/free-icon/cancel-button_318-122842.jpg?size=338&ext=jpg" width="25" style="width: 48px;
 height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
@@ -166,24 +168,52 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
         </div>
         <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.4;" id="mask"></div>
     </div>
-    @endif
-    <!-- popup -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB52Z3Q"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
-    <div id="wrapper" class="wrapper-fluid banners-effect-3">
+@endif
+<!-- popup -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB52Z3Q"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div id="wrapper" class="wrapper-fluid banners-effect-3">
 
     <!-- Header Container  -->
     <header id="header" class=" typeheader-1">
-        
+
         <!-- Header Top -->
         <div class="header-top hidden-compact">
             <div class="container">
                 <div class="row">
-                    <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
-                        <div class="hidden-md hidden-sm hidden-xs welcome-msg">Công ty cổ phần công nghệ Hợp Long /
-                            <span>Chúc mừng năm mới</span> 
+                    <div class="header-top-left col-lg-4 col-md-8 col-sm-6 col-xs-4">
+                        <div class="hidden-md hidden-sm hidden-xs welcome-msg">
+                            <ul class="top-link list-inline">
+                                <li>
+                                    <a class="btn btn-link" href="#">
+                                        <span class="icon icon-credit "></span> Về chúng tôi
+                                    </a>
+                                </li>
+                                <li class="currency">
+                                    <div class="btn-group currencies-block">
+                                        <a class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                                            <span class="icon icon-credit "></span> Thư viện <span class="fa fa-angle-down"></span>
+                                        </a>
+                                        <ul class="dropdown-menu btn-xs">
+                                            <li><a href="{{route('tin_tuc')}}">Tin tức</a></li>
+                                            <li> <a href="{{route('downloads')}}">Tài liệu</a></li>
+                                            <li> <a href="#">Tiện ích</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="btn btn-link">
+                                        <span class="icon icon-credit "></span> Câu hỏi thường gặp
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-link" href="{{route('contact')}}">
+                                        <span class="icon icon-credit "></span> Liên hệ
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                         <ul class="top-link list-inline hidden-lg ">
                             <li class="account" id="my_account">
@@ -194,9 +224,12 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <li><a href="{{route('loginCustomer')}}"><i class="fa fa-pencil-square-o"></i> Đăng nhập</a></li>
                                 </ul>
                             </li>
-                        </ul>            
+                        </ul>
                     </div>
-                    <div class="header-top-right collapsed-block col-lg-5 col-md-4 col-sm-6 col-xs-8">
+                    <div class="header-top-left col-lg-6 col-md-4 col-sm-6 col-xs-8">
+                        <div class="hidden-md hidden-sm hidden-xs welcome-msg">Đăng ký thành viên để nhận thêm 3% ưu đãi - Coupon: <span>HOPLONG</span> </div>
+                    </div>
+                    <div class="header-top-right collapsed-block col-lg-2 col-md-4 col-sm-6 col-xs-8">
                         <ul class="top-link list-inline lang-curr">
                             <li class="language">
                                 <div class="btn-group languages-block ">
@@ -208,11 +241,11 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li> <a href="#"> <img class="image_flag" src="{{url('public/homev2')}}/image/catalog/flags/vn.png" width="16px";height="10px" alt="Tiếng Việt" title="Tiếng Việt" /> Tiếng Việt </a> </li>
-                                            <!-- <li><a href="#"><img class="image_flag" src="{{url('public/homev2')}}/image/catalog/flags/gb.png" alt="English" title="English" /> English </a></li> -->
+                                        <!-- <li><a href="#"><img class="image_flag" src="{{url('public/homev2')}}/image/catalog/flags/gb.png" alt="English" title="English" /> English </a></li> -->
                                         </ul>
                                     </form>
                                 </div>
-                                
+
                             </li>
                         </ul>
                     </div>
@@ -245,7 +278,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                         <div class="col-md-12 search-tab-items" style="border: 1px solid #3498db;background: #fff;border: 2px solid #e7e7e7;
                     border-right-color: rgb(231, 231, 231);border-radius: 5px !important;">
                                             <div class="media" ng-repeat="search_item in res_product_search ">
-                                              <span ng-click="close_tab()" style="position: absolute;top: 10px;right: 15px;font-size: 16px;z-index: 50;font-weight: bold;cursor: pointer;">x</span>
+                                                <span ng-click="close_tab()" style="position: absolute;top: 10px;right: 15px;font-size: 16px;z-index: 50;font-weight: bold;cursor: pointer;">x</span>
                                                 <a class="pull-left" href="{{url('')}}/products/@{{search_item['slug']}}" target="_blank">
                                                     <img width="80" class="media-object" src="@{{search_item['pdp'] == 1 ? 'uploads/product_new/cover_image' : 'uploads/product'}}/@{{search_item['cover_image']}}" alt="Image">
                                                 </a>
@@ -259,13 +292,13 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     </div>
                                 </form>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <!-- //end Search -->
-                    <div class="middle-right col-lg-3 col-md-3 col-sm-3">                  
+                    <div class="middle-right col-lg-3 col-md-3 col-sm-3">
                         <!--cart-->
                         <div class="shopping_cart">
-                            <div id="cart" class="btn-shopping-cart pull-right">                       
+                            <div id="cart" class="btn-shopping-cart pull-right">
                                 <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <div class="shopcart">
                                         <span class="icon-c"><i class="fa fa-shopping-bag"></i></span>
@@ -278,11 +311,11 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     </div>
                                 </a>
                                 @if($cart->total_quantity)
-                                <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
-                                    <li>
-                                        <table class="table table-striped">
-                                            <tbody>
-                                                    @foreach($cart->items as $item)
+                                    <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                        <li>
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                @foreach($cart->items as $item)
                                                     <tr>
                                                         <td class="text-center" style="width:70px">
                                                             <a href="product.html">
@@ -290,39 +323,39 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                                 <img src="{{$urlImage}}/{{$item['image']}}" alt="{{$item['image']}}" style="width:70px" title="{{$item['image']}}" class="preview">
                                                             </a>
                                                         </td>
-                                                        <td class="text-left"> <a class="cart_product_name" href="">{{$item['title']}}</a> 
+                                                        <td class="text-left"> <a class="cart_product_name" href="">{{$item['title']}}</a>
                                                         </td>
-                                                        
-                                                            <!-- <a href="product.html" class="fa fa-edit"></a> -->
+
+                                                        <!-- <a href="product.html" class="fa fa-edit"></a> -->
                                                         </td>
                                                         <td class="text-right">
                                                             <a href="{{route('delete_cart',['id'=>$item['id']])}}" class="fa fa-times fa-delete"></a>
                                                         </td>
                                                     </tr>
-                                                    @endforeach
-                                            </tbody>
-                                        </table>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <table class="table table-bordered">
-                                                <tbody>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </li>
+                                        <li>
+                                            <div>
+                                                <table class="table table-bordered">
+                                                    <tbody>
                                                     <tr>
                                                         <td class="text-left"><strong>Tổng tiền</strong>
                                                         </td>
                                                         <td class="text-right">{{number_format($cart->total_amount)}}</td>
                                                     </tr>
-                                                </tbody>
-                                            </table>
-                                            <p class="text-right"> <a class="btn view-cart" href="{{route('view_cart')}}"><i class="fa fa-shopping-cart"></i>Xem giỏ hàng</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="{{route('order')}}"><i class="fa fa-share"></i>Đặt hàng</a> 
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
+                                                    </tbody>
+                                                </table>
+                                                <p class="text-right"> <a class="btn view-cart" href="{{route('view_cart')}}"><i class="fa fa-shopping-cart"></i>Xem giỏ hàng</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="{{route('order')}}"><i class="fa fa-share"></i>Đặt hàng</a>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 @endif
                             </div>
                             <!-- //import order -->
-                            <div id="cart" class="btn-shopping-cart pull-left">                       
+                            <div id="cart" class="btn-shopping-cart pull-left">
                                 <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <div class="shopcart">
                                         <span class="icon-c"><i class="fa fa-shopping-cart"></i></span>
@@ -337,17 +370,16 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <li>
                                         <table class="table table-striped">
                                             <tbody>
-                                                
-                                                    <tr>
-                                                        <td class="text-center"> <a class="cart_product_name" href="" style="font-size: 14px">Đặt hàng bằng file .csv</a> 
-                                                        </td>
-                                                    </tr>
+                                            <tr>
+                                                <td class="text-center"> <a class="cart_product_name" href="" style="font-size: 14px">Đặt hàng bằng file .csv</a>
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </li>
                                     <li>
                                         <div>
-                                            <p class="text-center"> 
+                                            <p class="text-center">
                                                 <a class="btn view-cart" href="{{url('/uploads/1.0.1/sampleImport.csv')}}">
                                                     <i class="fa fa-download" style="margin-right: 5px"></i>Tải file mẫu
                                                 </a>
@@ -372,13 +404,13 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <div class="modal-body">
                                         <form action="{{route('import_cart_csv')}}" method="POST" role="form" enctype="multipart/form-data">
                                             <legend>Tải lên file csv để đặt hàng</legend>
-                                        
+
                                             <div class="form-group">
                                                 <label for="">File csv</label>
                                                 <input type="file" class="form-control" name="file">
                                             </div>
-                                        
-                                            @csrf                                        
+
+                                            @csrf
                                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Hủy</button>
                                             <button type="submit" class="btn btn-primary pull-right">Tải</button>
                                             <div class="clearfix"></div>
@@ -397,12 +429,12 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
         <div class="header-bottom hidden-compact">
             <div class="container">
                 <div class="row">
-                    
+
                     <div class="bottom1 menu-vertical col-lg-2 col-md-3 col-sm-3">
                         <div class="responsive so-megamenu megamenu-style-dev ">
                             <div class="so-vertical-menu ">
-                                <nav class="navbar-default">    
-                                    
+                                <nav class="navbar-default">
+
                                     <div class="container-megamenu vertical">
                                         <div id="menuHeading">
                                             <div class="megamenuToogle-wrapper">
@@ -413,14 +445,14 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <span></span>
                                                             <span></span>
                                                         </div>
-                                                        Danh mục                          
+                                                        Danh mục
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                     
+
                                         <div class="navbar-header">
-                                            <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle">      
+                                            <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle">
                                                 <i class="fa fa-bars"></i>
                                                 <span>  Danh mục     </span>
                                             </button>
@@ -432,35 +464,35 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                 <div class="container-mega">
                                                     <ul class="megamenu megamenu-left" id="myList" style="position: relative;">
                                                         @foreach($categorys as $itemCategory)
-                                                        <li class="item-vertical  with-sub-menu hovere display_none">
-                                                            <p class="close-menu"></p>
-                                                            <a href="{{route('view_category',[$itemCategory->slug])}}" class="clearfix">
-                                                                <img src="{{url('public/homev2')}}/image/catalog/menu/icons/ico10.png" alt="icon">
-                                                                <span>{{$itemCategory->title}}</span>
-                                                                <b class="fa-angle-right"></b>
-                                                            </a>
-                                                            <div class="sub-menu" data-subwidth="60"  >
-                                                                <div class="content" >
-                                                                    <div class="row">
-                                                                        <div class="col-sm-12">
-                                                                            <div class="row">
-                                                                                @foreach($itemCategory->childs as $child)
-                                                                                <div class="col-md-4 static-menu">
-                                                                                    <div class="menu">
-                                                                                        <ul>
-                                                                                            <li>
-                                                                                                <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
+                                                            <li class="item-vertical  with-sub-menu hovere display_none">
+                                                                <p class="close-menu"></p>
+                                                                <a href="{{route('view_category',[$itemCategory->slug])}}" class="clearfix">
+                                                                    <img src="{{url('public/homev2')}}/image/catalog/menu/icons/ico10.png" alt="icon">
+                                                                    <span>{{$itemCategory->title}}</span>
+                                                                    <b class="fa-angle-right"></b>
+                                                                </a>
+                                                                <div class="sub-menu" data-subwidth="60"  >
+                                                                    <div class="content" >
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <div class="row">
+                                                                                    @foreach($itemCategory->childs as $child)
+                                                                                        <div class="col-md-4 static-menu">
+                                                                                            <div class="menu">
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endforeach
                                                                                 </div>
-                                                                                @endforeach
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>   
+                                                            </li>
                                                         @endforeach
                                                         <li class="loadmore" id="loadMore">
                                                             <i class="fa fa-plus-square-o"></i>
@@ -471,20 +503,20 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <i class="fa fa-plus-square-o"></i>
                                                             <span class="more-view">Rút gọn</span>
                                                         </li>
-                                                            
-                                                        </ul>
-                                                    </div>
+
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- //--- -->
-                                        <!-- menu -->
-                                        <div class="vertical-wrapper">
-                                            <span id="remove-verticalmenu" class="fa fa-times"></span>
-                                            <div class="megamenu-pattern">
-                                                <div class="container-mega">
-                                                    <ul class="megamenu megamenu-left" id="myList">
-                                                        @foreach($categorys as $itemCategory)
+                                    </div>
+                                    <!-- //--- -->
+                                    <!-- menu -->
+                                    <div class="vertical-wrapper">
+                                        <span id="remove-verticalmenu" class="fa fa-times"></span>
+                                        <div class="megamenu-pattern">
+                                            <div class="container-mega">
+                                                <ul class="megamenu megamenu-left" id="myList">
+                                                    @foreach($categorys as $itemCategory)
                                                         <li class="item-vertical  with-sub-menu hover">
                                                             <p class="close-menu"></p>
                                                             <a href="{{route('view_category',[$itemCategory->slug])}}" class="clearfix">
@@ -498,15 +530,15 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                                         <div class="col-sm-12">
                                                                             <div class="row">
                                                                                 @foreach($itemCategory->childs as $child)
-                                                                                <div class="col-md-4 static-menu">
-                                                                                    <div class="menu">
-                                                                                        <ul>
-                                                                                            <li>
-                                                                                               <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
-                                                                                            </li>
-                                                                                        </ul>
+                                                                                    <div class="col-md-4 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li>
+                                                                                                    <a href="{{route('view_category',['slug'=>$child->slug])}}"  class="main-menu">{{$child->title}}</a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
                                                                                 @endforeach
                                                                             </div>
                                                                         </div>
@@ -514,8 +546,8 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                        @endforeach
-                                                        <!-- <li class="loadmore" id="loadMore">
+                                                @endforeach
+                                                <!-- <li class="loadmore" id="loadMore">
                                                             <i class="fa fa-plus-square-o"></i>
                                                             <span class="more-view">Xem thêm</span>
                                                         </li>
@@ -524,17 +556,17 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <i class="fa fa-plus-square-o"></i>
                                                             <span class="more-view">Rút gọn</span>
                                                         </li> -->
-                                                    </ul>
-                                                </div>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <!-- menu -->
-                                    </nav>
+                                    </div>
+                                    <!-- menu -->
+                                </nav>
                             </div>
                         </div>
 
                     </div>
-                    
+
                     <!-- Main menu -->
                     <div class="main-menu-w col-lg-10 col-md-9">
                         <div class="responsive so-megamenu megamenu-style-dev">
@@ -547,7 +579,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                             <span class="icon-bar"></span>
                                         </button>
                                     </div>
-                                    
+
                                     <div class="megamenu-wrapper">
                                         <span id="remove-megamenu" class="fa fa-times"></span>
                                         <div class="megamenu-pattern">
@@ -572,7 +604,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <strong>Tài liệu</strong>
                                                         </a>
                                                     </li>
-                                                    <!-- 
+                                                <!--
                                                     <li class="with-sub-menu hover">
                                                         <p class="close-menu"></p>
                                                         <a href="#" class="clearfix">
@@ -587,17 +619,17 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                             <img class="label-hot" src="{{url('public/homev2')}}/image/catalog/menu/new-icon.png" alt="icon items">
                                                         </a>
                                                     </li> -->
-                                                    <li class="">
+                                                <!-- <li class="">
                                                         <p class="close-menu"></p>
                                                         <a href="{{route('contact')}}" class="clearfix">
                                                             <strong>Liên hệ</strong>
                                                         </a>
-                                                    </li> 
+                                                    </li>  -->
                                                     <li class="with-sub-menu hover">
-                                                        <a href="{{route('home')}}">Về Hoplong</a>
+                                                        <a href="{{route('home')}}">Đặt hàng nhanh</a>
                                                     </li>
                                                 </ul>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -606,92 +638,91 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                         </div>
                     </div>
                     <!-- //end Main menu -->
-                                      
-                    <div class="bottom3">                        
+
+                    <div class="bottom3">
                         <div class="telephone hidden-xs hidden-sm hidden-md">
-                            <ul class="blank"> 
-                                <li><a href="{{route('trackingOrder')}}"><i class="fa fa-truck"></i>Theo dõi đơn hàng của bạn</a></li> 
-                                <li><a href="#"><i class="fa fa-phone-square"></i>Hotline 1900.6536</a></li> 
-                                <li><a href="{{route('warranty')}}"><i class="fa fa-search"></i>Tra cứu bảo hành</a></li> 
+                            <ul class="blank">
+                                <li><a href="{{route('trackingOrder')}}"><i class="fa fa-truck"></i>Tracking Order</a></li>
+                                <!-- <li><a href="#"><i class="fa fa-phone-square"></i>Hotline 1900.6536</a></li>  -->
+                                <li><a href="{{route('warranty')}}"><i class="fa fa-search"></i>Check bảo hành</a></li>
                             </ul>
-                        </div>  
+                        </div>
                         <div class="signin-w hidden-md hidden-sm hidden-xs">
-                            <ul class="signin-link blank"> 
-                                @if(Auth::guard('customer')->check())                           
-                                <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('my_account')}}">Hi {{Auth::guard('customer')->user()->name}}</a> </li> 
+                            <ul class="signin-link blank">
+                                @if(Auth::guard('customer')->check())
+                                    <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('my_account')}}">Xin chào  {{Auth::guard('customer')->user()->name}}</a> </li>
                                 @else
-                                <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('loginCustomer')}}">Đăng nhập </a> / <a href="{{route('register_customer')}}">Đăng ký</a></li> 
-                                @endif                               
-                            </ul>                       
-                        </div>                  
+                                    <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg" href="{{route('loginCustomer')}}">Đăng nhập </a> / <a href="{{route('register_customer')}}">Đăng ký</a></li>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
-                    
+
                 </div>
             </div>
 
         </div>
     </header>
     <!-- //Header Container  -->
-<!-- Main Container  -->
+    <!-- Main Container  -->
 @yield('mainContainer')
 <!-- //Main Container -->
     <!-- Footer Container -->
     <footer class="footer-container typefooter-1">
         <!-- Footer Top Container -->
- 
-            <div class="container">
-                <div class="row footer-top">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="socials-w">
-                          <h2>Follow socials</h2>
-                          <ul class="socials">
+
+        <div class="container">
+            <div class="row footer-top">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="socials-w">
+                        <h2>Follow socials</h2>
+                        <ul class="socials">
                             <li class="facebook"><a href="https://www.facebook.com/hoplongtech/" target="_blank" rel="nofollow"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
                             <li class="youtube"><a href="https://www.youtube.com/channel/UCVAAwrppS45yC10KcpjKsqg/videos" target="_blank"><i class="fa fa-youtube-play" rel="nofollow"></i><span>Youtube</span></a></li>
-                            <li class="twitter"><a href="#" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
-                            <li class="google_plus"><a href="#" target="_blank" rel="nofollow"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
-                            <li class="pinterest"><a href="#" target="_blank" rel="nofollow"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
-                            <li class="linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin" rel="nofollow"></i><span>linkedin</span></a></li>
-                          </ul>
-                        </div>
+                            <li class="twitter"><a href="https://www.instagram.com/hoplongtech.official/" target="_blank" rel="nofollow"><i class="fa fa-instagram"></i><span>Twitter</span></a></li>
+                            <li class="pinterest"><a href="https://www.pinterest.com/HoplongOfficial/" target="_blank" rel="nofollow"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
+                            <li class="linkedin"><a href="https://www.linkedin.com/company/hoplongtech/" target="_blank"><i class="fa fa-linkedin" rel="nofollow"></i><span>linkedin</span></a></li>
+                        </ul>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="module newsletter-footer1">
-                            <div class="newsletter">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="module newsletter-footer1">
+                        <div class="newsletter">
 
-                                <div class="title-block">
-                                    <div class="page-heading font-title">
-                                        Đăng ký để nhận khuyến mãi
-                                    </div>
-                                    
+                            <div class="title-block">
+                                <div class="page-heading font-title">
+                                    Đăng ký để nhận khuyến mãi
                                 </div>
-
-                                <div class="block_content">
-                                    <form method="post" id="signup" name="signup" class="form-group form-inline signup send-mail">
-                                        <div class="form-group">
-                                            <div class="input-box">
-                                                <input type="email" placeholder="Nhập email của bạn..." value="" class="form-control" id="txtemail" name="txtemail" size="55">
-                                            </div>
-                                            <div class="subcribe">
-                                                <button class="btn btn-primary btn-default font-title" type="submit" onclick="return subscribe_newsletter();" name="submit">
-                                            Gửi
-                                        </button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
-                                </div>
-                                <!--/.modcontent-->
 
                             </div>
 
+                            <div class="block_content">
+                                <form method="post" id="signup" name="signup" class="form-group form-inline signup send-mail">
+                                    <div class="form-group">
+                                        <div class="input-box">
+                                            <input type="email" placeholder="Nhập email của bạn..." value="" class="form-control" id="txtemail" name="txtemail" size="55">
+                                        </div>
+                                        <div class="subcribe">
+                                            <button class="btn btn-primary btn-default font-title" type="submit" onclick="return subscribe_newsletter();" name="submit">
+                                                Gửi
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                            <!--/.modcontent-->
+
                         </div>
+
                     </div>
                 </div>
             </div>
-      
+        </div>
+
         <!-- /Footer Top Container -->
-        
+
         <div class="footer-middle ">
             <div class="container">
                 <div class="row">
@@ -721,12 +752,12 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                             <div class="module clearfix">
                                 <h3 class="modtitle">Hệ thống chi nhánh:</h3>
                                 <div class="modcontent">
-                                  <ul class="menu">
-                                    <li><a href="#">Hà Nội</a></li>
-                                    <li><a href="#">Hải phòng</a></li>
-                                    <li><a href="#">Đà Nẵng</a></li>
-                                    <li><a href="#">Hồ Chí Minh</a></li>
-                                  </ul>
+                                    <ul class="menu">
+                                        <li><a href="#">Hà Nội</a></li>
+                                        <li><a href="#">Hải phòng</a></li>
+                                        <li><a href="#">Đà Nẵng</a></li>
+                                        <li><a href="#">Hồ Chí Minh</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -734,8 +765,8 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-clear">
                         <div class="box-service box-footer">
-                          <div class="module clearfix">
-                            <h3 class="modtitle">Về Hoplong</h3>
+                            <div class="module clearfix">
+                                <h3 class="modtitle">Về Hoplong</h3>
                                 <div class="modcontent">
                                     <ul class="menu">
                                         <li><a style="color: red;">Hotline: 1900.6536</a></li>
@@ -745,7 +776,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                         <li><a href="#">Liên hệ</a></li>
                                     </ul>
                                 </div>
-                          </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
@@ -790,7 +821,7 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                     <img src="{{url('public/homev2')}}/image/catalog/appstore.png" alt="Aps Store"></br></br>
                                     <img src="{{url('public/homev2')}}/image/catalog/googleplay.png" alt="CH Play">
                                 </div>
-                                    
+
                             </div>
                         </div>
                     </div>
@@ -799,19 +830,19 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
         </div>
         <div class="container">
             <div class="row">
-                        <div class="footer-b">
-                            <div class="bottom-cont">
-                                <a href="http://online.gov.vn/Home/WebDetails/29393"><img src="{{url('public/homev2')}}/image/catalog/dathongbao.png" alt="Đã thông báo Bộ Công Thương"></a>
-                                <ul class="footer-links">
-                                    <li><a href="#">Giới thiệu</a></li>
-                                    <li><a href="#">Voucher</a></li>
-                                    <li><a href="#">Chăm sóc khách hàng</a></li>
-                                    <li><a href="#">Tin tức</a></li>
-                                    <li><a href="#">Liên hệ</a></li>
-                                </ul>  
-                                <p>Quà tặng trị giá 200.000đ (Áp dụng sản phẩm tự động hóa công nghiệp SCHNEIDER ELECTRIC)</br> Nhập mã HOPLONG giảm thêm 1% dành cho toàn bộ đơn hàng từ 01/01 đến 28/02/2020. Tặng voucher 20.000đ khi đánh giá 5* </br>(Áp dụng cho đơn hàng từ 200.000đ)</p>
-                            </div>
-                        </div>
+                <div class="footer-b">
+                    <div class="bottom-cont">
+                        <a href="http://online.gov.vn/Home/WebDetails/29393"><img src="{{url('public/homev2')}}/image/catalog/dathongbao.png" alt="Đã thông báo Bộ Công Thương"></a>
+                        <ul class="footer-links">
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#">Voucher</a></li>
+                            <li><a href="#">Chăm sóc khách hàng</a></li>
+                            <li><a href="#">Tin tức</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                        <p>Quà tặng trị giá 200.000đ (Áp dụng sản phẩm tự động hóa công nghiệp SCHNEIDER ELECTRIC)</br> Nhập mã HOPLONG giảm thêm 1% dành cho toàn bộ đơn hàng từ 01/01 đến 28/02/2020. Tặng voucher 20.000đ khi đánh giá 5* </br>(Áp dụng cho đơn hàng từ 200.000đ)</p>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Footer Bottom Container -->
@@ -824,18 +855,18 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
             <div class="copyright-w">
                 <div class="container">
                     <div class="copyright">
-                    Copyright © 2020 <a href="https://hoplongtech.com/" target="_blank">hoplongtech.com</a> All rights reserved. 
+                        Copyright © 2020 <a href="https://hoplongtech.com/" target="_blank">hoplongtech.com</a> All rights reserved.
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
         <!-- /Footer Bottom Container -->
-            <!--Back To Top-->
+        <!--Back To Top-->
         <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
     </footer>
     <!-- //end Footer Container -->
 
-    </div>
+</div>
 <!-- End Color Scheme
 ============================================ -->
 <!-- Include Libs & Plugins
@@ -860,12 +891,12 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/homepage.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/toppanel.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/so_megamenu.js"></script>
-<script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/addtocart.js"></script>  
+<script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/addtocart.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/themejs/application.js"></script>
 <script type="text/javascript" src="{{url('public/homev2')}}/js/my_js.js"></script>
 <script src="{{url('public/homev2')}}/js/swc.js"></script>
 <script type="text/javascript">
-var myapp = angular.module("myApp",['angularUtils.directives.dirPagination']);
+    var myapp = angular.module("myApp",['angularUtils.directives.dirPagination']);
     $url = window.location.protocol + "//" + window.location.hostname;
     myapp.controller("myCtrl",function($scope,$http){
         $(".search-tab").hide();
@@ -874,55 +905,55 @@ var myapp = angular.module("myApp",['angularUtils.directives.dirPagination']);
         }
 
         $scope.productSearch = function(product_search){
-            // console.log(product_search);
-            $(".search-tab-items").css('min-height',100);
-            $("#search-loader").addClass('search-loader');
-            $(".search-tab").show();
-            if(product_search != ''){
-                // $http.get($url + '/CodeHopLongTech/api/autoSearch/' + product_search).then(function(res){
-                $http.get($url + '/api/autoSearch/' + product_search).then(function(res){
-                    $scope.res_product_search = res.data.data;
-                    $("#search-loader").removeClass('search-loader');
-                }); 
+            if(product_search.length >= 3) {
+                $(".search-tab-items").css('min-height',100);
+                $("#search-loader").addClass('search-loader');
+                $(".search-tab").show();
+                if(product_search != ''){
+                    // $http.get($url + '/CodeHopLongTech/api/autoSearch/' + product_search).then(function(res){
+                    $http.get($url + '/api/autoSearch/' + product_search).then(function(res){
+                        $scope.res_product_search = res.data.data;
+                        $("#search-loader").removeClass('search-loader');
+                    });
+                }
+                if(product_search == ''){
+                    $scope.res_product_search = [];
+                }
             }
-            if(product_search == ''){
-                $scope.res_product_search = [];
-            }
-                
         };
 
-    // partnumber
-    var url = window.location.protocol + "//" + window.location.hostname;
-    var product_id = $('.ng_product_id').val();
-    var currentdate = new Date(); 
+        // partnumber
+        var url = window.location.protocol + "//" + window.location.hostname;
+        var product_id = $('.ng_product_id').val();
+        var currentdate = new Date();
         // if(currentdate.getMonth()+1 < 10){
         //     var month = "0"+(currentdate.getMonth()+1);
         // }
         var currentTime = currentdate.getFullYear() + "-"
-        + (currentdate.getMonth()+1<10 ? "0"+(currentdate.getMonth()+1) : currentdate.getMonth()+1)  + "-"
-        + currentdate.getDate();
+            + (currentdate.getMonth()+1<10 ? "0"+(currentdate.getMonth()+1) : currentdate.getMonth()+1)  + "-"
+            + currentdate.getDate();
 
         $http.get(url+'/api/getRateProduct/' + product_id).then(function(res){
-          $scope.getRateProduct = res.data;
-      });
+            $scope.getRateProduct = res.data;
+        });
         $http.get(url+'/api/getCommentProduct/' + product_id).then(function(res){
-          $scope.getCommentProduct = res.data;
-      }); 
+            $scope.getCommentProduct = res.data;
+        });
         $scope.replyComment = function(idComment){
-          $http.get(url+'/api/getReplyCommentProduct/' + idComment).then(function(res){
-            $('.reply-comment').addClass('hide');
-            var togg = ($('.fa-reply').parent().parent().parent().parent().find('.reply-comment').removeClass('hide').addClass('show'));
-            $scope.getReplyCommentProduct = res.data;
-        }); 
-      };
+            $http.get(url+'/api/getReplyCommentProduct/' + idComment).then(function(res){
+                $('.reply-comment').addClass('hide');
+                var togg = ($('.fa-reply').parent().parent().parent().parent().find('.reply-comment').removeClass('hide').addClass('show'));
+                $scope.getReplyCommentProduct = res.data;
+            });
+        };
         // get partnumber
         $http.get(url+'/api/getPartNumber/' + product_id).then(function(res){
-          for(var i=0; i<res.data.length; i++){
-            if(res.data[i]['price'] == '' || $.isNumeric(res.data[i]['price']) == false){
-              res.data[i]['price'] = "Liên hệ 1900.6536";
-              continue;
-          }
-          if((currentTime <= res.data[i]['time_discount'])){
+            for(var i=0; i<res.data.length; i++){
+                if(res.data[i]['price'] == '' || $.isNumeric(res.data[i]['price']) == false){
+                    res.data[i]['price'] = "Liên hệ 1900.6536";
+                    continue;
+                }
+                if((currentTime <= res.data[i]['time_discount'])){
                     // console.log(res.data[i]['price']);
                     var productPrice = res.data[i]['price'] - ((res.data[i]['price'] * res.data[i]['discount'])/100);
                     res.data[i]['price'] = String(productPrice).replace(/(.)(?=(\d{3})+$)/g,'$1,')+" VNĐ";
@@ -946,49 +977,49 @@ var myapp = angular.module("myApp",['angularUtils.directives.dirPagination']);
         // add to cart
         $scope.quantity = 1;
         $scope.addCart = function(idProduct,quantity){
-          $http.get(url+'/cart/add-to-cart/' + idProduct + '/' + quantity).then(function(res){
-            alert('Đã thêm sản phẩm vào giỏ hàng');
-            location.reload();
-        });
-      }
-      $scope.shopNow = function(idProduct,quantity){
-          $http.get(url+'/cart/shop-now/' + idProduct + '/' + quantity).then(function(res){
-            window.location.href = url+"/order";
-        });
-      }
+            $http.get(url+'/cart/add-to-cart/' + idProduct + '/' + quantity).then(function(res){
+                alert('Đã thêm sản phẩm vào giỏ hàng');
+                location.reload();
+            });
+        }
+        $scope.shopNow = function(idProduct,quantity){
+            $http.get(url+'/cart/shop-now/' + idProduct + '/' + quantity).then(function(res){
+                window.location.href = url+"/order";
+            });
+        }
         // add to cart
 
-       // show hide dimension
-       $scope.showDimension = function(){
-        $(".fa-plus").addClass('hide');
-        $(".fa-plus").removeClass('show');
-        $(".fa-minus").addClass('show');
-        $(".fa-minus").removeClass('hide');
-        $(".togDimension").addClass('showDimension');
-        $(".togDimension").removeClass('hideDimension');            
-    }
-    $scope.hideDimension = function(){
-        $(".fa-minus").addClass('hide');
-        $(".fa-minus").removeClass('show');
-        $(".fa-plus").addClass('show');
-        $(".fa-plus").removeClass('hide');
+        // show hide dimension
+        $scope.showDimension = function(){
+            $(".fa-plus").addClass('hide');
+            $(".fa-plus").removeClass('show');
+            $(".fa-minus").addClass('show');
+            $(".fa-minus").removeClass('hide');
+            $(".togDimension").addClass('showDimension');
+            $(".togDimension").removeClass('hideDimension');
+        }
+        $scope.hideDimension = function(){
+            $(".fa-minus").addClass('hide');
+            $(".fa-minus").removeClass('show');
+            $(".fa-plus").addClass('show');
+            $(".fa-plus").removeClass('hide');
 
-        $(".togDimension").addClass('hideDimension');
-        $(".togDimension").removeClass('showDimension');
-    }
-        // show hide dimension 
+            $(".togDimension").addClass('hideDimension');
+            $(".togDimension").removeClass('showDimension');
+        }
+        // show hide dimension
     });
-     // share likedin
+    // share likedin
     jQuery(document).ready(function($) {
-       $('.share').click(function() {
-         var NWin = window.open($(this).prop('href'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-         if (window.focus)
-         {
-           NWin.focus();
-       }
-       return false;
-   });
-    // partnumber
+        $('.share').click(function() {
+            var NWin = window.open($(this).prop('href'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+            if (window.focus)
+            {
+                NWin.focus();
+            }
+            return false;
+        });
+        // partnumber
     })
 </script>
 </body>
