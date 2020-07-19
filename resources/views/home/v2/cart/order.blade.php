@@ -385,7 +385,8 @@
 						        @endif
 							<div class="buttons">
 							  <div class="pull-right">
-								<input type="button" class="btn btn-primary" id="btn-pay" value="Thanh toán và đặt hàng">
+                                <input type="hidden" id="pay" name="pay" value="0">
+								<input type="submit" class="btn btn-primary" id="btn-pay" value="Thanh toán và đặt hàng">
 								<input type="submit" class="btn btn-primary" id="button-confirm" value="Xác nhận đặt hàng">
 							  </div>
 							</div>
@@ -446,7 +447,6 @@
 </div>
 @endif
 
-<input type="hidden" id="url-pay" value="{{route('formPay')}}">
 <!-- check config free ship -->
 @if(!empty($cart->getCoreConfig()) && $cart->getCoreConfig()['free_ship'] == 0)
 <!-- //--- -->
@@ -721,9 +721,11 @@ var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
         if($(this).val() == "Thanh toán bằng thẻ quốc tế Visa, Master, JCB") {
             $("#btn-pay").show();
             $("#button-confirm").hide();
+            $("#pay").val(1);
         } else {
             $("#btn-pay").hide();
             $("#button-confirm").show();
+            $("#pay").val(0);
         }
     });
 </script>

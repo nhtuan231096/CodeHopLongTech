@@ -54,7 +54,7 @@ class OrderController extends Controller
 		]);
 	}
 	public function post_order(Request $req, Data $cart){
-			$req->merge(['user_id'=>Auth::guard('customer')->id()]);
+        	$req->merge(['user_id'=>Auth::guard('customer')->id()]);
 		// if($req->reward_point){
 			// $req->merge(['total_price'=>$req->reward_point]);
 			$reduced_price = $req->reduced_price > 0 ? str_replace(',','',$req->reduced_price) : 0;
@@ -143,6 +143,24 @@ class OrderController extends Controller
 					// ]);
 					$dataOrder = Order::where('order_id',$order->id)->first();
 					$categorys=Category::where(['priority'=>1,'parent_id'=>0,'status'=>'enable'])->orderBy('sorder','ASC')->paginate(18);
+
+					//check payment
+                    if($req->pay == 1) {
+                        $response = \MoMoAIO::purchase([
+                            'amount' => str_replace(',','', $req->total_order_price),
+                            'returnUrl' => 'http://127.0.0.1/CodeHopLongTech/dang-nhap',
+                            'notifyUrl' => 'http://127.0.0.1/CodeHopLongTech/dang-nhap',
+                            'orderId' => $order->id,
+                            'orderInfo' => 'Test ghi chu',
+                            'requestId' => 'MM1540456472575',
+                        ])->send();
+                        if ($response->isRedirect()) {
+                            $redirectUrl = $response->payUrl;
+                            return redirect()->to($redirectUrl);
+                        }
+                    }
+                    //end check payment
+
 					return view('home.v2.order_information',[
 						'categorys' => $categorys,
 						'order' => $dataOrder
@@ -202,7 +220,7 @@ class OrderController extends Controller
 		$current_total_point = Auth::guard('customer')->user()->total_points > 0 ? Auth::guard('customer')->user()->total_points : 0;
 		$vip_guests = $current_total_point < $points ? ($points - $current_total_point) : 0;
 		$reward_points = Reward_points::first();
-		
+
 		// return view('home.v2.customer.myaccount',[
 		// 	'categorys' => $categorys,
 		// 	'vip_guests' => $vip_guests,
@@ -240,7 +258,7 @@ class OrderController extends Controller
 		$current_total_point = Auth::guard('customer')->user()->total_points > 0 ? Auth::guard('customer')->user()->total_points : 0;
 		$vip_guests = $current_total_point < $points ? ($points - $current_total_point) : 0;
 		$reward_points = Reward_points::first();
-		
+
 		// return view('home.v2.customer.myaccount',[
 		// 	'categorys' => $categorys,
 		// 	'vip_guests' => $vip_guests,
