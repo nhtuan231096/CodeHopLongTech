@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Helper;
 use Auth;
 use App\Models\Reward_points;
@@ -25,7 +25,7 @@ class Data
 			}
 			else {
 				$priceDiscount = date('Y-m-d') <= $model->time_discount ? $model->price - (($model->price*$model->discount)/100)
-				 : (Auth::guard('customer')->check() ? 
+				 : (Auth::guard('customer')->check() ?
 				 	(isset($model->price_when_login) ? $model->price_when_login : $model->price)
 				 : $model->price);
 				 // if(isset(Auth::guard('customer')->user()->cusGroup)){
@@ -63,7 +63,7 @@ class Data
 			}
 			// dd($this->items);
 		session(['cart'=>$this->items]);
-		
+
 	}
 	public function delete($id){
 		if (isset($this->items[$id])) {
@@ -163,7 +163,8 @@ class Data
 	public function payment_method(){
 		return [
 			'0' => "Thanh toán tiền mặt khi nhận hàng",
-			'1' => "Thanh toán bằng thẻ quốc tế Visa, Master, JCB",
+			'1' => "Thanh toán qua Momo",
+			'2' => "Thanh toán qua VNPay",
 		];
 	}
 	public function shipping_method(){
@@ -205,11 +206,11 @@ class Data
 					$priceProduct = $product->price_user;
 				}
 			}
-			
+
 			return number_format($priceProduct);
 			//---
 		}
-		
+
 		else{
 			// return Auth::guard('customer')->check();
 			return $product['price'] > 0 ? number_format($product['price']).'  VNĐ' : $product['price'];

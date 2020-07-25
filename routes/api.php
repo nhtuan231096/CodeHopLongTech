@@ -64,4 +64,6 @@ Route::get('selectionTool/getSubCategory/{category_id}','\App\Http\Controllers\H
 Route::post('selectionTool/getProductsFilter/','\App\Http\Controllers\Home\SelectionToolController@getProductsFilter');
 Route::post('selectionTool/getDataFilterByCateId/','\App\Http\Controllers\Home\SelectionToolController@getDataFilterByCateId');
 
+Route::get('checkStock/','\App\Http\Controllers\Home\HomeController@checkStock');
+
 

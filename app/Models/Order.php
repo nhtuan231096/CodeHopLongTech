@@ -1,14 +1,14 @@
-<?php 
+<?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 /**
-* 
+*
 */
 class Order extends Model
 {
 	protected $table='orders';
 	protected $fillable=[
-		'user_id','status','name','email','address','phone','total_price','payment_method','shipping_method','vat','reduced_price','use_coupon_code','total_vat','ship_cod','shipping_fee','total_order_price'
+		'user_id','status','name','email','address','phone','total_price','payment_method','shipping_method','vat','reduced_price','use_coupon_code','total_vat','ship_cod','shipping_fee','total_order_price','payment_status'
 	];
 
 	public function order_detail(){
@@ -26,7 +26,7 @@ class Order extends Model
 			if(!empty(request()->order_id) && empty(request()->name) && empty(request()->status) && empty(request()->email))
 			{
 				return $query->where('order_id','=',request()->order_id);
-			}	
+			}
 			if(empty(request()->order_id) && !empty(request()->name) && empty(request()->status) && empty(request()->email))
 			{
 				return $query->where('name','like','%'.request()->name.'%');
@@ -65,4 +65,3 @@ class Order extends Model
 			}
 	}
 }
- 

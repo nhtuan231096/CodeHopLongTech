@@ -318,9 +318,9 @@ height: 20px;float:right; margin-right: -25px; margin-top: -20px;"></a>
                                                 @foreach($cart->items as $item)
                                                     <tr>
                                                         <td class="text-center" style="width:70px">
-                                                            <a href="product.html">
+                                                            <a href="">
                                                                 <?php $urlImage = ($item['pdp'] == 1) ? 'uploads/product_new/cover_image' : 'uploads/product'?>
-                                                                <img src="{{$urlImage}}/{{$item['image']}}" alt="{{$item['image']}}" style="width:70px" title="{{$item['image']}}" class="preview">
+                                                                <img src="{{url('')}}/{{$urlImage}}/{{$item['image']}}" alt="{{$item['image']}}" style="width:70px" title="{{$item['image']}}" class="preview">
                                                             </a>
                                                         </td>
                                                         <td class="text-left"> <a class="cart_product_name" href="">{{$item['title']}}</a>

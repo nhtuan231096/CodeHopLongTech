@@ -385,9 +385,10 @@
 						        @endif
 							<div class="buttons">
 							  <div class="pull-right">
-                                <input type="hidden" id="pay" name="pay" value="0">
-								<input type="submit" class="btn btn-primary" id="btn-pay" value="Thanh toán và đặt hàng">
-								<input type="submit" class="btn btn-primary" id="button-confirm" value="Xác nhận đặt hàng">
+                                  <input type="hidden" id="pay" name="pay" value="0">
+                                  <input type="hidden" name="type_pay" id="type-pay">
+                                  <input type="submit" class="btn btn-primary" id="btn-pay" value="Thanh toán và đặt hàng">
+								  <input type="submit" class="btn btn-primary" id="button-confirm" value="Xác nhận đặt hàng">
 							  </div>
 							</div>
 						  <!-- </div> -->
@@ -718,13 +719,15 @@ var check = function (ship_cod,shipping_fee,getTotalPrice,reduced_price){
 <script type="text/javascript">
     $("#btn-pay").hide();
     $("#input_payment_method").click(function(){
-        if($(this).val() == "Thanh toán bằng thẻ quốc tế Visa, Master, JCB") {
+        if($(this).val() == "Thanh toán qua Momo" || $(this).val() == "Thanh toán qua VNPay") {
             $("#btn-pay").show();
+            $("#type-pay").val($(this).val());
             $("#button-confirm").hide();
             $("#pay").val(1);
         } else {
             $("#btn-pay").hide();
             $("#button-confirm").show();
+            $("#type-pay").val('');
             $("#pay").val(0);
         }
     });

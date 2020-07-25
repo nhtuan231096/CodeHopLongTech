@@ -74,9 +74,9 @@ return [
         'VNPay' => [
             'driver' => 'VNPay',
             'options' => [
-                'vnpTmnCode' => '',
-                'vnpHashSecret' => '',
-                'testMode' => false,
+                'vnpTmnCode' => 'HLONG001',
+                'vnpHashSecret' => 'NCQTUBXUSDGMZUBVQFNYUVLVSVCZRZDP',
+                'testMode' => true,
             ],
         ],
     ],

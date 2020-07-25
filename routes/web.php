@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Order;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,7 +51,34 @@ Route::post('admin/login.html','Admin\AdminController@post_login')->name('login'
 Route::get('admin/logout','Admin\AdminController@logout')->name('logout');
 
 Route::group(['prefix'=>'','namespace'=>'Home','middleware'=>'customer'],function(){
-	// selection tool
+    Route::get('/dat-hang-thanh-cong','OrderController@order_success')->name('complete-purchase');
+
+    Route::get('/complete-purchase-momo', function (\Illuminate\Http\Request $request) {
+        /** @var \Omnipay\Common\Message\ResponseInterface $completePurchaseResponse */
+        $completePurchaseResponse = $request->attributes->get('completePurchaseResponse');
+        if ($completePurchaseResponse->isSuccessful()) {
+            $orderId = ($completePurchaseResponse->getData()['orderId']);
+            Order::where('order_id',$orderId)->update(['payment_status' => 1]);
+            return redirect()->route('complete-purchase',['pay_status' => 1]);
+        } elseif ($completePurchaseResponse->isCancelled()) {
+            return redirect()->route('complete-purchase',['pay_status' => 0]);
+        }
+    })->middleware('completePurchase:MoMoAIO');
+
+    Route::get('/complete-purchase-vnpay', function (\Illuminate\Http\Request $request) {
+        /** @var \Omnipay\Common\Message\ResponseInterface $completePurchaseResponse */
+        $completePurchaseResponse = $request->attributes->get('completePurchaseResponse');
+        if ($completePurchaseResponse->isSuccessful()) {
+            $orderId = ($completePurchaseResponse->getData()['vnp_TxnRef']);
+            Order::where('order_id',$orderId)->update(['payment_status' => 1]);
+            return redirect()->route('complete-purchase',['pay_status' => 1]);
+        } elseif ($completePurchaseResponse->isCancelled()) {
+            return redirect()->route('complete-purchase',['pay_status' => 0]);
+        }
+
+    })->middleware('completePurchase:VNPay');
+
+    // selection tool
 	Route::get('/selection-tool','HomeController@selectionTool')->name('selectionTool');
 
 	// rating
